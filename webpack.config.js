@@ -3,6 +3,7 @@ const nodeExternals = require('webpack-node-externals');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const path = require('path');
+const NODE_ENV = 'development';
 
 const common = {
     nodeEnv: new webpack.DefinePlugin({
@@ -10,13 +11,13 @@ const common = {
             NODE_ENV: `'development'`
         }
     }),
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'assets/client/dist'),
     publicPath: '/',
     loaders: [
         {
             test: /\.js$/,
             exclude: /node_modules/,
-            loader: 'babel-loader'
+            use: 'babel-loader',
         }
     ],
     resolve: {extensions: ['.js']}
@@ -27,23 +28,38 @@ module.exports = [
         // client side rendering
         target: 'web',
         entry: {
-            client: './src/client/index.js'
+            client: './assets/client/index.js'
         },
         output: {
-            path: common.path,
+            path: path.resolve(__dirname, './assets/client/dist'),
             filename: '[name].js',
             publicPath: common.publicPath
         },
+        watch: true,
+        mode: NODE_ENV,
         plugins: [
             common.nodeEnv,
             new HtmlWebPackPlugin({
                 template: './src/client/index.html',
                 filename: './index.html'
-            })
+            }),
         ],
         resolve: common.resolve,
         module: {
-            loaders: common.loaders
+            rules: [
+                {
+                    test: /\.js$/,
+                    exclude: /node_modules/,
+                    use: {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: [
+                                "@babel/preset-env","@babel/preset-react"
+                            ]
+                        },
+                    },
+                }
+            ]
         },
         devtool: 'source-map',
         devServer: {
@@ -52,27 +68,32 @@ module.exports = [
             open: true,
             historyApiFallback: true
         },
-    },
-    {
-        // server side rendering
-        target: 'node',
-        entry: {
-            server: './src/server/server.js'
-        },
-        output: {
-            path: common.path,
-            filename: '[name].js',
-            publicPath: common.publicPath,
-            libraryTarget: 'commonjs2',
-        },
-        externals: [nodeExternals()],
         plugins: [
-            common.nodeEnv,
-            new CleanWebpackPlugin(['dist'], {verbose: true}),
         ],
-        resolve: common.resolve,
-        module: {
-            loaders: common.loaders
-        }
-    }
+    },
+    // {
+    //     // server side rendering
+    //     target: 'node',
+    //     entry: {
+    //         server: './app.js'
+    //     },
+    //     output: {
+    //         path: common.path,
+    //         filename: '[name].js',
+    //         publicPath: common.publicPath,
+    //         libraryTarget: 'commonjs2',
+    //     },
+    //     mode: NODE_ENV,
+    //     externals: [nodeExternals()],
+    //     plugins: [
+    //         common.nodeEnv,
+    //         new CleanWebpackPlugin(['dist'], {verbose: true}),
+    //     ],
+    //     resolve: common.resolve,
+    //     module: {
+    //         rules: common.loaders
+    //     },
+    //     plugins:[
+    //     ]
+    // }
 ];
