@@ -1,0 +1,229 @@
+.switch-wrapper {
+  position: relative;
+}
+ 
+.switch-wrapper > div {
+  position: absolute;
+  width:100%;
+}
+
+.navbar-home{
+  height: 75px;
+  background-color:#B1DEEB;
+  position: fixed;
+  top:0px;
+  left: 0px;
+  width: 100%;
+}
+.circle-menu{
+  width: 65px;
+  height: 65px;
+  Background-color: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 75px;
+}
+.square-menu{
+  width: 30px;
+  height: 30px;
+  background-color: #B1DEEB;
+  top: 70px;
+  position: absolute;
+}
+.content-body{
+  margin-top:140px;
+}
+.bloc-btn-menu{
+  width: 60px;
+  height: 60px;
+  margin-top: 5px;
+  display: inline-block;
+  border-radius: 10px;
+  /* background-color: #B1DEEB; */
+  padding: 4px;
+  border-radius: 10px;
+}
+.bloc-btn-menu-mobile{
+  width: 60px;
+  height: 60px;
+  margin-top: 5px;
+  padding: 5px;
+  display: inline-block;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #B1DEEB;
+  display: none;
+}
+@media screen and (max-width: 768px) {
+  .navbar-home div.bloc-btn-menu{
+      display: none;
+  }
+  .navbar-home div.bloc-btn-menu-mobile{
+      display: block;
+  }
+}
+.container-home{
+  padding: 20px;
+}
+.menu-item{
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  cursor:pointer;
+}
+#item-menu-home-mobile{
+  background:url(./images/img2.png) -800px -250px no-repeat;
+}
+#item-menu-home{
+  background:url(./images/img2.png) -250px -250px no-repeat;
+}
+#item-menu-add{
+  background:url(./images/img2.png) -750px -250px no-repeat;
+}
+#item-menu-text{
+  background:url(./images/img2.png) -550px -250px no-repeat;
+}
+#item-menu-categories{
+  background:url(./images/img2.png) -150px -250px no-repeat;
+}
+#item-menu-revision{
+  background:url(./images/img2.png) -50px -250px no-repeat;
+}
+.display-f-c{
+  display: flex;
+  flex-direction: column;
+}
+.display-f-r{
+  display: flex;
+  flex-direction: row;
+}
+.block-option-home{
+  min-height: 160px;
+  border-radius: 10px;
+  border: 1px solid #707070;
+  margin-bottom: 9px;
+  width: 100%;
+  cursor: pointer;
+  padding: 5px;
+}
+.block-option-home>div{
+  font-size:6vw;
+}
+@media screen and (min-width: 576px) {
+  .block-option-home>div{
+    font-size:4vw;
+  }
+}
+.menu-mobile{
+  position: absolute;
+  left: -350px;
+  top: 69px;
+  height: 100%;
+  width: 350px;
+  background-color:  rgb(177, 222, 235);
+  z-index: 1;
+  transition: left 0.5s;
+}
+.grey-theme-color{
+  color: #7F7D76;
+}
+.grey-theme-border-color{
+  color: #7F7D76;
+}
+.grey-theme-bg-color{
+  color: #7F7D76;
+}
+.sizeImg2{
+  width: 100px;
+  height: 100px;
+  margin: auto;
+}
+.item-read{
+  background:url(./images/img2.png) -1000px -150px no-repeat;
+}
+.item-review{
+  background:url(./images/img2.png) -200px -150px no-repeat;
+}
+.item-insight{
+  background:url(./images/img2.png) -1300px -150px no-repeat;
+}
+.item-custom{
+  background:url(./images/img2.png) -1000px -150px no-repeat;
+}
+.img-item-texte{
+  background:url(./images/img2.png) -400px -150px no-repeat;
+}
+.item-texte{
+  display:inline-block;
+  padding: 10px 10px;
+  cursor:pointer;
+  border-radius: 10px;
+}
+.item-texte:hover{
+  background-color: #d3e9f075;
+}
+.item-revision{
+  display:inline-block;
+  padding: 10px 10px;
+  cursor:pointer;
+  border-radius: 10px;
+}
+.item-revision:hover{
+  background-color: #d3e9f075;
+}
+.text-area-ajout-texte{
+  width:100%;
+  border-radius:20px;
+  box-shadow:-2px 2px 4px 2px;
+}
+.img-item-categorie{
+  background:url(/images/img2.png) 0px -150px no-repeat;
+}
+.mode-serie,.block-btn-commencer,.block-serie{
+  display: none;
+}
+.btn-commencer{
+  width: 301px;
+  height: 100px;
+  background-color: #FFD23D;
+  margin: auto;
+  padding: 28px;
+  border-radius: 50px;
+  color: white;
+  font-weight: bold;
+  font-size: 2.2em;
+  cursor: pointer;
+}
+.btn-commencer:hover{
+  background-color: #ffe387;
+}
+.container-serie{
+  background-color: #FFFBF1;
+  border-radius: 20px;
+  border: 1px solid #707070;
+  height: 400px;
+}
+
+.ml60{
+  margin-left: 60px;
+}
+.ml20{
+  margin-left: 20px;
+}
+.ml10{
+  margin-left: 10px;
+}
+
+.l1px{
+  left: -1px;
+}
+.r1px{
+  right: -1px;
+}
+.body-container{
+  margin-top:100px;
+}
+.nav-link{
+  display:block;
+  padding: 0px !important;
+}

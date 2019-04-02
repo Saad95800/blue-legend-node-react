@@ -10,9 +10,11 @@
 
 module.exports.routes = {
 
-  'GET /home': {controller: 'PostController', action: 'home'},
-  'GET /articles': 'PostController.articles',
-  'GET /article/:id': 'PostController.article',
+  'GET /accueil': {controller: 'PostController', action: 'home'},
+  'GET /texte-liste': {controller: 'PostController', action: 'home'},
+  'GET /ajout-texte': {controller: 'PostController', action: 'home'},
+  'GET /categories-liste': {controller: 'PostController', action: 'home'},
+  'GET /revision': {controller: 'PostController', action: 'home'},
 
   //  ╔╦╗╦╔═╗╔═╗  ╦═╗╔═╗╔╦╗╦╦═╗╔═╗╔═╗╔╦╗╔═╗   ┬   ╔╦╗╔═╗╦ ╦╔╗╔╦  ╔═╗╔═╗╔╦╗╔═╗
   //  ║║║║╚═╗║    ╠╦╝║╣  ║║║╠╦╝║╣ ║   ║ ╚═╗  ┌┼─   ║║║ ║║║║║║║║  ║ ║╠═╣ ║║╚═╗
