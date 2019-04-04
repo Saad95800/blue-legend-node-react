@@ -32,7 +32,7 @@ module.exports = {
       console.log(textes);
       data = {'textes': textes};
     }else{
-      var textes = await Text.find();
+      var textes = await Text.find({'id_category': req.params.id_category});
       data = {'textes': textes};      
     }
 

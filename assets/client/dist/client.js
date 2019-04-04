@@ -998,8 +998,7 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(TextList).call(this, props));
     var textes = [];
 
-    if (_this.props.data.app == 'client') {// AppClient
-    } else {
+    if (_this.props.data.app == 'server') {
       // AppServer
       textes = _this.props.data.data.textes;
     }

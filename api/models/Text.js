@@ -11,6 +11,16 @@ module.exports = {
     content: {
       type: 'string',
       required: true
+    },
+
+    type: {
+      type: 'string',
+      required: 'true'
+    },
+
+    id_category: {
+      type: 'string',
+      required: false
     }
 
   },

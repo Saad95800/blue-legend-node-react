@@ -21,6 +21,11 @@ module.exports = {
       protect: true,
     },
 
+    status: {
+      type: 'string',
+      required: true,
+    },
+
   },
 
 

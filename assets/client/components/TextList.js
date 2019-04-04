@@ -8,9 +8,7 @@ export default class TextList extends Component {
 
     let textes = [];
     
-    if(this.props.data.app == 'client'){ // AppClient
-
-    }else{// AppServer
+    if(this.props.data.app == 'server'){ // AppServer
       textes = this.props.data.data.textes;
     }
     this.state = {
