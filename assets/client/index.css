@@ -107,11 +107,11 @@
   padding: 5px;
 }
 .block-option-home>div{
-  font-size:6vw;
+  font-size:5vw;
 }
 @media screen and (min-width: 576px) {
   .block-option-home>div{
-    font-size:4vw;
+    font-size:3vw;
   }
 }
 .menu-mobile{
@@ -152,6 +152,25 @@
 }
 .img-item-texte{
   background:url(./images/img2.png) -400px -150px no-repeat;
+}
+.img-item-liste-texte{
+  background:url(./images/img2.png) -200px -250px no-repeat;
+  display: inline-block;
+  width: 50px;
+  height: 53px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.img-item-liste-category{
+  background: url(./images/img2.png) 0px -250px no-repeat;
+  display: inline-block;
+  width: 50px;
+  height: 53px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.hover-item:hover{
+  background-color: #e5eef580;
 }
 .item-texte{
   display:inline-block;

@@ -23,6 +23,18 @@ const common = {
     resolve: {extensions: ['.js']}
 };
 
+var plugins = [
+    new webpack.ProvidePlugin({
+        $: "jquery",
+        jQuery: "jquery"
+      }),
+    common.nodeEnv,
+    new HtmlWebPackPlugin({
+        template: './src/client/index.html',
+        filename: './index.html'
+    })
+  ];
+
 module.exports = [
     {
         // client side rendering
@@ -38,12 +50,11 @@ module.exports = [
         watch: true,
         mode: NODE_ENV,
         plugins: [
-            common.nodeEnv,
-            new HtmlWebPackPlugin({
-                template: './src/client/index.html',
-                filename: './index.html'
-            }),
-        ],
+            new webpack.ProvidePlugin({
+                $: "jquery",
+                jQuery: "jquery"
+              })
+          ],
         resolve: common.resolve,
         module: {
             rules: [
@@ -58,6 +69,17 @@ module.exports = [
                             ]
                         },
                     },
+                },
+                {
+                    test: /\.css$/,
+                    use: ['style-loader', 'css-loader'],
+                },
+                { 
+                    test: require.resolve('jquery'), 
+                    use: [{
+                        loader: 'expose-loader',
+                        options: '$'
+                    }]
                 }
             ]
         },
@@ -68,8 +90,9 @@ module.exports = [
             open: true,
             historyApiFallback: true
         },
-        plugins: [
-        ],
+        externals: {
+            jquery: 'jQuery'
+          }
     },
     // {
     //     // server side rendering

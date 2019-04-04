@@ -62,7 +62,6 @@ export default class NavBar extends Component {
       }
       return item;
     });
-    console.log(newItems);
     this.setState({items: newItems})   
 
   }

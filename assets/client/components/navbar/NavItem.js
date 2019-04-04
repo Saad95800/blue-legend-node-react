@@ -24,8 +24,6 @@ export default class NavItem extends Component {
 
   render() {
     let color = 'rgb(117, 222, 235, 0)';
-    console.log(this.props.url_courante);
-    console.log(this.props.url);
     if(this.props.url_courante == this.props.url || this.props.isSelected){
             color = 'rgb(117, 189, 210)';
     }

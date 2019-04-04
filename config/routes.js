@@ -10,11 +10,14 @@
 
 module.exports.routes = {
 
-  'GET /accueil': {controller: 'PostController', action: 'home'},
-  'GET /texte-liste': {controller: 'PostController', action: 'home'},
-  'GET /ajout-texte': {controller: 'PostController', action: 'home'},
-  'GET /categories-liste': {controller: 'PostController', action: 'home'},
-  'GET /revision': {controller: 'PostController', action: 'home'},
+  'GET /accueil': {controller: 'PostController', action: 'accueil'},
+  'GET /texte-liste': {controller: 'PostController', action: 'textes'},
+  'GET /ajout-texte': {controller: 'PostController', action: 'ajoutTexte'},
+  'GET /categories-liste': {controller: 'PostController', action: 'categoryList'},
+  'GET /revision': {controller: 'PostController', action: 'revision'},
+  'GET /texte/:id_texte': {controller: 'PostController', action: 'texte'},
+  'GET /textes/category/:id_category': {controller: 'PostController', action: 'textes'},
+  'GET /textes-ajax': {controller: 'PostController', action: 'textesAjax'},
 
   //  ╔╦╗╦╔═╗╔═╗  ╦═╗╔═╗╔╦╗╦╦═╗╔═╗╔═╗╔╦╗╔═╗   ┬   ╔╦╗╔═╗╦ ╦╔╗╔╦  ╔═╗╔═╗╔╦╗╔═╗
   //  ║║║║╚═╗║    ╠╦╝║╣  ║║║╠╦╝║╣ ║   ║ ╚═╗  ┌┼─   ║║║ ║║║║║║║║  ║ ║╠═╣ ║║╚═╗
