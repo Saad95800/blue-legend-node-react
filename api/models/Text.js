@@ -4,13 +4,22 @@ module.exports = {
 
     title: {
       type: 'string',
-      required: true,
-      description: 'Full representation of the user\'s name.'
+      required: true
     },
 
     content: {
       type: 'string',
       required: true
+    },
+
+    type_text: {
+      type: 'string',
+      required: true
+    },
+
+    id_category: {
+      type: 'string',
+      required: false
     }
 
   },

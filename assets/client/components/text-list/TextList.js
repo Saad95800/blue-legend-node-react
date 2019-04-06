@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 export default class TextList extends Component {
 
@@ -7,26 +8,48 @@ export default class TextList extends Component {
     super(props);
 
     let textes = [];
+    let id_category = '';
     
-    if(this.props.data.app == 'client'){ // AppClient
-
-    }else{// AppServer
+    if(this.props.data.app == 'server'){ // AppServer
       textes = this.props.data.data.textes;
+      id_category = this.props.data.data.id_category;
     }
     this.state = {
-      textes: textes
+      textes: textes,
+      id_category: id_category
     }
+
   }
 
   componentDidMount(){
-    fetch("/textes-ajax", {
-      method: 'get',
-    })
-    .then((resp) => resp.json())
-    .then( (textes) => {
-      console.log(textes);
-      this.setState({textes: textes});
-    });
+
+    let data = {};
+    let url = window.location.href.split("//")[1].replace(window.location.href.split("//")[1].split("/")[0], "");
+
+    if(this.props.data.app == 'client'){
+      
+      if( url.indexOf('textes/category') != -1 ){
+
+        data = {
+          id_category: url.split("/")[3]
+        }
+      }
+
+      axios({
+        method: 'post',
+        url: '/textes-ajax',
+        responseType: 'json',
+        data: data
+      })
+      .then((response) => {
+        this.setState({textes: response.data, id_category:url.split("/")[3]});
+      })
+      .catch( (error) => {
+        console.log(error);
+      });
+
+    }
+
   }
     render() {
 
@@ -36,16 +59,14 @@ export default class TextList extends Component {
                 <div style={{width: '90px', height: '70px', 'textAlign': 'center'}}>
                 <Link
                 to={'/texte/'+texte.id}
-                className={this.props.classItem}
                 id={this.props.id}>
                 <span className="img-item-liste-texte"></span>
                 </Link>
-                </div>
+                </div>  
              </div>;
     });
       return (
               <div>
-                 <h3>Liste des textes</h3>
                  {textes}
               </div>
       );

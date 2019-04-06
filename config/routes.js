@@ -11,13 +11,23 @@
 module.exports.routes = {
 
   'GET /accueil': {controller: 'PostController', action: 'accueil'},
-  'GET /texte-liste': {controller: 'PostController', action: 'textes'},
+
   'GET /ajout-texte': {controller: 'PostController', action: 'ajoutTexte'},
-  'GET /categories-liste': {controller: 'PostController', action: 'categoryList'},
-  'GET /revision': {controller: 'PostController', action: 'revision'},
+
+  'GET /texte-liste': {controller: 'PostController', action: 'textes'},
   'GET /texte/:id_texte': {controller: 'PostController', action: 'texte'},
+  'POST /textes-ajax': {controller: 'PostController', action: 'textesAjax', csrf: false},
+  
+  'GET /categories-liste': {controller: 'PostController', action: 'categoryList'},
   'GET /textes/category/:id_category': {controller: 'PostController', action: 'textes'},
-  'GET /textes-ajax': {controller: 'PostController', action: 'textesAjax'},
+  'POST /categories-ajax': {controller: 'PostController', action: 'categoriesAjax', csrf: false},
+
+  'GET /revision': {controller: 'PostController', action: 'revision'},
+  'GET /revision-content/texte/:id_texte': {controller: 'PostController', action: 'contentRevision'},
+  'GET /revision-mode/texte/:id_texte/content/:num_content': {controller: 'PostController', action: 'modeRevision'},
+  'GET /revision-btn-begin/texte/:id_texte/content/:num_content/mode/:num_mode': {controller: 'PostController', action: 'btnBeginRevision'},
+  'GET /revision-serie/texte/:id_texte/content/:num_content/mode/:num_mode/serie/:id_serie': {controller: 'PostController', action: 'serieRevision'},
+  'POST /get-serie-by-text': {controller: 'PostController', action: 'getSerieByText', csrf: false},
 
   //  ╔╦╗╦╔═╗╔═╗  ╦═╗╔═╗╔╦╗╦╦═╗╔═╗╔═╗╔╦╗╔═╗   ┬   ╔╦╗╔═╗╦ ╦╔╗╔╦  ╔═╗╔═╗╔╦╗╔═╗
   //  ║║║║╚═╗║    ╠╦╝║╣  ║║║╠╦╝║╣ ║   ║ ╚═╗  ┌┼─   ║║║ ║║║║║║║║  ║ ║╠═╣ ║║╚═╗

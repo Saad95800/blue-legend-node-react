@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
-import '../../../node_modules/react-trumbowyg/dist/trumbowyg.css';
-import {$, jQuery} from 'jquery';
+import '../../../../node_modules/react-trumbowyg/dist/trumbowyg.css';
 import Trumbowyg from 'react-trumbowyg';
 
 export default class TextAdd extends Component {
 
   constructor(props){
     super(props);
-  }
-
-  componentDidMount() { // hook the jQuery when component is mounted
-    // window.$ = window.jQuery = jquery;
   }
 
   render() {

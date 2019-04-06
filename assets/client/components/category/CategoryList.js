@@ -7,30 +7,33 @@ export default class CategoryList extends Component {
     super(props);
     
     let categories = []
-    if(this.props.data == {}){
-      categories = [
-        {id_category: 1, name: 'category ajax One'},
-        {id_category: 2, name: 'category ajax Two'}
-      ];
-    }else{
-      categories = [
-        {id_category: 1, name: 'category One'},
-        {id_category: 2, name: 'category Two'}
-      ];
+    if(this.props.data.app == 'server'){ // AppServer
+      categories = this.props.data.categories;
     }
     this.state = {
       categories: categories
     }
   }
 
+  componentDidMount(){
+    fetch("/categories-ajax", {
+      method: 'post',
+    })
+    .then((resp) => resp.json())
+    .then( (categories) => {
+      console.log(categories);
+      this.setState({categories: categories});
+    });
+  }
+
   render() {
 
     let categories = this.state.categories.map((category) => {
-      return <div key={category.id_category} style={{display: 'inline-block', borderRadius: '5px'}} className="hover-item">
+      return <div key={category.id} style={{display: 'inline-block', borderRadius: '5px'}} className="hover-item">
                 <div style={{textAlign: 'center'}}>{category.name}</div>
                 <div style={{width: '90px', height: '70px', 'textAlign': 'center'}}>
                 <Link
-                to={'/textes/category/'+category.id_category}
+                to={'/textes/category/'+category.id}
                 className={this.props.classItem}
                 id={this.props.id}>
                 <span className="img-item-liste-category"></span>
