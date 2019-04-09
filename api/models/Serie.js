@@ -7,9 +7,10 @@ module.exports = {
         required: true
       },
 
-      expressions: {
-        type: 'string',
-        required: true
+      expression: {
+        collection: 'expression',
+        via: 'owner',
+        type: "string"
       }
   
     },

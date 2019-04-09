@@ -6,7 +6,8 @@ let url = window.location.href.split("//")[1].replace(window.location.href.split
 hydrate(
     <Appclient data={
             {
-                url: url
+                url: url,
+                app: 'client'
             }
         }/>,
     document.getElementById('root')

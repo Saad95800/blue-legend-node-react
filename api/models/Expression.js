@@ -15,9 +15,13 @@ module.exports = {
     id_texte: {
       type: 'string',
       required: true,
+    },
+
+    owner: {
+      model: 'serie'
     }
 
-  },
+  }
 
 
 };

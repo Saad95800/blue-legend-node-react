@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 export default class CategoryList extends Component {
 
   constructor(props){
+    
     super(props);
     
     let categories = []
@@ -43,7 +44,7 @@ export default class CategoryList extends Component {
     });
       return (
               <div>
-                 <h3>Liste des textes</h3>
+                 <h3>Liste des catégories</h3>
                  {categories}
               </div>
       );

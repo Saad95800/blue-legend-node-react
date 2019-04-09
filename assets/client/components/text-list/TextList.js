@@ -5,14 +5,15 @@ import axios from 'axios';
 export default class TextList extends Component {
 
   constructor(props){
+    console.log("textList");
     super(props);
 
     let textes = [];
     let id_category = '';
     
     if(this.props.data.app == 'server'){ // AppServer
-      textes = this.props.data.data.textes;
-      id_category = this.props.data.data.id_category;
+      textes = this.props.data.textes;
+      id_category = this.props.data.id_category;
     }
     this.state = {
       textes: textes,
@@ -54,7 +55,7 @@ export default class TextList extends Component {
     render() {
 
     let textes = this.state.textes.map((texte) => {
-      return <div key={texte.id} style={{display: 'inline-block', borderRadius: '5px'}} className="hover-item">
+      return <div key={texte.id} style={{display: 'inline-block', borderRadius: '5px', width: '100px'}} className="hover-item">
                 <div style={{textAlign: 'center'}}>{texte.title}</div>
                 <div style={{width: '90px', height: '70px', 'textAlign': 'center'}}>
                 <Link
@@ -67,6 +68,7 @@ export default class TextList extends Component {
     });
       return (
               <div>
+                  <div>Liste des textes</div>
                  {textes}
               </div>
       );

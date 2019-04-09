@@ -10,7 +10,7 @@ export default class TextAdd extends Component {
 
       return (
         <div>
-        <div>Ajoutez votre texte dans la zone ci dessous</div>
+          <div>Ajoutez votre texte dans la zone ci dessous</div>
           <img src="/client/images/89.gif" />
         </div>
       );

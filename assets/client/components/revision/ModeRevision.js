@@ -14,7 +14,7 @@ export default class modeRevision extends Component {
     
     return (
       <div>
-      <h3>Que souhaitez-vous réviser</h3>
+      <h3>Quel mode ?</h3>
       <div style={{display: 'flex', flexDirection: 'row'}}>
         <Link to={`/revision-btn-begin/texte/${id_texte}/content/${num_content}/mode/1`} id={1}><div style={styles.itemBtn}>Normal</div></Link>
         <Link to={`/revision-btn-begin/texte/${id_texte}/content/${num_content}/mode/2`} id={2}><div style={styles.itemBtn}>Contre la montre</div></Link>

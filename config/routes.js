@@ -17,6 +17,8 @@ module.exports.routes = {
   'GET /texte-liste': {controller: 'PostController', action: 'textes'},
   'GET /texte/:id_texte': {controller: 'PostController', action: 'texte'},
   'POST /textes-ajax': {controller: 'PostController', action: 'textesAjax', csrf: false},
+  'POST /get-texte-ajax': {controller: 'PostController', action: 'getTexteAjax', csrf: false},
+  'POST /save-text-ajax': {controller: 'PostController', action: 'saveTextAjax', csrf: false},
   
   'GET /categories-liste': {controller: 'PostController', action: 'categoryList'},
   'GET /textes/category/:id_category': {controller: 'PostController', action: 'textes'},

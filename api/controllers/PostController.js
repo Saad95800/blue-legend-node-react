@@ -14,6 +14,7 @@ import {StaticRouter } from 'react-router-dom';
 let common = (req, res, data = {}) => {
   const context = {};
   data.url = req.url;
+  data.app = 'server';
   const content = ReactDOMServer.renderToString(<StaticRouter location={req.url} context={context}><Appserver data={data}/></StaticRouter>);
   res.send(layout(content));
   // res.view('pages/homepage', {body: body});
@@ -40,8 +41,9 @@ module.exports = {
     common(req, res, data);
   },
 
-  texte: (req, res) => {
-    let data = {'texte': {'id_texte': req.params.id_texte, titre: 'titre1', contenu: 'contenu1'}};
+  texte: async function(req, res){
+    let texte = await Text.find({id: req.allParams().id_texte});
+    let data = {'texte': texte[0]};
     common(req, res, data);
   },
 
@@ -56,17 +58,22 @@ module.exports = {
   },
 
   textesAjax: async function (req, res){
-    var textes = await Text.find(req.allParams());
+    let textes = await Text.find(req.allParams());
     res.json(textes);
   },
 
+  getTexteAjax: async function (req, res){
+    let texte = await Text.find(req.allParams());
+    res.json(texte);
+  },
+
   categoriesAjax: async function (req, res){
-    var categories = await Category.find();
+    let categories = await Category.find();
     res.json(categories);
   },
 
   revision: async function (req, res){
-    var textes = await Text.find();
+    let textes = await Text.find();
     let data = {'textes': textes, step: 'text-list'};
     common(req, res, data);
   },
@@ -82,20 +89,26 @@ module.exports = {
   },
 
   btnBeginRevision: async function (req, res){
-    let serie = await Serie.find({id_texte: req.params.id_texte});
+    let serie = await Serie.find({id_text: req.params.id_texte});
     let data = {step: 'btn-begin', id_texte: req.params.id_texte, num_content: req.params.num_content, num_mode: req.params.num_mode, serie: serie};
     common(req, res, data);
   },
 
   serieRevision: async function (req, res){
-    let serie = await Serie.find({id_serie: req.params.id_serie});
+    let serie = await Serie.find({id: req.params.id_serie});
     let data = {step: 'serie', id_texte: req.params.id_texte, num_content: req.params.num_content, num_mode: req.params.num_mode, serie: serie};
     common(req, res, data);
   },
 
   getSerieByText: async function (req, res){
-    let serie = await Serie.find({id_text: req.params.id_texte});
+    let serie = await Serie.find().populate('expression');
     res.json(serie);
+  },
+
+  saveTextAjax: async function (req, res){
+    let params = req.allParams();
+    await Text.create({title:params.title, content: params.content, type_text:"text", id_category: params.id_category });
+    return res.ok();
   }
   
 };
