@@ -1,23 +1,13 @@
-/**
- * PostController
- *
- * @description :: Server-side logic for managing posts
- * @help        :: See http://links.sailsjs.org/docs/controllers
- */
-
 const ReactDOMServer = require('react-dom/server');
 import React from 'react';
 import Appserver from '../../assets/client/components/Appserver';
-import layout from '../../assets/client/layout';
 import {StaticRouter } from 'react-router-dom';
 
 let common = (req, res, data = {}) => {
-  const context = {};
   data.url = req.url;
   data.app = 'server';
-  const content = ReactDOMServer.renderToString(<StaticRouter location={req.url} context={context}><Appserver data={data}/></StaticRouter>);
-  res.send(layout(content));
-  // res.view('pages/homepage', {body: body});
+  const content = ReactDOMServer.renderToString(<StaticRouter location={req.url} context={{}}><Appserver data={data}/></StaticRouter>);
+  res.view('pages/homepage', {body: content});
 }
 
 module.exports = {
@@ -73,8 +63,13 @@ module.exports = {
   },
 
   revision: async function (req, res){
-    let textes = await Text.find();
-    let data = {'textes': textes, step: 'text-list'};
+    let textes = await Text.find().populate('serie');
+    let texts = textes.map(function(text){
+                  if(text.serie.length > 0){
+                    return text;
+                  }
+                });
+    let data = {'textes': texts, step: 'text-list'};
     common(req, res, data);
   },
 
@@ -101,14 +96,26 @@ module.exports = {
   },
 
   getSerieByText: async function (req, res){
-    let serie = await Serie.find().populate('expression');
+    let serie = await Serie.findOne({owner_text: req.allParams().id_text}).populate('expression');
     res.json(serie);
   },
 
   saveTextAjax: async function (req, res){
     let params = req.allParams();
-    await Text.create({title:params.title, content: params.content, type_text:"text", id_category: params.id_category });
+    await Text.create({title:params.title, content: params.content, type_text:"text", owner_category: params.id_category });
     return res.ok();
+  },
+
+  getTextsRevision: async function (req, res){
+    let textes = await Text.find().populate('serie');
+    let result = [];
+    for(let txt of textes){
+      if(txt.serie.length > 0){
+        result.push(txt);
+      }
+    }
+    console.log(result);
+    res.json(result);
   }
   
 };

@@ -18,12 +18,13 @@ let styles = {
     color: 'white',
     position: 'fixed',
     top: '0px',
-    zIndex: '1',
+    zIndex: '2',
     textAlign: 'center',
     transition: 'height 0.5s',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    fontWeight: 'bold'
   }
 }
 
@@ -37,12 +38,12 @@ export default class Appclient extends Component {
     }
   }
 
-  viewMessageFlash(msg, error){
-    
+  viewMessageFlash(msg, error = false){
+    console.log('message flash view');
     let mf = document.querySelector("#message-flash");
     mf.style.height = '40px';
-    mf.style.height = '40px';
     mf.innerHTML = msg;
+    console.log('message flash view 2');
     if(error){
       mf.style.backgroundColor = 'rgb(255, 29, 22)';
     }else{

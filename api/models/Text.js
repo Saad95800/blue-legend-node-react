@@ -17,11 +17,25 @@ module.exports = {
       required: true
     },
 
-    id_category: {
-      type: 'string',
-      required: false
-    }
+    serie: {
+      collection: 'serie',
+      via: 'owner_text',
+      type: "string"
+    },
 
+    expression: {
+      collection: 'expression',
+      via: 'owner_texte',
+      type: "string"
+    },
+
+    owner_user: {
+      model: 'user'
+    },
+
+    owner_category: {
+      model: 'category'
+    }
   },
 
 

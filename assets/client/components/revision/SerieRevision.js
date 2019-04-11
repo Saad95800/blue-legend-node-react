@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import ReactCountdownClock from 'react-countdown-clock';
 
 export default class serieRevision extends Component {
 
   constructor(props){
     super(props);
+
+    let clock = '';
 
     this.state = {
       numQuestion: 0,
@@ -23,20 +26,22 @@ export default class serieRevision extends Component {
         colorMessageValidation: "#26DF38"
       },
       score: 0,
-      expressions:[]
+      expressions:[],
+      clock: 'enabled'
     }
 
   }
 
   componentDidMount(){
+
     axios({
       method: 'post',
       url: '/get-serie-by-text',
       responseType: 'json',
-      data: {id_texte: this.props.id_texte}
+      data: {id_text: this.props.data.location.pathname.split('/')[3]}
     })
     .then((response) => {
-      this.setState({expressions: response.data[0].expression});
+      this.setState({expressions: response.data.expression});
     })
     .catch( (error) => {
       console.log(error);
@@ -44,16 +49,16 @@ export default class serieRevision extends Component {
   }
 
   validate(){
-    let res = this.state.expressions[this.state.numQuestion].french_value == document.querySelector("#inputResponse").value;
+    let res = this.state.expressions[this.state.numQuestion].french_value.toLowerCase() == document.querySelector("#inputResponse").value.toLowerCase();
     let last = this.state.numQuestion == this.state.expressions.length - 1;
     let msg = "Suivant";
     if(last){
       msg = "Résultats";
     }
     if(res){
-      this.setState({stateQuestion:{btnValidation: msg, colorMessageValidation: "rgb(38, 223, 56)", messageValidation: "Bonne réponse"}, score: this.state.score+1, stepRev: "Validation"});
+      this.setState({stateQuestion:{btnValidation: msg, colorMessageValidation: "rgb(38, 223, 56)", messageValidation: "Bonne réponse"}, score: this.state.score+1, stepRev: "Validation", clock: 'disabled'});
     }else{
-      this.setState({stateQuestion:{btnValidation: msg, colorMessageValidation: "red", messageValidation: this.state.expressions[this.state.numQuestion].french_value}, stepRev: "Validation"});
+      this.setState({stateQuestion:{btnValidation: msg, colorMessageValidation: "red", messageValidation: this.state.expressions[this.state.numQuestion].french_value}, stepRev: "Validation", clock: 'disabled'});
     }
   }
 
@@ -61,7 +66,7 @@ export default class serieRevision extends Component {
     if( this.state.numQuestion == this.state.expressions.length - 1){
       this.setState({stateQuestion:{btnValidation: "Résultats", messageValidation: ""}, stepRev: "Resultat"});
     }else{
-      this.setState({stateQuestion:{btnValidation: "Valider", messageValidation: ""}, stepRev: "Question", numQuestion: this.state.numQuestion+1});
+      this.setState({stateQuestion:{btnValidation: "Valider", messageValidation: ""}, stepRev: "Question", numQuestion: this.state.numQuestion+1, clock: 'enabled'});
     }
     document.querySelector("#inputResponse").value = "";
   }
@@ -70,8 +75,18 @@ export default class serieRevision extends Component {
     console.log('result');
   }
 
+  verifKey(e){
+    let keycode = (e.keyCode ? e.keyCode : e.which);
+    if(keycode == '13'){
+      if(this.state.stepRev == 'Question'){
+        this.validate();
+      }else{
+        this.next();
+      }
+    }
+  }
+
   render() {
-    
     let displayExo = 'block';
     let displayRes = 'none';
     let func = '';
@@ -82,20 +97,34 @@ export default class serieRevision extends Component {
     }else{
       func = this.viewResult;
       displayExo = 'none';
-      displayRes = 'block';
+      displayRes = 'flex';
     }
     let text = '';
     if(this.state.expressions[this.state.numQuestion] !== undefined){
       text = this.state.expressions[this.state.numQuestion].english_value;
     }
-    
+    let clock = '';
+    if(this.props.num_mode == 2){
+      let count = 0;
+      if(this.state.clock == 'enabled'){
+        count = 5;
+      }
+      clock = <ReactCountdownClock 
+                seconds={count}
+                color="#ffd23d"
+                alpha={0.9}
+                size={100}
+                onComplete={this.validate.bind(this)} /> 
+
+    }
     return (
             <div>
+                <div id="clock" style={{position: 'fixed', top: '95px', right: '20px'}}>{clock}</div>
                 <div style={styles.blockSerie}>
                   <div style={{display: displayExo}}>
                     <div style={{paddingTop: "35px",textAlign: "center",fontWeight: "bold",fontSize: "30px"}}>{text}</div>
                     <div style={{textAlign: "center"}}>
-                      <input type="text" id="inputResponse" style={{width: "90%", height: "80px", fontSize: "40px", marginTop: "50px"}}/>
+                      <input type="text" id="inputResponse" onKeyPress={this.verifKey.bind(this)} style={{width: "90%", height: "80px", fontSize: "40px", marginTop: "50px"}}/>
                     </div>
                     <div style={{height:"30px", marginLeft:"30px", marginTop:"10px", fontSize: "30px", color: this.state.stateQuestion.colorMessageValidation}}>{this.state.stateQuestion.messageValidation}</div>
                   
@@ -103,9 +132,11 @@ export default class serieRevision extends Component {
                       <div style={styles.btnSuivant} onClick={func.bind(this)}>{this.state.stateQuestion.btnValidation}</div>
                     </div>
                   </div>
-                  <div style={{display: displayRes}}>
-                    <div>Score</div>
-                    <div>{this.state.score}/{this.state.expressions.length}</div>
+                  <div style={{display: displayRes, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100%', fontWeight: 'bold', fontSize: '100px'}}>
+                    <div>
+                      <div>Score</div>
+                      <div style={{textAlign: 'center'}}>{this.state.score}/{this.state.expressions.length}</div>
+                    </div>
                   </div>
                 </div>
             </div>

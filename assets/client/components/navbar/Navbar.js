@@ -101,13 +101,14 @@ export default class NavBar extends Component {
       <div>
         <nav className="menu-mobile"></nav>
         <nav className="navbar-home">
-            <div className="square-menu l1px"></div>
-            <div className="circle-menu l1px"></div>
+            {/* <div className="square-menu l1px"></div>
+            <div className="circle-menu l1px"></div> */}
             <div className="bloc-btn-menu-mobile ml10" ><div className="menu-item nav-accueil" id="item-menu-home-mobile"></div></div>
             {navitems}
-            <div className="square-menu r1px"></div>
-            <div className="circle-menu r1px"></div>
+            {/* <div className="square-menu r1px"></div>
+            <div className="circle-menu r1px"></div> */}
         </nav>
+        <div style={{width: '100%', height: '100%', backgroundColor: 'white', position: 'fixed', top: '75px', borderRadius: '40px'}}></div>
       </div>
     );
 

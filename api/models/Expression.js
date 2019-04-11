@@ -12,12 +12,11 @@ module.exports = {
       required: true,
     },
 
-    id_texte: {
-      type: 'string',
-      required: true,
+    owner_texte: {
+      model: 'text'
     },
 
-    owner: {
+    owner_serie: {
       model: 'serie'
     }
 

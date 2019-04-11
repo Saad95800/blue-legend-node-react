@@ -21,6 +21,18 @@ module.exports = {
       protect: true,
     },
 
+    text: {
+      collection: 'text',
+      via: 'owner_user',
+      type: "string"
+    },
+
+    category: {
+      collection: 'category',
+      via: 'owner_user',
+      type: "string"
+    }
+
   },
 
 

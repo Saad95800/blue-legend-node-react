@@ -6,11 +6,19 @@ module.exports = {
         type: 'string',
         required: true
       },
+  
+      name: {
+        type: 'string'
+      },
 
       expression: {
         collection: 'expression',
-        via: 'owner',
+        via: 'owner_serie',
         type: "string"
+      },
+
+      owner_text: {
+        model: 'text'
       }
   
     },

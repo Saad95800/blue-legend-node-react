@@ -15,6 +15,7 @@
     "html2plaintext": "^2.1.2",
     "jquery": "^3.3.1",
     "react": "^16.2.0",
+    "react-countdown-clock": "^2.5.0",
     "react-dom": "16.2.0",
     "react-dom-server": "0.0.5",
     "react-redux": "5.0.6",

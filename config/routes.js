@@ -30,6 +30,7 @@ module.exports.routes = {
   'GET /revision-btn-begin/texte/:id_texte/content/:num_content/mode/:num_mode': {controller: 'PostController', action: 'btnBeginRevision'},
   'GET /revision-serie/texte/:id_texte/content/:num_content/mode/:num_mode/serie/:id_serie': {controller: 'PostController', action: 'serieRevision'},
   'POST /get-serie-by-text': {controller: 'PostController', action: 'getSerieByText', csrf: false},
+  'POST /textes-revision-ajax': {controller: 'PostController', action: 'getTextsRevision', csrf: false},
 
   //  ╔╦╗╦╔═╗╔═╗  ╦═╗╔═╗╔╦╗╦╦═╗╔═╗╔═╗╔╦╗╔═╗   ┬   ╔╦╗╔═╗╦ ╦╔╗╔╦  ╔═╗╔═╗╔╦╗╔═╗
   //  ║║║║╚═╗║    ╠╦╝║╣  ║║║╠╦╝║╣ ║   ║ ╚═╗  ┌┼─   ║║║ ║║║║║║║║  ║ ║╠═╣ ║║╚═╗
