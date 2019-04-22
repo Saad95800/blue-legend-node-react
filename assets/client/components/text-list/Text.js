@@ -77,7 +77,7 @@ export default class Text extends Component {
       // document.querySelector('#translationPopupText').innerHTML = <img src="/client/images/89.gif" />;
       // axios({
       //   method: 'post',
-      //   url: 'https://api.deepl.com/v2/translate?auth_key=de9c22f0-b3e2-6694-d19a-e6c106c773d2&text='+selText+'&target_lang=fr&source_lang=en',
+      //   url: 'https://api.deepl.com/v2/translate?auth_key=0&text='+selText+'&target_lang=fr&source_lang=en',
       //   responseType: 'json',
       //   headers: {'Content-Type': 'application/x-www-form-urlencoded', 'Accept': '*/*'}
       // })
@@ -92,7 +92,7 @@ export default class Text extends Component {
       this.setState({french_value: '...'});
       axios({
         method: 'post',
-        url: `https://translation.googleapis.com/language/translate/v2?source=en&target=fr&key=AIzaSyDXclEOa7zqozby4oRS_Z1q7KIzsmclaTc&q=${selText}`,
+        url: `https://translation.googleapis.com/language/translate/v2?source=en&target=fr&key=0&q=${selText}`,
         responseType: 'json',
         headers: {'Content-Type': 'application/x-www-form-urlencoded', 'Accept': '*/*'}
       })
