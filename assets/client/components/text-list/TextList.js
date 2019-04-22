@@ -55,20 +55,20 @@ export default class TextList extends Component {
     render() {
 
     let textes = this.state.textes.map((texte) => {
-      return <div key={texte.id} style={{display: 'inline-block', borderRadius: '5px', width: '100px'}} className="hover-item">
-                <div style={{textAlign: 'center'}}>{texte.title}</div>
+      let textTitle = texte.title.length > 20 ? texte.title.substring(0, 20)+'...' : texte.title;
+      return <Link
+              to={'/texte/'+texte.id}
+              id={this.props.id}>
+              <div key={texte.id} style={{display: 'inline-block', borderRadius: '5px', width: '100px', margin: '10px'}} className="hover-item">
+                <div style={{textAlign: 'center'}}>{ textTitle }</div>
                 <div style={{width: '90px', height: '70px', 'textAlign': 'center'}}>
-                <Link
-                to={'/texte/'+texte.id}
-                id={this.props.id}>
                 <span className="img-item-liste-texte"></span>
-                </Link>
                 </div>  
-             </div>;
+              </div>
+             </Link>;
     });
       return (
               <div>
-                  <div>Liste des textes</div>
                  {textes}
               </div>
       );

@@ -7,9 +7,10 @@ export default class serieRevision extends Component {
   constructor(props){
     super(props);
 
-    let clock = '';
-
+    this.timer = null;
+    this.durationCount = 5;
     this.state = {
+      unitTime: 0,
       numQuestion: 0,
       stepRev: "Question",
       stepRevs: {
@@ -33,14 +34,15 @@ export default class serieRevision extends Component {
   }
 
   componentDidMount(){
-
+    let url = this.props.data.location.pathname.split('/');
     axios({
       method: 'post',
-      url: '/get-serie-by-text',
+      url: '/get-serie-by-text-ajax',
       responseType: 'json',
-      data: {id_text: this.props.data.location.pathname.split('/')[3]}
+      data: {id_text: url[3], id_serie: url[5]}
     })
     .then((response) => {
+      console.log(response);
       this.setState({expressions: response.data.expression});
     })
     .catch( (error) => {
@@ -49,6 +51,9 @@ export default class serieRevision extends Component {
   }
 
   validate(){
+    this.clearTimer();
+    console.log("validated");
+    this.unitTime = 0;
     let res = this.state.expressions[this.state.numQuestion].french_value.toLowerCase() == document.querySelector("#inputResponse").value.toLowerCase();
     let last = this.state.numQuestion == this.state.expressions.length - 1;
     let msg = "Suivant";
@@ -58,8 +63,35 @@ export default class serieRevision extends Component {
     if(res){
       this.setState({stateQuestion:{btnValidation: msg, colorMessageValidation: "rgb(38, 223, 56)", messageValidation: "Bonne réponse"}, score: this.state.score+1, stepRev: "Validation", clock: 'disabled'});
     }else{
-      this.setState({stateQuestion:{btnValidation: msg, colorMessageValidation: "red", messageValidation: this.state.expressions[this.state.numQuestion].french_value}, stepRev: "Validation", clock: 'disabled'});
+      this.setState({
+                  stateQuestion:{
+                    btnValidation: msg, 
+                    colorMessageValidation: "red", 
+                    messageValidation: this.state.expressions[this.state.numQuestion].french_value
+                  }, 
+                  stepRev: "Validation",
+                  clock: 'disabled'
+                });
     }
+    // let url = this.props.data.location.pathname.split('/');
+    // axios({
+    //   method: 'post',
+    //   url: '/save-dataserie',
+    //   responseType: 'json',
+    //   data: {
+    //       result: res, 
+    //       id_serie: url[5], 
+    //       duration: this.unitTime, 
+    //       expression: this.state.expressions[this.state.numQuestion].id
+    //     }
+    // })
+    // .then((response) => {
+    //   console.log(response);
+    // this.unitTime = 0;
+    // })
+    // .catch( (error) => {
+    //   console.log(error);
+    // });
   }
 
   next(){
@@ -76,6 +108,7 @@ export default class serieRevision extends Component {
   }
 
   verifKey(e){
+    console.log('verifKey');
     let keycode = (e.keyCode ? e.keyCode : e.which);
     if(keycode == '13'){
       if(this.state.stepRev == 'Question'){
@@ -86,9 +119,24 @@ export default class serieRevision extends Component {
     }
   }
 
+  startTimer(){
+
+    setTimeout(() => {
+      if(this.durationCount > 0){
+        this.durationCount--;
+        this.startTimer();
+      }else{
+        clearTimer();
+      }
+    }, 1000);
+  }
+  clearTimer(){
+  }
+
   render() {
     let displayExo = 'block';
     let displayRes = 'none';
+    /** Fonction a éxécuter lors de l'appuis sur le bouton vert */
     let func = '';
     if(this.state.stepRev == "Question"){
       func = this.validate;
@@ -99,6 +147,7 @@ export default class serieRevision extends Component {
       displayExo = 'none';
       displayRes = 'flex';
     }
+    /************************* */
     let text = '';
     if(this.state.expressions[this.state.numQuestion] !== undefined){
       text = this.state.expressions[this.state.numQuestion].english_value;
@@ -107,7 +156,8 @@ export default class serieRevision extends Component {
     if(this.props.num_mode == 2){
       let count = 0;
       if(this.state.clock == 'enabled'){
-        count = 5;
+        count = this.durationCount;
+        this.startTimer();
       }
       clock = <ReactCountdownClock 
                 seconds={count}
@@ -119,6 +169,7 @@ export default class serieRevision extends Component {
     }
     return (
             <div>
+                <div id="time" style={{position: 'fixed', top: '95px', right: '20px'}}>{this.state.unitTime}</div>
                 <div id="clock" style={{position: 'fixed', top: '95px', right: '20px'}}>{clock}</div>
                 <div style={styles.blockSerie}>
                   <div style={{display: displayExo}}>

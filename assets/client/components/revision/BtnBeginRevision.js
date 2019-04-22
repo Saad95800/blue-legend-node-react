@@ -15,14 +15,15 @@ export default class btnBeginRevision extends Component {
   }
 
   render() {
-    let id_texte = this.props.data.location.pathname.split("/")[3];
-    let num_content = this.props.data.location.pathname.split("/")[5];
-    let num_mode = this.props.data.location.pathname.split("/")[7];
-    let id_serie = this.props.id_serie;
+    let url = this.props.data.location.pathname;
+    let id_texte = url.split("/")[3];
+    let id_serie = url.split("/")[5];
+    let num_content = url.split("/")[7];
+    let num_mode = url.split("/")[9];
 
     return (
             <div style={{textAlign: 'center'}}>
-                <Link style={{textDecoration: 'none', display: 'inline-block'}} to={`/revision-serie/texte/${id_texte}/content/${num_content}/mode/${num_mode}/serie/${id_serie}`}><div style={styles.btnBegin}>Commencer</div></Link>
+                <Link style={{textDecoration: 'none', display: 'inline-block'}} to={`/revision-serie/texte/${id_texte}/serie/${id_serie}/content/${num_content}/mode/${num_mode}`}><div style={styles.btnBegin}>Commencer</div></Link>
             </div>
     );
 

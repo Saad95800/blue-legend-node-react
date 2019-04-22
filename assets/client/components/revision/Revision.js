@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TextListRevision from './TextListRevision';
+import SerieListRevision from './SerieListRevision';
 import ContentRevision from './ContentRevision';
 import ModeRevision from './ModeRevision';
 import BtnBeginRevision from './BtnBeginRevision';
@@ -12,20 +13,20 @@ export default class Revision extends Component {
     super(props);
 
     let textes = [];
+    let series = [];
     let step = this.props.step;
-    let id_texte = null;
-    let num_content = null;
-    let num_mode = null;
     let serie = {};
-    let id_serie = 0;
+    let id_serie = (this.props.location.pathname.indexOf('revision-serie-list') != -1) ? this.props.location.pathname.split("/")[3] : 0;
 
     this.state = {
       step: step,
       app: this.props.data.app,
       textes: textes,
+      series: series,
       id_texte: this.props.location.pathname.split("/")[3],
-      num_content: this.props.location.pathname.split("/")[5],
-      num_mode: this.props.location.pathname.split("/")[7],
+      id_serie: this.props.location.pathname.split("/")[5],
+      num_content: this.props.location.pathname.split("/")[7],
+      num_mode: this.props.location.pathname.split("/")[9],
       serie: serie,
       id_serie: id_serie,
       infos_content: {
@@ -42,6 +43,7 @@ export default class Revision extends Component {
 
   componentDidMount(){
 
+      let url = this.props.location.pathname.split("/");
       if(this.props.step == 'text-list'){
         axios({
           method: 'post',
@@ -55,34 +57,51 @@ export default class Revision extends Component {
         .catch( (error) => {
           console.log(error);
         });
-      }else if(this.props.step == 'content-review'){
-        let id_texte = this.props.location.pathname.split("/")[3];
-        this.setState({id_texte: id_texte});
-      }else if(this.props.step == 'mode'){
-        let id_texte = this.props.location.pathname.split("/")[3];
-        let num_content = this.props.location.pathname.split("/")[5];
-        this.setState({id_texte: id_texte, num_content: num_content});
-      }else if(this.props.step == 'btn-begin'){
-        let id_texte = this.props.location.pathname.split("/")[3];
-        let num_content = this.props.location.pathname.split("/")[5];
-        let num_mode = num_content = this.props.location.pathname.split("/")[7];
+      }else if(this.props.step == 'serie-list'){
+        let id_text = url[3];
         axios({
           method: 'post',
-          url: '/get-serie-by-text',
+          url: '/series-revision-ajax',
           responseType: 'json',
-          data: {id_text: id_texte}
+          data: {id_text: id_text}
         })
         .then((response) => {
-          this.setState({id_texte: id_texte, num_content: num_content, num_mode: num_mode, serie: response.data, id_serie: 1});
+          this.setState({series: response.data});
+        })
+        .catch( (error) => {
+          console.log(error);
+        });
+      }else if(this.props.step == 'content-review'){
+        let id_texte = url[3];
+        this.setState({id_texte: id_texte});
+      }else if(this.props.step == 'mode'){
+        let id_texte = url[3];
+        let id_serie = url[5];
+        let num_content = url[7];
+        this.setState({id_texte: id_texte, id_serie: id_serie, num_content: num_content});
+      }else if(this.props.step == 'btn-begin'){
+        let id_texte = url[3];
+        let id_serie = url[5];
+        let num_content = url[7];
+        let num_mode = url[9];
+        axios({
+          method: 'post',
+          url: '/get-serie-by-text-ajax',
+          responseType: 'json',
+          data: {id_text: id_texte, id_serie: id_serie}
+        })
+        .then((response) => {
+          this.setState({id_texte: id_texte, num_content: num_content, num_mode: num_mode, serie: response.data, id_serie: id_serie});
         })
         .catch( (error) => {
           console.log(error);
         });
       }else if(this.props.step == 'serie'){
-        let id_texte = this.props.location.pathname.split("/")[3];
-        let num_content = this.props.location.pathname.split("/")[5];
-        let num_mode = this.props.location.pathname.split("/")[7];
-        this.setState({id_texte: id_texte, num_content: num_content, num_mode: num_mode});
+        let id_texte = url[3];
+        let id_serie = url[5];
+        let num_content = url[7];
+        let num_mode = url[9];
+        this.setState({id_texte: id_texte, id_serie: id_serie, num_content: num_content, num_mode: num_mode});
       }
 
   }
@@ -96,6 +115,10 @@ export default class Revision extends Component {
         contentStep = <TextListRevision data={{'textes': this.state.textes}}/>;
         infos = <div>Quel texte souhaitez-vous réviser ?</div>;
         break;
+      case 'serie-list':
+        contentStep = <SerieListRevision data={{'series': this.state.series}}/>;
+        infos = <div>Quel serie voulez-vous faire ?</div>;
+        break;
       case 'content-review':
         contentStep = <ContentRevision data={this.props}/>;
         infos = <div>Texte ></div>;
@@ -106,7 +129,8 @@ export default class Revision extends Component {
         infos = <div><span>Texte</span><span> > </span><span>{content} ></span></div>;
         break;
       case 'btn-begin':
-        contentStep = <BtnBeginRevision data={this.props} id_serie={this.state.id_serie}/>;
+        let id_serie = this.props.location.pathname.split("/")[9];
+        contentStep = <BtnBeginRevision data={this.props} id_serie={id_serie}/>;
         let mode = this.state.infos_mode[this.state.num_mode];
         infos = <div><span>Texte</span><span> > </span><span>{this.state.infos_content[this.state.num_content]} ></span><span>{mode}</span></div>;
         break;
@@ -123,7 +147,7 @@ export default class Revision extends Component {
     return (
             <div>
                 <div style={{display: "flex", flexDirection: "row"}}>
-                  {infos}
+                  {/* {infos} */}
                 </div>
                 {contentStep}
             </div>

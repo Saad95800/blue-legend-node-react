@@ -3,8 +3,6 @@ import TextListRevision from './TextListRevision';
 import ContentRevision from './ContentRevision';
 import ModeRevision from './ModeRevision';
 import BtnBeginRevision from './BtnBeginRevision';
-// import SerieRevision from './SerieRevision';
-import axios from 'axios';
 
 export default class RevisionSsr extends Component {
 
@@ -12,6 +10,7 @@ export default class RevisionSsr extends Component {
     super(props);
 
     let textes = [];
+    let series = [];
     let step = this.props.step;
     let id_texte = null;
     let num_content = null;
@@ -23,6 +22,8 @@ export default class RevisionSsr extends Component {
       textes = this.props.data.textes;
       step = 'text-list';
       textes = textes;
+    }else if(this.props.data.step == 'serie-list'){
+      step = 'serie-list';
     }else if(this.props.data.step == 'content-review'){
       step = 'content-review';
       id_texte = this.props.data.id_texte;
@@ -73,6 +74,10 @@ export default class RevisionSsr extends Component {
     switch(this.state.step){
       case 'text-list':
         contentStep = <TextListRevision data={{'textes': this.state.textes}}/>;
+        infos = <div>Quel texte souhaitez-vous réviser ?</div>;
+        break;
+      case 'serie-list':
+        contentStep = <SerieListRevision data={{'series': this.state.series}}/>;
         infos = <div>Quel texte souhaitez-vous réviser ?</div>;
         break;
       case 'content-review':

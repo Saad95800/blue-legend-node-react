@@ -31,6 +31,13 @@ export default class NavBar extends Component {
             isSelected: false
         },
         {
+            url:"/categorie-ajout",
+            classContainer:"bloc-btn-menu ml20",
+            classItem:"menu-item nav-categories",
+            id:"item-menu-add-category",
+            isSelected: false
+        },
+        {
             url:"/categories-liste",
             classContainer:"bloc-btn-menu ml20",
             classItem:"menu-item nav-categories",

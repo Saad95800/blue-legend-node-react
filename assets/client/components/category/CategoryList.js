@@ -30,17 +30,19 @@ export default class CategoryList extends Component {
   render() {
 
     let categories = this.state.categories.map((category) => {
-      return <div key={category.id} style={{display: 'inline-block', borderRadius: '5px'}} className="hover-item">
+      return <Link
+              to={'/textes/category/'+category.id}
+              className={this.props.classItem}
+              id={this.props.id}>
+              <div key={category.id} style={{display: 'inline-block', borderRadius: '5px', margin: '10px', width: '120px', height: '120px'}} className="hover-item">
                 <div style={{textAlign: 'center'}}>{category.name}</div>
-                <div style={{width: '90px', height: '70px', 'textAlign': 'center'}}>
-                <Link
-                to={'/textes/category/'+category.id}
-                className={this.props.classItem}
-                id={this.props.id}>
+                <div style={{'textAlign': 'center'}}>
+                
                 <span className="img-item-liste-category"></span>
-                </Link>
+                
                 </div>
-             </div>;
+              </div>
+             </Link>;
     });
       return (
               <div>

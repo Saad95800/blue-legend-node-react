@@ -12,6 +12,12 @@ module.exports = {
       required: true,
     },
 
+    dataseries: {
+      collection: 'dataserie',
+      via: 'owner_expression',
+      type: "string"
+    },
+
     owner_texte: {
       model: 'text'
     },
@@ -21,6 +27,5 @@ module.exports = {
     }
 
   }
-
 
 };

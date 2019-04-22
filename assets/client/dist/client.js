@@ -332,8 +332,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _text_list_TextList__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./text-list/TextList */ "./assets/client/components/text-list/TextList.js");
 /* harmony import */ var _text_list_Text__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./text-list/Text */ "./assets/client/components/text-list/Text.js");
 /* harmony import */ var _category_CategoryList__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./category/CategoryList */ "./assets/client/components/category/CategoryList.js");
-/* harmony import */ var _revision_Revision__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./revision/Revision */ "./assets/client/components/revision/Revision.js");
-/* harmony import */ var react_swipeable_routes__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-swipeable-routes */ "./node_modules/react-swipeable-routes/es/index.js");
+/* harmony import */ var _category_CategoryAdd__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./category/CategoryAdd */ "./assets/client/components/category/CategoryAdd.js");
+/* harmony import */ var _revision_Revision__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./revision/Revision */ "./assets/client/components/revision/Revision.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -364,6 +364,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+ // import SwipeableRoutes from "react-swipeable-routes";
 
 var styles = {
   mfs: {
@@ -500,54 +501,64 @@ function (_Component) {
           }));
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-        path: "/texte/:id_texte",
+        path: "/categorie-ajout",
         render: function render(props) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_text_list_Text__WEBPACK_IMPORTED_MODULE_7__["default"], _extends({}, props, {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_category_CategoryAdd__WEBPACK_IMPORTED_MODULE_9__["default"], _extends({}, props, {
             data: _this2.state.data
           }));
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-        key: 1,
-        path: "/revision",
+        path: "/texte/:id_texte",
         render: function render(props) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_revision_Revision__WEBPACK_IMPORTED_MODULE_9__["default"], _extends({}, props, {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_text_list_Text__WEBPACK_IMPORTED_MODULE_7__["default"], _extends({}, props, {
             data: _this2.state.data,
-            step: 'text-list',
-            flag: 'toto'
+            viewMessageFlash: _this2.viewMessageFlash
           }));
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-        key: 2,
-        path: "/revision-content/texte/:id_texte",
+        path: "/revision",
         render: function render(props) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_revision_Revision__WEBPACK_IMPORTED_MODULE_9__["default"], _extends({}, props, {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_revision_Revision__WEBPACK_IMPORTED_MODULE_10__["default"], _extends({}, props, {
+            data: _this2.state.data,
+            step: 'text-list'
+          }));
+        }
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+        path: "/revision-serie-list/text/:id_text",
+        render: function render(props) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_revision_Revision__WEBPACK_IMPORTED_MODULE_10__["default"], _extends({}, props, {
+            data: _this2.state.data,
+            step: 'serie-list'
+          }));
+        }
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+        path: "/revision-content/text/:id_text/serie/:id_serie",
+        render: function render(props) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_revision_Revision__WEBPACK_IMPORTED_MODULE_10__["default"], _extends({}, props, {
             data: _this2.state.data,
             step: 'content-review'
           }));
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-        key: 3,
-        path: "/revision-mode/texte/:id_texte/content/:num_content",
+        path: "/revision-mode/texte/:id_texte/serie/:id_serie/content/:num_content",
         render: function render(props) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_revision_Revision__WEBPACK_IMPORTED_MODULE_9__["default"], _extends({}, props, {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_revision_Revision__WEBPACK_IMPORTED_MODULE_10__["default"], _extends({}, props, {
             data: _this2.state.data,
             step: 'mode'
           }));
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-        key: 4,
-        path: "/revision-btn-begin/texte/:id_texte/content/:num_content/mode/:num_mode",
+        path: "/revision-btn-begin/texte/:id_texte/serie/:id_serie/content/:num_content/mode/:num_mode",
         render: function render(props) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_revision_Revision__WEBPACK_IMPORTED_MODULE_9__["default"], _extends({}, props, {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_revision_Revision__WEBPACK_IMPORTED_MODULE_10__["default"], _extends({}, props, {
             data: _this2.state.data,
             step: 'btn-begin'
           }));
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-        key: 5,
-        path: "/revision-serie/texte/:id_texte/content/:num_content/mode/:num_mode/serie/:id_serie",
+        path: "/revision-serie/texte/:id_texte/serie/:id_serie/content/:num_content/mode/:num_mode",
         render: function render(props) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_revision_Revision__WEBPACK_IMPORTED_MODULE_9__["default"], _extends({}, props, {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_revision_Revision__WEBPACK_IMPORTED_MODULE_10__["default"], _extends({}, props, {
             data: _this2.state.data,
             step: 'serie'
           }));
@@ -557,6 +568,115 @@ function (_Component) {
   }]);
 
   return Appclient;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+/***/ }),
+
+/***/ "./assets/client/components/category/CategoryAdd.js":
+/*!**********************************************************!*\
+  !*** ./assets/client/components/category/CategoryAdd.js ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CategoryAdd; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/es/index.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+var CategoryAdd =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(CategoryAdd, _Component);
+
+  function CategoryAdd(props) {
+    var _this;
+
+    _classCallCheck(this, CategoryAdd);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(CategoryAdd).call(this, props));
+    _this.state = {
+      redirect: false
+    };
+    return _this;
+  }
+
+  _createClass(CategoryAdd, [{
+    key: "ajoutCategory",
+    value: function ajoutCategory() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default()({
+        method: 'post',
+        url: 'save-category-ajax',
+        responseType: 'json',
+        data: {
+          name: document.querySelector('#categoryName').value
+        }
+      }).then(function (response) {
+        console.log(response);
+
+        if (response) {
+          _this2.setState({
+            redirect: true
+          });
+        }
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var redirect = this.state.redirect;
+
+      if (redirect) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
+          to: "/categories-liste"
+        });
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Ajout Cat\xE9gorie"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        id: "categoryName"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: {
+          marginTop: '10px'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.ajoutCategory.bind(this)
+      }, "Ajouter")));
+    }
+  }]);
+
+  return CategoryAdd;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 
@@ -644,11 +764,18 @@ function (_Component) {
       var _this3 = this;
 
       var categories = this.state.categories.map(function (category) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+          to: '/textes/category/' + category.id,
+          className: _this3.props.classItem,
+          id: _this3.props.id
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: category.id,
           style: {
             display: 'inline-block',
-            borderRadius: '5px'
+            borderRadius: '5px',
+            margin: '10px',
+            width: '120px',
+            height: '120px'
           },
           className: "hover-item"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -657,14 +784,8 @@ function (_Component) {
           }
         }, category.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           style: {
-            width: '90px',
-            height: '70px',
             'textAlign': 'center'
           }
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          to: '/textes/category/' + category.id,
-          className: _this3.props.classItem,
-          id: _this3.props.id
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "img-item-liste-category"
         }))));
@@ -969,6 +1090,12 @@ function (_Component) {
         id: "item-menu-text",
         isSelected: false
       }, {
+        url: "/categorie-ajout",
+        classContainer: "bloc-btn-menu ml20",
+        classItem: "menu-item nav-categories",
+        id: "item-menu-add-category",
+        isSelected: false
+      }, {
         url: "/categories-liste",
         classContainer: "bloc-btn-menu ml20",
         classItem: "menu-item nav-categories",
@@ -1126,10 +1253,11 @@ function (_Component) {
   _createClass(btnBeginRevision, [{
     key: "render",
     value: function render() {
-      var id_texte = this.props.data.location.pathname.split("/")[3];
-      var num_content = this.props.data.location.pathname.split("/")[5];
-      var num_mode = this.props.data.location.pathname.split("/")[7];
-      var id_serie = this.props.id_serie;
+      var url = this.props.data.location.pathname;
+      var id_texte = url.split("/")[3];
+      var id_serie = url.split("/")[5];
+      var num_content = url.split("/")[7];
+      var num_mode = url.split("/")[9];
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
           textAlign: 'center'
@@ -1139,7 +1267,7 @@ function (_Component) {
           textDecoration: 'none',
           display: 'inline-block'
         },
-        to: "/revision-serie/texte/".concat(id_texte, "/content/").concat(num_content, "/mode/").concat(num_mode, "/serie/").concat(id_serie)
+        to: "/revision-serie/texte/".concat(id_texte, "/serie/").concat(id_serie, "/content/").concat(num_content, "/mode/").concat(num_mode)
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: styles.btnBegin
       }, "Commencer")));
@@ -1218,23 +1346,24 @@ function (_Component) {
     value: function render() {
       // console.log(this.props);  
       var id_texte = this.props.data.location.pathname.split("/")[3];
+      var id_serie = this.props.data.location.pathname.split("/")[5];
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Que souhaitez-vous r\xE9viser"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
           display: 'flex',
           flexDirection: 'row'
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/revision-mode/texte/".concat(id_texte, "/content/1"),
+        to: "/revision-mode/texte/".concat(id_texte, "/serie/").concat(id_serie, "/content/1"),
         id: 1
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: styles.itemBtn
       }, "Mots")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/revision-mode/texte/".concat(id_texte, "/content/2"),
+        to: "/revision-mode/texte/".concat(id_texte, "/serie/").concat(id_serie, "/content/2"),
         id: 2
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: styles.itemBtn
       }, "Expressions")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/revision-mode/texte/".concat(id_texte, "/content/3"),
+        to: "/revision-mode/texte/".concat(id_texte, "/serie/").concat(id_serie, "/content/3"),
         id: 3
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: styles.itemBtn
@@ -1309,20 +1438,22 @@ function (_Component) {
   _createClass(modeRevision, [{
     key: "render",
     value: function render() {
-      var id_texte = this.props.data.location.pathname.split("/")[3];
-      var num_content = this.props.data.location.pathname.split("/")[5];
+      var url = this.props.data.location.pathname;
+      var id_texte = url.split("/")[3];
+      var id_serie = url.split("/")[5];
+      var num_content = url.split("/")[7];
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Quel mode ?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
           display: 'flex',
           flexDirection: 'row'
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/revision-btn-begin/texte/".concat(id_texte, "/content/").concat(num_content, "/mode/1"),
+        to: "/revision-btn-begin/texte/".concat(id_texte, "/serie/").concat(id_serie, "/content/").concat(num_content, "/mode/1"),
         id: 1
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: styles.itemBtn
       }, "Normal")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/revision-btn-begin/texte/".concat(id_texte, "/content/").concat(num_content, "/mode/2"),
+        to: "/revision-btn-begin/texte/".concat(id_texte, "/serie/").concat(id_serie, "/content/").concat(num_content, "/mode/2"),
         id: 2
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: styles.itemBtn
@@ -1362,13 +1493,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _TextListRevision__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TextListRevision */ "./assets/client/components/revision/TextListRevision.js");
-/* harmony import */ var _ContentRevision__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ContentRevision */ "./assets/client/components/revision/ContentRevision.js");
-/* harmony import */ var _ModeRevision__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ModeRevision */ "./assets/client/components/revision/ModeRevision.js");
-/* harmony import */ var _BtnBeginRevision__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./BtnBeginRevision */ "./assets/client/components/revision/BtnBeginRevision.js");
-/* harmony import */ var _SerieRevision__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./SerieRevision */ "./assets/client/components/revision/SerieRevision.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _SerieListRevision__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SerieListRevision */ "./assets/client/components/revision/SerieListRevision.js");
+/* harmony import */ var _ContentRevision__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ContentRevision */ "./assets/client/components/revision/ContentRevision.js");
+/* harmony import */ var _ModeRevision__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ModeRevision */ "./assets/client/components/revision/ModeRevision.js");
+/* harmony import */ var _BtnBeginRevision__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./BtnBeginRevision */ "./assets/client/components/revision/BtnBeginRevision.js");
+/* harmony import */ var _SerieRevision__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./SerieRevision */ "./assets/client/components/revision/SerieRevision.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_7__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1394,43 +1528,43 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var Revision =
 /*#__PURE__*/
 function (_Component) {
   _inherits(Revision, _Component);
 
   function Revision(props) {
+    var _this$state;
+
     var _this;
 
     _classCallCheck(this, Revision);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Revision).call(this, props));
     var textes = [];
+    var series = [];
     var step = _this.props.step;
-    var id_texte = null;
-    var num_content = null;
-    var num_mode = null;
     var serie = {};
-    var id_serie = 0;
-    _this.state = {
+    var id_serie = _this.props.location.pathname.indexOf('revision-serie-list') != -1 ? _this.props.location.pathname.split("/")[3] : 0;
+    _this.state = (_this$state = {
       step: step,
       app: _this.props.data.app,
       textes: textes,
+      series: series,
       id_texte: _this.props.location.pathname.split("/")[3],
-      num_content: _this.props.location.pathname.split("/")[5],
-      num_mode: _this.props.location.pathname.split("/")[7],
-      serie: serie,
-      id_serie: id_serie,
-      infos_content: {
-        "1": "Mots",
-        "2": "Expressions",
-        "3": "Mots & Expressions"
-      },
-      infos_mode: {
-        "1": "Normal",
-        "2": "Contre la montre"
-      }
-    };
+      id_serie: _this.props.location.pathname.split("/")[5],
+      num_content: _this.props.location.pathname.split("/")[7],
+      num_mode: _this.props.location.pathname.split("/")[9],
+      serie: serie
+    }, _defineProperty(_this$state, "id_serie", id_serie), _defineProperty(_this$state, "infos_content", {
+      "1": "Mots",
+      "2": "Expressions",
+      "3": "Mots & Expressions"
+    }), _defineProperty(_this$state, "infos_mode", {
+      "1": "Normal",
+      "2": "Contre la montre"
+    }), _this$state);
     return _this;
   }
 
@@ -1439,8 +1573,10 @@ function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
+      var url = this.props.location.pathname.split("/");
+
       if (this.props.step == 'text-list') {
-        axios__WEBPACK_IMPORTED_MODULE_6___default()({
+        axios__WEBPACK_IMPORTED_MODULE_7___default()({
           method: 'post',
           url: '/textes-revision-ajax',
           responseType: 'json',
@@ -1452,30 +1588,48 @@ function (_Component) {
         }).catch(function (error) {
           console.log(error);
         });
+      } else if (this.props.step == 'serie-list') {
+        var id_text = url[3];
+        axios__WEBPACK_IMPORTED_MODULE_7___default()({
+          method: 'post',
+          url: '/series-revision-ajax',
+          responseType: 'json',
+          data: {
+            id_text: id_text
+          }
+        }).then(function (response) {
+          _this2.setState({
+            series: response.data
+          });
+        }).catch(function (error) {
+          console.log(error);
+        });
       } else if (this.props.step == 'content-review') {
-        var id_texte = this.props.location.pathname.split("/")[3];
+        var id_texte = url[3];
         this.setState({
           id_texte: id_texte
         });
       } else if (this.props.step == 'mode') {
-        var _id_texte = this.props.location.pathname.split("/")[3];
-        var num_content = this.props.location.pathname.split("/")[5];
+        var _id_texte = url[3];
+        var id_serie = url[5];
+        var num_content = url[7];
         this.setState({
           id_texte: _id_texte,
+          id_serie: id_serie,
           num_content: num_content
         });
       } else if (this.props.step == 'btn-begin') {
-        var _id_texte2 = this.props.location.pathname.split("/")[3];
-        var _num_content = this.props.location.pathname.split("/")[5];
-
-        var num_mode = _num_content = this.props.location.pathname.split("/")[7];
-
-        axios__WEBPACK_IMPORTED_MODULE_6___default()({
+        var _id_texte2 = url[3];
+        var _id_serie = url[5];
+        var _num_content = url[7];
+        var num_mode = url[9];
+        axios__WEBPACK_IMPORTED_MODULE_7___default()({
           method: 'post',
-          url: '/get-serie-by-text',
+          url: '/get-serie-by-text-ajax',
           responseType: 'json',
           data: {
-            id_text: _id_texte2
+            id_text: _id_texte2,
+            id_serie: _id_serie
           }
         }).then(function (response) {
           _this2.setState({
@@ -1483,17 +1637,19 @@ function (_Component) {
             num_content: _num_content,
             num_mode: num_mode,
             serie: response.data,
-            id_serie: 1
+            id_serie: _id_serie
           });
         }).catch(function (error) {
           console.log(error);
         });
       } else if (this.props.step == 'serie') {
-        var _id_texte3 = this.props.location.pathname.split("/")[3];
-        var _num_content2 = this.props.location.pathname.split("/")[5];
-        var _num_mode = this.props.location.pathname.split("/")[7];
+        var _id_texte3 = url[3];
+        var _id_serie2 = url[5];
+        var _num_content2 = url[7];
+        var _num_mode = url[9];
         this.setState({
           id_texte: _id_texte3,
+          id_serie: _id_serie2,
           num_content: _num_content2,
           num_mode: _num_mode
         });
@@ -1515,15 +1671,24 @@ function (_Component) {
           infos = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Quel texte souhaitez-vous r\xE9viser ?");
           break;
 
+        case 'serie-list':
+          contentStep = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SerieListRevision__WEBPACK_IMPORTED_MODULE_2__["default"], {
+            data: {
+              'series': this.state.series
+            }
+          });
+          infos = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Quel serie voulez-vous faire ?");
+          break;
+
         case 'content-review':
-          contentStep = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ContentRevision__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          contentStep = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ContentRevision__WEBPACK_IMPORTED_MODULE_3__["default"], {
             data: this.props
           });
           infos = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Texte >");
           break;
 
         case 'mode':
-          contentStep = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ModeRevision__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          contentStep = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ModeRevision__WEBPACK_IMPORTED_MODULE_4__["default"], {
             data: this.props
           });
           var content = this.state.infos_content[this.state.num_content];
@@ -1531,9 +1696,10 @@ function (_Component) {
           break;
 
         case 'btn-begin':
-          contentStep = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_BtnBeginRevision__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          var id_serie = this.props.location.pathname.split("/")[9];
+          contentStep = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_BtnBeginRevision__WEBPACK_IMPORTED_MODULE_5__["default"], {
             data: this.props,
-            id_serie: this.state.id_serie
+            id_serie: id_serie
           });
           var mode = this.state.infos_mode[this.state.num_mode];
           infos = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Texte"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " > "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, this.state.infos_content[this.state.num_content], " >"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, mode));
@@ -1541,7 +1707,7 @@ function (_Component) {
 
         case 'serie':
           console.log(this.state);
-          contentStep = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SerieRevision__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          contentStep = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SerieRevision__WEBPACK_IMPORTED_MODULE_6__["default"], {
             data: this.props,
             num_mode: this.state.num_mode,
             id_texte: this.state.id_texte
@@ -1563,11 +1729,102 @@ function (_Component) {
           display: "flex",
           flexDirection: "row"
         }
-      }, infos), contentStep);
+      }), contentStep);
     }
   }]);
 
   return Revision;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+/***/ }),
+
+/***/ "./assets/client/components/revision/SerieListRevision.js":
+/*!****************************************************************!*\
+  !*** ./assets/client/components/revision/SerieListRevision.js ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SerieListRevision; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var SerieListRevision =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(SerieListRevision, _Component);
+
+  function SerieListRevision(props) {
+    _classCallCheck(this, SerieListRevision);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(SerieListRevision).call(this, props));
+  }
+
+  _createClass(SerieListRevision, [{
+    key: "render",
+    value: function render() {
+      var textes = '';
+
+      if (this.props.data.series.length > 0) {
+        textes = this.props.data.series.map(function (serie, index) {
+          var link = '/revision-content/text/' + serie.owner_text + '/serie/' + serie.id;
+          var serieName = serie.name.length > 20 ? serie.name.substring(0, 20) + '...' : serie.name;
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+            to: link,
+            id: index
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            key: serie.id,
+            style: {
+              display: 'inline-block',
+              borderRadius: '5px',
+              margin: '10px',
+              width: '120px'
+            },
+            className: "hover-item"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            style: {
+              textAlign: 'center'
+            }
+          }, serieName), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            style: {
+              'textAlign': 'center'
+            }
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            className: "img-item-liste-texte"
+          }))));
+        });
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, textes);
+    }
+  }]);
+
+  return SerieListRevision;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 
@@ -1623,8 +1880,10 @@ function (_Component) {
     _classCallCheck(this, serieRevision);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(serieRevision).call(this, props));
-    var clock = '';
+    _this.timer = null;
+    _this.durationCount = 5;
     _this.state = {
+      unitTime: 0,
       numQuestion: 0,
       stepRev: "Question",
       stepRevs: {
@@ -1652,14 +1911,18 @@ function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
+      var url = this.props.data.location.pathname.split('/');
       axios__WEBPACK_IMPORTED_MODULE_1___default()({
         method: 'post',
-        url: '/get-serie-by-text',
+        url: '/get-serie-by-text-ajax',
         responseType: 'json',
         data: {
-          id_text: this.props.data.location.pathname.split('/')[3]
+          id_text: url[3],
+          id_serie: url[5]
         }
       }).then(function (response) {
+        console.log(response);
+
         _this2.setState({
           expressions: response.data.expression
         });
@@ -1670,6 +1933,9 @@ function (_Component) {
   }, {
     key: "validate",
     value: function validate() {
+      this.clearTimer();
+      console.log("validated");
+      this.unitTime = 0;
       var res = this.state.expressions[this.state.numQuestion].french_value.toLowerCase() == document.querySelector("#inputResponse").value.toLowerCase();
       var last = this.state.numQuestion == this.state.expressions.length - 1;
       var msg = "Suivant";
@@ -1699,7 +1965,26 @@ function (_Component) {
           stepRev: "Validation",
           clock: 'disabled'
         });
-      }
+      } // let url = this.props.data.location.pathname.split('/');
+      // axios({
+      //   method: 'post',
+      //   url: '/save-dataserie',
+      //   responseType: 'json',
+      //   data: {
+      //       result: res, 
+      //       id_serie: url[5], 
+      //       duration: this.unitTime, 
+      //       expression: this.state.expressions[this.state.numQuestion].id
+      //     }
+      // })
+      // .then((response) => {
+      //   console.log(response);
+      // this.unitTime = 0;
+      // })
+      // .catch( (error) => {
+      //   console.log(error);
+      // });
+
     }
   }, {
     key: "next",
@@ -1734,6 +2019,7 @@ function (_Component) {
   }, {
     key: "verifKey",
     value: function verifKey(e) {
+      console.log('verifKey');
       var keycode = e.keyCode ? e.keyCode : e.which;
 
       if (keycode == '13') {
@@ -1745,10 +2031,30 @@ function (_Component) {
       }
     }
   }, {
+    key: "startTimer",
+    value: function startTimer() {
+      var _this3 = this;
+
+      setTimeout(function () {
+        if (_this3.durationCount > 0) {
+          _this3.durationCount--;
+
+          _this3.startTimer();
+        } else {
+          clearTimer();
+        }
+      }, 1000);
+    }
+  }, {
+    key: "clearTimer",
+    value: function clearTimer() {}
+  }, {
     key: "render",
     value: function render() {
       var displayExo = 'block';
       var displayRes = 'none';
+      /** Fonction a éxécuter lors de l'appuis sur le bouton vert */
+
       var func = '';
 
       if (this.state.stepRev == "Question") {
@@ -1760,6 +2066,8 @@ function (_Component) {
         displayExo = 'none';
         displayRes = 'flex';
       }
+      /************************* */
+
 
       var text = '';
 
@@ -1773,7 +2081,8 @@ function (_Component) {
         var count = 0;
 
         if (this.state.clock == 'enabled') {
-          count = 5;
+          count = this.durationCount;
+          this.startTimer();
         }
 
         clock = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_countdown_clock__WEBPACK_IMPORTED_MODULE_2___default.a, {
@@ -1786,6 +2095,13 @@ function (_Component) {
       }
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "time",
+        style: {
+          position: 'fixed',
+          top: '95px',
+          right: '20px'
+        }
+      }, this.state.unitTime), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "clock",
         style: {
           position: 'fixed',
@@ -1893,7 +2209,7 @@ var styles = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return textListRevision; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return TextListRevision; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
@@ -1918,47 +2234,50 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var textListRevision =
+var TextListRevision =
 /*#__PURE__*/
 function (_Component) {
-  _inherits(textListRevision, _Component);
+  _inherits(TextListRevision, _Component);
 
-  function textListRevision(props) {
-    _classCallCheck(this, textListRevision);
+  function TextListRevision(props) {
+    _classCallCheck(this, TextListRevision);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(textListRevision).call(this, props));
+    return _possibleConstructorReturn(this, _getPrototypeOf(TextListRevision).call(this, props));
   }
 
-  _createClass(textListRevision, [{
+  _createClass(TextListRevision, [{
     key: "render",
     value: function render() {
       var _this = this;
 
-      console.log(this.props.data.textes);
       var textes = '';
 
       if (this.props.data.textes.length > 0) {
         textes = this.props.data.textes.map(function (texte) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          var link = '/revision-serie-list/text/' + texte.id;
+          var textTitle = texte.title.length > 20 ? texte.title.substring(0, 20) + '...' : texte.title;
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+            to: link,
+            id: _this.props.id
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             key: texte.id,
             style: {
               display: 'inline-block',
-              borderRadius: '5px'
+              borderRadius: '5px',
+              margin: '10px',
+              width: '120px'
             },
             className: "hover-item"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             style: {
               textAlign: 'center'
             }
-          }, texte.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          }, textTitle), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             style: {
               width: '90px',
               height: '70px',
               'textAlign': 'center'
             }
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-            to: '/revision-content/texte/' + texte.id,
-            id: _this.props.id
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
             className: "img-item-liste-texte"
           }))));
@@ -1969,7 +2288,7 @@ function (_Component) {
     }
   }]);
 
-  return textListRevision;
+  return TextListRevision;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 
@@ -2160,7 +2479,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_trumbowyg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-trumbowyg */ "./node_modules/react-trumbowyg/dist/react-trumbowyg.js");
+/* harmony import */ var react_trumbowyg__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_trumbowyg__WEBPACK_IMPORTED_MODULE_2__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -2177,6 +2500,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -2200,6 +2524,10 @@ function (_Component) {
 
     _this.state = {
       texte: texte,
+      selText: '',
+      french_value: '...',
+      msgBtnSave: 'Enregistrer',
+      wysiwyg: false,
       dataPopup: {
         display: 'none',
         top: 0,
@@ -2214,9 +2542,6 @@ function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      document.addEventListener('click', function (e) {
-        _this2.viewPopup(e);
-      });
       axios__WEBPACK_IMPORTED_MODULE_1___default()({
         method: 'post',
         url: '/get-texte-ajax',
@@ -2261,51 +2586,204 @@ function (_Component) {
   }, {
     key: "viewPopup",
     value: function viewPopup(e) {
+      var _this3 = this;
+
       var selText = this.getSelectedText();
 
-      if (selText != '') {
+      if (selText != '' && selText != ' ' && selText != '\n') {
         $('#popupTrad').css({
           left: e.pageX - 100,
           top: e.pageY - 86,
-          display: 'block'
-        }); // this.setState({dataPopup:{display: 'block', top: e.pageY - 86, left: e.pageX - 100}});
+          display: 'flex'
+        }); // document.querySelector('#translationPopupText').innerHTML = <img src="/client/images/89.gif" />;
+        // axios({
+        //   method: 'post',
+        //   url: 'https://api.deepl.com/v2/translate?auth_key=de9c22f0-b3e2-6694-d19a-e6c106c773d2&text='+selText+'&target_lang=fr&source_lang=en',
+        //   responseType: 'json',
+        //   headers: {'Content-Type': 'application/x-www-form-urlencoded', 'Accept': '*/*'}
+        // })
+        // .then((response) => {
+        //   console.log(response);
+        //   document.querySelector('#translationPopupText').innerHTML = response.data.translations[0].text;
+        // })
+        // .catch( (error) => {
+        //   console.log(error);
+        // });
+        // document.querySelector('#translationPopupText').innerHTML = '...';
 
-        console.log(selText);
+        this.setState({
+          french_value: '...'
+        });
+        axios__WEBPACK_IMPORTED_MODULE_1___default()({
+          method: 'post',
+          url: "https://translation.googleapis.com/language/translate/v2?source=en&target=fr&key=AIzaSyDXclEOa7zqozby4oRS_Z1q7KIzsmclaTc&q=".concat(selText),
+          responseType: 'json',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Accept': '*/*'
+          }
+        }).then(function (response) {
+          console.log(response);
+
+          _this3.setState({
+            french_value: response.data.data.translations[0].translatedText
+          }); // document.querySelector('#translationPopupText').innerHTML = response.data.data.translations[0].translatedText;
+
+        }).catch(function (error) {
+          console.log(error);
+        });
       } else {
         document.querySelector('#popupTrad').style.display = 'none';
+        this.setState({
+          msgBtnSave: 'Enregistrer'
+        });
       }
+    }
+  }, {
+    key: "saveExpression",
+    value: function saveExpression() {
+      var _this4 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default()({
+        method: 'post',
+        url: '/save-expression-ajax',
+        responseType: 'json',
+        data: {
+          french_value: this.state.french_value,
+          english_value: this.state.selText,
+          id_text: this.state.texte.id
+        }
+      }).then(function (response) {
+        console.log(response);
+
+        if (response.statusText == 'OK') {
+          _this4.setState({
+            msgBtnSave: 'Enregistré !'
+          });
+
+          setTimeout(function () {
+            _this4.setState({
+              msgBtnSave: 'Enregistrer'
+            });
+          }, 3000);
+        }
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+  }, {
+    key: "updateText",
+    value: function updateText() {
+      var _this5 = this;
+
+      var wysiwyg = document.getElementsByName("react-trumbowyg")[0];
+      axios__WEBPACK_IMPORTED_MODULE_1___default()({
+        method: 'post',
+        url: '/update-texte-ajax',
+        responseType: 'json',
+        data: {
+          id_text: this.props.location.pathname.split("/")[2],
+          content: wysiwyg.value
+        }
+      }).then(function (response) {
+        console.log(response);
+
+        if (response.statusText == 'OK') {
+          var text = _this5.state.texte;
+          text.content = wysiwyg.value;
+
+          _this5.setState({
+            texte: text,
+            wysiwyg: false
+          });
+        }
+      }).catch(function (error) {
+        console.log(error);
+      });
     }
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-        style: {
-          textAlign: 'center'
-        }
-      }, this.state.texte.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "popupTrad",
-        style: {
-          display: this.state.dataPopup.display,
-          zIndex: 1,
-          backgroundColor: 'white',
-          width: '200px',
-          height: '200px',
-          border: '1px solid black',
-          position: 'absolute',
-          top: this.state.dataPopup.top,
-          left: this.state.dataPopup.left
-        }
-      }, "contenu de la popup trad"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        onClick: this.viewPopup.bind(this),
-        dangerouslySetInnerHTML: {
-          __html: this.state.texte.content
-        },
-        style: {
-          padding: '10px',
-          border: '1px solid black',
-          borderRadius: '10px'
-        }
-      }));
+      var _this6 = this;
+
+      var wysiwyg = '';
+      var text = '';
+
+      if (this.state.wysiwyg == true) {
+        wysiwyg = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: this.updateText.bind(this)
+        }, "Enregistrer"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: function onClick() {
+            _this6.setState({
+              wysiwyg: false
+            });
+          }
+        }, "Annuler"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_trumbowyg__WEBPACK_IMPORTED_MODULE_2___default.a, {
+          id: "react-trumbowyg",
+          buttons: [['viewHTML'], ['formatting'], 'btnGrp-semantic', ['link'], ['insertImage'], 'btnGrp-justify', 'btnGrp-lists', ['table'], // I ADDED THIS FOR THE TABLE PLUGIN BUTTON
+          ['fullscreen']],
+          data: this.state.texte.content,
+          placeholder: "Entrez votre texte",
+          onChange: console.log('change'),
+          ref: "trumbowyg"
+        }));
+      } else {
+        var _ref;
+
+        text = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+          style: {
+            textAlign: 'center'
+          }
+        }, this.state.texte.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: function onClick() {
+            _this6.setState({
+              wysiwyg: true
+            });
+          }
+        }, "Edit"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          id: "popupTrad",
+          style: (_ref = {
+            display: this.state.dataPopup.display,
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: '10px'
+          }, _defineProperty(_ref, "padding", '10px 10px'), _defineProperty(_ref, "zIndex", 1), _defineProperty(_ref, "backgroundColor", '#e8ffe8'), _defineProperty(_ref, "width", '200px'), _defineProperty(_ref, "minHeight", '90px'), _defineProperty(_ref, "border", '1px solid black'), _defineProperty(_ref, "borderRadius", '10px'), _defineProperty(_ref, "position", 'absolute'), _defineProperty(_ref, "top", this.state.dataPopup.top), _defineProperty(_ref, "left", this.state.dataPopup.left), _ref)
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          id: "translationPopupText"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          style: {
+            margin: '10px'
+          }
+        }, this.state.french_value)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          id: "btnSaveExpression",
+          onClick: this.saveExpression.bind(this),
+          style: {
+            width: '90px',
+            height: '45px',
+            cursor: 'pointer',
+            color: 'white',
+            fontWeight: 'bold',
+            backgroundColor: '#08e608',
+            borderRadius: '5px',
+            textAlign: 'center',
+            padding: '12px 0px'
+          }
+        }, this.state.msgBtnSave)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          onClick: this.viewPopup.bind(this),
+          dangerouslySetInnerHTML: {
+            __html: this.state.texte.content
+          },
+          style: {
+            padding: '10px',
+            border: '1px solid black',
+            borderRadius: '10px',
+            overflow: 'hidden'
+          }
+        }));
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, text, wysiwyg);
     }
   }]);
 
@@ -2418,32 +2896,34 @@ function (_Component) {
       var _this3 = this;
 
       var textes = this.state.textes.map(function (texte) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        var textTitle = texte.title.length > 20 ? texte.title.substring(0, 20) + '...' : texte.title;
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+          to: '/texte/' + texte.id,
+          id: _this3.props.id
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: texte.id,
           style: {
             display: 'inline-block',
             borderRadius: '5px',
-            width: '100px'
+            width: '100px',
+            margin: '10px'
           },
           className: "hover-item"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           style: {
             textAlign: 'center'
           }
-        }, texte.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, textTitle), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           style: {
             width: '90px',
             height: '70px',
             'textAlign': 'center'
           }
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          to: '/texte/' + texte.id,
-          id: _this3.props.id
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "img-item-liste-texte"
         }))));
       });
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Liste des textes"), textes);
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, textes);
     }
   }]);
 
@@ -2478,23 +2958,6 @@ Object(react_dom__WEBPACK_IMPORTED_MODULE_1__["hydrate"])(react__WEBPACK_IMPORTE
     app: 'client'
   }
 }), document.getElementById('root'));
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js":
-/*!**********************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/interopRequireDefault.js ***!
-  \**********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : {
-    "default": obj
-  };
-}
-
-module.exports = _interopRequireDefault;
 
 /***/ }),
 
@@ -4274,204 +4737,6 @@ function toComment(sourceMap) {
   var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
   return '/*# ' + data + ' */';
 }
-
-/***/ }),
-
-/***/ "./node_modules/dom-helpers/events/off.js":
-/*!************************************************!*\
-  !*** ./node_modules/dom-helpers/events/off.js ***!
-  \************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
-
-exports.__esModule = true;
-exports.default = void 0;
-
-var _inDOM = _interopRequireDefault(__webpack_require__(/*! ../util/inDOM */ "./node_modules/dom-helpers/util/inDOM.js"));
-
-var off = function off() {};
-
-if (_inDOM.default) {
-  off = function () {
-    if (document.addEventListener) return function (node, eventName, handler, capture) {
-      return node.removeEventListener(eventName, handler, capture || false);
-    };else if (document.attachEvent) return function (node, eventName, handler) {
-      return node.detachEvent('on' + eventName, handler);
-    };
-  }();
-}
-
-var _default = off;
-exports.default = _default;
-module.exports = exports["default"];
-
-/***/ }),
-
-/***/ "./node_modules/dom-helpers/events/on.js":
-/*!***********************************************!*\
-  !*** ./node_modules/dom-helpers/events/on.js ***!
-  \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
-
-exports.__esModule = true;
-exports.default = void 0;
-
-var _inDOM = _interopRequireDefault(__webpack_require__(/*! ../util/inDOM */ "./node_modules/dom-helpers/util/inDOM.js"));
-
-var on = function on() {};
-
-if (_inDOM.default) {
-  on = function () {
-    if (document.addEventListener) return function (node, eventName, handler, capture) {
-      return node.addEventListener(eventName, handler, capture || false);
-    };else if (document.attachEvent) return function (node, eventName, handler) {
-      return node.attachEvent('on' + eventName, function (e) {
-        e = e || window.event;
-        e.target = e.target || e.srcElement;
-        e.currentTarget = node;
-        handler.call(node, e);
-      });
-    };
-  }();
-}
-
-var _default = on;
-exports.default = _default;
-module.exports = exports["default"];
-
-/***/ }),
-
-/***/ "./node_modules/dom-helpers/transition/properties.js":
-/*!***********************************************************!*\
-  !*** ./node_modules/dom-helpers/transition/properties.js ***!
-  \***********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
-
-exports.__esModule = true;
-exports.default = exports.animationEnd = exports.animationDelay = exports.animationTiming = exports.animationDuration = exports.animationName = exports.transitionEnd = exports.transitionDuration = exports.transitionDelay = exports.transitionTiming = exports.transitionProperty = exports.transform = void 0;
-
-var _inDOM = _interopRequireDefault(__webpack_require__(/*! ../util/inDOM */ "./node_modules/dom-helpers/util/inDOM.js"));
-
-var transform = 'transform';
-exports.transform = transform;
-var prefix, transitionEnd, animationEnd;
-exports.animationEnd = animationEnd;
-exports.transitionEnd = transitionEnd;
-var transitionProperty, transitionDuration, transitionTiming, transitionDelay;
-exports.transitionDelay = transitionDelay;
-exports.transitionTiming = transitionTiming;
-exports.transitionDuration = transitionDuration;
-exports.transitionProperty = transitionProperty;
-var animationName, animationDuration, animationTiming, animationDelay;
-exports.animationDelay = animationDelay;
-exports.animationTiming = animationTiming;
-exports.animationDuration = animationDuration;
-exports.animationName = animationName;
-
-if (_inDOM.default) {
-  var _getTransitionPropert = getTransitionProperties();
-
-  prefix = _getTransitionPropert.prefix;
-  exports.transitionEnd = transitionEnd = _getTransitionPropert.transitionEnd;
-  exports.animationEnd = animationEnd = _getTransitionPropert.animationEnd;
-  exports.transform = transform = prefix + "-" + transform;
-  exports.transitionProperty = transitionProperty = prefix + "-transition-property";
-  exports.transitionDuration = transitionDuration = prefix + "-transition-duration";
-  exports.transitionDelay = transitionDelay = prefix + "-transition-delay";
-  exports.transitionTiming = transitionTiming = prefix + "-transition-timing-function";
-  exports.animationName = animationName = prefix + "-animation-name";
-  exports.animationDuration = animationDuration = prefix + "-animation-duration";
-  exports.animationTiming = animationTiming = prefix + "-animation-delay";
-  exports.animationDelay = animationDelay = prefix + "-animation-timing-function";
-}
-
-var _default = {
-  transform: transform,
-  end: transitionEnd,
-  property: transitionProperty,
-  timing: transitionTiming,
-  delay: transitionDelay,
-  duration: transitionDuration
-};
-exports.default = _default;
-
-function getTransitionProperties() {
-  var style = document.createElement('div').style;
-  var vendorMap = {
-    O: function O(e) {
-      return "o" + e.toLowerCase();
-    },
-    Moz: function Moz(e) {
-      return e.toLowerCase();
-    },
-    Webkit: function Webkit(e) {
-      return "webkit" + e;
-    },
-    ms: function ms(e) {
-      return "MS" + e;
-    }
-  };
-  var vendors = Object.keys(vendorMap);
-  var transitionEnd, animationEnd;
-  var prefix = '';
-
-  for (var i = 0; i < vendors.length; i++) {
-    var vendor = vendors[i];
-
-    if (vendor + "TransitionProperty" in style) {
-      prefix = "-" + vendor.toLowerCase();
-      transitionEnd = vendorMap[vendor]('TransitionEnd');
-      animationEnd = vendorMap[vendor]('AnimationEnd');
-      break;
-    }
-  }
-
-  if (!transitionEnd && 'transitionProperty' in style) transitionEnd = 'transitionend';
-  if (!animationEnd && 'animationName' in style) animationEnd = 'animationend';
-  style = null;
-  return {
-    animationEnd: animationEnd,
-    transitionEnd: transitionEnd,
-    prefix: prefix
-  };
-}
-
-/***/ }),
-
-/***/ "./node_modules/dom-helpers/util/inDOM.js":
-/*!************************************************!*\
-  !*** ./node_modules/dom-helpers/util/inDOM.js ***!
-  \************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.__esModule = true;
-exports.default = void 0;
-
-var _default = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
-
-exports.default = _default;
-module.exports = exports["default"];
 
 /***/ }),
 
@@ -27588,2428 +27853,6 @@ function pathToRegexp (path, keys, options) {
 
   return stringToRegexp(/** @type {string} */ (path), /** @type {!Array} */ (keys), options)
 }
-
-
-/***/ }),
-
-/***/ "./node_modules/react-swipeable-routes/es/generatePath.js":
-/*!****************************************************************!*\
-  !*** ./node_modules/react-swipeable-routes/es/generatePath.js ***!
-  \****************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var path_to_regexp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! path-to-regexp */ "./node_modules/react-swipeable-routes/node_modules/path-to-regexp/index.js");
-/* harmony import */ var path_to_regexp__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(path_to_regexp__WEBPACK_IMPORTED_MODULE_0__);
-
-
-var patternCache = {};
-var cacheLimit = 10000;
-var cacheCount = 0;
-
-var compileGenerator = function compileGenerator(pattern) {
-  var cacheKey = pattern;
-  var cache = patternCache[cacheKey] || (patternCache[cacheKey] = {});
-
-  if (cache[pattern]) return cache[pattern];
-
-  var compiledGenerator = path_to_regexp__WEBPACK_IMPORTED_MODULE_0___default.a.compile(pattern);
-
-  if (cacheCount < cacheLimit) {
-    cache[pattern] = compiledGenerator;
-    cacheCount++;
-  }
-
-  return compiledGenerator;
-};
-
-/**
- * Public API for generating a URL pathname from a pattern and parameters.
- */
-var generatePath = function generatePath() {
-  var pattern = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '/';
-  var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-  if (pattern === '/') {
-    return pattern;
-  }
-  var generator = compileGenerator(pattern);
-  return generator(params);
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (generatePath);
-
-/***/ }),
-
-/***/ "./node_modules/react-swipeable-routes/es/index.js":
-/*!*********************************************************!*\
-  !*** ./node_modules/react-swipeable-routes/es/index.js ***!
-  \*********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_swipeable_views__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-swipeable-views */ "./node_modules/react-swipeable-views/lib/index.js");
-/* harmony import */ var react_swipeable_views__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_swipeable_views__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/es/index.js");
-/* harmony import */ var _generatePath__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./generatePath */ "./node_modules/react-swipeable-routes/es/generatePath.js");
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-
-
-
-
-
-var SwipeableRoutes = function (_Component) {
-  _inherits(SwipeableRoutes, _Component);
-
-  function SwipeableRoutes() {
-    var _temp, _this, _ret;
-
-    _classCallCheck(this, SwipeableRoutes);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {
-      urls: {}
-    }, _this.handleIndexChange = function (index, type) {
-      var _React$Children$toArr = react__WEBPACK_IMPORTED_MODULE_0___default.a.Children.toArray(_this.props.children)[index].props,
-          path = _React$Children$toArr.path,
-          defaultParams = _React$Children$toArr.defaultParams;
-
-
-      var url = void 0;
-      if (path.includes(":")) {
-        if (path in _this.state.urls) {
-          url = _this.state.urls[path];
-        } else {
-          // Build url with defaults
-          url = Object(_generatePath__WEBPACK_IMPORTED_MODULE_3__["default"])(path, defaultParams);
-          _this.setState(function (state) {
-            var _extends2;
-
-            return { urls: _extends({}, state.urls, (_extends2 = {}, _extends2[path] = url, _extends2)) };
-          });
-        }
-      } else {
-        url = path;
-      }
-      _this.historyGoTo(url);
-
-      // Call the onChangeIndex if it's set
-      if (typeof _this.props.onChangeIndex === "function") {
-        _this.props.onChangeIndex(index, type);
-      }
-    }, _this.triggerOnChangeIndex = function (location) {
-      var children = _this.props.children;
-
-      react__WEBPACK_IMPORTED_MODULE_0___default.a.Children.forEach(children, function (element, index) {
-        var _element$props = element.props,
-            pathProp = _element$props.path,
-            exact = _element$props.exact,
-            strict = _element$props.strict,
-            from = _element$props.from;
-
-        var path = pathProp || from;
-        if (Object(react_router__WEBPACK_IMPORTED_MODULE_2__["matchPath"])(location.pathname, { path: path, exact: exact, strict: strict })) {
-          if (typeof _this.props.onChangeIndex === "function") {
-            _this.props.onChangeIndex(index);
-          }
-          _this.setState(function (state) {
-            var _extends3;
-
-            return {
-              urls: _extends({}, state.urls, (_extends3 = {}, _extends3[path] = location.pathname, _extends3))
-            };
-          });
-        }
-      });
-    }, _this.historyGoTo = function (path) {
-      var _this$props = _this.props,
-          replace = _this$props.replace,
-          history = _this$props.history;
-
-      return replace ? history.replace(path) : history.push(path);
-    }, _temp), _possibleConstructorReturn(_this, _ret);
-  }
-
-  // Trigger the location change to the route path
-
-
-  SwipeableRoutes.prototype.componentDidMount = function componentDidMount() {
-    var _this2 = this;
-
-    var history = this.props.history;
-
-    this.triggerOnChangeIndex(history.location);
-    this.unlistenHistory = history.listen(function (location) {
-      // When the location changes, call onChangeIndex with the route index
-      _this2.triggerOnChangeIndex(location);
-    });
-  };
-
-  SwipeableRoutes.prototype.componentWillUnmount = function componentWillUnmount() {
-    this.unlistenHistory();
-  };
-
-  SwipeableRoutes.prototype.componentDidUpdate = function componentDidUpdate(prevProps) {
-    // If index prop changed, change the location to the path of that route
-    if (prevProps.index !== this.props.index) {
-      var paths = react__WEBPACK_IMPORTED_MODULE_0___default.a.Children.map(this.props.children, function (element) {
-        return element.props.path;
-      });
-      this.historyGoTo(paths[this.props.index]);
-    }
-  };
-
-  SwipeableRoutes.prototype.render = function render() {
-    var _this3 = this;
-
-    var _props = this.props,
-        children = _props.children,
-        index = _props.index,
-        replace = _props.replace,
-        innerRef = _props.innerRef,
-        location = _props.location,
-        history = _props.history,
-        staticContext = _props.staticContext,
-        routeMatch = _props.match,
-        rest = _objectWithoutProperties(_props, ["children", "index", "replace", "innerRef", "location", "history", "staticContext", "match"]);
-
-    // If there's no match, render the first route with no params
-
-
-    var matchedIndex = 0;
-    var match = void 0;
-    if (index) {
-      matchedIndex = index;
-    } else {
-      react__WEBPACK_IMPORTED_MODULE_0___default.a.Children.forEach(children, function (element, index) {
-        var _element$props2 = element.props,
-            pathProp = _element$props2.path,
-            exact = _element$props2.exact,
-            strict = _element$props2.strict,
-            from = _element$props2.from;
-
-        var path = pathProp || from;
-
-        match = Object(react_router__WEBPACK_IMPORTED_MODULE_2__["matchPath"])(location.pathname, { path: path, exact: exact, strict: strict });
-        if (match) {
-          matchedIndex = index;
-        }
-      });
-    }
-
-    var renderableRoutes = react__WEBPACK_IMPORTED_MODULE_0___default.a.Children.toArray(children).filter(function (element, index) {
-      return !element.props.path.includes(":") || Boolean(element.props.defaultParams) || element.props.path in _this3.state.urls;
-    });
-
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
-      react_swipeable_views__WEBPACK_IMPORTED_MODULE_1___default.a,
-      _extends({}, rest, {
-        index: matchedIndex,
-        onChangeIndex: this.handleIndexChange,
-        ref: innerRef
-      }),
-      renderableRoutes.map(function (element, index) {
-        var _element$props3 = element.props,
-            path = _element$props3.path,
-            component = _element$props3.component,
-            render = _element$props3.render,
-            children = _element$props3.children;
-
-        var props = { location: location, history: history, staticContext: staticContext };
-
-        var match = Object(react_router__WEBPACK_IMPORTED_MODULE_2__["matchPath"])(location.pathname, element.props);
-        if (match) {
-          match.type = "full";
-        } else if (path in _this3.state.urls) {
-          match = Object(react_router__WEBPACK_IMPORTED_MODULE_2__["matchPath"])(_this3.state.urls[path], element.props);
-          match.type = "outOfView";
-        } else {
-          match = Object(react_router__WEBPACK_IMPORTED_MODULE_2__["matchPath"])(Object(_generatePath__WEBPACK_IMPORTED_MODULE_3__["default"])(path, element.props.defaultParams), element.props);
-          match.type = "none";
-        }
-        props.match = match;
-        props.key = path;
-
-        // A lot of this code is borrowed from the render method of
-        // Route. Why can't I just render the Route then?
-        // Because Route only renders the component|render|children
-        // if there's a match with the location, while here I render
-        // regardless of the location.
-        return component ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(component, props) : render ? render(props) : children ? typeof children === "function" ? children(props) : !Array.isArray(children) || children.length // Preact defaults to empty children array
-        ? react__WEBPACK_IMPORTED_MODULE_0___default.a.Children.only(children) : null : null;
-      })
-    );
-  };
-
-  return SwipeableRoutes;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(SwipeableRoutes));
-
-/***/ }),
-
-/***/ "./node_modules/react-swipeable-routes/node_modules/path-to-regexp/index.js":
-/*!**********************************************************************************!*\
-  !*** ./node_modules/react-swipeable-routes/node_modules/path-to-regexp/index.js ***!
-  \**********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-/**
- * Expose `pathToRegexp`.
- */
-module.exports = pathToRegexp
-module.exports.parse = parse
-module.exports.compile = compile
-module.exports.tokensToFunction = tokensToFunction
-module.exports.tokensToRegExp = tokensToRegExp
-
-/**
- * Default configs.
- */
-var DEFAULT_DELIMITER = '/'
-var DEFAULT_DELIMITERS = './'
-
-/**
- * The main path matching regexp utility.
- *
- * @type {RegExp}
- */
-var PATH_REGEXP = new RegExp([
-  // Match escaped characters that would otherwise appear in future matches.
-  // This allows the user to escape special characters that won't transform.
-  '(\\\\.)',
-  // Match Express-style parameters and un-named parameters with a prefix
-  // and optional suffixes. Matches appear as:
-  //
-  // ":test(\\d+)?" => ["test", "\d+", undefined, "?"]
-  // "(\\d+)"  => [undefined, undefined, "\d+", undefined]
-  '(?:\\:(\\w+)(?:\\(((?:\\\\.|[^\\\\()])+)\\))?|\\(((?:\\\\.|[^\\\\()])+)\\))([+*?])?'
-].join('|'), 'g')
-
-/**
- * Parse a string for the raw tokens.
- *
- * @param  {string}  str
- * @param  {Object=} options
- * @return {!Array}
- */
-function parse (str, options) {
-  var tokens = []
-  var key = 0
-  var index = 0
-  var path = ''
-  var defaultDelimiter = (options && options.delimiter) || DEFAULT_DELIMITER
-  var delimiters = (options && options.delimiters) || DEFAULT_DELIMITERS
-  var pathEscaped = false
-  var res
-
-  while ((res = PATH_REGEXP.exec(str)) !== null) {
-    var m = res[0]
-    var escaped = res[1]
-    var offset = res.index
-    path += str.slice(index, offset)
-    index = offset + m.length
-
-    // Ignore already escaped sequences.
-    if (escaped) {
-      path += escaped[1]
-      pathEscaped = true
-      continue
-    }
-
-    var prev = ''
-    var next = str[index]
-    var name = res[2]
-    var capture = res[3]
-    var group = res[4]
-    var modifier = res[5]
-
-    if (!pathEscaped && path.length) {
-      var k = path.length - 1
-
-      if (delimiters.indexOf(path[k]) > -1) {
-        prev = path[k]
-        path = path.slice(0, k)
-      }
-    }
-
-    // Push the current path onto the tokens.
-    if (path) {
-      tokens.push(path)
-      path = ''
-      pathEscaped = false
-    }
-
-    var partial = prev !== '' && next !== undefined && next !== prev
-    var repeat = modifier === '+' || modifier === '*'
-    var optional = modifier === '?' || modifier === '*'
-    var delimiter = prev || defaultDelimiter
-    var pattern = capture || group
-
-    tokens.push({
-      name: name || key++,
-      prefix: prev,
-      delimiter: delimiter,
-      optional: optional,
-      repeat: repeat,
-      partial: partial,
-      pattern: pattern ? escapeGroup(pattern) : '[^' + escapeString(delimiter) + ']+?'
-    })
-  }
-
-  // Push any remaining characters.
-  if (path || index < str.length) {
-    tokens.push(path + str.substr(index))
-  }
-
-  return tokens
-}
-
-/**
- * Compile a string to a template function for the path.
- *
- * @param  {string}             str
- * @param  {Object=}            options
- * @return {!function(Object=, Object=)}
- */
-function compile (str, options) {
-  return tokensToFunction(parse(str, options))
-}
-
-/**
- * Expose a method for transforming tokens into the path function.
- */
-function tokensToFunction (tokens) {
-  // Compile all the tokens into regexps.
-  var matches = new Array(tokens.length)
-
-  // Compile all the patterns before compilation.
-  for (var i = 0; i < tokens.length; i++) {
-    if (typeof tokens[i] === 'object') {
-      matches[i] = new RegExp('^(?:' + tokens[i].pattern + ')$')
-    }
-  }
-
-  return function (data, options) {
-    var path = ''
-    var encode = (options && options.encode) || encodeURIComponent
-
-    for (var i = 0; i < tokens.length; i++) {
-      var token = tokens[i]
-
-      if (typeof token === 'string') {
-        path += token
-        continue
-      }
-
-      var value = data ? data[token.name] : undefined
-      var segment
-
-      if (Array.isArray(value)) {
-        if (!token.repeat) {
-          throw new TypeError('Expected "' + token.name + '" to not repeat, but got array')
-        }
-
-        if (value.length === 0) {
-          if (token.optional) continue
-
-          throw new TypeError('Expected "' + token.name + '" to not be empty')
-        }
-
-        for (var j = 0; j < value.length; j++) {
-          segment = encode(value[j], token)
-
-          if (!matches[i].test(segment)) {
-            throw new TypeError('Expected all "' + token.name + '" to match "' + token.pattern + '"')
-          }
-
-          path += (j === 0 ? token.prefix : token.delimiter) + segment
-        }
-
-        continue
-      }
-
-      if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
-        segment = encode(String(value), token)
-
-        if (!matches[i].test(segment)) {
-          throw new TypeError('Expected "' + token.name + '" to match "' + token.pattern + '", but got "' + segment + '"')
-        }
-
-        path += token.prefix + segment
-        continue
-      }
-
-      if (token.optional) {
-        // Prepend partial segment prefixes.
-        if (token.partial) path += token.prefix
-
-        continue
-      }
-
-      throw new TypeError('Expected "' + token.name + '" to be ' + (token.repeat ? 'an array' : 'a string'))
-    }
-
-    return path
-  }
-}
-
-/**
- * Escape a regular expression string.
- *
- * @param  {string} str
- * @return {string}
- */
-function escapeString (str) {
-  return str.replace(/([.+*?=^!:${}()[\]|/\\])/g, '\\$1')
-}
-
-/**
- * Escape the capturing group by escaping special characters and meaning.
- *
- * @param  {string} group
- * @return {string}
- */
-function escapeGroup (group) {
-  return group.replace(/([=!:$/()])/g, '\\$1')
-}
-
-/**
- * Get the flags for a regexp from the options.
- *
- * @param  {Object} options
- * @return {string}
- */
-function flags (options) {
-  return options && options.sensitive ? '' : 'i'
-}
-
-/**
- * Pull out keys from a regexp.
- *
- * @param  {!RegExp} path
- * @param  {Array=}  keys
- * @return {!RegExp}
- */
-function regexpToRegexp (path, keys) {
-  if (!keys) return path
-
-  // Use a negative lookahead to match only capturing groups.
-  var groups = path.source.match(/\((?!\?)/g)
-
-  if (groups) {
-    for (var i = 0; i < groups.length; i++) {
-      keys.push({
-        name: i,
-        prefix: null,
-        delimiter: null,
-        optional: false,
-        repeat: false,
-        partial: false,
-        pattern: null
-      })
-    }
-  }
-
-  return path
-}
-
-/**
- * Transform an array into a regexp.
- *
- * @param  {!Array}  path
- * @param  {Array=}  keys
- * @param  {Object=} options
- * @return {!RegExp}
- */
-function arrayToRegexp (path, keys, options) {
-  var parts = []
-
-  for (var i = 0; i < path.length; i++) {
-    parts.push(pathToRegexp(path[i], keys, options).source)
-  }
-
-  return new RegExp('(?:' + parts.join('|') + ')', flags(options))
-}
-
-/**
- * Create a path regexp from string input.
- *
- * @param  {string}  path
- * @param  {Array=}  keys
- * @param  {Object=} options
- * @return {!RegExp}
- */
-function stringToRegexp (path, keys, options) {
-  return tokensToRegExp(parse(path, options), keys, options)
-}
-
-/**
- * Expose a function for taking tokens and returning a RegExp.
- *
- * @param  {!Array}  tokens
- * @param  {Array=}  keys
- * @param  {Object=} options
- * @return {!RegExp}
- */
-function tokensToRegExp (tokens, keys, options) {
-  options = options || {}
-
-  var strict = options.strict
-  var start = options.start !== false
-  var end = options.end !== false
-  var delimiter = escapeString(options.delimiter || DEFAULT_DELIMITER)
-  var delimiters = options.delimiters || DEFAULT_DELIMITERS
-  var endsWith = [].concat(options.endsWith || []).map(escapeString).concat('$').join('|')
-  var route = start ? '^' : ''
-  var isEndDelimited = tokens.length === 0
-
-  // Iterate over the tokens and create our regexp string.
-  for (var i = 0; i < tokens.length; i++) {
-    var token = tokens[i]
-
-    if (typeof token === 'string') {
-      route += escapeString(token)
-      isEndDelimited = i === tokens.length - 1 && delimiters.indexOf(token[token.length - 1]) > -1
-    } else {
-      var capture = token.repeat
-        ? '(?:' + token.pattern + ')(?:' + escapeString(token.delimiter) + '(?:' + token.pattern + '))*'
-        : token.pattern
-
-      if (keys) keys.push(token)
-
-      if (token.optional) {
-        if (token.partial) {
-          route += escapeString(token.prefix) + '(' + capture + ')?'
-        } else {
-          route += '(?:' + escapeString(token.prefix) + '(' + capture + '))?'
-        }
-      } else {
-        route += escapeString(token.prefix) + '(' + capture + ')'
-      }
-    }
-  }
-
-  if (end) {
-    if (!strict) route += '(?:' + delimiter + ')?'
-
-    route += endsWith === '$' ? '$' : '(?=' + endsWith + ')'
-  } else {
-    if (!strict) route += '(?:' + delimiter + '(?=' + endsWith + '))?'
-    if (!isEndDelimited) route += '(?=' + delimiter + '|' + endsWith + ')'
-  }
-
-  return new RegExp(route, flags(options))
-}
-
-/**
- * Normalize the given path string, returning a regular expression.
- *
- * An empty array can be passed in for the keys, which will hold the
- * placeholder key descriptions. For example, using `/user/:id`, `keys` will
- * contain `[{ name: 'id', delimiter: '/', optional: false, repeat: false }]`.
- *
- * @param  {(string|RegExp|Array)} path
- * @param  {Array=}                keys
- * @param  {Object=}               options
- * @return {!RegExp}
- */
-function pathToRegexp (path, keys, options) {
-  if (path instanceof RegExp) {
-    return regexpToRegexp(path, keys)
-  }
-
-  if (Array.isArray(path)) {
-    return arrayToRegexp(/** @type {!Array} */ (path), keys, options)
-  }
-
-  return stringToRegexp(/** @type {string} */ (path), keys, options)
-}
-
-
-/***/ }),
-
-/***/ "./node_modules/react-swipeable-views-core/lib/checkIndexBounds.js":
-/*!*************************************************************************!*\
-  !*** ./node_modules/react-swipeable-views-core/lib/checkIndexBounds.js ***!
-  \*************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/react-swipeable-views-core/node_modules/@babel/runtime/helpers/interopRequireDefault.js");
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var _warning = _interopRequireDefault(__webpack_require__(/*! warning */ "./node_modules/react-swipeable-views-core/node_modules/warning/warning.js"));
-
-var checkIndexBounds = function checkIndexBounds(props) {
-  var index = props.index,
-      children = props.children;
-
-  var childrenCount = _react.default.Children.count(children);
-
-   true ? (0, _warning.default)(index >= 0 && index <= childrenCount, "react-swipeable-view: the new index: ".concat(index, " is out of bounds: [0-").concat(childrenCount, "].")) : undefined;
-};
-
-var _default = checkIndexBounds;
-exports.default = _default;
-
-/***/ }),
-
-/***/ "./node_modules/react-swipeable-views-core/lib/computeIndex.js":
-/*!*********************************************************************!*\
-  !*** ./node_modules/react-swipeable-views-core/lib/computeIndex.js ***!
-  \*********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/react-swipeable-views-core/node_modules/@babel/runtime/helpers/interopRequireDefault.js");
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = computeIndex;
-
-var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var _constant = _interopRequireDefault(__webpack_require__(/*! ./constant */ "./node_modules/react-swipeable-views-core/lib/constant.js"));
-
-function computeIndex(params) {
-  var children = params.children,
-      startIndex = params.startIndex,
-      startX = params.startX,
-      pageX = params.pageX,
-      viewLength = params.viewLength,
-      resistance = params.resistance;
-  var indexMax = _react.default.Children.count(children) - 1;
-  var index = startIndex + (startX - pageX) / viewLength;
-  var newStartX;
-
-  if (!resistance) {
-    // Reset the starting point
-    if (index < 0) {
-      index = 0;
-      newStartX = (index - startIndex) * viewLength + pageX;
-    } else if (index > indexMax) {
-      index = indexMax;
-      newStartX = (index - startIndex) * viewLength + pageX;
-    }
-  } else if (index < 0) {
-    index = Math.exp(index * _constant.default.RESISTANCE_COEF) - 1;
-  } else if (index > indexMax) {
-    index = indexMax + 1 - Math.exp((indexMax - index) * _constant.default.RESISTANCE_COEF);
-  }
-
-  return {
-    index: index,
-    startX: newStartX
-  };
-}
-
-/***/ }),
-
-/***/ "./node_modules/react-swipeable-views-core/lib/constant.js":
-/*!*****************************************************************!*\
-  !*** ./node_modules/react-swipeable-views-core/lib/constant.js ***!
-  \*****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _default = {
-  RESISTANCE_COEF: 0.6,
-  // This value is closed to what browsers are using internally to
-  // trigger a native scroll.
-  UNCERTAINTY_THRESHOLD: 3 // px
-
-};
-exports.default = _default;
-
-/***/ }),
-
-/***/ "./node_modules/react-swipeable-views-core/lib/getDisplaySameSlide.js":
-/*!****************************************************************************!*\
-  !*** ./node_modules/react-swipeable-views-core/lib/getDisplaySameSlide.js ***!
-  \****************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var getDisplaySameSlide = function getDisplaySameSlide(props, nextProps) {
-  var displaySameSlide = false;
-
-  if (props.children.length && nextProps.children.length) {
-    var oldChildren = props.children[props.index];
-    var oldKey = oldChildren ? oldChildren.key : 'empty';
-
-    if (oldKey !== null) {
-      var newChildren = nextProps.children[nextProps.index];
-      var newKey = newChildren ? newChildren.key : 'empty';
-
-      if (oldKey === newKey) {
-        displaySameSlide = true;
-      }
-    }
-  }
-
-  return displaySameSlide;
-};
-
-var _default = getDisplaySameSlide;
-exports.default = _default;
-
-/***/ }),
-
-/***/ "./node_modules/react-swipeable-views-core/lib/index.js":
-/*!**************************************************************!*\
-  !*** ./node_modules/react-swipeable-views-core/lib/index.js ***!
-  \**************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/react-swipeable-views-core/node_modules/@babel/runtime/helpers/interopRequireDefault.js");
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-Object.defineProperty(exports, "checkIndexBounds", {
-  enumerable: true,
-  get: function get() {
-    return _checkIndexBounds.default;
-  }
-});
-Object.defineProperty(exports, "computeIndex", {
-  enumerable: true,
-  get: function get() {
-    return _computeIndex.default;
-  }
-});
-Object.defineProperty(exports, "constant", {
-  enumerable: true,
-  get: function get() {
-    return _constant.default;
-  }
-});
-Object.defineProperty(exports, "getDisplaySameSlide", {
-  enumerable: true,
-  get: function get() {
-    return _getDisplaySameSlide.default;
-  }
-});
-Object.defineProperty(exports, "mod", {
-  enumerable: true,
-  get: function get() {
-    return _mod.default;
-  }
-});
-
-var _checkIndexBounds = _interopRequireDefault(__webpack_require__(/*! ./checkIndexBounds */ "./node_modules/react-swipeable-views-core/lib/checkIndexBounds.js"));
-
-var _computeIndex = _interopRequireDefault(__webpack_require__(/*! ./computeIndex */ "./node_modules/react-swipeable-views-core/lib/computeIndex.js"));
-
-var _constant = _interopRequireDefault(__webpack_require__(/*! ./constant */ "./node_modules/react-swipeable-views-core/lib/constant.js"));
-
-var _getDisplaySameSlide = _interopRequireDefault(__webpack_require__(/*! ./getDisplaySameSlide */ "./node_modules/react-swipeable-views-core/lib/getDisplaySameSlide.js"));
-
-var _mod = _interopRequireDefault(__webpack_require__(/*! ./mod */ "./node_modules/react-swipeable-views-core/lib/mod.js"));
-
-/***/ }),
-
-/***/ "./node_modules/react-swipeable-views-core/lib/mod.js":
-/*!************************************************************!*\
-  !*** ./node_modules/react-swipeable-views-core/lib/mod.js ***!
-  \************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-// Extended version of % with negative integer support.
-function mod(n, m) {
-  var q = n % m;
-  return q < 0 ? q + m : q;
-}
-
-var _default = mod;
-exports.default = _default;
-
-/***/ }),
-
-/***/ "./node_modules/react-swipeable-views-core/node_modules/@babel/runtime/helpers/interopRequireDefault.js":
-/*!**************************************************************************************************************!*\
-  !*** ./node_modules/react-swipeable-views-core/node_modules/@babel/runtime/helpers/interopRequireDefault.js ***!
-  \**************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : {
-    default: obj
-  };
-}
-
-module.exports = _interopRequireDefault;
-
-/***/ }),
-
-/***/ "./node_modules/react-swipeable-views-core/node_modules/warning/warning.js":
-/*!*********************************************************************************!*\
-  !*** ./node_modules/react-swipeable-views-core/node_modules/warning/warning.js ***!
-  \*********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Copyright (c) 2014-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-
-
-/**
- * Similar to invariant but only logs a warning if the condition is not met.
- * This can be used to log issues in development environments in critical
- * paths. Removing the logging code for production environments will keep the
- * same logic and follow the same code paths.
- */
-
-var __DEV__ = "development" !== 'production';
-
-var warning = function() {};
-
-if (__DEV__) {
-  var printWarning = function printWarning(format, args) {
-    var len = arguments.length;
-    args = new Array(len > 1 ? len - 1 : 0);
-    for (var key = 1; key < len; key++) {
-      args[key - 1] = arguments[key];
-    }
-    var argIndex = 0;
-    var message = 'Warning: ' +
-      format.replace(/%s/g, function() {
-        return args[argIndex++];
-      });
-    if (typeof console !== 'undefined') {
-      console.error(message);
-    }
-    try {
-      // --- Welcome to debugging React ---
-      // This error was thrown as a convenience so that you can use this stack
-      // to find the callsite that caused this warning to fire.
-      throw new Error(message);
-    } catch (x) {}
-  }
-
-  warning = function(condition, format, args) {
-    var len = arguments.length;
-    args = new Array(len > 2 ? len - 2 : 0);
-    for (var key = 2; key < len; key++) {
-      args[key - 2] = arguments[key];
-    }
-    if (format === undefined) {
-      throw new Error(
-          '`warning(condition, format, ...args)` requires a warning ' +
-          'message argument'
-      );
-    }
-    if (!condition) {
-      printWarning.apply(null, [format].concat(args));
-    }
-  };
-}
-
-module.exports = warning;
-
-
-/***/ }),
-
-/***/ "./node_modules/react-swipeable-views/lib/SwipeableViews.js":
-/*!******************************************************************!*\
-  !*** ./node_modules/react-swipeable-views/lib/SwipeableViews.js ***!
-  \******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/interopRequireDefault.js");
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.getDomTreeShapes = getDomTreeShapes;
-exports.findNativeHandler = findNativeHandler;
-exports.default = void 0;
-
-var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/extends.js"));
-
-var _objectWithoutProperties2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/objectWithoutProperties */ "./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/objectWithoutProperties.js"));
-
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/classCallCheck.js"));
-
-var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/createClass.js"));
-
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/possibleConstructorReturn.js"));
-
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/getPrototypeOf.js"));
-
-var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/inherits.js"));
-
-var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js"));
-
-var _warning = _interopRequireDefault(__webpack_require__(/*! warning */ "./node_modules/react-swipeable-views/node_modules/warning/warning.js"));
-
-var _properties = _interopRequireDefault(__webpack_require__(/*! dom-helpers/transition/properties */ "./node_modules/dom-helpers/transition/properties.js"));
-
-var _on = _interopRequireDefault(__webpack_require__(/*! dom-helpers/events/on */ "./node_modules/dom-helpers/events/on.js"));
-
-var _off = _interopRequireDefault(__webpack_require__(/*! dom-helpers/events/off */ "./node_modules/dom-helpers/events/off.js"));
-
-var _reactSwipeableViewsCore = __webpack_require__(/*! react-swipeable-views-core */ "./node_modules/react-swipeable-views-core/lib/index.js");
-
-function addEventListenerEnhanced(node, event, handler, options) {
-  (0, _on.default)(node, event, handler, options);
-  return {
-    remove: function remove() {
-      (0, _off.default)(node, event, handler, options);
-    }
-  };
-}
-
-var styleInjected = false; // Support old version of iOS and IE 10.
-// To be deleted in 2019.
-
-function injectStyle() {
-  // Inject once for all the instances
-  if (!styleInjected) {
-    var style = document.createElement('style');
-    style.innerHTML = "\n      .react-swipeable-view-container {\n        display: -webkit-box;\n        display: -ms-flexbox;\n      }\n      .react-swipeable-view-container > div {\n        -ms-flex-negative: 0;\n      }\n    ";
-
-    if (document.body) {
-      document.body.appendChild(style);
-    }
-
-    styleInjected = true;
-  }
-}
-
-var styles = {
-  container: {
-    direction: 'ltr',
-    display: 'flex',
-    willChange: 'transform'
-  },
-  slide: {
-    width: '100%',
-    WebkitFlexShrink: 0,
-    flexShrink: 0,
-    overflow: 'auto'
-  }
-};
-var axisProperties = {
-  root: {
-    x: {
-      overflowX: 'hidden'
-    },
-    'x-reverse': {
-      overflowX: 'hidden'
-    },
-    y: {
-      overflowY: 'hidden'
-    },
-    'y-reverse': {
-      overflowY: 'hidden'
-    }
-  },
-  flexDirection: {
-    x: 'row',
-    'x-reverse': 'row-reverse',
-    y: 'column',
-    'y-reverse': 'column-reverse'
-  },
-  transform: {
-    x: function x(translate) {
-      return "translate(".concat(-translate, "%, 0)");
-    },
-    'x-reverse': function xReverse(translate) {
-      return "translate(".concat(translate, "%, 0)");
-    },
-    y: function y(translate) {
-      return "translate(0, ".concat(-translate, "%)");
-    },
-    'y-reverse': function yReverse(translate) {
-      return "translate(0, ".concat(translate, "%)");
-    }
-  },
-  length: {
-    x: 'width',
-    'x-reverse': 'width',
-    y: 'height',
-    'y-reverse': 'height'
-  },
-  rotationMatrix: {
-    x: {
-      x: [1, 0],
-      y: [0, 1]
-    },
-    'x-reverse': {
-      x: [-1, 0],
-      y: [0, 1]
-    },
-    y: {
-      x: [0, 1],
-      y: [1, 0]
-    },
-    'y-reverse': {
-      x: [0, -1],
-      y: [1, 0]
-    }
-  },
-  scrollPosition: {
-    x: 'scrollLeft',
-    'x-reverse': 'scrollLeft',
-    y: 'scrollTop',
-    'y-reverse': 'scrollTop'
-  },
-  scrollLength: {
-    x: 'scrollWidth',
-    'x-reverse': 'scrollWidth',
-    y: 'scrollHeight',
-    'y-reverse': 'scrollHeight'
-  },
-  clientLength: {
-    x: 'clientWidth',
-    'x-reverse': 'clientWidth',
-    y: 'clientHeight',
-    'y-reverse': 'clientHeight'
-  }
-};
-
-function createTransition(property, options) {
-  var duration = options.duration,
-      easeFunction = options.easeFunction,
-      delay = options.delay;
-  return "".concat(property, " ").concat(duration, " ").concat(easeFunction, " ").concat(delay);
-} // We are using a 2x2 rotation matrix.
-
-
-function applyRotationMatrix(touch, axis) {
-  var rotationMatrix = axisProperties.rotationMatrix[axis];
-  return {
-    pageX: rotationMatrix.x[0] * touch.pageX + rotationMatrix.x[1] * touch.pageY,
-    pageY: rotationMatrix.y[0] * touch.pageX + rotationMatrix.y[1] * touch.pageY
-  };
-}
-
-function adaptMouse(event) {
-  event.touches = [{
-    pageX: event.pageX,
-    pageY: event.pageY
-  }];
-  return event;
-}
-
-function getDomTreeShapes(element, rootNode) {
-  var domTreeShapes = [];
-
-  while (element && element !== rootNode) {
-    // We reach a Swipeable View, no need to look higher in the dom tree.
-    if (element.hasAttribute('data-swipeable')) {
-      break;
-    }
-
-    var style = window.getComputedStyle(element);
-
-    if ( // Ignore the scroll children if the element is absolute positioned.
-    style.getPropertyValue('position') === 'absolute' || // Ignore the scroll children if the element has an overflowX hidden
-    style.getPropertyValue('overflow-x') === 'hidden') {
-      domTreeShapes = [];
-    } else if (element.clientWidth > 0 && element.scrollWidth > element.clientWidth || element.clientHeight > 0 && element.scrollHeight > element.clientHeight) {
-      // Ignore the nodes that have no width.
-      // Keep elements with a scroll
-      domTreeShapes.push({
-        element: element,
-        scrollWidth: element.scrollWidth,
-        scrollHeight: element.scrollHeight,
-        clientWidth: element.clientWidth,
-        clientHeight: element.clientHeight,
-        scrollLeft: element.scrollLeft,
-        scrollTop: element.scrollTop
-      });
-    }
-
-    element = element.parentNode;
-  }
-
-  return domTreeShapes;
-} // We can only have one node at the time claiming ownership for handling the swipe.
-// Otherwise, the UX would be confusing.
-// That's why we use a singleton here.
-
-
-var nodeWhoClaimedTheScroll = null;
-
-function findNativeHandler(params) {
-  var domTreeShapes = params.domTreeShapes,
-      pageX = params.pageX,
-      startX = params.startX,
-      axis = params.axis;
-  return domTreeShapes.some(function (shape) {
-    // Determine if we are going backward or forward.
-    var goingForward = pageX >= startX;
-
-    if (axis === 'x' || axis === 'y') {
-      goingForward = !goingForward;
-    }
-
-    var scrollPosition = shape[axisProperties.scrollPosition[axis]];
-    var areNotAtStart = scrollPosition > 0;
-    var areNotAtEnd = scrollPosition + shape[axisProperties.clientLength[axis]] < shape[axisProperties.scrollLength[axis]];
-
-    if (goingForward && areNotAtEnd || !goingForward && areNotAtStart) {
-      nodeWhoClaimedTheScroll = shape.element;
-      return true;
-    }
-
-    return false;
-  });
-}
-
-var SwipeableViews =
-/*#__PURE__*/
-function (_React$Component) {
-  (0, _inherits2.default)(SwipeableViews, _React$Component);
-
-  function SwipeableViews(props) {
-    var _this;
-
-    (0, _classCallCheck2.default)(this, SwipeableViews);
-    _this = (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(SwipeableViews).call(this, props));
-    _this.rootNode = null;
-    _this.containerNode = null;
-    _this.ignoreNextScrollEvents = false;
-    _this.viewLength = 0;
-    _this.startX = 0;
-    _this.lastX = 0;
-    _this.vx = 0;
-    _this.startY = 0;
-    _this.isSwiping = undefined;
-    _this.started = false;
-    _this.startIndex = 0;
-    _this.transitionListener = null;
-    _this.touchMoveListener = null;
-    _this.activeSlide = null;
-    _this.indexCurrent = null;
-    _this.firstRenderTimeout = null;
-
-    _this.setRootNode = function (node) {
-      _this.rootNode = node;
-    };
-
-    _this.setContainerNode = function (node) {
-      _this.containerNode = node;
-    };
-
-    _this.setActiveSlide = function (node) {
-      _this.activeSlide = node;
-
-      _this.updateHeight();
-    };
-
-    _this.handleSwipeStart = function (event) {
-      var axis = _this.props.axis;
-      var touch = applyRotationMatrix(event.touches[0], axis);
-      _this.viewLength = _this.rootNode.getBoundingClientRect()[axisProperties.length[axis]];
-      _this.startX = touch.pageX;
-      _this.lastX = touch.pageX;
-      _this.vx = 0;
-      _this.startY = touch.pageY;
-      _this.isSwiping = undefined;
-      _this.started = true;
-      var computedStyle = window.getComputedStyle(_this.containerNode);
-      var transform = computedStyle.getPropertyValue('-webkit-transform') || computedStyle.getPropertyValue('transform');
-
-      if (transform && transform !== 'none') {
-        var transformValues = transform.split('(')[1].split(')')[0].split(',');
-        var rootStyle = window.getComputedStyle(_this.rootNode);
-        var tranformNormalized = applyRotationMatrix({
-          pageX: parseInt(transformValues[4], 10),
-          pageY: parseInt(transformValues[5], 10)
-        }, axis);
-        _this.startIndex = -tranformNormalized.pageX / (_this.viewLength - parseInt(rootStyle.paddingLeft, 10) - parseInt(rootStyle.paddingRight, 10)) || 0;
-      }
-    };
-
-    _this.handleSwipeMove = function (event) {
-      // The touch start event can be cancel.
-      // Makes sure we set a starting point.
-      if (!_this.started) {
-        _this.handleTouchStart(event);
-
-        return;
-      } // We are not supposed to hanlde this touch move.
-
-
-      if (nodeWhoClaimedTheScroll !== null && nodeWhoClaimedTheScroll !== _this.rootNode) {
-        return;
-      }
-
-      var _this$props = _this.props,
-          axis = _this$props.axis,
-          children = _this$props.children,
-          ignoreNativeScroll = _this$props.ignoreNativeScroll,
-          onSwitching = _this$props.onSwitching,
-          resistance = _this$props.resistance;
-      var touch = applyRotationMatrix(event.touches[0], axis); // We don't know yet.
-
-      if (_this.isSwiping === undefined) {
-        var dx = Math.abs(touch.pageX - _this.startX);
-        var dy = Math.abs(touch.pageY - _this.startY);
-        var isSwiping = dx > dy && dx > _reactSwipeableViewsCore.constant.UNCERTAINTY_THRESHOLD; // We let the parent handle the scroll.
-
-        if (!resistance && (axis === 'y' || axis === 'y-reverse') && (_this.indexCurrent === 0 && _this.startX < touch.pageX || _this.indexCurrent === _react.default.Children.count(_this.props.children) - 1 && _this.startX > touch.pageX)) {
-          _this.isSwiping = false;
-          return;
-        } // We are likely to be swiping, let's prevent the scroll event.
-
-
-        if (dx > dy) {
-          event.preventDefault();
-        }
-
-        if (isSwiping === true || dy > _reactSwipeableViewsCore.constant.UNCERTAINTY_THRESHOLD) {
-          _this.isSwiping = isSwiping;
-          _this.startX = touch.pageX; // Shift the starting point.
-
-          return; // Let's wait the next touch event to move something.
-        }
-      }
-
-      if (_this.isSwiping !== true) {
-        return;
-      } // We are swiping, let's prevent the scroll event.
-
-
-      event.preventDefault(); // Low Pass filter.
-
-      _this.vx = _this.vx * 0.5 + (touch.pageX - _this.lastX) * 0.5;
-      _this.lastX = touch.pageX;
-
-      var _computeIndex = (0, _reactSwipeableViewsCore.computeIndex)({
-        children: children,
-        resistance: resistance,
-        pageX: touch.pageX,
-        startIndex: _this.startIndex,
-        startX: _this.startX,
-        viewLength: _this.viewLength
-      }),
-          index = _computeIndex.index,
-          startX = _computeIndex.startX; // Add support for native scroll elements.
-
-
-      if (nodeWhoClaimedTheScroll === null && !ignoreNativeScroll) {
-        var domTreeShapes = getDomTreeShapes(event.target, _this.rootNode);
-        var hasFoundNativeHandler = findNativeHandler({
-          domTreeShapes: domTreeShapes,
-          startX: _this.startX,
-          pageX: touch.pageX,
-          axis: axis
-        }); // We abort the touch move handler.
-
-        if (hasFoundNativeHandler) {
-          return;
-        }
-      } // We are moving toward the edges.
-
-
-      if (startX) {
-        _this.startX = startX;
-      } else if (nodeWhoClaimedTheScroll === null) {
-        nodeWhoClaimedTheScroll = _this.rootNode;
-      }
-
-      _this.setIndexCurrent(index);
-
-      var callback = function callback() {
-        if (onSwitching) {
-          onSwitching(index, 'move');
-        }
-      };
-
-      if (_this.state.displaySameSlide || !_this.state.isDragging) {
-        _this.setState({
-          displaySameSlide: false,
-          isDragging: true
-        }, callback);
-      }
-
-      callback();
-    };
-
-    _this.handleSwipeEnd = function () {
-      nodeWhoClaimedTheScroll = null; // The touch start event can be cancel.
-      // Makes sure that a starting point is set.
-
-      if (!_this.started) {
-        return;
-      }
-
-      _this.started = false;
-
-      if (_this.isSwiping !== true) {
-        return;
-      }
-
-      var indexLatest = _this.state.indexLatest;
-      var indexCurrent = _this.indexCurrent;
-      var delta = indexLatest - indexCurrent;
-      var indexNew; // Quick movement
-
-      if (Math.abs(_this.vx) > _this.props.threshold) {
-        if (_this.vx > 0) {
-          indexNew = Math.floor(indexCurrent);
-        } else {
-          indexNew = Math.ceil(indexCurrent);
-        }
-      } else if (Math.abs(delta) > _this.props.hysteresis) {
-        // Some hysteresis with indexLatest.
-        indexNew = delta > 0 ? Math.floor(indexCurrent) : Math.ceil(indexCurrent);
-      } else {
-        indexNew = indexLatest;
-      }
-
-      var indexMax = _react.default.Children.count(_this.props.children) - 1;
-
-      if (indexNew < 0) {
-        indexNew = 0;
-      } else if (indexNew > indexMax) {
-        indexNew = indexMax;
-      }
-
-      _this.setIndexCurrent(indexNew);
-
-      _this.setState({
-        indexLatest: indexNew,
-        isDragging: false
-      }, function () {
-        if (_this.props.onSwitching) {
-          _this.props.onSwitching(indexNew, 'end');
-        }
-
-        if (_this.props.onChangeIndex && indexNew !== indexLatest) {
-          _this.props.onChangeIndex(indexNew, indexLatest, {
-            reason: 'swipe'
-          });
-        } // Manually calling handleTransitionEnd in that case as isn't otherwise.
-
-
-        if (indexCurrent === indexLatest) {
-          _this.handleTransitionEnd();
-        }
-      });
-    };
-
-    _this.handleTouchStart = function (event) {
-      if (_this.props.onTouchStart) {
-        _this.props.onTouchStart(event);
-      }
-
-      _this.handleSwipeStart(event);
-    };
-
-    _this.handleTouchEnd = function (event) {
-      if (_this.props.onTouchEnd) {
-        _this.props.onTouchEnd(event);
-      }
-
-      _this.handleSwipeEnd(event);
-    };
-
-    _this.handleMouseDown = function (event) {
-      if (_this.props.onMouseDown) {
-        _this.props.onMouseDown(event);
-      }
-
-      event.persist();
-
-      _this.handleSwipeStart(adaptMouse(event));
-    };
-
-    _this.handleMouseUp = function (event) {
-      if (_this.props.onMouseUp) {
-        _this.props.onMouseUp(event);
-      }
-
-      _this.handleSwipeEnd(adaptMouse(event));
-    };
-
-    _this.handleMouseLeave = function (event) {
-      if (_this.props.onMouseLeave) {
-        _this.props.onMouseLeave(event);
-      } // Filter out events
-
-
-      if (_this.started) {
-        _this.handleSwipeEnd(adaptMouse(event));
-      }
-    };
-
-    _this.handleMouseMove = function (event) {
-      if (_this.props.onMouseMove) {
-        _this.props.onMouseMove(event);
-      } // Filter out events
-
-
-      if (_this.started) {
-        _this.handleSwipeMove(adaptMouse(event));
-      }
-    };
-
-    _this.handleScroll = function (event) {
-      if (_this.props.onScroll) {
-        _this.props.onScroll(event);
-      } // Ignore events bubbling up.
-
-
-      if (event.target !== _this.rootNode) {
-        return;
-      }
-
-      if (_this.ignoreNextScrollEvents) {
-        _this.ignoreNextScrollEvents = false;
-        return;
-      }
-
-      var indexLatest = _this.state.indexLatest;
-      var indexNew = Math.ceil(event.target.scrollLeft / event.target.clientWidth) + indexLatest;
-      _this.ignoreNextScrollEvents = true; // Reset the scroll position.
-
-      event.target.scrollLeft = 0;
-
-      if (_this.props.onChangeIndex && indexNew !== indexLatest) {
-        _this.props.onChangeIndex(indexNew, indexLatest, {
-          reason: 'focus'
-        });
-      }
-    };
-
-    _this.updateHeight = function () {
-      if (_this.activeSlide !== null) {
-        var child = _this.activeSlide.children[0];
-
-        if (child !== undefined && child.offsetHeight !== undefined && _this.state.heightLatest !== child.offsetHeight) {
-          _this.setState({
-            heightLatest: child.offsetHeight
-          });
-        }
-      }
-    };
-
-    if (true) {
-      (0, _reactSwipeableViewsCore.checkIndexBounds)(props);
-    }
-
-    _this.state = {
-      indexLatest: props.index,
-      // Set to true as soon as the component is swiping.
-      // It's the state counter part of this.isSwiping.
-      isDragging: false,
-      // Help with SSR logic and lazy loading logic.
-      renderOnlyActive: !props.disableLazyLoading,
-      heightLatest: 0,
-      // Let the render method that we are going to display the same slide than previously.
-      displaySameSlide: true
-    };
-
-    _this.setIndexCurrent(props.index);
-
-    return _this;
-  }
-
-  (0, _createClass2.default)(SwipeableViews, [{
-    key: "getChildContext",
-    value: function getChildContext() {
-      var _this2 = this;
-
-      return {
-        swipeableViews: {
-          slideUpdateHeight: function slideUpdateHeight() {
-            _this2.updateHeight();
-          }
-        }
-      };
-    }
-  }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this3 = this;
-
-      // Subscribe to transition end events.
-      this.transitionListener = addEventListenerEnhanced(this.containerNode, _properties.default.end, function (event) {
-        if (event.target !== _this3.containerNode) {
-          return;
-        }
-
-        _this3.handleTransitionEnd();
-      }); // Block the thread to handle that event.
-
-      this.touchMoveListener = addEventListenerEnhanced(this.rootNode, 'touchmove', function (event) {
-        // Handling touch events is disabled.
-        if (_this3.props.disabled) {
-          return;
-        }
-
-        _this3.handleSwipeMove(event);
-      }, {
-        passive: false
-      });
-
-      if (!this.props.disableLazyLoading) {
-        this.firstRenderTimeout = setTimeout(function () {
-          _this3.setState({
-            renderOnlyActive: false
-          });
-        }, 0);
-      }
-
-      injectStyle(); // Send all functions in an object if action param is set.
-
-      if (this.props.action) {
-        this.props.action({
-          updateHeight: this.updateHeight
-        });
-      }
-    }
-  }, {
-    key: "componentWillReceiveProps",
-    value: function componentWillReceiveProps(nextProps) {
-      var index = nextProps.index;
-
-      if (typeof index === 'number' && index !== this.props.index) {
-        if (true) {
-          (0, _reactSwipeableViewsCore.checkIndexBounds)(nextProps);
-        }
-
-        this.setIndexCurrent(index);
-        this.setState({
-          // If true, we are going to change the children. We shoudn't animate it.
-          displaySameSlide: (0, _reactSwipeableViewsCore.getDisplaySameSlide)(this.props, nextProps),
-          indexLatest: index
-        });
-      }
-    }
-  }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      this.transitionListener.remove();
-      this.touchMoveListener.remove();
-      clearTimeout(this.firstRenderTimeout);
-    }
-  }, {
-    key: "setIndexCurrent",
-    value: function setIndexCurrent(indexCurrent) {
-      if (!this.props.animateTransitions && this.indexCurrent !== indexCurrent) {
-        this.handleTransitionEnd();
-      }
-
-      this.indexCurrent = indexCurrent;
-
-      if (this.containerNode) {
-        var axis = this.props.axis;
-        var transform = axisProperties.transform[axis](indexCurrent * 100);
-        this.containerNode.style.WebkitTransform = transform;
-        this.containerNode.style.transform = transform;
-      }
-    }
-  }, {
-    key: "handleTransitionEnd",
-    value: function handleTransitionEnd() {
-      if (!this.props.onTransitionEnd) {
-        return;
-      } // Filters out when changing the children
-
-
-      if (this.state.displaySameSlide) {
-        return;
-      } // The rest callback is triggered when swiping. It's just noise.
-      // We filter it out.
-
-
-      if (!this.state.isDragging) {
-        this.props.onTransitionEnd();
-      }
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this4 = this;
-
-      var _this$props2 = this.props,
-          action = _this$props2.action,
-          animateHeight = _this$props2.animateHeight,
-          animateTransitions = _this$props2.animateTransitions,
-          axis = _this$props2.axis,
-          children = _this$props2.children,
-          containerStyleProp = _this$props2.containerStyle,
-          disabled = _this$props2.disabled,
-          disableLazyLoading = _this$props2.disableLazyLoading,
-          enableMouseEvents = _this$props2.enableMouseEvents,
-          hysteresis = _this$props2.hysteresis,
-          ignoreNativeScroll = _this$props2.ignoreNativeScroll,
-          index = _this$props2.index,
-          onChangeIndex = _this$props2.onChangeIndex,
-          onSwitching = _this$props2.onSwitching,
-          onTransitionEnd = _this$props2.onTransitionEnd,
-          resistance = _this$props2.resistance,
-          slideStyleProp = _this$props2.slideStyle,
-          slideClassName = _this$props2.slideClassName,
-          springConfig = _this$props2.springConfig,
-          style = _this$props2.style,
-          threshold = _this$props2.threshold,
-          other = (0, _objectWithoutProperties2.default)(_this$props2, ["action", "animateHeight", "animateTransitions", "axis", "children", "containerStyle", "disabled", "disableLazyLoading", "enableMouseEvents", "hysteresis", "ignoreNativeScroll", "index", "onChangeIndex", "onSwitching", "onTransitionEnd", "resistance", "slideStyle", "slideClassName", "springConfig", "style", "threshold"]);
-      var _this$state = this.state,
-          displaySameSlide = _this$state.displaySameSlide,
-          heightLatest = _this$state.heightLatest,
-          indexLatest = _this$state.indexLatest,
-          isDragging = _this$state.isDragging,
-          renderOnlyActive = _this$state.renderOnlyActive;
-      var touchEvents = !disabled ? {
-        onTouchStart: this.handleTouchStart,
-        onTouchEnd: this.handleTouchEnd
-      } : {};
-      var mouseEvents = !disabled && enableMouseEvents ? {
-        onMouseDown: this.handleMouseDown,
-        onMouseUp: this.handleMouseUp,
-        onMouseLeave: this.handleMouseLeave,
-        onMouseMove: this.handleMouseMove
-      } : {}; // There is no point to animate if we are already providing a height.
-
-       true ? (0, _warning.default)(!animateHeight || !containerStyleProp || !containerStyleProp.height, "react-swipeable-view: You are setting animateHeight to true but you are\nalso providing a custom height.\nThe custom height has a higher priority than the animateHeight property.\nSo animateHeight is most likely having no effect at all.") : undefined;
-      var slideStyle = (0, _extends2.default)({}, styles.slide, slideStyleProp);
-      var transition;
-      var WebkitTransition;
-
-      if (isDragging || !animateTransitions || displaySameSlide) {
-        transition = 'all 0s ease 0s';
-        WebkitTransition = 'all 0s ease 0s';
-      } else {
-        transition = createTransition('transform', springConfig);
-        WebkitTransition = createTransition('-webkit-transform', springConfig);
-
-        if (heightLatest !== 0) {
-          var additionalTranstion = ", ".concat(createTransition('height', springConfig));
-          transition += additionalTranstion;
-          WebkitTransition += additionalTranstion;
-        }
-      }
-
-      var containerStyle = {
-        height: null,
-        WebkitFlexDirection: axisProperties.flexDirection[axis],
-        flexDirection: axisProperties.flexDirection[axis],
-        WebkitTransition: WebkitTransition,
-        transition: transition
-      }; // Apply the styles for SSR considerations
-
-      if (!renderOnlyActive) {
-        var transform = axisProperties.transform[axis](this.indexCurrent * 100);
-        containerStyle.WebkitTransform = transform;
-        containerStyle.transform = transform;
-      }
-
-      if (animateHeight) {
-        containerStyle.height = heightLatest;
-      }
-
-      return _react.default.createElement("div", (0, _extends2.default)({
-        ref: this.setRootNode,
-        style: (0, _extends2.default)({}, axisProperties.root[axis], style)
-      }, other, touchEvents, mouseEvents, {
-        onScroll: this.handleScroll
-      }), _react.default.createElement("div", {
-        ref: this.setContainerNode,
-        style: (0, _extends2.default)({}, containerStyle, styles.container, containerStyleProp),
-        className: "react-swipeable-view-container"
-      }, _react.default.Children.map(children, function (child, indexChild) {
-        if (renderOnlyActive && indexChild !== indexLatest) {
-          return null;
-        }
-
-         true ? (0, _warning.default)(_react.default.isValidElement(child), "react-swipeable-view: one of the children provided is invalid: ".concat(child, ".\nWe are expecting a valid React Element")) : undefined;
-        var ref;
-        var hidden = true;
-
-        if (indexChild === indexLatest) {
-          hidden = false;
-
-          if (animateHeight) {
-            ref = _this4.setActiveSlide;
-            slideStyle.overflowY = 'hidden';
-          }
-        }
-
-        return _react.default.createElement("div", {
-          ref: ref,
-          style: slideStyle,
-          className: slideClassName,
-          "aria-hidden": hidden,
-          "data-swipeable": "true"
-        }, child);
-      })));
-    }
-  }]);
-  return SwipeableViews;
-}(_react.default.Component); // Added as an ads for people using the React dev tools in production.
-// So they know, the tool used to build the awesome UI they
-// are looking at/retro engineering.
-
-
-SwipeableViews.displayName = 'ReactSwipableView';
-SwipeableViews.propTypes =  true ? {
-  /**
-   * This is callback property. It's called by the component on mount.
-   * This is useful when you want to trigger an action programmatically.
-   * It currently only supports updateHeight() action.
-   *
-   * @param {object} actions This object contains all posible actions
-   * that can be triggered programmatically.
-   */
-  action: _propTypes.default.func,
-
-  /**
-   * If `true`, the height of the container will be animated to match the current slide height.
-   * Animating another style property has a negative impact regarding performance.
-   */
-  animateHeight: _propTypes.default.bool,
-
-  /**
-   * If `false`, changes to the index prop will not cause an animated transition.
-   */
-  animateTransitions: _propTypes.default.bool,
-
-  /**
-   * The axis on which the slides will slide.
-   */
-  axis: _propTypes.default.oneOf(['x', 'x-reverse', 'y', 'y-reverse']),
-
-  /**
-   * Use this property to provide your slides.
-   */
-  children: _propTypes.default.node.isRequired,
-
-  /**
-   * This is the inlined style that will be applied
-   * to each slide container.
-   */
-  containerStyle: _propTypes.default.object,
-
-  /**
-   * If `true`, it will disable touch events.
-   * This is useful when you want to prohibit the user from changing slides.
-   */
-  disabled: _propTypes.default.bool,
-
-  /**
-   * This is the config used to disable lazyloding,
-   * if `true` will render all the views in first rendering.
-   */
-  disableLazyLoading: _propTypes.default.bool,
-
-  /**
-   * If `true`, it will enable mouse events.
-   * This will allow the user to perform the relevant swipe actions with a mouse.
-   */
-  enableMouseEvents: _propTypes.default.bool,
-
-  /**
-   * Configure hysteresis between slides. This value determines how far
-   * should user swipe to switch slide.
-   */
-  hysteresis: _propTypes.default.number,
-
-  /**
-   * If `true`, it will ignore native scroll container.
-   * It can be used to filter out false positive that blocks the swipe.
-   */
-  ignoreNativeScroll: _propTypes.default.bool,
-
-  /**
-   * This is the index of the slide to show.
-   * This is useful when you want to change the default slide shown.
-   * Or when you have tabs linked to each slide.
-   */
-  index: _propTypes.default.number,
-
-  /**
-   * This is callback prop. It's call by the
-   * component when the shown slide change after a swipe made by the user.
-   * This is useful when you have tabs linked to each slide.
-   *
-   * @param {integer} index This is the current index of the slide.
-   * @param {integer} indexLatest This is the oldest index of the slide.
-   * @param {object} meta Meta data containing more information about the event.
-   */
-  onChangeIndex: _propTypes.default.func,
-
-  /**
-   * @ignore
-   */
-  onMouseDown: _propTypes.default.func,
-
-  /**
-   * @ignore
-   */
-  onMouseLeave: _propTypes.default.func,
-
-  /**
-   * @ignore
-   */
-  onMouseMove: _propTypes.default.func,
-
-  /**
-   * @ignore
-   */
-  onMouseUp: _propTypes.default.func,
-
-  /**
-   * @ignore
-   */
-  onScroll: _propTypes.default.func,
-
-  /**
-   * This is callback prop. It's called by the
-   * component when the slide switching.
-   * This is useful when you want to implement something corresponding
-   * to the current slide position.
-   *
-   * @param {integer} index This is the current index of the slide.
-   * @param {string} type Can be either `move` or `end`.
-   */
-  onSwitching: _propTypes.default.func,
-
-  /**
-   * @ignore
-   */
-  onTouchEnd: _propTypes.default.func,
-
-  /**
-   * @ignore
-   */
-  onTouchMove: _propTypes.default.func,
-
-  /**
-   * @ignore
-   */
-  onTouchStart: _propTypes.default.func,
-
-  /**
-   * The callback that fires when the animation comes to a rest.
-   * This is useful to defer CPU intensive task.
-   */
-  onTransitionEnd: _propTypes.default.func,
-
-  /**
-   * If `true`, it will add bounds effect on the edges.
-   */
-  resistance: _propTypes.default.bool,
-
-  /**
-   * This is the className that will be applied
-   * on the slide component.
-   */
-  slideClassName: _propTypes.default.string,
-
-  /**
-   * This is the inlined style that will be applied
-   * on the slide component.
-   */
-  slideStyle: _propTypes.default.object,
-
-  /**
-   * This is the config used to create CSS transitions.
-   * This is useful to change the dynamic of the transition.
-   */
-  springConfig: _propTypes.default.shape({
-    delay: _propTypes.default.string,
-    duration: _propTypes.default.string,
-    easeFunction: _propTypes.default.string
-  }),
-
-  /**
-   * This is the inlined style that will be applied
-   * on the root component.
-   */
-  style: _propTypes.default.object,
-
-  /**
-   * This is the threshold used for detecting a quick swipe.
-   * If the computed speed is above this value, the index change.
-   */
-  threshold: _propTypes.default.number
-} : undefined;
-SwipeableViews.defaultProps = {
-  animateHeight: false,
-  animateTransitions: true,
-  axis: 'x',
-  disabled: false,
-  disableLazyLoading: false,
-  enableMouseEvents: false,
-  hysteresis: 0.6,
-  ignoreNativeScroll: false,
-  index: 0,
-  threshold: 5,
-  springConfig: {
-    duration: '0.35s',
-    easeFunction: 'cubic-bezier(0.15, 0.3, 0.25, 1)',
-    delay: '0s'
-  },
-  resistance: false
-};
-SwipeableViews.childContextTypes = {
-  swipeableViews: _propTypes.default.shape({
-    slideUpdateHeight: _propTypes.default.func
-  })
-};
-var _default = SwipeableViews;
-exports.default = _default;
-
-/***/ }),
-
-/***/ "./node_modules/react-swipeable-views/lib/index.js":
-/*!*********************************************************!*\
-  !*** ./node_modules/react-swipeable-views/lib/index.js ***!
-  \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/interopRequireDefault.js");
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _SwipeableViews = _interopRequireDefault(__webpack_require__(/*! ./SwipeableViews */ "./node_modules/react-swipeable-views/lib/SwipeableViews.js"));
-
-var _default = _SwipeableViews.default;
-exports.default = _default;
-
-/***/ }),
-
-/***/ "./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/assertThisInitialized.js":
-/*!*********************************************************************************************************!*\
-  !*** ./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/assertThisInitialized.js ***!
-  \*********************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _assertThisInitialized(self) {
-  if (self === void 0) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-
-  return self;
-}
-
-module.exports = _assertThisInitialized;
-
-/***/ }),
-
-/***/ "./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/classCallCheck.js":
-/*!**************************************************************************************************!*\
-  !*** ./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/classCallCheck.js ***!
-  \**************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-
-module.exports = _classCallCheck;
-
-/***/ }),
-
-/***/ "./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/createClass.js":
-/*!***********************************************************************************************!*\
-  !*** ./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/createClass.js ***!
-  \***********************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _defineProperties(target, props) {
-  for (var i = 0; i < props.length; i++) {
-    var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || false;
-    descriptor.configurable = true;
-    if ("value" in descriptor) descriptor.writable = true;
-    Object.defineProperty(target, descriptor.key, descriptor);
-  }
-}
-
-function _createClass(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties(Constructor, staticProps);
-  return Constructor;
-}
-
-module.exports = _createClass;
-
-/***/ }),
-
-/***/ "./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/extends.js":
-/*!*******************************************************************************************!*\
-  !*** ./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/extends.js ***!
-  \*******************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _extends() {
-  module.exports = _extends = Object.assign || function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-
-    return target;
-  };
-
-  return _extends.apply(this, arguments);
-}
-
-module.exports = _extends;
-
-/***/ }),
-
-/***/ "./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/getPrototypeOf.js":
-/*!**************************************************************************************************!*\
-  !*** ./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/getPrototypeOf.js ***!
-  \**************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _getPrototypeOf(o) {
-  module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
-    return o.__proto__ || Object.getPrototypeOf(o);
-  };
-  return _getPrototypeOf(o);
-}
-
-module.exports = _getPrototypeOf;
-
-/***/ }),
-
-/***/ "./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/inherits.js":
-/*!********************************************************************************************!*\
-  !*** ./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/inherits.js ***!
-  \********************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var setPrototypeOf = __webpack_require__(/*! ./setPrototypeOf */ "./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/setPrototypeOf.js");
-
-function _inherits(subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function");
-  }
-
-  subClass.prototype = Object.create(superClass && superClass.prototype, {
-    constructor: {
-      value: subClass,
-      writable: true,
-      configurable: true
-    }
-  });
-  if (superClass) setPrototypeOf(subClass, superClass);
-}
-
-module.exports = _inherits;
-
-/***/ }),
-
-/***/ "./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/interopRequireDefault.js":
-/*!*********************************************************************************************************!*\
-  !*** ./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/interopRequireDefault.js ***!
-  \*********************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : {
-    default: obj
-  };
-}
-
-module.exports = _interopRequireDefault;
-
-/***/ }),
-
-/***/ "./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/objectWithoutProperties.js":
-/*!***********************************************************************************************************!*\
-  !*** ./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/objectWithoutProperties.js ***!
-  \***********************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var objectWithoutPropertiesLoose = __webpack_require__(/*! ./objectWithoutPropertiesLoose */ "./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/objectWithoutPropertiesLoose.js");
-
-function _objectWithoutProperties(source, excluded) {
-  if (source == null) return {};
-  var target = objectWithoutPropertiesLoose(source, excluded);
-  var key, i;
-
-  if (Object.getOwnPropertySymbols) {
-    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-
-    for (i = 0; i < sourceSymbolKeys.length; i++) {
-      key = sourceSymbolKeys[i];
-      if (excluded.indexOf(key) >= 0) continue;
-      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-      target[key] = source[key];
-    }
-  }
-
-  return target;
-}
-
-module.exports = _objectWithoutProperties;
-
-/***/ }),
-
-/***/ "./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/objectWithoutPropertiesLoose.js":
-/*!****************************************************************************************************************!*\
-  !*** ./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/objectWithoutPropertiesLoose.js ***!
-  \****************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _objectWithoutPropertiesLoose(source, excluded) {
-  if (source == null) return {};
-  var target = {};
-  var sourceKeys = Object.keys(source);
-  var key, i;
-
-  for (i = 0; i < sourceKeys.length; i++) {
-    key = sourceKeys[i];
-    if (excluded.indexOf(key) >= 0) continue;
-    target[key] = source[key];
-  }
-
-  return target;
-}
-
-module.exports = _objectWithoutPropertiesLoose;
-
-/***/ }),
-
-/***/ "./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/possibleConstructorReturn.js":
-/*!*************************************************************************************************************!*\
-  !*** ./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/possibleConstructorReturn.js ***!
-  \*************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var _typeof = __webpack_require__(/*! ../helpers/typeof */ "./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/typeof.js");
-
-var assertThisInitialized = __webpack_require__(/*! ./assertThisInitialized */ "./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/assertThisInitialized.js");
-
-function _possibleConstructorReturn(self, call) {
-  if (call && (_typeof(call) === "object" || typeof call === "function")) {
-    return call;
-  }
-
-  return assertThisInitialized(self);
-}
-
-module.exports = _possibleConstructorReturn;
-
-/***/ }),
-
-/***/ "./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/setPrototypeOf.js":
-/*!**************************************************************************************************!*\
-  !*** ./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/setPrototypeOf.js ***!
-  \**************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _setPrototypeOf(o, p) {
-  module.exports = _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
-    o.__proto__ = p;
-    return o;
-  };
-
-  return _setPrototypeOf(o, p);
-}
-
-module.exports = _setPrototypeOf;
-
-/***/ }),
-
-/***/ "./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/typeof.js":
-/*!******************************************************************************************!*\
-  !*** ./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/typeof.js ***!
-  \******************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof2 = function _typeof2(obj) { return typeof obj; }; } else { _typeof2 = function _typeof2(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof2(obj); }
-
-function _typeof(obj) {
-  if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
-    module.exports = _typeof = function _typeof(obj) {
-      return _typeof2(obj);
-    };
-  } else {
-    module.exports = _typeof = function _typeof(obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
-    };
-  }
-
-  return _typeof(obj);
-}
-
-module.exports = _typeof;
-
-/***/ }),
-
-/***/ "./node_modules/react-swipeable-views/node_modules/warning/warning.js":
-/*!****************************************************************************!*\
-  !*** ./node_modules/react-swipeable-views/node_modules/warning/warning.js ***!
-  \****************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Copyright (c) 2014-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-
-
-/**
- * Similar to invariant but only logs a warning if the condition is not met.
- * This can be used to log issues in development environments in critical
- * paths. Removing the logging code for production environments will keep the
- * same logic and follow the same code paths.
- */
-
-var __DEV__ = "development" !== 'production';
-
-var warning = function() {};
-
-if (__DEV__) {
-  var printWarning = function printWarning(format, args) {
-    var len = arguments.length;
-    args = new Array(len > 1 ? len - 1 : 0);
-    for (var key = 1; key < len; key++) {
-      args[key - 1] = arguments[key];
-    }
-    var argIndex = 0;
-    var message = 'Warning: ' +
-      format.replace(/%s/g, function() {
-        return args[argIndex++];
-      });
-    if (typeof console !== 'undefined') {
-      console.error(message);
-    }
-    try {
-      // --- Welcome to debugging React ---
-      // This error was thrown as a convenience so that you can use this stack
-      // to find the callsite that caused this warning to fire.
-      throw new Error(message);
-    } catch (x) {}
-  }
-
-  warning = function(condition, format, args) {
-    var len = arguments.length;
-    args = new Array(len > 2 ? len - 2 : 0);
-    for (var key = 2; key < len; key++) {
-      args[key - 2] = arguments[key];
-    }
-    if (format === undefined) {
-      throw new Error(
-          '`warning(condition, format, ...args)` requires a warning ' +
-          'message argument'
-      );
-    }
-    if (!condition) {
-      printWarning.apply(null, [format].concat(args));
-    }
-  };
-}
-
-module.exports = warning;
 
 
 /***/ }),

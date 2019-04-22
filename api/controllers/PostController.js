@@ -24,7 +24,7 @@ module.exports = {
       var textes = await Text.find();
       data = {'textes': textes};
     }else{
-      var textes = await Text.find({'id_category': req.params.id_category});
+      var textes = await Text.find({'owner_category': req.params.id_category});
       data = {'textes': textes, 'id_category': req.params.id_category};      
     }
 
@@ -47,8 +47,17 @@ module.exports = {
     common(req, res, data);
   },
 
+  categoryAdd: async function (req, res){
+    common(req, res);
+  },
+
+  saveCategoryAjax: async function (req, res){
+    await Category.create({name: req.allParams().name});
+    return res.ok();
+  },
+
   textesAjax: async function (req, res){
-    let textes = await Text.find(req.allParams());
+    let textes = await Text.find({owner_category: req.allParams().id_category});
     res.json(textes);
   },
 
@@ -96,14 +105,39 @@ module.exports = {
   },
 
   getSerieByText: async function (req, res){
-    let serie = await Serie.findOne({owner_text: req.allParams().id_text}).populate('expression');
+    let params = req.allParams();
+    console.log(params);
+    let serie = await Serie.findOne({id: params.id_serie, owner_text: params.id_text}).populate('expression');
+    console.log(serie);
     res.json(serie);
+    // res.ok();
   },
 
   saveTextAjax: async function (req, res){
     let params = req.allParams();
     await Text.create({title:params.title, content: params.content, type_text:"text", owner_category: params.id_category });
     return res.ok();
+  },
+
+  saveExpression: async function (req, res){
+    let params = req.allParams();
+    let serial = await Serie.find({ owner_text: params.id_text });
+    let number = serial.length + 1;
+    await Serie.findOrCreate({ owner_text: params.id_text }, { owner_text: params.id_text, name: 'Série '+number })
+                            .exec(async(err, serie, wasCreated)=> {
+                              if (err) { return res.serverError(err); }
+                            
+                              if(wasCreated) {
+                                sails.log('Created a new serie: ' + serie.id);
+                              }
+                              else {
+                                sails.log('Found existing serie: ' + serie.id);
+                              }
+                              console.log(serie);
+                              await Expression.create({french_value:params.french_value, english_value: params.english_value, owner_texte: params.id_text, owner_serie: serie.id });
+                              return res.ok();
+                            });
+
   },
 
   getTextsRevision: async function (req, res){
@@ -116,6 +150,40 @@ module.exports = {
     }
     console.log(result);
     res.json(result);
+  },
+
+  getSeriesRevision: async function (req, res){
+    let series = await Serie.find({owner_text: req.allParams().id_text}).populate('expression');
+    let result = [];
+    for(let serie of series){
+      if(serie.expression.length > 0){
+        result.push(serie);
+      }
+    }
+    res.json(result);
+  },
+
+  updateTextAjax: async function (req, res){
+    let params = req.allParams();
+    var updatedText = await Text.updateOne({ id: params.id_text })
+    .set({
+      content: params.content
+    });
+    
+    if (updatedText) {
+      sails.log('Mise à jour réussie !');
+      res.ok();
+    }
+    else {
+      sails.log('Le texte à mettre à jour n\'éxiste pas dans la base de données.');
+      res.error('Le texte à mettre à jour n\'éxiste pas dans la base de données.');
+    }
+  },
+
+  serieListrevision: async function (req, res){
+    let series = await Serie.find({owner_text: params.id_text});
+    let data = {step: 'serie', id_text: req.params.id_texte, series: series};
+    common(req, res, data);
   }
   
 };

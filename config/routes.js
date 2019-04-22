@@ -19,18 +19,25 @@ module.exports.routes = {
   'POST /textes-ajax': {controller: 'PostController', action: 'textesAjax', csrf: false},
   'POST /get-texte-ajax': {controller: 'PostController', action: 'getTexteAjax', csrf: false},
   'POST /save-text-ajax': {controller: 'PostController', action: 'saveTextAjax', csrf: false},
+  'POST /update-texte-ajax': {controller: 'PostController', action: 'updateTextAjax', csrf: false},
   
   'GET /categories-liste': {controller: 'PostController', action: 'categoryList'},
+  'GET /categorie-ajout': {controller: 'PostController', action: 'categoryAdd'},
   'GET /textes/category/:id_category': {controller: 'PostController', action: 'textes'},
   'POST /categories-ajax': {controller: 'PostController', action: 'categoriesAjax', csrf: false},
+  'POST /save-category-ajax': {controller: 'PostController', action: 'saveCategoryAjax', csrf: false},
 
   'GET /revision': {controller: 'PostController', action: 'revision'},
-  'GET /revision-content/texte/:id_texte': {controller: 'PostController', action: 'contentRevision'},
-  'GET /revision-mode/texte/:id_texte/content/:num_content': {controller: 'PostController', action: 'modeRevision'},
-  'GET /revision-btn-begin/texte/:id_texte/content/:num_content/mode/:num_mode': {controller: 'PostController', action: 'btnBeginRevision'},
-  'GET /revision-serie/texte/:id_texte/content/:num_content/mode/:num_mode/serie/:id_serie': {controller: 'PostController', action: 'serieRevision'},
-  'POST /get-serie-by-text': {controller: 'PostController', action: 'getSerieByText', csrf: false},
+  'GET /revision-serie-list/text/:id_text': {controller: 'PostController', action: 'serieListrevision'},
+  // 'GET /revision-content/texte/:id_texte': {controller: 'PostController', action: 'contentRevision'},
+  'GET /revision-content/text/:id_text/serie/:id_serie': {controller: 'PostController', action: 'contentRevision'},
+  'GET /revision-mode/texte/:id_texte/serie/:id_serie/content/:num_content': {controller: 'PostController', action: 'modeRevision'},
+  'GET /revision-btn-begin/texte/:id_texte/serie/:id_serie/content/:num_content/mode/:num_mode': {controller: 'PostController', action: 'btnBeginRevision'},
+  'GET /revision-serie/texte/:id_texte/serie/:id_serie/content/:num_content/mode/:num_mode': {controller: 'PostController', action: 'serieRevision'},
+  'POST /get-serie-by-text-ajax': {controller: 'PostController', action: 'getSerieByText', csrf: false},
   'POST /textes-revision-ajax': {controller: 'PostController', action: 'getTextsRevision', csrf: false},
+  'POST /series-revision-ajax': {controller: 'PostController', action: 'getSeriesRevision', csrf: false},
+  'POST /save-expression-ajax': {controller: 'PostController', action: 'saveExpression', csrf: false},
 
   //  ╔╦╗╦╔═╗╔═╗  ╦═╗╔═╗╔╦╗╦╦═╗╔═╗╔═╗╔╦╗╔═╗   ┬   ╔╦╗╔═╗╦ ╦╔╗╔╦  ╔═╗╔═╗╔╦╗╔═╗
   //  ║║║║╚═╗║    ╠╦╝║╣  ║║║╠╦╝║╣ ║   ║ ╚═╗  ┌┼─   ║║║ ║║║║║║║║  ║ ║╠═╣ ║║╚═╗
