@@ -1881,7 +1881,7 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(serieRevision).call(this, props));
     _this.timer = null;
-    _this.durationCount = 5;
+    _this.durationCount = 0;
     _this.state = {
       unitTime: 0,
       numQuestion: 0,
@@ -1933,7 +1933,7 @@ function (_Component) {
   }, {
     key: "validate",
     value: function validate() {
-      this.clearTimer();
+      // this.clearTimer();
       console.log("validated");
       this.unitTime = 0;
       var res = this.state.expressions[this.state.numQuestion].french_value.toLowerCase() == document.querySelector("#inputResponse").value.toLowerCase();
@@ -2037,17 +2037,17 @@ function (_Component) {
 
       setTimeout(function () {
         if (_this3.durationCount > 0) {
-          _this3.durationCount--;
+          _this3.durationCount++;
 
           _this3.startTimer();
         } else {
-          clearTimer();
+          alert(_this3.durationCount);
+          _this3.durationCount = 0;
         }
       }, 1000);
-    }
-  }, {
-    key: "clearTimer",
-    value: function clearTimer() {}
+    } // clearTimer(){
+    // }
+
   }, {
     key: "render",
     value: function render() {
@@ -2248,17 +2248,15 @@ function (_Component) {
   _createClass(TextListRevision, [{
     key: "render",
     value: function render() {
-      var _this = this;
-
       var textes = '';
 
       if (this.props.data.textes.length > 0) {
-        textes = this.props.data.textes.map(function (texte) {
+        textes = this.props.data.textes.map(function (texte, index) {
           var link = '/revision-serie-list/text/' + texte.id;
           var textTitle = texte.title.length > 20 ? texte.title.substring(0, 20) + '...' : texte.title;
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
             to: link,
-            id: _this.props.id
+            key: index
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             key: texte.id,
             style: {
@@ -2591,32 +2589,15 @@ function (_Component) {
       var selText = this.getSelectedText();
 
       if (selText != '' && selText != ' ' && selText != '\n') {
+        this.state.selText = selText;
         $('#popupTrad').css({
           left: e.pageX - 100,
           top: e.pageY - 86,
           display: 'flex'
-        }); // document.querySelector('#translationPopupText').innerHTML = <img src="/client/images/89.gif" />;
-        // axios({
-        //   method: 'post',
-        //   url: 'https://api.deepl.com/v2/translate?auth_key=de9c22f0-b3e2-6694-d19a-e6c106c773d2&text='+selText+'&target_lang=fr&source_lang=en',
-        //   responseType: 'json',
-        //   headers: {'Content-Type': 'application/x-www-form-urlencoded', 'Accept': '*/*'}
-        // })
-        // .then((response) => {
-        //   console.log(response);
-        //   document.querySelector('#translationPopupText').innerHTML = response.data.translations[0].text;
-        // })
-        // .catch( (error) => {
-        //   console.log(error);
-        // });
-        // document.querySelector('#translationPopupText').innerHTML = '...';
-
-        this.setState({
-          french_value: '...'
         });
         axios__WEBPACK_IMPORTED_MODULE_1___default()({
           method: 'post',
-          url: "https://translation.googleapis.com/language/translate/v2?source=en&target=fr&key=AIzaSyDXclEOa7zqozby4oRS_Z1q7KIzsmclaTc&q=".concat(selText),
+          url: 'https://api.deepl.com/v2/translate?auth_key=0&text=' + selText + '&target_lang=fr&source_lang=en',
           responseType: 'json',
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -2626,12 +2607,25 @@ function (_Component) {
           console.log(response);
 
           _this3.setState({
-            french_value: response.data.data.translations[0].translatedText
-          }); // document.querySelector('#translationPopupText').innerHTML = response.data.data.translations[0].translatedText;
-
+            french_value: response.data.translations[0].text
+          });
         }).catch(function (error) {
           console.log(error);
-        });
+        }); // document.querySelector('#translationPopupText').innerHTML = '...';
+        // this.setState({french_value: '...'});
+        // axios({
+        //   method: 'post',
+        //   url: `https://translation.googleapis.com/language/translate/v2?source=en&target=fr&key=0&q=${selText}`,
+        //   responseType: 'json',
+        //   headers: {'Content-Type': 'application/x-www-form-urlencoded', 'Accept': '*/*'}
+        // })
+        // .then((response) => {
+        //   console.log(response);
+        //   this.setState({french_value: response.data.data.translations[0].translatedText});
+        // })
+        // .catch( (error) => {
+        //   console.log(error);
+        // });
       } else {
         document.querySelector('#popupTrad').style.display = 'none';
         this.setState({
@@ -2893,13 +2887,11 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
-
-      var textes = this.state.textes.map(function (texte) {
+      var textes = this.state.textes.map(function (texte, index) {
         var textTitle = texte.title.length > 20 ? texte.title.substring(0, 20) + '...' : texte.title;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: '/texte/' + texte.id,
-          id: _this3.props.id
+          key: index
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: texte.id,
           style: {

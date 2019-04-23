@@ -2,12 +2,14 @@ const ReactDOMServer = require('react-dom/server');
 import React from 'react';
 import Appserver from '../../assets/client/components/Appserver';
 import {StaticRouter } from 'react-router-dom';
+import layout from '../../assets/client/layout';
 
 let common = (req, res, data = {}) => {
   data.url = req.url;
   data.app = 'server';
   const content = ReactDOMServer.renderToString(<StaticRouter location={req.url} context={{}}><Appserver data={data}/></StaticRouter>);
-  res.view('pages/homepage', {body: content});
+  // res.view('pages/homepage', {body: content});
+  res.send(layout(content));
 }
 
 module.exports = {
@@ -110,7 +112,6 @@ module.exports = {
     let serie = await Serie.findOne({id: params.id_serie, owner_text: params.id_text}).populate('expression');
     console.log(serie);
     res.json(serie);
-    // res.ok();
   },
 
   saveTextAjax: async function (req, res){
@@ -133,7 +134,6 @@ module.exports = {
                               else {
                                 sails.log('Found existing serie: ' + serie.id);
                               }
-                              console.log(serie);
                               await Expression.create({french_value:params.french_value, english_value: params.english_value, owner_texte: params.id_text, owner_serie: serie.id });
                               return res.ok();
                             });
@@ -181,7 +181,10 @@ module.exports = {
   },
 
   serieListrevision: async function (req, res){
+    let params = req.allParams();
     let series = await Serie.find({owner_text: params.id_text});
+    // console.log(params);
+    // console.log(series);
     let data = {step: 'serie', id_text: req.params.id_texte, series: series};
     common(req, res, data);
   }

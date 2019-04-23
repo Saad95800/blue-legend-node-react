@@ -8,7 +8,7 @@ export default class serieRevision extends Component {
     super(props);
 
     this.timer = null;
-    this.durationCount = 5;
+    this.durationCount = 0;
     this.state = {
       unitTime: 0,
       numQuestion: 0,
@@ -51,7 +51,7 @@ export default class serieRevision extends Component {
   }
 
   validate(){
-    this.clearTimer();
+    // this.clearTimer();
     console.log("validated");
     this.unitTime = 0;
     let res = this.state.expressions[this.state.numQuestion].french_value.toLowerCase() == document.querySelector("#inputResponse").value.toLowerCase();
@@ -123,15 +123,17 @@ export default class serieRevision extends Component {
 
     setTimeout(() => {
       if(this.durationCount > 0){
-        this.durationCount--;
+        this.durationCount++;
         this.startTimer();
       }else{
-        clearTimer();
+        alert(this.durationCount);
+        this.durationCount = 0;
       }
     }, 1000);
   }
-  clearTimer(){
-  }
+
+  // clearTimer(){
+  // }
 
   render() {
     let displayExo = 'block';

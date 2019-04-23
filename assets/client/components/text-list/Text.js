@@ -69,41 +69,41 @@ export default class Text extends Component {
   viewPopup(e) {
     let selText = this.getSelectedText();
     if(selText != '' && selText != ' ' && selText != '\n'){
+      this.state.selText = selText;
       $('#popupTrad').css({
         left:  e.pageX - 100,
         top:   e.pageY - 86,
         display: 'flex'
       });
-      // document.querySelector('#translationPopupText').innerHTML = <img src="/client/images/89.gif" />;
-      // axios({
-      //   method: 'post',
-      //   url: 'https://api.deepl.com/v2/translate?auth_key=0&text='+selText+'&target_lang=fr&source_lang=en',
-      //   responseType: 'json',
-      //   headers: {'Content-Type': 'application/x-www-form-urlencoded', 'Accept': '*/*'}
-      // })
-      // .then((response) => {
-      //   console.log(response);
-      //   document.querySelector('#translationPopupText').innerHTML = response.data.translations[0].text;
-      // })
-      // .catch( (error) => {
-      //   console.log(error);
-      // });
-      // document.querySelector('#translationPopupText').innerHTML = '...';
-      this.setState({french_value: '...'});
+
       axios({
         method: 'post',
-        url: `https://translation.googleapis.com/language/translate/v2?source=en&target=fr&key=0&q=${selText}`,
+        url: 'https://api.deepl.com/v2/translate?auth_key=0&text='+selText+'&target_lang=fr&source_lang=en',
         responseType: 'json',
         headers: {'Content-Type': 'application/x-www-form-urlencoded', 'Accept': '*/*'}
       })
       .then((response) => {
         console.log(response);
-        this.setState({french_value: response.data.data.translations[0].translatedText});
-        // document.querySelector('#translationPopupText').innerHTML = response.data.data.translations[0].translatedText;
+        this.setState({french_value: response.data.translations[0].text});
       })
       .catch( (error) => {
         console.log(error);
       });
+      // document.querySelector('#translationPopupText').innerHTML = '...';
+      // this.setState({french_value: '...'});
+      // axios({
+      //   method: 'post',
+      //   url: `https://translation.googleapis.com/language/translate/v2?source=en&target=fr&key=0&q=${selText}`,
+      //   responseType: 'json',
+      //   headers: {'Content-Type': 'application/x-www-form-urlencoded', 'Accept': '*/*'}
+      // })
+      // .then((response) => {
+      //   console.log(response);
+      //   this.setState({french_value: response.data.data.translations[0].translatedText});
+      // })
+      // .catch( (error) => {
+      //   console.log(error);
+      // });
     }else{
       document.querySelector('#popupTrad').style.display = 'none';
       this.setState({msgBtnSave: 'Enregistrer'})

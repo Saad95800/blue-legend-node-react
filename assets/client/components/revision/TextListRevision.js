@@ -11,12 +11,12 @@ export default class TextListRevision extends Component {
     let textes = '';
 
     if(this.props.data.textes.length > 0){
-      textes = this.props.data.textes.map( (texte) => {
+      textes = this.props.data.textes.map( (texte, index) => {
         let link = '/revision-serie-list/text/'+texte.id;
         let textTitle = texte.title.length > 20 ? texte.title.substring(0, 20)+'...' : texte.title;
         return <Link
                 to={link}
-                id={this.props.id}>
+                key={index}>
                 <div key={texte.id} style={{display: 'inline-block', borderRadius: '5px', margin: '10px', width: '120px'}} className="hover-item">
                   <div style={{textAlign: 'center'}}>{textTitle}</div>
                   <div style={{width: '90px', height: '70px', 'textAlign': 'center'}}>
