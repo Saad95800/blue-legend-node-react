@@ -7,7 +7,7 @@ module.exports = {
       },
 
       duration: {
-        type: 'float'
+        type: 'number'
       },
 
       owner_expression: {

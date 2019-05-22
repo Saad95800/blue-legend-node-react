@@ -10,6 +10,7 @@
 
 module.exports.routes = {
 
+  'GET /': {controller: 'PostController', action: 'renderVitrine'},
   'GET /accueil': {controller: 'PostController', action: 'accueil'},
 
   'GET /ajout-texte': {controller: 'PostController', action: 'ajoutTexte'},

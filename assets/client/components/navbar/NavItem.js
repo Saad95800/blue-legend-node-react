@@ -5,13 +5,14 @@ export default class NavItem extends Component {
 
   constructor(props){
     super(props);
-    // this.state = {
-    //     isSelected: this.props.isSelected
-    // }
   }
 
   colorClickItem(event){
+    if(this.props.classContainer == 'bloc-btn-menu-vitrine'){
+      window.location.href = '/';
+    }else{
       this.props.colorClickItem(event);
+    }
   }
 
   colorHoverItem(event){
@@ -25,10 +26,12 @@ export default class NavItem extends Component {
   render() {
     let color = 'rgb(117, 222, 235, 0)';
     if(this.props.url_courante == this.props.url || this.props.isSelected){
-            color = 'rgb(117, 189, 210)';
+      color = 'rgb(32, 96, 250)';
     }
+    let style = this.props.style;
+    style = Object.assign({backgroundColor: color}, style);
     return (
-        <div className={this.props.classContainer} style={{backgroundColor: color}} >
+        <div className={this.props.classContainer} style={style} >
             <Link
                 to={this.props.url}
                 className={this.props.classItem} 

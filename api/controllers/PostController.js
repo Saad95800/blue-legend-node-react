@@ -1,22 +1,35 @@
 const ReactDOMServer = require('react-dom/server');
 import React from 'react';
 import Appserver from '../../assets/client/components/Appserver';
+import Vitrine from '../../assets/client/components/Vitrine';
 import {StaticRouter } from 'react-router-dom';
-import layout from '../../assets/client/layout';
 
-let common = (req, res, data = {}) => {
+let render = (req, res, data = {}) => {
   data.url = req.url;
   data.app = 'server';
-  const content = ReactDOMServer.renderToString(<StaticRouter location={req.url} context={{}}><Appserver data={data}/></StaticRouter>);
-  // res.view('pages/homepage', {body: content});
-  res.send(layout(content));
+  const body = ReactDOMServer.renderToString(
+                                              <StaticRouter location={req.url} context={{}}>
+                                                <Appserver data={data}/>
+                                              </StaticRouter>
+                                            );
+  res.view('pages/homepage', {body: body});
 }
 
 module.exports = {
 
+  renderVitrine: async function (req, res){
+    let data = {};
+    data.url = req.url;
+    data.app = 'server';
+    const body = ReactDOMServer.renderToString(
+                                                <Vitrine data={data}/>
+                                              );
+    res.view('pages/homepage', {body: body});
+  },
+
   accueil: async function (req, res){
     let data = {'textes': [{titre: 'titre1', contenu: 'contenu1'}, {titre: 'titre2', contenu: 'contenu2'}, {titre: 'titre3', contenu: 'contenu3'}]};
-    common(req, res, data);
+    render(req, res, data);
   },
 
   textes: async function (req, res){
@@ -30,27 +43,27 @@ module.exports = {
       data = {'textes': textes, 'id_category': req.params.id_category};      
     }
 
-    common(req, res, data);
+    render(req, res, data);
   },
 
   texte: async function(req, res){
     let texte = await Text.find({id: req.allParams().id_texte});
     let data = {'texte': texte[0]};
-    common(req, res, data);
+    render(req, res, data);
   },
 
   ajoutTexte: (req, res) => {
-    common(req, res);
+    render(req, res);
   },
 
   categoryList: async function (req, res){
     let categories = await Category.find();
     let data = {'categories': categories};
-    common(req, res, data);
+    render(req, res, data);
   },
 
   categoryAdd: async function (req, res){
-    common(req, res);
+    render(req, res);
   },
 
   saveCategoryAjax: async function (req, res){
@@ -81,29 +94,29 @@ module.exports = {
                   }
                 });
     let data = {'textes': texts, step: 'text-list'};
-    common(req, res, data);
+    render(req, res, data);
   },
 
   contentRevision: async function (req, res){
     let data = {step: 'content-review', id_texte: req.params.id_texte};
-    common(req, res, data);
+    render(req, res, data);
   },
 
   modeRevision: async function (req, res){
     let data = {step: 'mode', id_texte: req.params.id_texte, num_content: req.params.num_content};
-    common(req, res, data);
+    render(req, res, data);
   },
 
   btnBeginRevision: async function (req, res){
     let serie = await Serie.find({id_text: req.params.id_texte});
     let data = {step: 'btn-begin', id_texte: req.params.id_texte, num_content: req.params.num_content, num_mode: req.params.num_mode, serie: serie};
-    common(req, res, data);
+    render(req, res, data);
   },
 
   serieRevision: async function (req, res){
     let serie = await Serie.find({id: req.params.id_serie});
     let data = {step: 'serie', id_texte: req.params.id_texte, num_content: req.params.num_content, num_mode: req.params.num_mode, serie: serie};
-    common(req, res, data);
+    render(req, res, data);
   },
 
   getSerieByText: async function (req, res){
@@ -186,7 +199,7 @@ module.exports = {
     // console.log(params);
     // console.log(series);
     let data = {step: 'serie', id_text: req.params.id_texte, series: series};
-    common(req, res, data);
+    render(req, res, data);
   }
   
 };

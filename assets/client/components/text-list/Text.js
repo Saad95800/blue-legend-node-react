@@ -78,7 +78,7 @@ export default class Text extends Component {
 
       axios({
         method: 'post',
-        url: 'https://api.deepl.com/v2/translate?auth_key=0&text='+selText+'&target_lang=fr&source_lang=en',
+        url: 'https://api.deepl.com/v2/translate?auth_key=de9c22f0-b3e2-6694-d19a-e6c106c773d2&text='+selText+'&target_lang=fr&source_lang=en',
         responseType: 'json',
         headers: {'Content-Type': 'application/x-www-form-urlencoded', 'Accept': '*/*'}
       })
@@ -89,21 +89,6 @@ export default class Text extends Component {
       .catch( (error) => {
         console.log(error);
       });
-      // document.querySelector('#translationPopupText').innerHTML = '...';
-      // this.setState({french_value: '...'});
-      // axios({
-      //   method: 'post',
-      //   url: `https://translation.googleapis.com/language/translate/v2?source=en&target=fr&key=0&q=${selText}`,
-      //   responseType: 'json',
-      //   headers: {'Content-Type': 'application/x-www-form-urlencoded', 'Accept': '*/*'}
-      // })
-      // .then((response) => {
-      //   console.log(response);
-      //   this.setState({french_value: response.data.data.translations[0].translatedText});
-      // })
-      // .catch( (error) => {
-      //   console.log(error);
-      // });
     }else{
       document.querySelector('#popupTrad').style.display = 'none';
       this.setState({msgBtnSave: 'Enregistrer'})

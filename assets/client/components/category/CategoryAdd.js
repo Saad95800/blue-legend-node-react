@@ -43,12 +43,27 @@ export default class CategoryAdd extends Component {
     }
 
       return (
-              <div>
+            <div style={{display: 'flex', justifyContent: 'center'}}>
+              <div style={styles.containerForm}>
                  <h3>Ajout Catégorie</h3>
                  <input type="text" id="categoryName"/>
                  <div style={{marginTop: '10px'}}><button onClick={this.ajoutCategory.bind(this)}>Ajouter</button></div>
               </div>
+            </div>
       );
     }
 
+  }
+
+  let styles = {
+    containerForm:{
+      padding: '33px',
+      backgroundColor: 'white',
+      width: '50%',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: '10px'
+    }
   }

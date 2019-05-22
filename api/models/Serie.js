@@ -26,6 +26,10 @@ module.exports = {
 
       owner_text: {
         model: 'text'
+      },
+
+      owner_user: {
+        model: 'user'
       }
   
     },

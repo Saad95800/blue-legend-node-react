@@ -16,7 +16,7 @@ export default class SerieListRevision extends Component {
         let serieName = serie.name.length > 20 ? serie.name.substring(0, 20)+'...' : serie.name;
         return <Link
                 to={link}
-                id={index}>
+                key={index}>
                   <div key={serie.id} style={{display: 'inline-block', borderRadius: '5px', margin: '10px', width: '120px'}} className="hover-item">
                     <div style={{textAlign: 'center'}}>{serieName}</div>
                     <div style={{'textAlign': 'center'}}>

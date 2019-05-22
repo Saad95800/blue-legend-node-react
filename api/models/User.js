@@ -37,6 +37,12 @@ module.exports = {
       collection: 'histoserie',
       via: 'owner_user',
       type: "string"
+    },
+
+    serie: {
+      collection: 'serie',
+      via: 'owner_user',
+      type: "string"
     }
 
   },

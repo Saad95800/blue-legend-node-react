@@ -74,11 +74,8 @@ export default class Appclient extends Component {
                     atLeave={{ opacity: 0 }}
                     atActive={{ opacity: 1 }}
                     className="switch-wrapper">
-                          <Route exact path="/" render={(props) => { return <Home {...props} data={this.state.data}/>}} />
                           <Route path="/accueil" render={(props) => { return <Home {...props} data={this.state.data}/>}} />
-
                           <Route path="/ajout-texte" render={(props) => { return <TextAdd {...props} data={this.state.data} viewMessageFlash={this.viewMessageFlash}/>}} />
-
                           <Route path="/texte-liste" render={(props) => { return <TextList {...props} data={this.state.data}/>}} />
                           <Route path="/textes/category/:id_category" render={(props) => { return <TextList {...props} data={this.state.data}/>}} />
                           <Route path="/categories-liste" render={(props) => { return <CategoryList {...props} data={this.state.data}/>}} />

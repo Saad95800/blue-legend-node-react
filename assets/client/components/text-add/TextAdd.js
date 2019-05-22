@@ -71,17 +71,19 @@ export default class TextAdd extends Component {
                   });
 
     return (
-      <div>
+      <div style={styles.containerForm}>
 
-        <div>Ajoutez votre texte dans la zone ci dessous</div>
+          <div style={{width: '100%'}}>
+            <div>Ajoutez votre texte dans la zone ci dessous</div>
 
-          <div style={{display: 'flex', flexDirection: 'row',justifyContent: 'flex-start'}}>
-            <button onClick={this.saveText.bind(this)}>Enregistrer</button>
-            <select id="category-text" style={{marginLeft: '20px'}}>{options}</select>
-          </div>
-          <div>
-            <div>Titre</div>
-            <input type="text" id="title-text" style={{width: '100%'}}/>
+            <div style={{display: 'flex', flexDirection: 'row',justifyContent: 'flex-start'}}>
+              <button onClick={this.saveText.bind(this)}>Enregistrer</button>
+              <select id="category-text" style={{marginLeft: '20px'}}>{options}</select>
+            </div>
+            <div>
+              <div>Titre</div>
+              <input type="text" id="title-text" style={{width: '100%'}}/>
+            </div>
           </div>
           <Trumbowyg id='react-trumbowyg'
                     buttons={
@@ -107,4 +109,16 @@ export default class TextAdd extends Component {
     );
   }
 
+}
+
+let styles = {
+  containerForm:{
+    padding: '33px',
+    backgroundColor: 'white',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: '10px'
+  }
 }

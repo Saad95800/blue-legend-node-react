@@ -7,8 +7,9 @@ export default class serieRevision extends Component {
   constructor(props){
     super(props);
 
-    this.timer = null;
-    this.durationCount = 0;
+    this.timer = 0;
+    this.durationCount = 5;
+    this.stateCount = this.durationCount;
     this.state = {
       unitTime: 0,
       numQuestion: 0,
@@ -31,6 +32,8 @@ export default class serieRevision extends Component {
       clock: 'enabled'
     }
 
+    this.startTimer();
+    
   }
 
   componentDidMount(){
@@ -51,17 +54,24 @@ export default class serieRevision extends Component {
   }
 
   validate(){
-    // this.clearTimer();
-    console.log("validated");
-    this.unitTime = 0;
+    this.stateCount = 0;
     let res = this.state.expressions[this.state.numQuestion].french_value.toLowerCase() == document.querySelector("#inputResponse").value.toLowerCase();
-    let last = this.state.numQuestion == this.state.expressions.length - 1;
+    let last = (this.state.numQuestion == this.state.expressions.length - 1);
     let msg = "Suivant";
     if(last){
       msg = "Résultats";
     }
     if(res){
-      this.setState({stateQuestion:{btnValidation: msg, colorMessageValidation: "rgb(38, 223, 56)", messageValidation: "Bonne réponse"}, score: this.state.score+1, stepRev: "Validation", clock: 'disabled'});
+      this.setState({
+        stateQuestion:{
+          btnValidation: msg, 
+          colorMessageValidation: "rgb(38, 223, 56)", 
+          messageValidation: "Bonne réponse"
+        }, 
+        score: this.state.score+1, 
+        stepRev: "Validation", 
+        clock: 'disabled'
+      });
     }else{
       this.setState({
                   stateQuestion:{
@@ -96,9 +106,25 @@ export default class serieRevision extends Component {
 
   next(){
     if( this.state.numQuestion == this.state.expressions.length - 1){
-      this.setState({stateQuestion:{btnValidation: "Résultats", messageValidation: ""}, stepRev: "Resultat"});
+      this.setState({
+        stateQuestion:{
+          btnValidation: "Résultats", 
+          messageValidation: ""
+        }, 
+        stepRev: "Resultat"
+      });
     }else{
-      this.setState({stateQuestion:{btnValidation: "Valider", messageValidation: ""}, stepRev: "Question", numQuestion: this.state.numQuestion+1, clock: 'enabled'});
+      this.stateCount = this.durationCount;
+      this.setState({
+        stateQuestion:{
+          btnValidation: "Valider", 
+          messageValidation: ""
+        }, 
+        stepRev: "Question", 
+        numQuestion: this.state.numQuestion+1, 
+        clock: 'enabled'
+      });
+      this.startTimer();
     }
     document.querySelector("#inputResponse").value = "";
   }
@@ -122,18 +148,16 @@ export default class serieRevision extends Component {
   startTimer(){
 
     setTimeout(() => {
-      if(this.durationCount > 0){
-        this.durationCount++;
+      if(this.stateCount > 0){
+        this.timer = this.timer + 0.1;
         this.startTimer();
       }else{
-        alert(this.durationCount);
-        this.durationCount = 0;
+        this.setState({unitTime: Math.floor(this.timer)});
+        this.timer = 0;
       }
-    }, 1000);
-  }
+    }, 100);
 
-  // clearTimer(){
-  // }
+  }
 
   render() {
     let displayExo = 'block';
@@ -159,7 +183,6 @@ export default class serieRevision extends Component {
       let count = 0;
       if(this.state.clock == 'enabled'){
         count = this.durationCount;
-        this.startTimer();
       }
       clock = <ReactCountdownClock 
                 seconds={count}

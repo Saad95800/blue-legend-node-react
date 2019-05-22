@@ -54,7 +54,7 @@ export default class Appserver extends Component {
                     atActive={{ opacity: 1 }}
                     className="switch-wrapper"
                     >
-                    <Route exact path="/" render={ (props) => { return <Home {...props} data={this.state.data}/>} } />
+                    {/* <Route exact path="/" render={ (props) => { return <Home {...props} data={this.state.data}/>} } /> */}
                     <Route path="/accueil" render={ (props) => { return <Home {...props} data={this.state.data}/>} } />
                     <Route path="/ajout-texte" render={ (props) => { return <TextAddSrr {...props} data={this.state.data}/>} } />
                     <Route path="/texte-liste" render={ (props) => { return <TextList {...props} data={this.state.data}/>} } />

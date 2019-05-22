@@ -29,11 +29,11 @@ export default class CategoryList extends Component {
 
   render() {
 
-    let categories = this.state.categories.map((category) => {
+    let categories = this.state.categories.map((category, index) => {
       return <Link
               to={'/textes/category/'+category.id}
               className={this.props.classItem}
-              id={this.props.id}>
+              key={index}>
               <div key={category.id} style={{display: 'inline-block', borderRadius: '5px', margin: '10px', width: '120px', height: '120px'}} className="hover-item">
                 <div style={{textAlign: 'center'}}>{category.name}</div>
                 <div style={{'textAlign': 'center'}}>
@@ -45,10 +45,22 @@ export default class CategoryList extends Component {
              </Link>;
     });
       return (
-              <div>
+              <div style={styles.containerList}>
                  <h3>Liste des catégories</h3>
-                 {categories}
+                 <div>{categories}</div>
               </div>
       );
+    }
+  }
+
+  let styles = {
+    containerList:{
+      padding: '33px',
+      backgroundColor: 'white',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: '10px'
     }
   }
