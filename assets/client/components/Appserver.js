@@ -46,8 +46,9 @@ export default class Appserver extends Component {
     return (
           <div className="body-container">
           <div id="message-flash" style={styles.mfs}></div>
-          <Route render={ (props) => { return <NavBar {...props} data={data}/>} }/>
-          <div className="container">
+          
+          <div className="container-app">
+          </div>
             <AnimatedSwitch
                     atEnter={{ opacity: 0 }}
                     atLeave={{ opacity: 0 }}
@@ -71,7 +72,7 @@ export default class Appserver extends Component {
                       <Route path="/revision-serie/texte/:id_texte/serie/:id_serie/content/:num_content/mode/:num_mode" render={ (props) => { return <RevisionSsr {...props} data={this.state.data} step={'serie'}/>} } />
                     {/* </SwipeableRoutes> */}
             </AnimatedSwitch>
-          </div>
+          <Route render={ (props) => { return <NavBar {...props} data={data}/>} }/>
       </div>
     );
   }

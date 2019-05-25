@@ -3,6 +3,7 @@ import '../../../../node_modules/react-trumbowyg/dist/trumbowyg.css';
 import Trumbowyg from 'react-trumbowyg';
 import axios from 'axios';
 import { Redirect } from 'react-router';
+import { Container, Row, Col } from 'reactstrap';
 
 export default class TextAdd extends Component {
 
@@ -71,40 +72,52 @@ export default class TextAdd extends Component {
                   });
 
     return (
-      <div style={styles.containerForm}>
 
-          <div style={{width: '100%'}}>
-            <div>Ajoutez votre texte dans la zone ci dessous</div>
+      <div className="container-text-add">
+        <div>
+          <Container>
+            <Row>
+              <div className="main-titles">
+                Dashboard
+              </div>
+            </Row>
+            <Row>
+              <div>Ajoutez votre texte dans la zone ci dessous</div>
+                <div style={{display: 'flex', flexDirection: 'row',justifyContent: 'flex-start'}}>
+                <button onClick={this.saveText.bind(this)}>Enregistrer</button>
+                <select id="category-text" style={{marginLeft: '20px'}}>{options}</select>
+              </div>
+              <div>
+                <div>Titre</div>
+                <input type="text" id="title-text" style={{width: '100%'}}/>
+              </div>
+            </Row>
+            <Row>
+            <div style={styles.containerForm}>
+                <Trumbowyg id='react-trumbowyg'
+                          buttons={
+                              [
+                                  ['viewHTML'],
+                                  ['formatting'],
+                                  'btnGrp-semantic',
+                                  ['link'],
+                                  ['insertImage'],
+                                  'btnGrp-justify',
+                                  'btnGrp-lists',
+                                  ['table'], // I ADDED THIS FOR THE TABLE PLUGIN BUTTON
+                                  ['fullscreen']
+                              ]
+                          }
+                          data={''}
+                          placeholder='Entrez votre texte'
+                          onChange={console.log('change')}
+                          ref="trumbowyg"
+                />
 
-            <div style={{display: 'flex', flexDirection: 'row',justifyContent: 'flex-start'}}>
-              <button onClick={this.saveText.bind(this)}>Enregistrer</button>
-              <select id="category-text" style={{marginLeft: '20px'}}>{options}</select>
             </div>
-            <div>
-              <div>Titre</div>
-              <input type="text" id="title-text" style={{width: '100%'}}/>
-            </div>
-          </div>
-          <Trumbowyg id='react-trumbowyg'
-                    buttons={
-                        [
-                            ['viewHTML'],
-                            ['formatting'],
-                            'btnGrp-semantic',
-                            ['link'],
-                            ['insertImage'],
-                            'btnGrp-justify',
-                            'btnGrp-lists',
-                            ['table'], // I ADDED THIS FOR THE TABLE PLUGIN BUTTON
-                            ['fullscreen']
-                        ]
-                    }
-                    data={''}
-                    placeholder='Entrez votre texte'
-                    onChange={console.log('change')}
-                    ref="trumbowyg"
-          />
-
+            </Row>
+          </Container>
+        </div>
       </div>
     );
   }

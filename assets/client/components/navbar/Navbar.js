@@ -64,10 +64,12 @@ export default class NavBar extends Component {
             id:"item-menu-statistiques",
             style: {},
             isSelected: false
-        },
+        }
+      ],
+      itemsLeft:[
         {
             url:"/accueil",
-            classContainer:"bloc-btn-menu-left top120",
+            classContainer:"bloc-btn-menu-left",
             classItem:"menu-item-left nav-item-left",
             id:"item-menu-accueil",
             style: {},
@@ -75,7 +77,7 @@ export default class NavBar extends Component {
         },
         {
             url:"/info-user",
-            classContainer:"bloc-btn-menu-left top165",
+            classContainer:"bloc-btn-menu-left",
             classItem:"menu-item-left nav-item-left",
             id:"item-menu-info-user",
             style: {},
@@ -83,15 +85,15 @@ export default class NavBar extends Component {
         },
         {
             url:"/parametres",
-            classContainer:"bloc-btn-menu-left top210",
+            classContainer:"bloc-btn-menu-left",
             classItem:"menu-item-left nav-item-left",
             id:"item-menu-parametres",
             style: {},
             isSelected: false
         }
       ],
-      url_courante: this.props.data.url
-
+      url_courante: this.props.data.url,
+      menuMobileView: false
     }
     
   }
@@ -123,7 +125,15 @@ export default class NavBar extends Component {
         && window.location.href.split('/')[3] != event.target.href.split('/')[3]){
       event.target.parentElement.style.backgroundColor = 'rgb(59, 116, 254)';
     }
+  }
 
+  displayMenuMobile(event){
+    console.log(this.state.menuMobileView);
+    if(this.state.menuMobileView == true){
+      this.setState({menuMobileView: false});
+    }else{
+      this.setState({menuMobileView: true});
+    }
   }
 
   render() {
@@ -143,28 +153,52 @@ export default class NavBar extends Component {
                             key={item.id}
                           />
     });
+    let navitemsLeft = this.state.itemsLeft.map((item) =>{
+      return             <NavItem
+                            url={item.url}
+                            url_courante={this.state.url_courante}
+                            classContainer={item.classContainer}
+                            classItem={item.classItem}
+                            id={item.id}
+                            style={item.style}
+                            isSelected={item.isSelected}
+                            colorHoverItem={this.colorHoverItem.bind(this)} 
+                            colorMouseOutItem={this.colorMouseOutItem.bind(this)} 
+                            colorClickItem={this.colorClickItem.bind(this)}
+                            key={item.id}
+                          />
+    });
 
+    let displayMenuMobile = {left: '-160px'};
+    if(this.state.menuMobileView == true){
+      displayMenuMobile = {left: '0px'};
+    }
     return (
       <div>
-        <nav className="menu-mobile"></nav>
+        <nav className="menu-mobile" style={displayMenuMobile}></nav>
+        <nav className="navbar-home-mobile">
+          <div className="bloc-btn-menu-mobile ml10" onClick={this.displayMenuMobile.bind(this)}><div className="menu-item nav-accueil" id="item-menu-home-mobile"></div></div>
+        </nav>
         <nav className="navbar-home">
-            <div className="bloc-btn-menu-mobile ml10" ><div className="menu-item nav-accueil" id="item-menu-home-mobile"></div></div>
-            {/* <div className="bloc-btn-menu-vitrine"><div className="btn-menu-vitrine"></div></div> */}
             <NavItem
                             url={'/'}
                             url_courante={this.state.url_courante}
                             classContainer={'bloc-btn-menu-vitrine'}
-                            classItem={'menu-item nav-vitrine'}
+                            classItem={'menu-item-vitrine nav-vitrine'}
                             id={'item-vitrine'}
                             style={''}
                             isSelected={false}
-                            colorHoverItem={this.colorHoverItem.bind(this)} 
-                            colorMouseOutItem={this.colorMouseOutItem.bind(this)} 
                             colorClickItem={this.colorClickItem.bind(this)}
+                            colorHoverItem={() => {}}
                           />
             {navitems}
         </nav>
-        <div style={{width: '100%', height: '100%', backgroundColor: '#F8FAFE', position: 'fixed', top: '75px', left: '45px', borderRadius: '20px'}}></div>
+        <nav className="navbar-home-left">
+          {navitemsLeft}
+        </nav>
+        <div className="block-corner-radius">
+          <div className="corner-radius"></div>
+        </div>
       </div>
     );
 
