@@ -7,13 +7,13 @@ export default class Home extends Component {
 
     render() {
       return (
-        <div className="container-home" style={{marginTop: '-26px'}}>
+        <div className="container-home">
 
             <div>
               <Container>
                 <Row>
                   <div className="main-titles">
-                    Dashboard
+                    DASHBOARD
                   </div>
                 </Row>
                 <Row style={{marginTop: '20px'}}>

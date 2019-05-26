@@ -18,11 +18,15 @@ body{
   width: 100%;
 }
 .navbar-home-left{
-  background-color:#3B74FE;
+  background-color: #3B74FE;
   position: fixed;
   width: 50px;
-  margin-top: -25px;
+  margin-top: -1px;
   padding-top: 15px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .navbar-home-mobile{
   display: none;
@@ -255,7 +259,7 @@ body{
   margin-left: 10px;
 }
 .body-container{
-  margin-top:100px;
+  margin-top:76px;
 }
 .nav-link{
   display:block;
@@ -271,7 +275,7 @@ body{
   width: 94%;
   height: 100%;
   background-color: #F8FAFE;
-  margin-top: -24px;
+  margin-top: -1px;
   margin-left: 50px;
 }
 .home-box-series{
@@ -400,6 +404,31 @@ body{
   height: 10px;
   border-top-left-radius: 10px;
   background-color: #F8FAFE;
+}
+.btn-forms{
+  background-color: #26DF38;
+  border-radius: 14px;
+  width: 158px;
+  height: 42px;
+  display: inline-block;
+  color: #fff;
+  cursor: pointer;
+  text-align: center;
+  padding: 12px 0px;
+}
+.select-forms{
+  border: 1px solid #DCDCDC;
+  height: 25px;
+  width: 100%;
+}
+.btn-forms:hover{
+  background-color: #10c622;
+}
+.container-home{
+  padding: 0px 10px;
+}
+.container-home, .container-text-add{
+  padding: 0px 10px;
 }
 @media screen and (max-width: 768px) {
   .navbar-home div.bloc-btn-menu{

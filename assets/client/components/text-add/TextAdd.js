@@ -3,7 +3,8 @@ import '../../../../node_modules/react-trumbowyg/dist/trumbowyg.css';
 import Trumbowyg from 'react-trumbowyg';
 import axios from 'axios';
 import { Redirect } from 'react-router';
-import { Container, Row, Col } from 'reactstrap';
+// import './../../../styles/bootstrap.min.css';
+import { Container, Row, Col, FormGroup, Label, Input } from 'reactstrap';
 
 export default class TextAdd extends Component {
 
@@ -45,7 +46,7 @@ export default class TextAdd extends Component {
         method: 'post',
         url: '/save-text-ajax',
         responseType: 'json',
-        data: {title: document.querySelector('#title-text').value, content: wysiwyg.value, id_category: document.querySelector('#category-text').value}
+        data: {title: document.querySelector('#title-text').value, content: wysiwyg.value, id_category: document.querySelector('#select-category-text').value}
       })
       .then((response) => {
         this.props.viewMessageFlash('Texte ajouté avec succès !');
@@ -72,66 +73,69 @@ export default class TextAdd extends Component {
                   });
 
     return (
-
       <div className="container-text-add">
-        <div>
           <Container>
             <Row>
               <div className="main-titles">
-                Dashboard
+                AJOUTER UN TEXTE
               </div>
             </Row>
+            <Row style={{marginTop: '20px'}}>
+              <Col sm="9">
+                <Label for="exampleSelect" sm={2}>Catégorie</Label>
+                <FormGroup row>
+                  <Col sm={12}>
+                    <Input type="select">
+                      <option>---</option>
+                      {options}
+                    </Input>
+                  </Col>
+                </FormGroup>
+              </Col>
+              <Col sm="3" style={{textAlign: 'right', marginTop: '16px'}}>
+                <div className="btn-forms" onClick={this.saveText.bind(this)}>AJOUTER</div>
+              </Col>
+            </Row>
             <Row>
-              <div>Ajoutez votre texte dans la zone ci dessous</div>
-                <div style={{display: 'flex', flexDirection: 'row',justifyContent: 'flex-start'}}>
-                <button onClick={this.saveText.bind(this)}>Enregistrer</button>
-                <select id="category-text" style={{marginLeft: '20px'}}>{options}</select>
-              </div>
+              <Col sm="12">
+                <Label for="exampleEmail" sm={2}>Titre du texte</Label>
+                <FormGroup row>
+                  <Col sm={12}>
+                    <Input type="text" autoComplete="off" id="title-text" />
+                  </Col>
+                </FormGroup>
+              </Col>
+            </Row>
+            <Row>
+            <Col sm="12">
               <div>
-                <div>Titre</div>
-                <input type="text" id="title-text" style={{width: '100%'}}/>
-              </div>
-            </Row>
-            <Row>
-            <div style={styles.containerForm}>
-                <Trumbowyg id='react-trumbowyg'
-                          buttons={
-                              [
-                                  ['viewHTML'],
-                                  ['formatting'],
-                                  'btnGrp-semantic',
-                                  ['link'],
-                                  ['insertImage'],
-                                  'btnGrp-justify',
-                                  'btnGrp-lists',
-                                  ['table'], // I ADDED THIS FOR THE TABLE PLUGIN BUTTON
-                                  ['fullscreen']
-                              ]
-                          }
-                          data={''}
-                          placeholder='Entrez votre texte'
-                          onChange={console.log('change')}
-                          ref="trumbowyg"
-                />
+                  <Trumbowyg id='react-trumbowyg'
+                            buttons={
+                                [
+                                    ['viewHTML'],
+                                    ['formatting'],
+                                    'btnGrp-semantic',
+                                    ['link'],
+                                    ['insertImage'],
+                                    'btnGrp-justify',
+                                    'btnGrp-lists',
+                                    ['table'], // I ADDED THIS FOR THE TABLE PLUGIN BUTTON
+                                    ['fullscreen']
+                                ]
+                            }
+                            data={''}
+                            placeholder='Entrez votre texte'
+                            onChange={console.log('change')}
+                            ref="trumbowyg"
+                            style={{backgroundColor: 'red'}}
+                  />
 
-            </div>
+              </div>
+            </Col>
             </Row>
           </Container>
-        </div>
       </div>
     );
   }
 
-}
-
-let styles = {
-  containerForm:{
-    padding: '33px',
-    backgroundColor: 'white',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: '10px'
-  }
 }
