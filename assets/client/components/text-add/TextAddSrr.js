@@ -20,8 +20,9 @@ export default class TextAdd extends Component {
       });
 
       return (
-        <div className="container-text-add">
+        <div className="container-text-add container-page">
         <Container>
+        <div className="block-text-add">
           <Row>
             <div className="main-titles">
               AJOUTER UN TEXTE
@@ -29,22 +30,22 @@ export default class TextAdd extends Component {
           </Row>
           <Row style={{marginTop: '20px'}}>
             <Col sm="9">
-              <Label for="exampleSelect" sm={2}>Catégorie</Label>
+              <Label for="select-category-text" sm={2}>Catégorie</Label>
               <FormGroup row>
                 <Col sm={12}>
-                  <Input type="select">
+                  <Input type="select" id="select-category-text">
                     <option>---</option>
                   </Input>
                 </Col>
               </FormGroup>
             </Col>
             <Col sm="3" style={{textAlign: 'right', marginTop: '16px'}}>
-              <div className="btn-forms">AJOUTER</div>
+              <div className="btn-forms">Ajouter</div>
             </Col>
           </Row>
           <Row>
             <Col sm="12">
-              <Label for="exampleEmail" sm={2}>Titre du texte</Label>
+              <Label for="title-text" sm={2}>Titre du texte</Label>
               <FormGroup row>
                 <Col sm={12}>
                   <Input type="text" autoComplete="off" id="title-text" />
@@ -54,9 +55,12 @@ export default class TextAdd extends Component {
           </Row>
           <Row>
           <Col sm="12">
-              <div style={{display: 'flex', justifyContent: 'center', marginTop: '20px'}}><img src="/client/images/89.gif" /></div>
+            <div onClick={console.log('toto 2')} className="container-wysiwig">
+              <img src="/client/images/89.gif" />
+            </div>
           </Col>
           </Row>
+          </div>
         </Container>
     </div>
       );

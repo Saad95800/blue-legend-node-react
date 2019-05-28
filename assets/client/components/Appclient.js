@@ -80,7 +80,7 @@ export default class Appclient extends Component {
                           <Route path="/texte-liste" render={(props) => { return <TextList {...props} data={this.state.data}/>}} />
                           <Route path="/textes/category/:id_category" render={(props) => { return <TextList {...props} data={this.state.data}/>}} />
                           <Route path="/categories-liste" render={(props) => { return <CategoryList {...props} data={this.state.data}/>}} />
-                          <Route path="/categorie-ajout" render={(props) => { return <CategoryAdd {...props} data={this.state.data}/>}} />
+                          <Route path="/categorie-ajout" render={(props) => { return <CategoryAdd {...props} data={this.state.data} viewMessageFlash={this.viewMessageFlash}/>}} />
                           <Route path="/texte/:id_texte" render={ (props) => { return <Text {...props} data={this.state.data} viewMessageFlash={this.viewMessageFlash}/>} } />
                           {/* <SwipeableRoutes> */}
                             <Route path="/revision" render={(props) => { return <Revision {...props} data={this.state.data} step={'text-list'} />}} />

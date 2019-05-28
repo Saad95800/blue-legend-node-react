@@ -180,7 +180,9 @@ module.exports = {
     let params = req.allParams();
     var updatedText = await Text.updateOne({ id: params.id_text })
     .set({
-      content: params.content
+      title: params.title,
+      content: params.content,
+      owner_category: params.category
     });
     
     if (updatedText) {
