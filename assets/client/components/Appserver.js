@@ -9,6 +9,7 @@ import TextSsr from './text-list/TextSsr';
 import CategoryList from './category/CategoryList';
 import CategoryAdd from './category/CategoryAdd';
 import RevisionSsr from './revision/RevisionSsr';
+import CustomSeriesList from './revision/CustomSeriesList';
 // import SwipeableRoutes from "react-swipeable-routes";
 
 let styles = {
@@ -65,11 +66,13 @@ export default class Appserver extends Component {
                     <Route path="/texte/:id_texte" render={ (props) => { return <TextSsr {...props} data={this.state.data}/>} } />
                     {/* <SwipeableRoutes> */}
                       <Route path="/revision" render={ (props) => { return <RevisionSsr {...props} data={this.state.data} step={'text-list'}/>} } />
-                      <Route path="/revision-serie-list/text/:id_text" render={(props) => { return <Revision {...props} data={this.state.data} step={'serie-list'}/>}} />
+                      <Route path="/revision-serie-list/text/:id_text" render={(props) => { return <RevisionSsr {...props} data={this.state.data} step={'serie-list'}/>}} />
                       <Route path="/revision-content/text/:id_text/serie/:id_serie" render={ (props) => { return <RevisionSsr {...props} data={this.state.data} step={'content-review'}/>} } />
                       <Route path="/revision-mode/texte/:id_texte/serie/:id_serie/content/:num_content" render={ (props) => { return <RevisionSsr {...props} data={this.state.data} step={'mode'}/>} } />
                       <Route path="/revision-btn-begin/texte/:id_texte/serie/:id_serie/content/:num_content/mode/:num_mode" render={ (props) => { return <RevisionSsr {...props} data={this.state.data} step={'btn-begin'}/>} } />
                       <Route path="/revision-serie/texte/:id_texte/serie/:id_serie/content/:num_content/mode/:num_mode" render={ (props) => { return <RevisionSsr {...props} data={this.state.data} step={'serie'}/>} } />
+                      <Route path="/custom-series-list" render={ (props) => { return <CustomSeriesList {...props} data={this.state.data} />} } />
+                      <Route path="/add-custom-serie" render={ (props) => { return <CustomSeriesList {...props} data={this.state.data} />} } />
                     {/* </SwipeableRoutes> */}
             </AnimatedSwitch>
             </div>

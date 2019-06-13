@@ -56,7 +56,7 @@ export default class TextSsr extends Component {
                       </div>
                       <div id="btnSaveExpression" style={{width:'90px', height: '45px', cursor: 'pointer', color: 'white', fontWeight: 'bold', backgroundColor: '#08e608', borderRadius: '5px', textAlign: 'center', padding: '12px 0px'}}>{this.state.msgBtnSave}</div>
                     </div>
-                  <div className="container-text-view" style={{marginTop: '20px'}} dangerouslySetInnerHTML={{ __html: this.state.texte.content }}></div>
+                  <div id="container-text" style={{marginTop: '20px'}} dangerouslySetInnerHTML={{ __html: this.state.texte.content }}></div>
                 </div>;
 
     return (

@@ -9,14 +9,14 @@ export default class NavBar extends Component {
 
     this.state = {
       items:[
-        {
-            url:"/ajout-texte",
-            classContainer:"bloc-btn-menu",
-            classItem:"menu-item nav-ajout-texte",
-            id:"item-menu-add",
-            style: {},
-            isSelected: false
-        },
+        // {
+        //     url:"/ajout-texte",
+        //     classContainer:"bloc-btn-menu",
+        //     classItem:"menu-item nav-ajout-texte",
+        //     id:"item-menu-add",
+        //     style: {},
+        //     isSelected: false
+        // },
         {
             url:"/texte-liste",
             classContainer:"bloc-btn-menu",
@@ -25,14 +25,14 @@ export default class NavBar extends Component {
             style: {},
             isSelected: false
         },
-        {
-            url:"/categorie-ajout",
-            classContainer:"bloc-btn-menu",
-            classItem:"menu-item nav-categories",
-            id:"item-menu-add-category",
-            style: {},
-            isSelected: false
-        },
+        // {
+        //     url:"/categorie-ajout",
+        //     classContainer:"bloc-btn-menu",
+        //     classItem:"menu-item nav-categories",
+        //     id:"item-menu-add-category",
+        //     style: {},
+        //     isSelected: false
+        // },
         {
             url:"/categories-liste",
             classContainer:"bloc-btn-menu",

@@ -6,6 +6,7 @@ import ModeRevision from './ModeRevision';
 import BtnBeginRevision from './BtnBeginRevision';
 import SerieRevision from './SerieRevision';
 import axios from 'axios';
+import { Row, Col } from 'reactstrap';
 
 export default class Revision extends Component {
 
@@ -109,35 +110,63 @@ export default class Revision extends Component {
 
     let contentStep;
     let infos;
+    let stepsIcons;
 
     switch(this.state.step){
       case 'text-list':
         contentStep = <TextListRevision data={{'textes': this.state.textes}}/>;
-        infos = <div>Quel texte souhaitez-vous réviser ?</div>;
+        infos = <div className="text-center font-infos-revision">Quel texte souhaitez-vous réviser ?</div>;
+        stepsIcons = <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'fixed', top: '117px', left: '70px'}}>
+                      <span className="img-icone-revision-texte"></span>
+                    </div>;
         break;
       case 'serie-list':
         contentStep = <SerieListRevision data={{'series': this.state.series}}/>;
-        infos = <div>Quel serie voulez-vous faire ?</div>;
+        infos = <div className="text-center font-infos-revision">Quel série souhaitez-vous réviser ?</div>;
+        stepsIcons = <div className="flex-column" style={{alignItems: 'center', position: 'fixed', top: '117px', left: '70px'}}>
+                      <span className="img-icone-revision-texte"></span>
+                      <span className="img-icone-revision-arrow"></span>
+                    </div>;
         break;
       case 'content-review':
         contentStep = <ContentRevision data={this.props}/>;
-        infos = <div>Texte ></div>;
+        infos = '';
+        stepsIcons = <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'fixed', top: '117px', left: '70px'}}>
+                      <span className="img-icone-revision-texte"></span>
+                      <span className="img-icone-revision-arrow"></span>
+                    </div>;
         break;
       case 'mode':
         contentStep = <ModeRevision data={this.props}/>;
         let content = this.state.infos_content[this.state.num_content];
-        infos = <div><span>Texte</span><span> > </span><span>{content} ></span></div>;
+        infos = '';
+        stepsIcons = <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'fixed', top: '117px', left: '70px'}}>
+                      <span className="img-icone-revision-texte"></span>
+                      <span className="img-icone-revision-arrow"></span>
+                    </div>;
         break;
       case 'btn-begin':
         let id_serie = this.props.location.pathname.split("/")[9];
         contentStep = <BtnBeginRevision data={this.props} id_serie={id_serie}/>;
         let mode = this.state.infos_mode[this.state.num_mode];
-        infos = <div><span>Texte</span><span> > </span><span>{this.state.infos_content[this.state.num_content]} ></span><span>{mode}</span></div>;
+        stepsIcons = <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'fixed', top: '117px', left: '70px'}}>
+                        <span className="img-icone-revision-texte"></span>
+                        <span className="img-icone-revision-arrow"></span>
+                        <span className="img-icone-revision-time"></span>
+                        <span className="img-icone-revision-arrow"></span>
+                      </div>;
+        infos = '';
         break;
       case 'serie':
-        console.log(this.state);
         contentStep = <SerieRevision data={this.props} num_mode={this.state.num_mode} id_texte={this.state.id_texte}/>;
-        infos = <div><span>Texte</span><span> > </span><span>{this.state.infos_content[this.state.num_content]} ></span><span>{this.state.infos_mode[this.state.num_mode]}</span></div>;
+        infos = '';
+        stepsIcons = <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'fixed', top: '117px', left: '70px'}}>
+                        <span className="img-icone-revision-texte"></span>
+                        <span className="img-icone-revision-arrow"></span>
+                        <span className="img-icone-revision-time"></span>
+                        <span className="img-icone-revision-arrow"></span>
+                        <span className="img-icone-revision-serie"></span>
+                      </div>;
         break;
       default:
       contentStep = <TextListRevision data={{'textes': this.state.textes}}/>;
@@ -145,12 +174,26 @@ export default class Revision extends Component {
     }
 
     return (
-            <div>
-                <div style={{display: "flex", flexDirection: "row"}}>
-                  {/* {infos} */}
-                </div>
-                {contentStep}
-            </div>
+      <div className="container-revision container-page">
+        <Row>
+          <div className="main-titles">
+            REVISION
+          </div>
+        </Row>
+        <Row>
+          <div className="hidden-xs col-sm-2" style={{position: 'absolute'}}>
+            {stepsIcons}
+          </div>
+          <Col xs="12" sm="10" style={{width: '100%'}}>
+            <Row style={{marginTop: '20px'}}>
+              {infos}
+            </Row>
+            <Row style={{marginTop: '20px'}} className="display-flex-center">
+              {contentStep}
+            </Row>
+          </Col>
+        </Row>
+    </div>
     );
   }
 }

@@ -58,11 +58,11 @@ export default class TextList extends Component {
 
       let textes = this.state.textes.map((texte, index) => {
         let textTitle = texte.title.length > 20 ? texte.title.substring(0, 20)+'...' : texte.title;
-        return  <div className="col-xs-4 col-sm-2">
+        return  <div className="col-xs-4 col-sm-2" key={index}>
                   <Link
                     to={'/texte/'+texte.id}
                     key={index}>
-                    <div key={texte.id} className="text-list-hover-item">
+                    <div key={texte.id} className="list-hover-item">
                       <div className="display-flex-center" style={{textAlign: 'center', height: '40px'}}>{ capitalizeFirstLetter(textTitle) }</div>
                       <div style={{'textAlign': 'center'}}>
                       <span className="img-item-liste-texte"></span>
@@ -70,7 +70,7 @@ export default class TextList extends Component {
                     </div>
                   </Link>
                 </div>;
-      });
+        });
       return (
               <div className="container-text-list container-page">
                 <Container>

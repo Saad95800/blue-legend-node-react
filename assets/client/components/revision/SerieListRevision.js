@@ -8,11 +8,11 @@ export default class SerieListRevision extends Component {
   }
 
   render() {
-    let textes = '';
+    let series = '';
 
     if(this.props.data.series.length > 0){
-      textes = this.props.data.series.map( (serie, index) => {
-        let link = '/revision-content/text/'+serie.owner_text+'/serie/'+serie.id;
+      series = this.props.data.series.map( (serie, index) => {
+        let link = `/revision-mode/texte/${serie.owner_text}/serie/${serie.id}/content/1`;
         let serieName = serie.name.length > 20 ? serie.name.substring(0, 20)+'...' : serie.name;
         return <Link
                 to={link}
@@ -30,7 +30,7 @@ export default class SerieListRevision extends Component {
 
     return (
             <div>
-              {textes}
+              {series}
             </div>
     );
 

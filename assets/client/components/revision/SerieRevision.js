@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import ReactCountdownClock from 'react-countdown-clock';
+import {capitalizeFirstLetter} from './../functions';
 
 export default class serieRevision extends Component {
 
@@ -9,10 +10,11 @@ export default class serieRevision extends Component {
 
     this.timer = 0;
     this.durationCount = 5;
-    this.stateCount = this.durationCount;
-    this.state = {
-      unitTime: 0,
+    
+    this.state = {  
+      id_histoserie: 0,
       numQuestion: 0,
+      inputResponse: '',
       stepRev: "Question",
       stepRevs: {
         "1": "Question",
@@ -29,15 +31,26 @@ export default class serieRevision extends Component {
       },
       score: 0,
       expressions:[],
-      clock: 'enabled'
+      clock: 'enabled',
+
+      minutes: 0,
+      seconds: 0,
+      millis: 0,
+      running: false
     }
 
-    this.startTimer();
+    // this.startTimer();
+    
+    this._handleStartClick = this._handleStartClick.bind(this);
+    this._handleStopClick = this._handleStopClick.bind(this);
+    this._handleResetClick = this._handleResetClick.bind(this);
+
     
   }
 
   componentDidMount(){
     let url = this.props.data.location.pathname.split('/');
+    this._handleStartClick();
     axios({
       method: 'post',
       url: '/get-serie-by-text-ajax',
@@ -45,7 +58,6 @@ export default class serieRevision extends Component {
       data: {id_text: url[3], id_serie: url[5]}
     })
     .then((response) => {
-      console.log(response);
       this.setState({expressions: response.data.expression});
     })
     .catch( (error) => {
@@ -54,54 +66,59 @@ export default class serieRevision extends Component {
   }
 
   validate(){
-    this.stateCount = 0;
-    let res = this.state.expressions[this.state.numQuestion].french_value.toLowerCase() == document.querySelector("#inputResponse").value.toLowerCase();
-    let last = (this.state.numQuestion == this.state.expressions.length - 1);
-    let msg = "Suivant";
-    if(last){
-      msg = "Résultats";
-    }
-    if(res){
-      this.setState({
-        stateQuestion:{
-          btnValidation: msg, 
-          colorMessageValidation: "rgb(38, 223, 56)", 
-          messageValidation: "Bonne réponse"
-        }, 
-        score: this.state.score+1, 
-        stepRev: "Validation", 
-        clock: 'disabled'
+    this._handleStopClick();
+    if(this.state.stepRev == 'Question'){
+      let res = this.state.expressions[this.state.numQuestion].french_value.toLowerCase() == document.querySelector("#inputResponse").value.toLowerCase();
+      let last = (this.state.numQuestion == this.state.expressions.length - 1);
+      let msg = "Suivant";
+      if(last){
+        msg = "Résultats";
+      }
+      if(res){
+        this.setState({
+          stateQuestion:{
+            btnValidation: msg, 
+            colorMessageValidation: "rgb(38, 223, 56)", 
+            messageValidation: "Bonne réponse"
+          }, 
+          score: this.state.score+1, 
+          stepRev: "Validation", 
+          clock: 'disabled'
+        });
+      }else{
+        this.setState({
+                    stateQuestion:{
+                      btnValidation: msg, 
+                      colorMessageValidation: "red", 
+                      messageValidation: this.state.expressions[this.state.numQuestion].french_value
+                    }, 
+                    stepRev: "Validation",
+                    clock: 'disabled'
+                  });
+      }
+      let url = this.props.data.location.pathname.split('/');
+      axios({
+        method: 'post',
+        url: '/save-dataserie',
+        responseType: 'json',
+        data: {
+            result: res, 
+            id_serie: url[5], 
+            id_histoserie: this.state.id_histoserie, 
+            duration: this.state.seconds, 
+            id_expression: this.state.expressions[this.state.numQuestion].id
+          }
+      })
+      .then((response) => {
+        if(this.state.id_histoserie == 0){
+          this.setState({id_histoserie: response.data.id_histoserie});
+        }
+      })
+      .catch( (error) => {
+        console.log(error);
       });
-    }else{
-      this.setState({
-                  stateQuestion:{
-                    btnValidation: msg, 
-                    colorMessageValidation: "red", 
-                    messageValidation: this.state.expressions[this.state.numQuestion].french_value
-                  }, 
-                  stepRev: "Validation",
-                  clock: 'disabled'
-                });
     }
-    // let url = this.props.data.location.pathname.split('/');
-    // axios({
-    //   method: 'post',
-    //   url: '/save-dataserie',
-    //   responseType: 'json',
-    //   data: {
-    //       result: res, 
-    //       id_serie: url[5], 
-    //       duration: this.unitTime, 
-    //       expression: this.state.expressions[this.state.numQuestion].id
-    //     }
-    // })
-    // .then((response) => {
-    //   console.log(response);
-    // this.unitTime = 0;
-    // })
-    // .catch( (error) => {
-    //   console.log(error);
-    // });
+
   }
 
   next(){
@@ -111,10 +128,12 @@ export default class serieRevision extends Component {
           btnValidation: "Résultats", 
           messageValidation: ""
         }, 
-        stepRev: "Resultat"
+        stepRev: "Resultat",
+        inputResponse: ''
       });
     }else{
-      this.stateCount = this.durationCount;
+      this._handleResetClick();
+      this._handleStartClick();
       this.setState({
         stateQuestion:{
           btnValidation: "Valider", 
@@ -122,9 +141,9 @@ export default class serieRevision extends Component {
         }, 
         stepRev: "Question", 
         numQuestion: this.state.numQuestion+1, 
-        clock: 'enabled'
+        clock: 'enabled',
+        inputResponse: ''
       });
-      this.startTimer();
     }
     document.querySelector("#inputResponse").value = "";
   }
@@ -134,7 +153,6 @@ export default class serieRevision extends Component {
   }
 
   verifKey(e){
-    console.log('verifKey');
     let keycode = (e.keyCode ? e.keyCode : e.which);
     if(keycode == '13'){
       if(this.state.stepRev == 'Question'){
@@ -145,20 +163,81 @@ export default class serieRevision extends Component {
     }
   }
 
-  startTimer(){
-
-    setTimeout(() => {
-      if(this.stateCount > 0){
-        this.timer = this.timer + 0.1;
-        this.startTimer();
-      }else{
-        this.setState({unitTime: Math.floor(this.timer)});
-        this.timer = 0;
-      }
-    }, 100);
-
+  restart(){
+    this.setState({
+      numQuestion: 0,
+      stepRev: "Question",
+            stateQuestion: {
+              logoUrlValidation: "",
+              logoDisplayValidation: "none",
+              messageValidation: "",
+              btnValidation: "Valider",
+              inputTextValue: "",
+              colorMessageValidation: "#26DF38"
+            },
+      score: 0,
+      clock: 'enabled'
+    });
+    this._handleResetClick();
+    this._handleStartClick();
   }
 
+  /////////////////////////////////////////////////////
+
+  _handleStartClick(event) {
+    var _this = this;
+    if (!this.state.running) {
+        this.interval = setInterval(() => {
+            this.tick();
+        }, 100)
+
+        this.setState({running: true})
+    }
+}
+
+_handleStopClick(event) {        
+    if (this.state.running) {
+        clearInterval(this.interval);
+        this.setState({running: false})
+    }
+}
+
+_handleResetClick(event) {
+    this._handleStopClick();
+    this.update(0, 0, 0);
+}
+
+tick() {
+    let millis = this.state.millis + 1;
+    let seconds = this.state.seconds;
+    let minutes = this.state.minutes;
+
+    if (millis === 10) {
+        millis = 0;
+        seconds = seconds + 1;
+    }
+
+    if (seconds === 60) {
+        millis = 0;
+        seconds = 0;
+        minutes = minutes + 1;
+    }
+
+    this.update(millis, seconds, minutes);
+}
+
+zeroPad(value) {
+    return value < 10 ? `0${value}` : value;
+}
+
+update(millis, seconds, minutes) {
+    this.setState({
+        millis: millis,
+        seconds: seconds,
+        minutes: minutes
+    });
+}
+////////////////////////////////////////////////////////////
   render() {
     let displayExo = 'block';
     let displayRes = 'none';
@@ -174,7 +253,7 @@ export default class serieRevision extends Component {
       displayRes = 'flex';
     }
     /************************* */
-    let text = '';
+    let text = '...';
     if(this.state.expressions[this.state.numQuestion] !== undefined){
       text = this.state.expressions[this.state.numQuestion].english_value;
     }
@@ -194,13 +273,20 @@ export default class serieRevision extends Component {
     }
     return (
             <div>
-                <div id="time" style={{position: 'fixed', top: '95px', right: '20px'}}>{this.state.unitTime}</div>
-                <div id="clock" style={{position: 'fixed', top: '95px', right: '20px'}}>{clock}</div>
+                <div id="clock" style={{position: 'fixed', top: '78px', right: '80px'}}>{clock}</div>
                 <div style={styles.blockSerie}>
                   <div style={{display: displayExo}}>
-                    <div style={{paddingTop: "35px",textAlign: "center",fontWeight: "bold",fontSize: "30px"}}>{text}</div>
+                    <div style={{paddingTop: "35px",textAlign: "center",fontWeight: "bold",fontSize: "30px"}}>{capitalizeFirstLetter(text)}</div>
                     <div style={{textAlign: "center"}}>
-                      <input type="text" id="inputResponse" onKeyPress={this.verifKey.bind(this)} style={{width: "90%", height: "80px", fontSize: "40px", marginTop: "50px"}}/>
+                      <input 
+                        type="text" 
+                        id="inputResponse" 
+                        value={this.state.inputResponse} 
+                        style={{width: "90%", height: "80px", fontSize: "40px", marginTop: "50px"}} 
+                        onChange={ () => {this.setState({ inputResponse: document.querySelector("#inputResponse").value})} }
+                        onKeyPress={this.verifKey.bind(this)}
+                        autoComplete="off"
+                      />
                     </div>
                     <div style={{height:"30px", marginLeft:"30px", marginTop:"10px", fontSize: "30px", color: this.state.stateQuestion.colorMessageValidation}}>{this.state.stateQuestion.messageValidation}</div>
                   
@@ -208,13 +294,23 @@ export default class serieRevision extends Component {
                       <div style={styles.btnSuivant} onClick={func.bind(this)}>{this.state.stateQuestion.btnValidation}</div>
                     </div>
                   </div>
-                  <div style={{display: displayRes, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100%', fontWeight: 'bold', fontSize: '100px'}}>
+                  <div style={{display: displayRes, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
                     <div>
                       <div>Score</div>
-                      <div style={{textAlign: 'center'}}>{this.state.score}/{this.state.expressions.length}</div>
+                      <div style={{textAlign: 'center', fontWeight: 'bold', fontSize: '100px'}}>
+                        {this.state.score}/{this.state.expressions.length}
+                      </div>
+                      <button onClick={this.restart.bind(this)}>Recommencer</button>
                     </div>
                   </div>
                 </div>
+
+                {/* <div className="segments">
+                    <span className="mins">{this.zeroPad(this.state.minutes)}:</span> 
+                    <span className="secs">{this.zeroPad(this.state.seconds)} </span> 
+                    <span className="millis">.0{this.state.millis}</span>
+                </div> */}
+
             </div>
     );
 

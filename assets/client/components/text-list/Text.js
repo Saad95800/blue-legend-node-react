@@ -251,9 +251,9 @@ export default class Text extends Component {
                         <div style={{margin: '10px'}}>{capitalizeFirstLetter(this.state.selText)}</div>
                         <div style={{margin: '10px', fontSize: '1.2em', fontWeight: 'bold'}}>{capitalizeFirstLetter(this.state.french_value)}</div>
                       </div>
-                      <div id="btnSaveExpression" style={{width:'90px', height: '45px', cursor: 'pointer', color: 'white', fontWeight: 'bold', backgroundColor: '#08e608', borderRadius: '5px', textAlign: 'center', padding: '12px 0px'}}>{this.state.msgBtnSave}</div>
+                      <div id="btnSaveExpression" onClick={this.saveExpression.bind(this)} style={{width:'90px', height: '45px', cursor: 'pointer', color: 'white', fontWeight: 'bold', backgroundColor: '#08e608', borderRadius: '5px', textAlign: 'center', padding: '12px 0px'}}>{this.state.msgBtnSave}</div>
                     </div>
-                    <div className="container-text-view" style={{marginTop: '20px'}} onClick={this.viewPopup.bind(this)} dangerouslySetInnerHTML={{ __html: this.state.texte.content }}></div>
+                    <div id="container-text" style={{marginTop: '20px'}} onClick={this.viewPopup.bind(this)} dangerouslySetInnerHTML={{ __html: this.state.texte.content }}></div>
                   </div>;
 
     return (

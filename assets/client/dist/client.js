@@ -334,6 +334,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _category_CategoryList__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./category/CategoryList */ "./assets/client/components/category/CategoryList.js");
 /* harmony import */ var _category_CategoryAdd__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./category/CategoryAdd */ "./assets/client/components/category/CategoryAdd.js");
 /* harmony import */ var _revision_Revision__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./revision/Revision */ "./assets/client/components/revision/Revision.js");
+/* harmony import */ var _revision_CustomSeriesList__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./revision/CustomSeriesList */ "./assets/client/components/revision/CustomSeriesList.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -353,6 +354,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -548,6 +550,20 @@ function (_Component) {
             step: 'serie'
           }));
         }
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+        path: "/custom-series-list",
+        render: function render(props) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(AddCustomSerie, _extends({}, props, {
+            data: _this2.state.data
+          }));
+        }
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+        path: "/add-custom-serie",
+        render: function render(props) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(AddCustomSerie, _extends({}, props, {
+            data: _this2.state.data
+          }));
+        }
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
         render: function render(props) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_Navbar__WEBPACK_IMPORTED_MODULE_3__["default"], _extends({}, props, {
@@ -579,6 +595,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Vitrine; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -599,6 +616,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var Vitrine =
 /*#__PURE__*/
 function (_Component) {
@@ -615,9 +633,339 @@ function (_Component) {
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "vitrine-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-        className: "block1"
-      }, "Site vitrine"));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
+        className: "header-nav-vitrine"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "size100"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-sm-3 col-xs-5"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "display-flex-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "display-flex-center main-logo-vitrine"
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-xs-7 col-sm-4 col-sm-offset-5"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "flex-row",
+        style: {
+          height: '68px',
+          alignItems: 'center'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "btn-vitrine display-flex-center"
+      }, "CONNEXION"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        onClick: this.viewPopupSignup,
+        className: "btn-vitrine display-flex-center"
+      }, "INSCRIPTION"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "block1 img-vitrine-blocks"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "size100"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "img-vitrine-block1 size100"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], {
+        style: {
+          height: '580px'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+        sm: "6",
+        style: {
+          height: '100%'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "size100 display-flex-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "img-block1-logo"
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+        sm: "6",
+        style: {
+          height: '100%'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "display-flex-center flex-column size100"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "img-block1-book"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "text-block1-msg text-border",
+        style: {
+          margin: '15px 0px'
+        }
+      }, "Apprend l'anglais efficacement. Par la lecture."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "btn-vitrine display-flex-center",
+        style: {
+          width: '300px',
+          height: '100px',
+          borderRadius: '50px',
+          fontSize: '2em'
+        }
+      }, "Commencer"))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "block2 img-vitrine-blocks"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "size100",
+        style: {
+          backgroundColor: '#F8FAFE'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], {
+        style: {
+          height: '100%'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+        sm: "6",
+        style: {
+          height: '100%'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "display-flex-center size100",
+        style: {
+          padding: '0px 20px'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "flex-column"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        style: {
+          fontSize: '55px'
+        },
+        className: "text-center font-weight-bold"
+      }, "Qu'est-ce que Blue Legend ?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        style: {
+          fontSize: '30px'
+        },
+        className: "text-center font-weight-bold"
+      }, "Blue Legend est une application web et mobile permettant d'apprendre l'anglais \xE0 travers la lecture de textes en leur donnant la possibilit\xE9 de traduire chaque expressions et mots de vocabulaire et de les r\xE9viser gr\xE2ce \xE0 des s\xE9ries de r\xE9visions ludiques et int\xE9ractives.")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+        sm: "6",
+        style: {
+          height: '100%'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "img-vitrine-block2 size100"
+      }))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "block3 img-vitrine-blocks"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "img-vitrine-block3 size100"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], {
+        style: {
+          height: '100%'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-sm-6 col-sm-offset-6",
+        style: {
+          height: '100%'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "size100 text-border display-flex-center flex-column"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        style: {
+          fontSize: '55px',
+          color: '#fff'
+        },
+        className: "text-center font-weight-bold"
+      }, "Apprend en lisant tes textes et contenus pr\xE9f\xE9r\xE9s."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        style: {
+          fontSize: '30px',
+          color: '#fff'
+        },
+        className: "text-center font-weight-bold"
+      }, "Choisis les livres et contenus qui te passionnent. Lis tes textes et enregistre les mots de vocabulaire et expression que tu souhaites.")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "block4 img-vitrine-blocks"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "size100"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], {
+        style: {
+          height: '100%'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-sm-6",
+        style: {
+          height: '100%'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "size100 display-flex-center flex-column"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        style: {
+          fontSize: '55px'
+        },
+        className: "text-center font-weight-bold"
+      }, "Apprend efficacement ton vocabulaire."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        style: {
+          fontSize: '30px'
+        },
+        className: "text-center font-weight-bold"
+      }, "R\xE9vise ton vocabulaire avec des s\xE9ries de r\xE9vision int\xE9ractives."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-sm-6",
+        style: {
+          height: '100%'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "img-vitrine-block4 size100"
+      }))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "block5 img-vitrine-blocks"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "size100",
+        style: {
+          backgroundColor: '#fff'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], {
+        style: {
+          height: '100%'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-sm-6",
+        style: {
+          height: '100%'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "size100 display-flex-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "img-vitrine-block5",
+        style: {
+          height: '80%',
+          width: '80%'
+        }
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-sm-6",
+        style: {
+          height: '100%'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "size100 display-flex-center flex-column"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        style: {
+          fontSize: '55px'
+        },
+        className: "text-center font-weight-bold"
+      }, "Met-toi au d\xE9fi en jouant contre la montre."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        style: {
+          fontSize: '30px'
+        },
+        className: "text-center font-weight-bold"
+      }, "Tu as la possibilit\xE9 de mettre au chronom\xE8tre lors de chacune de tes s\xE9ries de r\xE9vision afin de te mettre au d\xE9fi et de voir la qualit\xE9 de ton apprentissage.")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "block6 img-vitrine-blocks"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "size100"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], {
+        style: {
+          height: '100%'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-sm-6",
+        style: {
+          height: '100%'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "size100 display-flex-center flex-column"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        style: {
+          fontSize: '55px'
+        },
+        className: "text-center font-weight-bold"
+      }, "M\xE9morise durablement gr\xE2ce \xE0 la m\xE9thode de r\xE9p\xE9titions espac\xE9s"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-sm-6",
+        style: {
+          height: '100%'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "display-flex-center size100"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "img-vitrine-block6",
+        style: {
+          width: '90%',
+          height: '90%'
+        }
+      })))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "block7 img-vitrine-blocks"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "size100",
+        style: {
+          backgroundColor: '#fff'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], {
+        style: {
+          height: '100%'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-sm-6",
+        style: {
+          height: '100%'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "size100 display-flex-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "img-vitrine-block7",
+        style: {
+          height: '80%',
+          width: '80%'
+        }
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-sm-6",
+        style: {
+          height: '100%'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "size100 display-flex-center flex-column"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        style: {
+          fontSize: '55px'
+        },
+        className: "text-center font-weight-bold"
+      }, "En ligne ou hors ligne, r\xE9vise tes textes o\xF9 que tu soit."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        style: {
+          fontSize: '30px'
+        },
+        className: "text-center font-weight-bold"
+      }, "Notre application est disponible pour tout type d'appareils et est utilisable en mode hors-ligne. C'est une progressive web app, ce qui signifie qu'elle est multi plate-forme et fonctionne sur IOS et Android.")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "block8 footer-vitrine"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "size100"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], {
+        style: {
+          height: '100%'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-sm-5",
+        style: {
+          height: '100%'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "size100 display-flex-center flex-row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "img-block1-logo",
+        style: {
+          width: '180px',
+          height: '150px'
+        }
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "main-logo-vitrine"
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-sm-7",
+        style: {
+          height: '100%'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "size100 display-flex-center flex-column",
+        style: {
+          alignItems: 'flex-start'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        for: "newsletter",
+        sm: 3,
+        className: "text-border",
+        style: {
+          textAlign: 'left',
+          fontSize: '20px',
+          width: '100%'
+        }
+      }, "Abonne-toi et soit inform\xE9 de toutes les nouvelles fonctionnalit\xE9s \xE0 venir"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["FormGroup"], {
+        row: true,
+        style: {
+          width: '80%',
+          marginTop: '20px'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+        sm: 12
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Input"], {
+        type: "text",
+        autoComplete: "off",
+        id: "newsletter"
+      })))))))));
     }
   }]);
 
@@ -795,6 +1143,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
+/* harmony import */ var _functions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../functions */ "./assets/client/components/functions.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -812,6 +1162,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
 
 
 
@@ -863,35 +1215,55 @@ function (_Component) {
       var _this3 = this;
 
       var categories = this.state.categories.map(function (category, index) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        var categoryName = category.name.length > 20 ? category.name.substring(0, 20) + '...' : category.name;
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "col-xs-4 col-sm-2",
+          key: index
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: '/textes/category/' + category.id,
           className: _this3.props.classItem,
           key: index
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: category.id,
-          style: {
-            display: 'inline-block',
-            borderRadius: '5px',
-            margin: '10px',
-            width: '120px',
-            height: '120px'
-          },
-          className: "hover-item"
+          className: "list-hover-item"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "display-flex-center",
           style: {
-            textAlign: 'center'
+            textAlign: 'center',
+            height: '40px'
           }
-        }, category.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, Object(_functions__WEBPACK_IMPORTED_MODULE_3__["capitalizeFirstLetter"])(categoryName)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           style: {
             'textAlign': 'center'
           }
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "img-item-liste-category"
-        }))));
+        })))));
       });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        style: styles.containerList
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Liste des cat\xE9gories"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, categories));
+        className: "container-list-category container-page"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Container"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "block-category-list"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Row"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "main-titles"
+      }, "LISTE DES CATEGORIES")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Row"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
+        xs: {
+          size: 3,
+          offset: 9
+        },
+        style: {
+          textAlign: 'right',
+          marginTop: '16px'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: '/categorie-ajout'
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+        className: "btn-forms"
+      }, "Ajouter une cat\xE9gorie")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Row"], {
+        style: {
+          marginTop: '20px'
+        }
+      }, categories))));
     }
   }]);
 
@@ -899,17 +1271,6 @@ function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 
-var styles = {
-  containerList: {
-    padding: '33px',
-    backgroundColor: 'white',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: '10px'
-  }
-};
 
 /***/ }),
 
@@ -1092,7 +1453,7 @@ function (_Component) {
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
         sm: "3"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: '/custom-series',
+        to: '/custom-series-list',
         className: "home-item-nav home-item-nav-custom"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "home-title-nav home-title-nav-custom text-center"
@@ -1262,28 +1623,30 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(NavBar).call(this, props));
     _this.state = {
-      items: [{
-        url: "/ajout-texte",
-        classContainer: "bloc-btn-menu",
-        classItem: "menu-item nav-ajout-texte",
-        id: "item-menu-add",
-        style: {},
-        isSelected: false
-      }, {
+      items: [// {
+      //     url:"/ajout-texte",
+      //     classContainer:"bloc-btn-menu",
+      //     classItem:"menu-item nav-ajout-texte",
+      //     id:"item-menu-add",
+      //     style: {},
+      //     isSelected: false
+      // },
+      {
         url: "/texte-liste",
         classContainer: "bloc-btn-menu",
         classItem: "menu-item nav-lecture",
         id: "item-menu-text",
         style: {},
         isSelected: false
-      }, {
-        url: "/categorie-ajout",
-        classContainer: "bloc-btn-menu",
-        classItem: "menu-item nav-categories",
-        id: "item-menu-add-category",
-        style: {},
-        isSelected: false
-      }, {
+      }, // {
+      //     url:"/categorie-ajout",
+      //     classContainer:"bloc-btn-menu",
+      //     classItem:"menu-item nav-categories",
+      //     id:"item-menu-add-category",
+      //     style: {},
+      //     isSelected: false
+      // },
+      {
         url: "/categories-liste",
         classContainer: "bloc-btn-menu",
         classItem: "menu-item nav-categories",
@@ -1669,6 +2032,168 @@ var styles = {
 
 /***/ }),
 
+/***/ "./assets/client/components/revision/CustomSeriesList.js":
+/*!***************************************************************!*\
+  !*** ./assets/client/components/revision/CustomSeriesList.js ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CustomSeriesList; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+var CustomSeriesList =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(CustomSeriesList, _Component);
+
+  function CustomSeriesList(props) {
+    var _this;
+
+    _classCallCheck(this, CustomSeriesList);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(CustomSeriesList).call(this, props));
+    var series = [];
+
+    if (_this.props.data.app == 'server') {
+      series = _this.props.data.series;
+    }
+
+    _this.state = {
+      series: series
+    };
+    return _this;
+  }
+
+  _createClass(CustomSeriesList, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default()({
+        method: 'post',
+        url: '/series-revision-ajax',
+        responseType: 'json',
+        data: {
+          id_text: ''
+        }
+      }).then(function (response) {
+        _this2.setState({
+          series: response.data
+        });
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var series = '';
+
+      if (this.state.series.length > 0) {
+        series = this.state.series.map(function (serie, index) {
+          var link = "/revision-mode/texte/".concat(serie.owner_text, "/serie/").concat(serie.id, "/content/1");
+          var serieName = serie.name.length > 20 ? serie.name.substring(0, 20) + '...' : serie.name;
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+            to: link,
+            key: index
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            key: serie.id,
+            style: {
+              display: 'inline-block',
+              borderRadius: '5px',
+              margin: '10px',
+              width: '120px'
+            },
+            className: "hover-item"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            style: {
+              textAlign: 'center'
+            }
+          }, serieName), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            style: {
+              'textAlign': 'center'
+            }
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            className: "img-item-liste-texte"
+          }))));
+        });
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container-custom-serie container-page"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "main-titles"
+      }, "SERIES PERSONNALISEES")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+        xs: {
+          size: 3,
+          offset: 9
+        },
+        style: {
+          textAlign: 'right',
+          marginTop: '16px'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        to: '/add-custom-serie'
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+        className: "btn-forms"
+      }, "Ajouter une s\xE9rie")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+        xs: "12",
+        sm: "10",
+        style: {
+          width: '100%'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
+        style: {
+          marginTop: '20px'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "text-center font-infos-revision"
+      }, "Quel s\xE9rie souhaitez-vous r\xE9viser ?")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
+        style: {
+          marginTop: '20px'
+        },
+        className: "display-flex-center"
+      }, series))));
+    }
+  }]);
+
+  return CustomSeriesList;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+/***/ }),
+
 /***/ "./assets/client/components/revision/ModeRevision.js":
 /*!***********************************************************!*\
   !*** ./assets/client/components/revision/ModeRevision.js ***!
@@ -1779,6 +2304,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SerieRevision__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./SerieRevision */ "./assets/client/components/revision/SerieRevision.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -1798,6 +2324,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -1939,6 +2466,7 @@ function (_Component) {
     value: function render() {
       var contentStep;
       var infos;
+      var stepsIcons;
 
       switch (this.state.step) {
         case 'text-list':
@@ -1947,7 +2475,21 @@ function (_Component) {
               'textes': this.state.textes
             }
           });
-          infos = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Quel texte souhaitez-vous r\xE9viser ?");
+          infos = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "text-center font-infos-revision"
+          }, "Quel texte souhaitez-vous r\xE9viser ?");
+          stepsIcons = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            style: {
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              position: 'fixed',
+              top: '117px',
+              left: '70px'
+            }
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            className: "img-icone-revision-texte"
+          }));
           break;
 
         case 'serie-list':
@@ -1956,14 +2498,43 @@ function (_Component) {
               'series': this.state.series
             }
           });
-          infos = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Quel serie voulez-vous faire ?");
+          infos = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "text-center font-infos-revision"
+          }, "Quel s\xE9rie souhaitez-vous r\xE9viser ?");
+          stepsIcons = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "flex-column",
+            style: {
+              alignItems: 'center',
+              position: 'fixed',
+              top: '117px',
+              left: '70px'
+            }
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            className: "img-icone-revision-texte"
+          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            className: "img-icone-revision-arrow"
+          }));
           break;
 
         case 'content-review':
           contentStep = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ContentRevision__WEBPACK_IMPORTED_MODULE_3__["default"], {
             data: this.props
           });
-          infos = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Texte >");
+          infos = '';
+          stepsIcons = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            style: {
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              position: 'fixed',
+              top: '117px',
+              left: '70px'
+            }
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            className: "img-icone-revision-texte"
+          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            className: "img-icone-revision-arrow"
+          }));
           break;
 
         case 'mode':
@@ -1971,7 +2542,21 @@ function (_Component) {
             data: this.props
           });
           var content = this.state.infos_content[this.state.num_content];
-          infos = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Texte"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " > "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, content, " >"));
+          infos = '';
+          stepsIcons = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            style: {
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              position: 'fixed',
+              top: '117px',
+              left: '70px'
+            }
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            className: "img-icone-revision-texte"
+          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            className: "img-icone-revision-arrow"
+          }));
           break;
 
         case 'btn-begin':
@@ -1981,17 +2566,54 @@ function (_Component) {
             id_serie: id_serie
           });
           var mode = this.state.infos_mode[this.state.num_mode];
-          infos = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Texte"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " > "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, this.state.infos_content[this.state.num_content], " >"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, mode));
+          stepsIcons = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            style: {
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              position: 'fixed',
+              top: '117px',
+              left: '70px'
+            }
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            className: "img-icone-revision-texte"
+          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            className: "img-icone-revision-arrow"
+          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            className: "img-icone-revision-time"
+          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            className: "img-icone-revision-arrow"
+          }));
+          infos = '';
           break;
 
         case 'serie':
-          console.log(this.state);
           contentStep = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SerieRevision__WEBPACK_IMPORTED_MODULE_6__["default"], {
             data: this.props,
             num_mode: this.state.num_mode,
             id_texte: this.state.id_texte
           });
-          infos = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Texte"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " > "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, this.state.infos_content[this.state.num_content], " >"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, this.state.infos_mode[this.state.num_mode]));
+          infos = '';
+          stepsIcons = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            style: {
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              position: 'fixed',
+              top: '117px',
+              left: '70px'
+            }
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            className: "img-icone-revision-texte"
+          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            className: "img-icone-revision-arrow"
+          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            className: "img-icone-revision-time"
+          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            className: "img-icone-revision-arrow"
+          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            className: "img-icone-revision-serie"
+          }));
           break;
 
         default:
@@ -2003,12 +2625,31 @@ function (_Component) {
           break;
       }
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container-revision container-page"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_8__["Row"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "main-titles"
+      }, "REVISION")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_8__["Row"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "hidden-xs col-sm-2",
         style: {
-          display: "flex",
-          flexDirection: "row"
+          position: 'absolute'
         }
-      }), contentStep);
+      }, stepsIcons), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_8__["Col"], {
+        xs: "12",
+        sm: "10",
+        style: {
+          width: '100%'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_8__["Row"], {
+        style: {
+          marginTop: '20px'
+        }
+      }, infos), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_8__["Row"], {
+        style: {
+          marginTop: '20px'
+        },
+        className: "display-flex-center"
+      }, contentStep))));
     }
   }]);
 
@@ -2067,11 +2708,11 @@ function (_Component) {
   _createClass(SerieListRevision, [{
     key: "render",
     value: function render() {
-      var textes = '';
+      var series = '';
 
       if (this.props.data.series.length > 0) {
-        textes = this.props.data.series.map(function (serie, index) {
-          var link = '/revision-content/text/' + serie.owner_text + '/serie/' + serie.id;
+        series = this.props.data.series.map(function (serie, index) {
+          var link = "/revision-mode/texte/".concat(serie.owner_text, "/serie/").concat(serie.id, "/content/1");
           var serieName = serie.name.length > 20 ? serie.name.substring(0, 20) + '...' : serie.name;
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
             to: link,
@@ -2099,7 +2740,7 @@ function (_Component) {
         });
       }
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, textes);
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, series);
     }
   }]);
 
@@ -2126,6 +2767,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_countdown_clock__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-countdown-clock */ "./node_modules/react-countdown-clock/build/react-countdown-clock.js");
 /* harmony import */ var react_countdown_clock__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_countdown_clock__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _functions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../functions */ "./assets/client/components/functions.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2136,13 +2778,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -2154,17 +2797,17 @@ function (_Component) {
   _inherits(serieRevision, _Component);
 
   function serieRevision(props) {
-    var _this;
+    var _this2;
 
     _classCallCheck(this, serieRevision);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(serieRevision).call(this, props));
-    _this.timer = 0;
-    _this.durationCount = 5;
-    _this.stateCount = _this.durationCount;
-    _this.state = {
-      unitTime: 0,
+    _this2 = _possibleConstructorReturn(this, _getPrototypeOf(serieRevision).call(this, props));
+    _this2.timer = 0;
+    _this2.durationCount = 5;
+    _this2.state = {
+      id_histoserie: 0,
       numQuestion: 0,
+      inputResponse: '',
       stepRev: "Question",
       stepRevs: {
         "1": "Question",
@@ -2181,20 +2824,28 @@ function (_Component) {
       },
       score: 0,
       expressions: [],
-      clock: 'enabled'
+      clock: 'enabled',
+      minutes: 0,
+      seconds: 0,
+      millis: 0,
+      running: false // this.startTimer();
+
     };
-
-    _this.startTimer();
-
-    return _this;
+    _this2._handleStartClick = _this2._handleStartClick.bind(_assertThisInitialized(_this2));
+    _this2._handleStopClick = _this2._handleStopClick.bind(_assertThisInitialized(_this2));
+    _this2._handleResetClick = _this2._handleResetClick.bind(_assertThisInitialized(_this2));
+    return _this2;
   }
 
   _createClass(serieRevision, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this2 = this;
+      var _this3 = this;
 
       var url = this.props.data.location.pathname.split('/');
+
+      this._handleStartClick();
+
       axios__WEBPACK_IMPORTED_MODULE_1___default()({
         method: 'post',
         url: '/get-serie-by-text-ajax',
@@ -2204,9 +2855,7 @@ function (_Component) {
           id_serie: url[5]
         }
       }).then(function (response) {
-        console.log(response);
-
-        _this2.setState({
+        _this3.setState({
           expressions: response.data.expression
         });
       }).catch(function (error) {
@@ -2216,56 +2865,64 @@ function (_Component) {
   }, {
     key: "validate",
     value: function validate() {
-      this.stateCount = 0;
-      var res = this.state.expressions[this.state.numQuestion].french_value.toLowerCase() == document.querySelector("#inputResponse").value.toLowerCase();
-      var last = this.state.numQuestion == this.state.expressions.length - 1;
-      var msg = "Suivant";
+      var _this4 = this;
 
-      if (last) {
-        msg = "Résultats";
+      this._handleStopClick();
+
+      if (this.state.stepRev == 'Question') {
+        var res = this.state.expressions[this.state.numQuestion].french_value.toLowerCase() == document.querySelector("#inputResponse").value.toLowerCase();
+        var last = this.state.numQuestion == this.state.expressions.length - 1;
+        var msg = "Suivant";
+
+        if (last) {
+          msg = "Résultats";
+        }
+
+        if (res) {
+          this.setState({
+            stateQuestion: {
+              btnValidation: msg,
+              colorMessageValidation: "rgb(38, 223, 56)",
+              messageValidation: "Bonne réponse"
+            },
+            score: this.state.score + 1,
+            stepRev: "Validation",
+            clock: 'disabled'
+          });
+        } else {
+          this.setState({
+            stateQuestion: {
+              btnValidation: msg,
+              colorMessageValidation: "red",
+              messageValidation: this.state.expressions[this.state.numQuestion].french_value
+            },
+            stepRev: "Validation",
+            clock: 'disabled'
+          });
+        }
+
+        var url = this.props.data.location.pathname.split('/');
+        axios__WEBPACK_IMPORTED_MODULE_1___default()({
+          method: 'post',
+          url: '/save-dataserie',
+          responseType: 'json',
+          data: {
+            result: res,
+            id_serie: url[5],
+            id_histoserie: this.state.id_histoserie,
+            duration: this.state.seconds,
+            id_expression: this.state.expressions[this.state.numQuestion].id
+          }
+        }).then(function (response) {
+          if (_this4.state.id_histoserie == 0) {
+            _this4.setState({
+              id_histoserie: response.data.id_histoserie
+            });
+          }
+        }).catch(function (error) {
+          console.log(error);
+        });
       }
-
-      if (res) {
-        this.setState({
-          stateQuestion: {
-            btnValidation: msg,
-            colorMessageValidation: "rgb(38, 223, 56)",
-            messageValidation: "Bonne réponse"
-          },
-          score: this.state.score + 1,
-          stepRev: "Validation",
-          clock: 'disabled'
-        });
-      } else {
-        this.setState({
-          stateQuestion: {
-            btnValidation: msg,
-            colorMessageValidation: "red",
-            messageValidation: this.state.expressions[this.state.numQuestion].french_value
-          },
-          stepRev: "Validation",
-          clock: 'disabled'
-        });
-      } // let url = this.props.data.location.pathname.split('/');
-      // axios({
-      //   method: 'post',
-      //   url: '/save-dataserie',
-      //   responseType: 'json',
-      //   data: {
-      //       result: res, 
-      //       id_serie: url[5], 
-      //       duration: this.unitTime, 
-      //       expression: this.state.expressions[this.state.numQuestion].id
-      //     }
-      // })
-      // .then((response) => {
-      //   console.log(response);
-      // this.unitTime = 0;
-      // })
-      // .catch( (error) => {
-      //   console.log(error);
-      // });
-
     }
   }, {
     key: "next",
@@ -2276,10 +2933,14 @@ function (_Component) {
             btnValidation: "Résultats",
             messageValidation: ""
           },
-          stepRev: "Resultat"
+          stepRev: "Resultat",
+          inputResponse: ''
         });
       } else {
-        this.stateCount = this.durationCount;
+        this._handleResetClick();
+
+        this._handleStartClick();
+
         this.setState({
           stateQuestion: {
             btnValidation: "Valider",
@@ -2287,9 +2948,9 @@ function (_Component) {
           },
           stepRev: "Question",
           numQuestion: this.state.numQuestion + 1,
-          clock: 'enabled'
+          clock: 'enabled',
+          inputResponse: ''
         });
-        this.startTimer();
       }
 
       document.querySelector("#inputResponse").value = "";
@@ -2302,7 +2963,6 @@ function (_Component) {
   }, {
     key: "verifKey",
     value: function verifKey(e) {
-      console.log('verifKey');
       var keycode = e.keyCode ? e.keyCode : e.which;
 
       if (keycode == '13') {
@@ -2314,27 +2974,101 @@ function (_Component) {
       }
     }
   }, {
-    key: "startTimer",
-    value: function startTimer() {
-      var _this3 = this;
+    key: "restart",
+    value: function restart() {
+      this.setState({
+        numQuestion: 0,
+        stepRev: "Question",
+        stateQuestion: {
+          logoUrlValidation: "",
+          logoDisplayValidation: "none",
+          messageValidation: "",
+          btnValidation: "Valider",
+          inputTextValue: "",
+          colorMessageValidation: "#26DF38"
+        },
+        score: 0,
+        clock: 'enabled'
+      });
 
-      setTimeout(function () {
-        if (_this3.stateCount > 0) {
-          _this3.timer = _this3.timer + 0.1;
+      this._handleResetClick();
 
-          _this3.startTimer();
-        } else {
-          _this3.setState({
-            unitTime: Math.floor(_this3.timer)
-          });
+      this._handleStartClick();
+    } /////////////////////////////////////////////////////
 
-          _this3.timer = 0;
-        }
-      }, 100);
+  }, {
+    key: "_handleStartClick",
+    value: function _handleStartClick(event) {
+      var _this5 = this;
+
+      var _this = this;
+
+      if (!this.state.running) {
+        this.interval = setInterval(function () {
+          _this5.tick();
+        }, 100);
+        this.setState({
+          running: true
+        });
+      }
     }
+  }, {
+    key: "_handleStopClick",
+    value: function _handleStopClick(event) {
+      if (this.state.running) {
+        clearInterval(this.interval);
+        this.setState({
+          running: false
+        });
+      }
+    }
+  }, {
+    key: "_handleResetClick",
+    value: function _handleResetClick(event) {
+      this._handleStopClick();
+
+      this.update(0, 0, 0);
+    }
+  }, {
+    key: "tick",
+    value: function tick() {
+      var millis = this.state.millis + 1;
+      var seconds = this.state.seconds;
+      var minutes = this.state.minutes;
+
+      if (millis === 10) {
+        millis = 0;
+        seconds = seconds + 1;
+      }
+
+      if (seconds === 60) {
+        millis = 0;
+        seconds = 0;
+        minutes = minutes + 1;
+      }
+
+      this.update(millis, seconds, minutes);
+    }
+  }, {
+    key: "zeroPad",
+    value: function zeroPad(value) {
+      return value < 10 ? "0".concat(value) : value;
+    }
+  }, {
+    key: "update",
+    value: function update(millis, seconds, minutes) {
+      this.setState({
+        millis: millis,
+        seconds: seconds,
+        minutes: minutes
+      });
+    } ////////////////////////////////////////////////////////////
+
   }, {
     key: "render",
     value: function render() {
+      var _this6 = this;
+
       var displayExo = 'block';
       var displayRes = 'none';
       /** Fonction a éxécuter lors de l'appuis sur le bouton vert */
@@ -2353,7 +3087,7 @@ function (_Component) {
       /************************* */
 
 
-      var text = '';
+      var text = '...';
 
       if (this.state.expressions[this.state.numQuestion] !== undefined) {
         text = this.state.expressions[this.state.numQuestion].english_value;
@@ -2378,18 +3112,11 @@ function (_Component) {
       }
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "time",
-        style: {
-          position: 'fixed',
-          top: '95px',
-          right: '20px'
-        }
-      }, this.state.unitTime), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "clock",
         style: {
           position: 'fixed',
-          top: '95px',
-          right: '20px'
+          top: '78px',
+          right: '80px'
         }
       }, clock), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: styles.blockSerie
@@ -2404,20 +3131,27 @@ function (_Component) {
           fontWeight: "bold",
           fontSize: "30px"
         }
-      }, text), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, Object(_functions__WEBPACK_IMPORTED_MODULE_3__["capitalizeFirstLetter"])(text)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
           textAlign: "center"
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         id: "inputResponse",
-        onKeyPress: this.verifKey.bind(this),
+        value: this.state.inputResponse,
         style: {
           width: "90%",
           height: "80px",
           fontSize: "40px",
           marginTop: "50px"
-        }
+        },
+        onChange: function onChange() {
+          _this6.setState({
+            inputResponse: document.querySelector("#inputResponse").value
+          });
+        },
+        onKeyPress: this.verifKey.bind(this),
+        autoComplete: "off"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
           height: "30px",
@@ -2439,15 +3173,17 @@ function (_Component) {
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          height: '100%',
-          fontWeight: 'bold',
-          fontSize: '100px'
+          height: '100%'
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Score"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
-          textAlign: 'center'
+          textAlign: 'center',
+          fontWeight: 'bold',
+          fontSize: '100px'
         }
-      }, this.state.score, "/", this.state.expressions.length)))));
+      }, this.state.score, "/", this.state.expressions.length), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.restart.bind(this)
+      }, "Recommencer")))));
     }
   }]);
 
@@ -2496,6 +3232,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
+/* harmony import */ var _functions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../functions */ "./assets/client/components/functions.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2513,6 +3251,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
 
 
 
@@ -2537,35 +3277,34 @@ function (_Component) {
         textes = this.props.data.textes.map(function (texte, index) {
           var link = '/revision-serie-list/text/' + texte.id;
           var textTitle = texte.title.length > 20 ? texte.title.substring(0, 20) + '...' : texte.title;
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "col-xs-4 col-sm-2",
+            key: "index"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
             to: link,
             key: index
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             key: texte.id,
-            style: {
-              display: 'inline-block',
-              borderRadius: '5px',
-              margin: '10px',
-              width: '120px'
-            },
-            className: "hover-item"
+            className: "list-hover-item"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "display-flex-center",
             style: {
-              textAlign: 'center'
+              textAlign: 'center',
+              height: '40px'
             }
-          }, textTitle), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          }, Object(_functions__WEBPACK_IMPORTED_MODULE_3__["capitalizeFirstLetter"])(textTitle)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             style: {
-              width: '90px',
-              height: '70px',
               'textAlign': 'center'
             }
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
             className: "img-item-liste-texte"
-          }))));
+          })))));
         });
       }
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, textes);
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container-revision-text-list"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Row"], null, textes));
     }
   }]);
 
@@ -3211,6 +3950,7 @@ function (_Component) {
         }
       }, Object(_functions__WEBPACK_IMPORTED_MODULE_4__["capitalizeFirstLetter"])(this.state.french_value))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "btnSaveExpression",
+        onClick: this.saveExpression.bind(this),
         style: {
           width: '90px',
           height: '45px',
@@ -3223,7 +3963,7 @@ function (_Component) {
           padding: '12px 0px'
         }
       }, this.state.msgBtnSave)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "container-text-view",
+        id: "container-text",
         style: {
           marginTop: '20px'
         },
@@ -3369,13 +4109,14 @@ function (_Component) {
       var textes = this.state.textes.map(function (texte, index) {
         var textTitle = texte.title.length > 20 ? texte.title.substring(0, 20) + '...' : texte.title;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "col-xs-4 col-sm-2"
+          className: "col-xs-4 col-sm-2",
+          key: index
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: '/texte/' + texte.id,
           key: index
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: texte.id,
-          className: "text-list-hover-item"
+          className: "list-hover-item"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "display-flex-center",
           style: {

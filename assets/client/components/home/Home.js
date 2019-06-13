@@ -70,7 +70,7 @@ export default class Home extends Component {
                     </Link>
                   </Col>
                   <Col sm="3">
-                    <Link to={'/custom-series'} className="home-item-nav home-item-nav-custom">
+                    <Link to={'/custom-series-list'} className="home-item-nav home-item-nav-custom">
                       <div className="home-title-nav home-title-nav-custom text-center">Séries pers</div>
                       <div className="home-logo-item home-logo-item-custom"></div>
                     </Link>

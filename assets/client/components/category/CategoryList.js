@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Container, Row, Col, Button } from 'reactstrap';
+import {capitalizeFirstLetter} from './../functions';
 
 export default class CategoryList extends Component {
 
@@ -30,37 +32,44 @@ export default class CategoryList extends Component {
   render() {
 
     let categories = this.state.categories.map((category, index) => {
-      return <Link
-              to={'/textes/category/'+category.id}
-              className={this.props.classItem}
-              key={index}>
-              <div key={category.id} style={{display: 'inline-block', borderRadius: '5px', margin: '10px', width: '120px', height: '120px'}} className="hover-item">
-                <div style={{textAlign: 'center'}}>{category.name}</div>
-                <div style={{'textAlign': 'center'}}>
-                
-                <span className="img-item-liste-category"></span>
-                
-                </div>
-              </div>
-             </Link>;
+      let categoryName = category.name.length > 20 ? category.name.substring(0, 20)+'...' : category.name;
+        return  <div className="col-xs-4 col-sm-2" key={index}>
+                  <Link
+                    to={'/textes/category/'+category.id}
+                    className={this.props.classItem}
+                    key={index}>
+                    <div key={category.id} className="list-hover-item">
+                      <div className="display-flex-center" style={{textAlign: 'center', height: '40px'}}>{ capitalizeFirstLetter(categoryName) }</div>
+                      <div style={{'textAlign': 'center'}}>
+                      <span className="img-item-liste-category"></span>
+                      </div>
+                    </div>
+                  </Link>
+                </div>;
     });
-      return (
-              <div style={styles.containerList}>
-                 <h3>Liste des catégories</h3>
-                 <div>{categories}</div>
-              </div>
-      );
-    }
-  }
 
-  let styles = {
-    containerList:{
-      padding: '33px',
-      backgroundColor: 'white',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-      borderRadius: '10px'
+      return (
+        <div className="container-list-category container-page">
+          <Container>
+          <div className="block-category-list">
+            <Row>
+              <div className="main-titles">
+                LISTE DES CATEGORIES
+              </div>
+            </Row>
+            <Row>
+              <Col xs={{ size: 3, offset: 9 }} style={{textAlign: 'right', marginTop: '16px'}}>
+              <Link to={'/categorie-ajout'}>
+                <Button className="btn-forms">Ajouter une catégorie</Button>
+              </Link>
+              </Col>
+            </Row>
+            <Row style={{marginTop: '20px'}}>
+              {categories}
+            </Row>
+            </div>
+          </Container>
+      </div>
+      );
     }
   }

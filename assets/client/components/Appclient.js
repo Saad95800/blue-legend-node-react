@@ -9,6 +9,7 @@ import Text from './text-list/Text';
 import CategoryList from './category/CategoryList';
 import CategoryAdd from './category/CategoryAdd';
 import Revision from './revision/Revision';
+import CustomSeriesList from './revision/CustomSeriesList';
 // import SwipeableRoutes from "react-swipeable-routes";
 
 let styles = {
@@ -89,6 +90,8 @@ export default class Appclient extends Component {
                             <Route path="/revision-mode/texte/:id_texte/serie/:id_serie/content/:num_content" render={(props) => { return <Revision {...props} data={this.state.data} step={'mode'}/>}} />
                             <Route path="/revision-btn-begin/texte/:id_texte/serie/:id_serie/content/:num_content/mode/:num_mode" render={(props) => { return <Revision {...props} data={this.state.data} step={'btn-begin'}/>}} />
                             <Route path="/revision-serie/texte/:id_texte/serie/:id_serie/content/:num_content/mode/:num_mode" render={(props) => { return <Revision {...props} data={this.state.data} step={'serie'}/>}} />
+                            <Route path="/custom-series-list" render={ (props) => { return <AddCustomSerie {...props} data={this.state.data} />} } />
+                            <Route path="/add-custom-serie" render={ (props) => { return <AddCustomSerie {...props} data={this.state.data} />} } />
                           {/* </SwipeableRoutes> */}
                   </AnimatedSwitch>
                   </div>

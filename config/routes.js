@@ -35,10 +35,13 @@ module.exports.routes = {
   'GET /revision-mode/texte/:id_texte/serie/:id_serie/content/:num_content': {controller: 'PostController', action: 'modeRevision'},
   'GET /revision-btn-begin/texte/:id_texte/serie/:id_serie/content/:num_content/mode/:num_mode': {controller: 'PostController', action: 'btnBeginRevision'},
   'GET /revision-serie/texte/:id_texte/serie/:id_serie/content/:num_content/mode/:num_mode': {controller: 'PostController', action: 'serieRevision'},
+  'GET /custom-series-list': {controller: 'PostController', action: 'customSeriesList'},
+  'GET /add-custom-serie': {controller: 'PostController', action: 'addCustomSerie'},
   'POST /get-serie-by-text-ajax': {controller: 'PostController', action: 'getSerieByText', csrf: false},
   'POST /textes-revision-ajax': {controller: 'PostController', action: 'getTextsRevision', csrf: false},
   'POST /series-revision-ajax': {controller: 'PostController', action: 'getSeriesRevision', csrf: false},
   'POST /save-expression-ajax': {controller: 'PostController', action: 'saveExpression', csrf: false},
+  'POST /save-dataserie': {controller: 'PostController', action: 'saveDataSerie', csrf: false},
 
   //  ╔╦╗╦╔═╗╔═╗  ╦═╗╔═╗╔╦╗╦╦═╗╔═╗╔═╗╔╦╗╔═╗   ┬   ╔╦╗╔═╗╦ ╦╔╗╔╦  ╔═╗╔═╗╔╦╗╔═╗
   //  ║║║║╚═╗║    ╠╦╝║╣  ║║║╠╦╝║╣ ║   ║ ╚═╗  ┌┼─   ║║║ ║║║║║║║║  ║ ║╠═╣ ║║╚═╗
