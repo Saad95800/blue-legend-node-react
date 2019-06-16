@@ -192,6 +192,17 @@ export default class NavBar extends Component {
                             colorHoverItem={() => {}}
                           />
             {navitems}
+            <NavItem
+                            url={'/logout'}
+                            url_courante={this.state.url_courante}
+                            classContainer={'bloc-btn-menu-right'}
+                            classItem={'menu-item-vitrine nav-vitrine'}
+                            id={'item-logout'}
+                            style={''}
+                            isSelected={false}
+                            colorClickItem={this.colorClickItem.bind(this)}
+                            colorHoverItem={() => {}}
+                          />
         </nav>
         <nav className="navbar-home-left">
           {navitemsLeft}

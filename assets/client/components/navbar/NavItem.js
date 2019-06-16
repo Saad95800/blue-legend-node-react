@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 export default class NavItem extends Component {
 
@@ -10,6 +11,23 @@ export default class NavItem extends Component {
   colorClickItem(event){
     if(this.props.classContainer == 'bloc-btn-menu-vitrine'){
       window.location.href = '/';
+    }else if(this.props.classContainer == 'bloc-btn-menu-right'){
+      event.preventDefault();
+      axios({
+        method: 'post',
+        url: '/logout',
+        responseType: 'json',
+        data: {}
+      })
+      .then((response) => {
+        console.log(response);
+        if(response.statusText == 'OK'){
+          window.location.href = '/';
+        }
+      })
+      .catch( (error) => {
+        console.log(error);
+      });
     }else{
       this.props.colorClickItem(event);
     }

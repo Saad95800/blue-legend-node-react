@@ -1,14 +1,16 @@
+import bcrypt from 'bcrypt-nodejs';
+
 module.exports = {
 
   attributes: {
 
-    userName: {
+    username: {
       type: 'string',
       required: true,
       description: 'Full representation of the user\'s name.'
     },
 
-    emailAddress: {
+    email: {
       type: 'string',
       required: true,
       unique: true,
@@ -19,6 +21,10 @@ module.exports = {
       type: 'string',
       required: true,
       protect: true,
+    },
+
+    confirmed: {
+      type: 'boolean'
     },
 
     text: {
@@ -46,6 +52,18 @@ module.exports = {
     }
 
   },
+  customToJSON: function() {
+     return _.omit(this, ['password'])
+  },
+  beforeCreate: function(user, cb){
+    bcrypt.genSalt(10, function(err, salt){
+      bcrypt.hash(user.password, salt, null, function(err, hash){
+        if(err) return cb(err);
+        user.password = hash;
+        return cb();
+      });
+    });
+  }
 
 
 };

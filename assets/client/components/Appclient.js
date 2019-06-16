@@ -34,14 +34,12 @@ export default class Appclient extends Component {
   
   constructor(props){
     super(props);
-
     this.state = {
       data: this.props.data
     }
   }
 
   viewMessageFlash(msg, error = false){
-    console.log('message flash view');
     let mf = document.querySelector("#message-flash");
     mf.style.height = '40px';
     mf.innerHTML = msg;

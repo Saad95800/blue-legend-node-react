@@ -5,19 +5,27 @@ import Vitrine from '../../assets/client/components/Vitrine';
 import {StaticRouter } from 'react-router-dom';
 
 let render = (req, res, data = {}) => {
-  data.url = req.url;
-  data.app = 'server';
-  const body = ReactDOMServer.renderToString(
-                                              <StaticRouter location={req.url} context={{}}>
-                                                <Appserver data={data}/>
-                                              </StaticRouter>
-                                            );
-  res.view('pages/homepage', {body: body});
+  console.log(req.isAuthenticated());
+  if(req.isAuthenticated()){
+    console.log(req.user);
+    data.url = req.url;
+    data.app = 'server';
+    data.user = req.user;
+    const body = ReactDOMServer.renderToString(
+                                                <StaticRouter location={req.url} context={{}}>
+                                                  <Appserver data={data}/>
+                                                </StaticRouter>
+                                              );
+    res.view('pages/homepage', {body: body});
+  }else{
+    res.redirect('/');
+  }
 }
 
 module.exports = {
 
   renderVitrine: async function (req, res){
+    console.log(req.isAuthenticated());
     let data = {};
     data.url = req.url;
     data.app = 'server';
@@ -27,15 +35,8 @@ module.exports = {
     res.view('pages/homepage', {body: body});
   },
 
-  accueil: async function (req, res){
-    let data = {
-      'textes': [
-        {titre: 'titre1', contenu: 'contenu1'}, 
-        {titre: 'titre2', contenu: 'contenu2'}, 
-        {titre: 'titre3', contenu: 'contenu3'}
-      ]
-    };
-    render(req, res, data);
+  accueil: function (req, res){
+    render(req, res);
   },
 
   textes: async function (req, res){
@@ -282,7 +283,17 @@ module.exports = {
     let expressions = await Expression.find({owner_user: ''});
     let data = {id_text: '', expressions: expressions};
     render(req, res, data);
-  }
+  },
   
-};
+  saveUser: async function (req, res){
+    let params = req.allParams();
+    let user = await User.create({
+      username: params.username,
+      email: params.email,
+      password: params.password
+    }).fetch();
+    console.log(user);
+    res.json(user);
+  }
 
+};

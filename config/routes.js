@@ -42,12 +42,18 @@ module.exports.routes = {
   'POST /series-revision-ajax': {controller: 'PostController', action: 'getSeriesRevision', csrf: false},
   'POST /save-expression-ajax': {controller: 'PostController', action: 'saveExpression', csrf: false},
   'POST /save-dataserie': {controller: 'PostController', action: 'saveDataSerie', csrf: false},
-
+  'POST /save-user-ajax': {controller: 'PostController', action: 'saveUser', csrf: false},
+  'POST /login': {controller: 'AuthController', action: 'login', csrf: false},
+  'POST /logout': {controller: 'AuthController', action: 'logout', csrf: false},
+  // 'GET /login': { view: 'login' },
+  // 'POST /login': 'AuthController.login',
+  // '/logout': 'AuthController.logout',
+  // 'GET /register': { view: 'register' },
   //  ╔╦╗╦╔═╗╔═╗  ╦═╗╔═╗╔╦╗╦╦═╗╔═╗╔═╗╔╦╗╔═╗   ┬   ╔╦╗╔═╗╦ ╦╔╗╔╦  ╔═╗╔═╗╔╦╗╔═╗
   //  ║║║║╚═╗║    ╠╦╝║╣  ║║║╠╦╝║╣ ║   ║ ╚═╗  ┌┼─   ║║║ ║║║║║║║║  ║ ║╠═╣ ║║╚═╗
   //  ╩ ╩╩╚═╝╚═╝  ╩╚═╚═╝═╩╝╩╩╚═╚═╝╚═╝ ╩ ╚═╝  └┘   ═╩╝╚═╝╚╩╝╝╚╝╩═╝╚═╝╩ ╩═╩╝╚═╝
   '/terms':                   '/legal/terms',
-  '/logout':                  '/api/v1/account/logout',
+  // '/logout':                  '/api/v1/account/logout',
 
 
   //  ╦ ╦╔═╗╔╗ ╦ ╦╔═╗╔═╗╦╔═╔═╗

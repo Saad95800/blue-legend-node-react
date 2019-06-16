@@ -20,7 +20,13 @@ module.exports.session = {
   ***************************************************************************/
   secret: '377557fb58d0649e322dbdeead9f6b8d',
 
-
+  // Note: user, pass and port are optional
+  adapter: 'connect-mongo',
+  url: 'mongodb://@localhost:27017/blue-legend',
+  collection: 'sessions',
+  auto_reconnect: false,
+  ssl: false,
+  stringify: true
   /***************************************************************************
   *                                                                          *
   * Customize when built-in session support will be skipped.                 *

@@ -34,7 +34,6 @@ export default class Appserver extends Component {
   
   constructor(props){
     super(props);
-
     this.state = {
       data: this.props.data
     }

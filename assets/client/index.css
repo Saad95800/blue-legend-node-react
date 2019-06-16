@@ -1,5 +1,5 @@
 body{
-  background-color: #E7EDFD;
+  /* background-color: #E7EDFD; */
 }
 .switch-wrapper {
   position: relative;
@@ -61,6 +61,14 @@ body{
   padding: 4px;
   text-align: center;
 }
+.bloc-btn-menu-right{
+  width: 80px;
+  height: 74px;
+  display: inline-block;
+  padding: 4px;
+  text-align: center;
+  float: right;
+}
 .bloc-btn-menu-left{
   width: 50px;
   padding-left: 7px;
@@ -107,6 +115,9 @@ body{
 }
 #item-vitrine{
   background:url(./images/main_img.png) 0px 0px no-repeat;
+}
+#item-logout{
+  background:url(./images/main_img.png) -835px 0px no-repeat;
 }
 #item-menu-home-mobile{
   background:url(./images/main_img.png) -426px 0px no-repeat;
@@ -553,15 +564,15 @@ body{
   height: 100%;
 }
 .img-vitrine-blocks{
-  height: 580px;
+  height: 600px;
   width: 100%;
 }
 .img-vitrine-block1{
-  background: url(./images/vitrine/block1.jpg) 0px 0px no-repeat;
+  background: url(./images/vitrine/block1.png) 0px 0px no-repeat;
   background-size: 100% 100%;
-  opacity: 0.7;
+  opacity: 0.9;
   position: absolute;
-  height: 580px;
+  height: 600px;
 }
 .img-vitrine-block2{
   background: url(./images/vitrine/block2.png) 0px 0px no-repeat;
@@ -628,6 +639,28 @@ body{
 .footer-vitrine{
   background-color: #3B74FE;
   height: 250px;
+}
+.back-screen{
+  background-color: #000;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  opacity: 0.7;
+  z-index: 1;
+}
+.popupSigninSignup{
+  background-color: #fff;
+  border-radius: 20px;
+  position: fixed;
+  top: 100px;
+  left: 5%;
+  width: 90%;
+  z-index: 2;
+  padding: 20px;
+}
+.block5,.block7{
+  background: url(./images/vitrine/fond-gris.png) 0px 0px no-repeat;
+  background-size: 100% 100%;
 }
 /****************** Media queries *******************/
 @media screen and (max-width: 768px) {
