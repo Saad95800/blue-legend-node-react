@@ -596,7 +596,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/es/index.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -619,6 +620,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var Vitrine =
 /*#__PURE__*/
 function (_Component) {
@@ -632,7 +634,11 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Vitrine).call(this, props));
     _this.state = {
       popupSignup: false,
-      popupSignin: false
+      popupSignin: false,
+      username: '',
+      email: '',
+      password1: '',
+      password2: ''
     };
     return _this;
   }
@@ -699,26 +705,81 @@ function (_Component) {
     value: function saveUser() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default()({
-        method: 'post',
-        url: '/save-user-ajax',
-        responseType: 'json',
-        data: {
-          username: this.state.username,
-          email: this.state.email,
-          password: this.state.password1
+      if (this.state.username != '' && this.state.email != '' && this.state.password1 != '' && this.state.password2 != '') {
+        if (this.state.password1 == this.state.password2) {
+          var res = this.checkPassword(this.state.password1);
+
+          if (Array.isArray(res)) {
+            this.viewMessageFlash(res[1], true);
+          } else {
+            axios__WEBPACK_IMPORTED_MODULE_1___default()({
+              method: 'post',
+              url: '/save-user-ajax',
+              responseType: 'json',
+              data: {
+                username: this.state.username,
+                email: this.state.email,
+                password: this.state.password1
+              }
+            }).then(function (response) {
+              console.log(response);
+
+              if (response.statusText == 'OK') {
+                window.localStorage.setItem('id_user', response.data.id);
+
+                _this2.viewMessageFlash('Utilisateur crée avec succes !', false);
+
+                document.location.href = "/accueil";
+              } else {
+                _this2.viewMessageFlash('Erreur lors de la création de l\'utilisateur', true);
+              }
+            }).catch(function (error) {
+              console.log(error);
+
+              _this2.viewMessageFlash('Erreur lors de l\'ajout', true);
+            });
+          }
+        } else {
+          this.viewMessageFlash('Les deux mots de passe doivent être identiques', true);
         }
-      }).then(function (response) {
-        console.log(response);
-        window.localStorage.setItem('id_user', response.data.id);
+      } else {
+        this.viewMessageFlash('Tout les champs doivent être remplis.', true);
+      }
+    }
+  }, {
+    key: "checkPassword",
+    value: function checkPassword(pwd) {
+      var error = false;
+      var msg = '';
+      var csp = ['À', 'Á', 'Â', 'Ã', 'Ä', ',', 'Å', 'Æ', 'Ç', 'È', 'É', 'Ê', 'Ë', 'Ì', 'Í', 'Î', 'Ï', 'Ð', 'Ñ', 'Ò', 'Ó', 'Ô', 'Õ', 'Ö', 'Ø', 'Œ', 'Š', 'þ', 'Ù', 'Ú', 'Û', 'Ü', 'Ý', 'Ÿ', 'à', 'á', 'â', 'ã', 'ä', 'å', 'æ', 'ç', 'è', 'é', 'ê', 'ë', 'ì', 'í', 'î', 'ï', 'ð', 'ñ', 'ò', 'ó', 'ô', 'õ', 'ö', 'ø', 'œ', 'š', 'Þ', 'ù', 'ú', 'û', 'ü', 'ý', 'ÿ', '¢', 'ß', '¥', '£', '™', '©', '®', 'ª', '×', '÷', '±', '²', '³', '¼', '½', '¾', 'µ', '¿', '¶', '·', '¸', 'º', '°', '¯', '§', '…', '¤', '¦', '≠', '¬', 'ˆ', '¨', '‰'];
 
-        _this2.viewMessageFlash('Utilisateur crée avec succes !', false); // document.location.href="/accueil";
+      if (typeof pwd == 'string') {
+        if (pwd.length > 5) {
+          var _arr = csp;
 
-      }).catch(function (error) {
-        console.log(error);
+          for (var _i = 0; _i < _arr.length; _i++) {
+            var cs = _arr[_i];
 
-        _this2.viewMessageFlash('Erreur lors de l\'ajout', true);
-      });
+            if (pwd.indexOf(cs) != -1) {
+              error = true;
+              msg = 'Les caractères spéciaux sont interdits';
+              break;
+            }
+          }
+        } else {
+          error = true;
+          msg = 'Le mot de passe doit faire au moins 6 caratères';
+        }
+      } else {
+        error = true;
+        msg = 'Le format du mot de passe est incorrect';
+      }
+
+      if (error == true) {
+        return [false, msg];
+      }
+
+      return true;
     }
   }, {
     key: "login",
@@ -762,6 +823,8 @@ function (_Component) {
           onClick: this.closePopups.bind(this),
           className: "back-screen"
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "display-flex-center"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "display-flex-center flex-column popupSigninSignup",
           onClick: function onClick(e) {
             e.stopPropagation();
@@ -775,11 +838,11 @@ function (_Component) {
             marginTop: '30px',
             width: '60%'
           }
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], {
           row: true
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
           sm: 12
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Label"], null, "Pr\xE9nom"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Input"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Label"], null, "Pr\xE9nom"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
           value: this.state.username,
           type: "text",
           onChange: function onChange() {
@@ -789,11 +852,11 @@ function (_Component) {
           },
           autoComplete: "off",
           id: "username"
-        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], {
+        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], {
           row: true
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
           sm: 12
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Label"], null, "Email"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Input"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Label"], null, "Email"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
           value: this.state.email,
           type: "text",
           onChange: function onChange() {
@@ -803,13 +866,13 @@ function (_Component) {
           },
           autoComplete: "off",
           id: "email"
-        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], {
+        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], {
           row: true
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
           sm: 12
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Label"], null, "Mot de passe"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Input"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Label"], null, "Mot de passe"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
           value: this.state.password1,
-          type: "text",
+          type: "password",
           onChange: function onChange() {
             _this4.setState({
               password1: document.querySelector("#password1").value
@@ -817,13 +880,13 @@ function (_Component) {
           },
           autoComplete: "off",
           id: "password1"
-        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], {
+        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], {
           row: true
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
           sm: 12
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Label"], null, "Confirmation du mot de passe"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Input"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Label"], null, "Confirmation du mot de passe"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
           value: this.state.password2,
-          type: "text",
+          type: "password",
           onChange: function onChange() {
             _this4.setState({
               password2: document.querySelector("#password2").value
@@ -831,22 +894,24 @@ function (_Component) {
           },
           autoComplete: "off",
           id: "password2"
-        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], {
+        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], {
           row: true
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
           sm: 12,
           style: {
             textAlign: 'center'
           }
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "btn-forms",
+          className: "btn btn-forms",
           onClick: this.saveUser.bind(this)
-        }, "Cr\xE9er le compte"), "              ")))));
+        }, "Cr\xE9er le compte"), "              "))))));
       } else if (this.state.popupSignin == true) {
         popupSignView = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           onClick: this.closePopups.bind(this),
           className: "back-screen"
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "display-flex-center"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "display-flex-center flex-column popupSigninSignup",
           onClick: function onClick(e) {
             e.stopPropagation();
@@ -861,27 +926,13 @@ function (_Component) {
           onSubmit: this.login.bind(this),
           style: {
             marginTop: '30px',
-            width: '60%'
+            width: '80%'
           }
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], {
           row: true
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
           sm: 12
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Label"], null, "Pr\xE9nom"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Input"], {
-          value: this.state.username,
-          type: "text",
-          onChange: function onChange() {
-            _this4.setState({
-              username: document.querySelector("#username").value
-            });
-          },
-          autoComplete: "off",
-          id: "username"
-        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], {
-          row: true
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
-          sm: 12
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Label"], null, "Email"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Input"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Label"], null, "Email"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
           value: this.state.email,
           type: "text",
           onChange: function onChange() {
@@ -891,13 +942,13 @@ function (_Component) {
           },
           autoComplete: "off",
           id: "email"
-        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], {
+        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], {
           row: true
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
           sm: 12
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Label"], null, "Mot de passe"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Input"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Label"], null, "Mot de passe"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
           value: this.state.password1,
-          type: "text",
+          type: "password",
           onChange: function onChange() {
             _this4.setState({
               password1: document.querySelector("#password1").value
@@ -905,9 +956,9 @@ function (_Component) {
           },
           autoComplete: "off",
           id: "password1"
-        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], {
+        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], {
           row: true
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
           sm: 12,
           style: {
             textAlign: 'center'
@@ -915,8 +966,8 @@ function (_Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "submit",
           value: "Connexion",
-          className: "btn-forms"
-        }))))));
+          className: "btn btn-forms"
+        })))))));
       }
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -954,11 +1005,11 @@ function (_Component) {
         className: "size100"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "img-vitrine-block1 size100"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Container"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Row"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Container"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
         style: {
           height: '580px'
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
         sm: "6",
         style: {
           height: '100%'
@@ -967,7 +1018,7 @@ function (_Component) {
         className: "size100 display-flex-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "img-block1-logo"
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
         sm: "6",
         style: {
           height: '100%'
@@ -991,13 +1042,13 @@ function (_Component) {
         }
       }, "Commencer"))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "block2 img-vitrine-blocks"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Container"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Container"], {
         className: "size100"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Row"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
         style: {
           height: '100%'
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
         sm: "6",
         style: {
           height: '100%'
@@ -1019,7 +1070,7 @@ function (_Component) {
           fontSize: '22px'
         },
         className: "text-center font-weight-bold"
-      }, "Blue Legend est une application web et mobile permettant d'apprendre l'anglais \xE0 travers la lecture de textes en leur donnant la possibilit\xE9 de traduire chaque expressions et mots de vocabulaire et de les r\xE9viser gr\xE2ce \xE0 des s\xE9ries de r\xE9visions ludiques et int\xE9ractives.")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
+      }, "Blue Legend est une application web et mobile permettant d'apprendre l'anglais \xE0 travers la lecture de textes en leur donnant la possibilit\xE9 de traduire chaque expressions et mots de vocabulaire et de les r\xE9viser gr\xE2ce \xE0 des s\xE9ries de r\xE9visions ludiques et int\xE9ractives.")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
         sm: "6",
         style: {
           height: '100%'
@@ -1028,9 +1079,9 @@ function (_Component) {
         className: "img-vitrine-block2 size100"
       }))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "block3 img-vitrine-blocks"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Container"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Container"], {
         className: "img-vitrine-block3 size100"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Row"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
         style: {
           height: '100%'
         }
@@ -1055,9 +1106,9 @@ function (_Component) {
         className: "text-center font-weight-bold"
       }, "Choisis les livres et contenus qui te passionnent. Lis tes textes et enregistre les mots de vocabulaire et expression que tu souhaites.")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "block4 img-vitrine-blocks"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Container"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Container"], {
         className: "size100"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Row"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
         style: {
           height: '100%'
         }
@@ -1087,9 +1138,9 @@ function (_Component) {
         className: "img-vitrine-block4 size100"
       }))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "block5 img-vitrine-blocks"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Container"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Container"], {
         className: "size100"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Row"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
         style: {
           height: '100%'
         }
@@ -1125,9 +1176,9 @@ function (_Component) {
         className: "text-center font-weight-bold"
       }, "Tu as la possibilit\xE9 de mettre au chronom\xE8tre lors de chacune de tes s\xE9ries de r\xE9vision afin de te mettre au d\xE9fi et de voir la qualit\xE9 de ton apprentissage.")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "block6 img-vitrine-blocks"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Container"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Container"], {
         className: "size100"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Row"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
         style: {
           height: '100%'
         }
@@ -1158,9 +1209,9 @@ function (_Component) {
         }
       })))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "block7 img-vitrine-blocks"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Container"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Container"], {
         className: "size100"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Row"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
         style: {
           height: '100%'
         }
@@ -1196,9 +1247,9 @@ function (_Component) {
         className: "text-center font-weight-bold"
       }, "Notre application est disponible pour tout type d'appareils et est utilisable en mode hors-ligne. C'est une progressive web app, ce qui signifie qu'elle est multi plate-forme et fonctionne sur IOS et Android.")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "block8 footer-vitrine"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Container"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Container"], {
         className: "size100"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Row"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
         style: {
           height: '100%'
         }
@@ -1235,15 +1286,15 @@ function (_Component) {
           fontSize: '20px',
           width: '100%'
         }
-      }, "Abonne-toi et soit inform\xE9 de toutes les nouvelles fonctionnalit\xE9s \xE0 venir"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], {
+      }, "Abonne-toi et soit inform\xE9 de toutes les nouvelles fonctionnalit\xE9s \xE0 venir"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], {
         row: true,
         style: {
           width: '80%',
           marginTop: '20px'
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
         sm: 12
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Input"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
         type: "text",
         autoComplete: "off",
         id: "newsletter"
@@ -3942,17 +3993,11 @@ function (_Component) {
     _classCallCheck(this, Text);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Text).call(this, props));
-    var texte = {};
-
-    if (_this.props.data.app == 'server') {
-      texte = _this.props.data.texte;
-    }
-
     _this.state = {
-      texte: texte,
+      texte: {},
       categories: [],
       selText: '',
-      french_value: 'TRADUCTION',
+      french_value: 'TRAD',
       msgBtnSave: 'Enregistrer',
       wysiwyg: false,
       dataPopup: {
@@ -4042,8 +4087,8 @@ function (_Component) {
         });
         console.log(selText);
         $('#popupTrad').css({
-          left: e.pageX - 210,
-          top: e.pageY - 110,
+          left: e.pageX - 350,
+          top: e.pageY - 90,
           display: 'flex'
         });
         axios__WEBPACK_IMPORTED_MODULE_1___default()({

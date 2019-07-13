@@ -9,16 +9,11 @@ export default class Text extends Component {
   constructor(props){
     super(props);
 
-    let texte = {};
-    if(this.props.data.app == 'server'){
-      texte = this.props.data.texte;
-    }
-
     this.state = {
-      texte: texte,
+      texte: {},
       categories: [],
       selText: '',
-      french_value: 'TRADUCTION',
+      french_value: 'TRAD',
       msgBtnSave: 'Enregistrer',
       wysiwyg: false,
       dataPopup:{
@@ -77,9 +72,8 @@ export default class Text extends Component {
         if (document.activeElement && 
                 (document.activeElement.tagName.toLowerCase () == "textarea" || 
                  document.activeElement.tagName.toLowerCase () == "input")){
-            var text = document.activeElement.value;
-            selText = text.substring (document.activeElement.selectionStart, 
-                                      document.activeElement.selectionEnd);
+                  var text = document.activeElement.value;
+                  selText = text.substring (document.activeElement.selectionStart, document.activeElement.selectionEnd);
         }else {
             var selRange = window.getSelection();
             selText = selRange.toString();
@@ -99,8 +93,8 @@ export default class Text extends Component {
       this.setState({selText: selText});
       console.log(selText);
       $('#popupTrad').css({
-        left:  e.pageX - 210,
-        top:   e.pageY - 110,
+        left:  e.pageX - 350,
+        top:   e.pageY - 90,
         display: 'flex'
       });
 

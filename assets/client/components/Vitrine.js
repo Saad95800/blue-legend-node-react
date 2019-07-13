@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Redirect } from 'react-router';
 import {Container, Row, Col, FormGroup, Label, Input} from 'reactstrap';
 
 
@@ -10,7 +11,11 @@ export default class Vitrine extends Component {
 
     this.state = {
       popupSignup: false,
-      popupSignin: false
+      popupSignin: false,
+      username: '',
+      email: '',
+      password1: '',
+      password2: ''
     }
   }
   
@@ -67,23 +72,73 @@ export default class Vitrine extends Component {
 
   saveUser(){
 
-    axios({
-      method: 'post',
-      url: '/save-user-ajax',
-      responseType: 'json',
-      data: {username: this.state.username, email: this.state.email, password: this.state.password1 }
-    })
-    .then((response) => {
-      console.log(response);
-      window.localStorage.setItem('id_user', response.data.id);
-      this.viewMessageFlash('Utilisateur crée avec succes !', false);
-      // document.location.href="/accueil";
-    })
-    .catch( (error) => {
-      console.log(error);
-      this.viewMessageFlash('Erreur lors de l\'ajout', true);
-    });
+    if(this.state.username != '' &&
+    this.state.email != '' &&
+    this.state.password1  != '' &&
+    this.state.password2  != '' ){
+      if(this.state.password1 == this.state.password2){
+        let res = this.checkPassword(this.state.password1);
+        if(Array.isArray(res)){
+          this.viewMessageFlash(res[1], true);
+        }else{
+          axios({
+            method: 'post',
+            url: '/save-user-ajax',
+            responseType: 'json',
+            data: {username: this.state.username, email: this.state.email, password: this.state.password1 }
+          })
+          .then((response) => {
+            console.log(response);
+            if(response.statusText == 'OK'){
+              window.localStorage.setItem('id_user', response.data.id);
+              this.viewMessageFlash('Utilisateur crée avec succes !', false);
+              document.location.href="/accueil";
+            }else{
+              this.viewMessageFlash('Erreur lors de la création de l\'utilisateur', true);
+            }
 
+          })
+          .catch( (error) => {
+            console.log(error);
+            this.viewMessageFlash('Erreur lors de l\'ajout', true);
+          });
+        }
+      }else{
+        this.viewMessageFlash('Les deux mots de passe doivent être identiques', true);
+      }
+    }else{
+      this.viewMessageFlash('Tout les champs doivent être remplis.', true);
+    }
+
+
+  }
+
+  checkPassword(pwd){
+    let error = false;
+    let msg = '';
+    let csp = ['À','Á','Â','Ã','Ä',',','Å','Æ','Ç','È','É','Ê','Ë','Ì','Í','Î','Ï','Ð','Ñ','Ò','Ó','Ô','Õ','Ö','Ø','Œ','Š','þ','Ù','Ú','Û','Ü','Ý','Ÿ','à','á','â','ã','ä','å','æ','ç','è','é','ê','ë','ì','í','î','ï','ð','ñ','ò','ó','ô','õ','ö','ø','œ','š','Þ','ù','ú','û','ü','ý','ÿ','¢','ß','¥','£','™','©','®','ª','×','÷','±','²','³','¼','½','¾','µ','¿','¶','·','¸','º','°','¯','§','…','¤','¦','≠','¬','ˆ','¨','‰'];
+    if(typeof pwd == 'string'){
+      if(pwd.length > 5){
+        for (let cs of csp){
+          if(pwd.indexOf(cs) != -1){
+            error = true;
+            msg = 'Les caractères spéciaux sont interdits';
+            break;
+          }
+        }        
+      }else{
+        error = true;
+        msg = 'Le mot de passe doit faire au moins 6 caratères';  
+      }
+
+    }else{
+      error = true;
+      msg = 'Le format du mot de passe est incorrect';
+    }
+    if(error == true){
+      return [false, msg];
+    }
+    return true;
   }
 
   login(e){
@@ -118,72 +173,79 @@ export default class Vitrine extends Component {
       popupSignView =
       <div>
         <div onClick={this.closePopups.bind(this)} className="back-screen"></div>
-        <div className="display-flex-center flex-column popupSigninSignup" onClick={(e) => { e.stopPropagation();}}>
-          <div style={{fontSize: '30px'}}>S'inscrire</div>
-          <div style={{marginTop:'30px', width: '60%'}}>
-            <FormGroup row>
-              <Col sm={12}>
-                <Label>Prénom</Label>
-                <Input value={this.state.username} type="text" onChange={() => {this.setState({username: document.querySelector("#username").value})}} autoComplete="off" id="username" />
-              </Col>
-            </FormGroup>
-            <FormGroup row>
-              <Col sm={12}>
-                <Label>Email</Label>
-                <Input value={this.state.email} type="text" onChange={() => {this.setState({email: document.querySelector("#email").value})}} autoComplete="off" id="email" />
-              </Col>
-            </FormGroup>
-            <FormGroup row>
-              <Col sm={12}>
-                <Label>Mot de passe</Label>
-                <Input value={this.state.password1} type="text" onChange={() => {this.setState({password1: document.querySelector("#password1").value})}} autoComplete="off" id="password1" />
-              </Col>
-            </FormGroup>
-            <FormGroup row>
-              <Col sm={12}>
-                <Label>Confirmation du mot de passe</Label>
-                <Input value={this.state.password2} type="text" onChange={() => {this.setState({password2: document.querySelector("#password2").value})}} autoComplete="off" id="password2" />
-              </Col>
-            </FormGroup>            
-            <FormGroup row>
-              <Col sm={12} style={{textAlign: 'center'}}>
-              <div className="btn-forms" onClick={this.saveUser.bind(this)}>Créer le compte</div>              </Col>
-            </FormGroup>            
+        <div className="display-flex-center">
+          <div className="display-flex-center flex-column popupSigninSignup" onClick={(e) => { e.stopPropagation();}}>
+            <div style={{fontSize: '30px'}}>S'inscrire</div>
+            <div style={{marginTop:'30px', width: '60%'}}>
+              <FormGroup row>
+                <Col sm={12}>
+                  <Label>Prénom</Label>
+                  <Input value={this.state.username} type="text" onChange={() => {this.setState({username: document.querySelector("#username").value})}} autoComplete="off" id="username" />
+                </Col>
+              </FormGroup>
+              <FormGroup row>
+                <Col sm={12}>
+                  <Label>Email</Label>
+                  <Input value={this.state.email} type="text" onChange={() => {this.setState({email: document.querySelector("#email").value})}} autoComplete="off" id="email" />
+                </Col>
+              </FormGroup>
+              <FormGroup row>
+                <Col sm={12}>
+                  <Label>Mot de passe</Label>
+                  <Input value={this.state.password1} type="password" onChange={() => {this.setState({password1: document.querySelector("#password1").value})}} autoComplete="off" id="password1" />
+                </Col>
+              </FormGroup>
+              <FormGroup row>
+                <Col sm={12}>
+                  <Label>Confirmation du mot de passe</Label>
+                  <Input value={this.state.password2} type="password" onChange={() => {this.setState({password2: document.querySelector("#password2").value})}} autoComplete="off" id="password2" />
+                </Col>
+              </FormGroup>            
+              <FormGroup row>
+                <Col sm={12} style={{textAlign: 'center'}}>
+                <div className="btn btn-forms" onClick={this.saveUser.bind(this)}>Créer le compte</div>              </Col>
+              </FormGroup>            
+            </div>
           </div>
         </div>
+
       </div>;
     }else if(this.state.popupSignin == true){
       popupSignView = 
       <div>
         <div onClick={this.closePopups.bind(this)} className="back-screen"></div>
-        <div className="display-flex-center flex-column popupSigninSignup" onClick={(e) => { e.stopPropagation();}}>
-          <div style={{fontSize: '30px'}}>Se connecter</div>
-          <form method="POST" action="/login" onSubmit={this.login.bind(this)} style={{marginTop:'30px', width: '60%'}}>
-            <FormGroup row>
-              <Col sm={12}>
-                <Label>Prénom</Label>
-                <Input value={this.state.username} type="text" onChange={() => {this.setState({username: document.querySelector("#username").value})}} autoComplete="off" id="username" />
-              </Col>
-            </FormGroup>
-            <FormGroup row>
-              <Col sm={12}>
-                <Label>Email</Label>
-                <Input value={this.state.email} type="text" onChange={() => {this.setState({email: document.querySelector("#email").value})}} autoComplete="off" id="email" />
-              </Col>
-            </FormGroup>
-            <FormGroup row>
-              <Col sm={12}>
-                <Label>Mot de passe</Label>
-                <Input value={this.state.password1} type="text" onChange={() => {this.setState({password1: document.querySelector("#password1").value})}} autoComplete="off" id="password1" />
-              </Col>
-            </FormGroup>           
-            <FormGroup row>
-              <Col sm={12} style={{textAlign: 'center'}}>
-                <input type="submit" value="Connexion" className="btn-forms" />
-              </Col>
-            </FormGroup>            
-          </form>
+        <div className="display-flex-center">
+          <div className="display-flex-center flex-column popupSigninSignup" onClick={(e) => { e.stopPropagation();}}>
+            <div style={{fontSize: '30px'}}>Se connecter</div>
+            <form method="POST" action="/login" onSubmit={this.login.bind(this)} style={{marginTop:'30px', width: '80%'}}>
+              <FormGroup row>
+                <Col sm={12}>
+                  <Label>Email</Label>
+                  <Input value={this.state.email} type="text" onChange={() => {this.setState({email: document.querySelector("#email").value})}} autoComplete="off" id="email" />
+                </Col>
+              </FormGroup>
+              {/* <FormGroup row>
+                <Col sm={12}>
+                  <Label>Email</Label>
+                  <Input value={this.state.email} type="text" onChange={() => {this.setState({email: document.querySelector("#email").value})}} autoComplete="off" id="email" />
+                </Col>
+              </FormGroup> */}
+              <FormGroup row>
+                <Col sm={12}>
+                  <Label>Mot de passe</Label>
+                  <Input value={this.state.password1} type="password" onChange={() => {this.setState({password1: document.querySelector("#password1").value})}} autoComplete="off" id="password1" />
+                </Col>
+              </FormGroup>           
+              <FormGroup row>
+                <Col sm={12} style={{textAlign: 'center'}}>
+                  <input type="submit" value="Connexion" className="btn btn-forms" />
+                </Col>
+              </FormGroup>            
+            </form>
+          </div>          
         </div>
+        
+
       </div>;
     }
 

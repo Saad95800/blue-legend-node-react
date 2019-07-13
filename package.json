@@ -5,6 +5,7 @@
   "description": "a Sails application",
   "keywords": [],
   "dependencies": {
+    "@react-pdf/renderer": "^1.6.2",
     "@sailshq/connect-redis": "^3.2.1",
     "@sailshq/lodash": "^3.10.3",
     "@sailshq/socket.io-redis": "^5.2.0",
@@ -23,6 +24,7 @@
     "react-countdown-clock": "^2.5.0",
     "react-dom": "^16.2.0",
     "react-dom-server": "0.0.5",
+    "react-pdf": "^4.1.0",
     "react-redux": "5.0.6",
     "react-router": "4.2.0",
     "react-router-dom": "4.2.2",
@@ -66,6 +68,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-register": "^6.26.0",
     "clean-webpack-plugin": "0.1.18",
+    "copy-webpack-plugin": "^5.0.3",
     "css-loader": "^2.1.1",
     "expose-loader": "^0.7.5",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",

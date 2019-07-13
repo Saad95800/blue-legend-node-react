@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 const NODE_ENV = 'development';
 
@@ -28,6 +29,12 @@ var plugins = [
         $: "jquery",
         jQuery: "jquery"
       }),
+      new CopyWebpackPlugin([
+        {
+          from: 'node_modules/pdfjs-dist/cmaps/',
+          to: 'cmaps/'
+        },
+      ]),
     common.nodeEnv,
     new HtmlWebPackPlugin({
         template: './src/client/index.html',

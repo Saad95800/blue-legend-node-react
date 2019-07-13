@@ -540,7 +540,7 @@ body{
   background-color: #2558D5;
   width: 150px;
   height: 50px;
-  border: 2px solid #fff;
+  border: 0.4px solid #fff;
   color: #fff;
   Font-weight: bold;
   margin: 0px 3px;
@@ -568,7 +568,7 @@ body{
   width: 100%;
 }
 .img-vitrine-block1{
-  background: url(./images/vitrine/block1.png) 0px 0px no-repeat;
+  background: url(./images/vitrine/block1.jpg) 0px 0px no-repeat;
   background-size: 100% 100%;
   opacity: 0.9;
   position: absolute;
@@ -653,14 +653,16 @@ body{
   border-radius: 20px;
   position: fixed;
   top: 100px;
-  left: 5%;
   width: 90%;
+  max-width: 550px;
   z-index: 2;
   padding: 20px;
 }
 .block5,.block7{
-  background: url(./images/vitrine/fond-gris.png) 0px 0px no-repeat;
-  background-size: 100% 100%;
+  background-color: #f5f5ff;
+}
+.block7{
+  background-color: #f5f5ff;
 }
 /****************** Media queries *******************/
 @media screen and (max-width: 768px) {
