@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 import NavItem from './NavItem';
+import axios from 'axios';
+import {capitalizeFirstLetter} from './../functions';
 
 export default class NavBar extends Component {
 
   constructor(props){
 
     super(props);
-
+    let username = '';
+    if(this.props.data.app == 'server'){
+      username = this.props.data.user.username;
+    }
     this.state = {
+      username: username,
       items:[
         // {
         //     url:"/ajout-texte",
@@ -49,22 +55,22 @@ export default class NavBar extends Component {
             style: {},
             isSelected: false
         },
-        {
-            url:"/planning",
-            classContainer:"bloc-btn-menu",
-            classItem:"menu-item nav-planning",
-            id:"item-menu-planning",
-            style: {},
-            isSelected: false
-        },
-        {
-            url:"/statistiques",
-            classContainer:"bloc-btn-menu",
-            classItem:"menu-item nav-statistiques",
-            id:"item-menu-statistiques",
-            style: {},
-            isSelected: false
-        }
+        // {
+        //     url:"/planning",
+        //     classContainer:"bloc-btn-menu",
+        //     classItem:"menu-item nav-planning",
+        //     id:"item-menu-planning",
+        //     style: {},
+        //     isSelected: false
+        // },
+        // {
+        //     url:"/statistiques",
+        //     classContainer:"bloc-btn-menu",
+        //     classItem:"menu-item nav-statistiques",
+        //     id:"item-menu-statistiques",
+        //     style: {},
+        //     isSelected: false
+        // }
       ],
       itemsLeft:[
         {
@@ -75,22 +81,22 @@ export default class NavBar extends Component {
             style: {},
             isSelected: false
         },
-        {
-            url:"/info-user",
-            classContainer:"bloc-btn-menu-left",
-            classItem:"menu-item-left nav-item-left",
-            id:"item-menu-info-user",
-            style: {},
-            isSelected: false
-        },
-        {
-            url:"/parametres",
-            classContainer:"bloc-btn-menu-left",
-            classItem:"menu-item-left nav-item-left",
-            id:"item-menu-parametres",
-            style: {},
-            isSelected: false
-        }
+        // {
+        //     url:"/info-user",
+        //     classContainer:"bloc-btn-menu-left",
+        //     classItem:"menu-item-left nav-item-left",
+        //     id:"item-menu-info-user",
+        //     style: {},
+        //     isSelected: false
+        // },
+        // {
+        //     url:"/parametres",
+        //     classContainer:"bloc-btn-menu-left",
+        //     classItem:"menu-item-left nav-item-left",
+        //     id:"item-menu-parametres",
+        //     style: {},
+        //     isSelected: false
+        // }
       ],
       url_courante: this.props.data.url,
       menuMobileView: false
@@ -98,6 +104,25 @@ export default class NavBar extends Component {
     
   }
 
+  componentDidMount(){
+    axios({
+      method: 'post',
+      url: '/get-data-navbar-ajax',
+      responseType: 'json',
+      data: {}
+    })
+    .then((response) => {
+      console.log(response);
+      if(response.statusText == 'OK'){
+        this.setState({
+          username: response.data.username
+        });
+      }
+    })
+    .catch( (error) => {
+      console.log(error);
+    });
+  }
   colorClickItem(event){
 
     console.log(event.target);
@@ -203,6 +228,10 @@ export default class NavBar extends Component {
                             colorClickItem={this.colorClickItem.bind(this)}
                             colorHoverItem={() => {}}
                           />
+            <div className="display-flex-center" style={{justifyContent: 'left', color: '#fff', minWidth: '150px', height: '74px', padding: '0px 20px', textAlign: 'center', float: 'right'}} id="username">
+              <div className="navbar-img-user"></div>
+              <div style={{marginLeft: '8px', fontWeight: 'bold', fontSize: '1.3em', fontFamily: 'cursive'}}>{capitalizeFirstLetter(this.state.username)}</div>
+            </div>
         </nav>
         <nav className="navbar-home-left">
           {navitemsLeft}

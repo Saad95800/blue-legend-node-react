@@ -50,7 +50,7 @@ export default class CategoryAdd extends Component {
     }
 
       return (
-        <div className="container-add-category container-page">
+        <div className="container-add-category container-page display-flex-center">
           <Container>
           <div className="block-category-add">
             <Row>

@@ -23,7 +23,7 @@ body{
   width: 50px;
   top: 75px;
   padding-top: 15px;
-  height: 200px;
+  height: 70px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -117,7 +117,7 @@ body{
   background:url(./images/main_img.png) 0px 0px no-repeat;
 }
 #item-logout{
-  background:url(./images/main_img.png) -835px 0px no-repeat;
+  background:url(./images/main_img.png) -887px 0px no-repeat;
 }
 #item-menu-home-mobile{
   background:url(./images/main_img.png) -426px 0px no-repeat;
@@ -524,6 +524,7 @@ body{
   height: 20px;
   position: absolute;
   top: -11px;
+  left: 90px;
   background-color: #e7edfd;
   border-top: 1px solid black;
   border-left: 1px solid black;
@@ -534,6 +535,24 @@ body{
 .font-infos-revision{
   font-weight: bold;
   font-size: 20px;
+}
+#cal1{
+  position:absolute;
+  height:0px;
+  width:0px;
+  top:100px;
+  left:100px;
+  overflow:none;
+  z-index:-100;
+}
+#cal2{
+  position:absolute;
+  height:0px;
+  width:0px;
+  top:0px;
+  left:0px;
+  overflow:none;
+  z-index:-100;
 }
 .btn-vitrine{
   border-radius: 20px;
@@ -664,8 +683,26 @@ body{
 .block7{
   background-color: #f5f5ff;
 }
+::selection{
+  background: #8cadff5c;
+}
+::-moz-selection{
+  background: #8cadff5c;
+}
+.container-page{
+  padding: 0px 60px;
+}
+.navbar-img-user{
+  width:50px;
+  height: 50px;
+  background:url(./images/icon_user.png) 0px 0px no-repeat;
+  background-size: 100%;
+}
 /****************** Media queries *******************/
 @media screen and (max-width: 768px) {
+  .container-page{
+    padding: 0px 0px;
+  }
   .container-text-add{
     padding: 0px 0px;
   }

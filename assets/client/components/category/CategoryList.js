@@ -49,7 +49,7 @@ export default class CategoryList extends Component {
     });
 
       return (
-        <div className="container-list-category container-page">
+        <div className="container-list-category container-page display-flex-center">
           <Container>
           <div className="block-category-list">
             <Row>

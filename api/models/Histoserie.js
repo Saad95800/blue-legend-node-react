@@ -10,6 +10,10 @@ module.exports = {
         type: 'boolean'
       },
 
+      date_creation: {
+        type: 'number'
+      },
+
       dataseries: {
         collection: 'dataserie',
         via: 'owner_histoserie',

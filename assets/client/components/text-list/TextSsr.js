@@ -48,14 +48,18 @@ export default class TextSsr extends Component {
                   <div className="display-flex-right" style={{marginTop: '20px'}}>
                     <div className="btn-forms" onClick={ () => {this.setState({wysiwyg: true})} }>Editer</div>
                   </div>
-                    <div id="popupTrad" style={{display: this.state.dataPopup.display,flexDirection: 'column',justifyContent: 'center',alignItems: 'center',padding: '10px', padding: '10px 10px', zIndex: 1, backgroundColor: '#E7EDFD', width: '200px', minHeight: '90px', border: '1px solid black', position: 'absolute', top: this.state.dataPopup.top, left: this.state.dataPopup.left}}>
+                  <div id="cal1">&nbsp;</div>
+                  <div id="cal2">&nbsp;</div>
+                  <div id="popupTrad" style={{display: 'none',flexDirection: 'column',justifyContent: 'center',alignItems: 'center',padding: '10px', padding: '10px 10px', zIndex: 1, backgroundColor: '#E7EDFD', minWidth: '200px', minHeight: '90px', border: '1px solid black', position: 'absolute'}}>
                       <div className="arrow-popuptrad"></div>
                       <div id="translationPopupText" className="text-center">
                       <div style={{margin: '10px'}}>{capitalizeFirstLetter(this.state.selText)}</div>
-                    <div style={{margin: '10px', fontSize: '1.2em', fontWeight: 'bold'}}>{capitalizeFirstLetter(this.state.french_value)}</div>
+                      <div style={{margin: '10px', fontSize: '1.2em', fontWeight: 'bold'}}>{capitalizeFirstLetter(this.state.french_value)}</div>
                       </div>
-                      <div id="btnSaveExpression" style={{width:'90px', height: '45px', cursor: 'pointer', color: 'white', fontWeight: 'bold', backgroundColor: '#08e608', borderRadius: '5px', textAlign: 'center', padding: '12px 0px'}}>{this.state.msgBtnSave}</div>
-                    </div>
+                      <div class="display-flex-center">
+                        <div id="btnSaveExpression" style={{width:'90px', height: '45px', cursor: 'pointer', color: 'white', fontWeight: 'bold', backgroundColor: '#08e608', borderRadius: '5px', textAlign: 'center', padding: '12px 0px'}}>{this.state.msgBtnSave}</div>
+                      </div>
+                  </div>
                   <div id="container-text" style={{marginTop: '20px'}} dangerouslySetInnerHTML={{ __html: this.state.texte.content }}></div>
                 </div>;
 

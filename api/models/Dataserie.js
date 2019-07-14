@@ -20,6 +20,10 @@ module.exports = {
 
       owner_histoserie: {
         model: 'histoserie'
+      },
+
+      owner_user: {
+        model: 'user'
       }
   
     },

@@ -1,13 +1,63 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'reactstrap';
+import axios from 'axios';
 
 export default class Home extends Component {
 
+    constructor(props){
+      super(props);
+
+      let nbSeriesToday = '';
+      let nbSerieRealiseesToday = '';
+      let nbSeriesTotalRealisees = '';
+      let nbMotsExprApprisToday = '-';
+      let nbMotsExprTotalAppris = '-';
+
+      if(this.props.data.app == 'server'){
+        nbSeriesToday = this.props.data.nbSeriesToday;
+        nbSerieRealiseesToday = this.props.data.nbSerieRealiseesToday;
+        nbSeriesTotalRealisees = this.props.data.nbSeriesTotalRealisees;
+        nbMotsExprApprisToday = this.props.data.nbSeriesTotalRealisees;
+        nbMotsExprTotalAppris = this.props.data.nbSeriesTotalRealisees;
+      }
+      this.state = {
+        nbSeriesToday: nbSeriesToday,
+        nbSerieRealiseesToday: nbSerieRealiseesToday,
+        nbSeriesTotalRealisees: nbSeriesTotalRealisees,
+        nbMotsExprApprisToday: nbMotsExprApprisToday,
+        nbMotsExprTotalAppris: nbMotsExprTotalAppris
+      }
+    }
+
+    componentDidMount(){
+      axios({
+        method: 'post',
+        url: '/get-data-home-ajax',
+        responseType: 'json',
+        data: {}
+      })
+      .then((response) => {
+        console.log(response);
+        if(response.statusText == 'OK'){
+          this.setState({
+            nbSeriesToday: response.data.nbSeriesToday, 
+            nbSerieRealiseesToday: response.data.nbSerieRealiseesToday,
+            nbSeriesTotalRealisees: response.data.nbSeriesTotalRealisees,
+            nbMotsExprApprisToday: response.data.nbMotsExprApprisToday,
+            nbMotsExprTotalAppris: response.data.nbMotsExprTotalAppris
+          });
+        }
+      })
+      .catch( (error) => {
+        console.log(error);
+      });
+    }
 
     render() {
+      console.log(this.props.data);
       return (
-        <div className="container-home container-page">
+        <div className="container-home container-page display-flex-center">
 
             <div>
               <Container>
@@ -25,15 +75,15 @@ export default class Home extends Component {
                       <Row style={{marginTop: '20px'}}>
                             <Col sm="4">
                               <div className="text-center home-font-subtitles">Séries à réaliser</div>
-                              <div className="text-center home-box-series">5</div>
+                              <div className="text-center home-box-series">{this.state.nbSeriesToday}</div>
                             </Col>
                             <Col sm="4">
                               <div className="text-center home-font-subtitles">Séries réalisées</div>
-                              <div className="text-center home-box-series">10</div>
+                              <div className="text-center home-box-series">{this.state.nbSerieRealiseesToday}</div>
                             </Col>
                             <Col sm="4">
                               <div className="text-center home-font-subtitles">Mots & Expr Appris</div>
-                              <div className="text-center home-box-series">53</div>
+                              <div className="text-center home-box-series">{this.state.nbMotsExprApprisToday}</div>
                             </Col>             
                       </Row>
                     </div>                    
@@ -46,11 +96,11 @@ export default class Home extends Component {
                         <Row  style={{marginTop: '20px'}}>
                           <Col sm="6" style={{paddingLeft: '0px', paddingRight: '0px'}}>
                             <div className="text-center home-font-subtitles-total">Séries réalisées</div>
-                            <div className="text-center" style={{fontSize: '30px', fontWeight:'bold'}}>10</div>
+                            <div className="text-center" style={{fontSize: '30px', fontWeight:'bold'}}>{this.state.nbSeriesTotalRealisees}</div>
                           </Col>
                           <Col sm="6" style={{paddingLeft: '0px', paddingRight: '0px'}}>
                             <div className="text-center home-font-subtitles-total">Mots & Expr Appris</div>
-                            <div className="text-center" style={{fontSize: '30px', fontWeight:'bold'}}>53</div>
+                            <div className="text-center" style={{fontSize: '30px', fontWeight:'bold'}}>{this.state.nbMotsExprTotalAppris}</div>
                           </Col>
                         </Row>
                       </div>

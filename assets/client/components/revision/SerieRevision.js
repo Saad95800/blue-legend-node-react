@@ -131,6 +131,27 @@ export default class serieRevision extends Component {
         stepRev: "Resultat",
         inputResponse: ''
       });
+
+      axios({
+        method: 'post',
+        url: '/update-histoserie-ajax',
+        responseType: 'json',
+        data: {
+          id_histoserie: this.state.id_histoserie,
+          completed: true,
+          score: this.state.score,
+          id_serie: this.props.data.location.pathname.split('/')[5]
+        }
+      })
+      .then((response) => {
+        if(this.state.id_histoserie == 0){
+          this.setState({id_histoserie: response.data.id_histoserie});
+        }
+      })
+      .catch( (error) => {
+        console.log(error);
+      });
+
     }else{
       this._handleResetClick();
       this._handleStartClick();

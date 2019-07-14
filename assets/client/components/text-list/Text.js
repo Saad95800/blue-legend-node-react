@@ -13,7 +13,7 @@ export default class Text extends Component {
       texte: {},
       categories: [],
       selText: '',
-      french_value: 'TRAD',
+      french_value: 'Trad',
       msgBtnSave: 'Enregistrer',
       wysiwyg: false,
       dataPopup:{
@@ -66,6 +66,44 @@ export default class Text extends Component {
 
   }
 
+  changePopup(mouse){
+      var ele = document.getElementById('popupTrad');
+      var sel = window.getSelection();
+      var rel1= document.createRange();
+      rel1.selectNode(document.getElementById('cal1'));
+      var rel2= document.createRange();
+      rel2.selectNode(document.getElementById('cal2'));
+    if(mouse == 'mouseUp'){
+      if (!sel.isCollapsed) {
+            
+        var r = sel.getRangeAt(0).getBoundingClientRect();
+        var rb1 = rel1.getBoundingClientRect();
+        var rb2 = rel2.getBoundingClientRect();
+        ele.style.top = ((r.bottom - rb2.top)*100/(rb1.top-rb2.top)+20) + 'px'; //this will place ele below the selection
+        ele.style.left = ((r.left - rb2.left)*100/(rb1.left-rb2.left)-90) + 'px'; //this will align the right edges together
+        this.setState({selText: sel.toString()});
+        ele.style.display = 'block';
+        axios({
+          method: 'post',
+          url: 'https://api.deepl.com/v2/translate?auth_key=&text='+sel.toString()+'&target_lang=fr&source_lang=en',
+          // url: `https://translation.googleapis.com/language/translate/v2?source=en&target=fr&key=&q=${sel.toString()}`,
+          responseType: 'json',
+          headers: {'Content-Type': 'application/x-www-form-urlencoded', 'Accept': '*/*'}
+        })
+        .then((response) => {
+          console.log(response);
+          this.setState({french_value: response.data.translations[0].text});
+        })
+        .catch( (error) => {
+          console.log(error);
+        });
+    }
+    }else{
+      ele.style.display = 'none';
+      this.setState({selText: ''});
+    }
+  }
+
   getSelectedText(){
     var selText = "";
     if (window.getSelection) {  // all browsers, except IE before version 9
@@ -87,35 +125,35 @@ export default class Text extends Component {
     return selText;
   }
 
-  viewPopup(e) {
-    let selText = this.getSelectedText();
-    if(selText != '' && selText != ' ' && selText != '\n'){
-      this.setState({selText: selText});
-      console.log(selText);
-      $('#popupTrad').css({
-        left:  e.pageX - 350,
-        top:   e.pageY - 90,
-        display: 'flex'
-      });
+  // viewPopup(e) {
+  //   let selText = this.getSelectedText();
+  //   if(selText != '' && selText != ' ' && selText != '\n'){
+  //     this.setState({selText: selText});
+  //     console.log(selText);
+  //     $('#popupTrad').css({
+  //       left:  e.pageX - 350,
+  //       top:   e.pageY - 90,
+  //       display: 'flex'
+  //     });
 
-      axios({
-        method: 'post',
-        url: 'https://api.deepl.com/v2/translate?auth_key=de9c22f0-b3e2-6694-d19a-e6c106c773d2&text='+selText+'&target_lang=fr&source_lang=en',
-        responseType: 'json',
-        headers: {'Content-Type': 'application/x-www-form-urlencoded', 'Accept': '*/*'}
-      })
-      .then((response) => {
-        console.log(response);
-        this.setState({french_value: response.data.translations[0].text});
-      })
-      .catch( (error) => {
-        console.log(error);
-      });
-    }else{
-      document.querySelector('#popupTrad').style.display = 'none';
-      this.setState({msgBtnSave: 'Enregistrer'})
-    }
-  }
+  //     axios({
+  //       method: 'post',
+  //       url: 'https://api.deepl.com/v2/translate?auth_key=de9c22f0-b3e2-6694-d19a-e6c106c773d2&text='+selText+'&target_lang=fr&source_lang=en',
+  //       responseType: 'json',
+  //       headers: {'Content-Type': 'application/x-www-form-urlencoded', 'Accept': '*/*'}
+  //     })
+  //     .then((response) => {
+  //       console.log(response);
+  //       this.setState({french_value: response.data.translations[0].text});
+  //     })
+  //     .catch( (error) => {
+  //       console.log(error);
+  //     });
+  //   }else{
+  //     document.querySelector('#popupTrad').style.display = 'none';
+  //     this.setState({msgBtnSave: 'Enregistrer'})
+  //   }
+  // }
 
   saveExpression(){
 
@@ -239,19 +277,23 @@ export default class Text extends Component {
                     <div className="display-flex-right" style={{marginTop: '20px'}}>
                       <div className="btn-forms" onClick={ () => {this.setState({wysiwyg: true})} }>Editer</div>
                     </div>
-                    <div id="popupTrad" style={{display: this.state.dataPopup.display,flexDirection: 'column',justifyContent: 'center',alignItems: 'center',padding: '10px', padding: '10px 10px', zIndex: 1, backgroundColor: '#e8ffe8', width: '200px', minHeight: '90px', border: '1px solid black', borderRadius: '10px', position: 'absolute', top: this.state.dataPopup.top, left: this.state.dataPopup.left}}>
-                      <div className="arrow-popuptrad"></div>
-                      <div id="translationPopupText">
+                    <div id="cal1">&nbsp;</div>
+                    <div id="cal2">&nbsp;</div>
+                    <div id="popupTrad" style={{display: 'none',flexDirection: 'column',justifyContent: 'center',alignItems: 'center',padding: '10px', padding: '10px 10px', zIndex: 1, backgroundColor: '#E7EDFD', minWidth: '200px', minHeight: '90px', border: '1px solid black', position: 'absolute'}}>
+                        <div className="arrow-popuptrad"></div>
+                        <div id="translationPopupText" className="text-center">
                         <div style={{margin: '10px'}}>{capitalizeFirstLetter(this.state.selText)}</div>
                         <div style={{margin: '10px', fontSize: '1.2em', fontWeight: 'bold'}}>{capitalizeFirstLetter(this.state.french_value)}</div>
-                      </div>
-                      <div id="btnSaveExpression" onClick={this.saveExpression.bind(this)} style={{width:'90px', height: '45px', cursor: 'pointer', color: 'white', fontWeight: 'bold', backgroundColor: '#08e608', borderRadius: '5px', textAlign: 'center', padding: '12px 0px'}}>{this.state.msgBtnSave}</div>
+                        </div>
+                        <div className="display-flex-center">
+                          <div id="btnSaveExpression" onClick={this.saveExpression.bind(this)} style={{width:'90px', height: '45px', cursor: 'pointer', color: 'white', fontWeight: 'bold', backgroundColor: '#08e608', borderRadius: '5px', textAlign: 'center', padding: '12px 0px'}}>{this.state.msgBtnSave}</div>
+                        </div>
                     </div>
-                    <div id="container-text" style={{marginTop: '20px'}} onClick={this.viewPopup.bind(this)} dangerouslySetInnerHTML={{ __html: this.state.texte.content }}></div>
+                    <div id="container-text" style={{marginTop: '20px'}} onMouseUp={()=>{this.changePopup('mouseUp')}} onMouseDown={()=>{this.changePopup('mouseDown')}} dangerouslySetInnerHTML={{ __html: this.state.texte.content }}></div>
                   </div>;
 
     return (
-        <div className="container-text-view container-page">
+        <div className="container-text-view container-page display-flex-center" style={{padding: '0px 0px'}}>
           <Container>
           <div className="block-text-add">
             <Row>

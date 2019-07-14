@@ -72,7 +72,7 @@ export default class TextList extends Component {
                 </div>;
         });
       return (
-              <div className="container-text-list container-page">
+              <div className="container-text-list container-page display-flex-center">
                 <Container>
                   <Row>
                     <div className="main-titles">
