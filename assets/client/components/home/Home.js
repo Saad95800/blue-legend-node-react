@@ -55,7 +55,6 @@ export default class Home extends Component {
     }
 
     render() {
-      console.log(this.props.data);
       return (
         <div className="container-home container-page display-flex-center">
 

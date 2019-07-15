@@ -211,8 +211,16 @@ module.exports = {
         id: params.id_serie, 
         owner_text: params.id_text,
         owner_user: req.user.id
-      }).populate('expression');      
+      }).populate('recordexpression');      
     }
+
+    let listRecordExpressions = [];
+    for (let recordexpression of serie.recordexpression) {
+      recordexpression = await RecordExpression.findOne({id: recordexpression.id}).populate('owner_expression');
+      listRecordExpressions.push(recordexpression);
+    }
+
+    serie.recordexpression = listRecordExpressions;
 
     res.json(serie);
   },
@@ -242,21 +250,37 @@ module.exports = {
         { owner_text: params.id_text, owner_user: req.user.id }, 
         { owner_text: params.id_text, name: 'Série '+number, owner_user: req.user.id }
       )
-      .exec(async(err, serie, wasCreated)=> {
+      .exec(async(err, serie, wasCreated) => {
         if (err) { return res.serverError(err); }
       
         if(wasCreated) {
-          sails.log('Created a new serie: ' + serie.id);
+          sails.log('Nouvelle série crée: ' + serie.id);
         }
         else {
-          sails.log('Found existing serie: ' + serie.id);
+          sails.log('Série éxistante trouvée: ' + serie.id);
         }
-        await Expression.create({
-          french_value:params.french_value, 
-          english_value: params.english_value, 
-          owner_texte: params.id_text, 
-          owner_serie: serie.id 
+        
+        await Expression.findOrCreate(
+          {english_value: params.english_value},
+          {english_value: params.english_value, french_value:params.french_value}
+          )
+        .exec(async(err, expression, wasCreated) => {
+          console.log(params);
+          if (err) { return res.serverError(err); }
+          if(wasCreated){
+            sails.log('Nouvelle expression crée: ' + expression.id);
+            // await Expression.updateOne({id: expression.id}).set({french_value:params.french_value});
+          }else{
+            sails.log('Expression éxistante trouvée: ' + expression.id);
+          }
+          await RecordExpression.create({
+            owner_texte: params.id_text, 
+            owner_serie: serie.id,
+            owner_expression: expression.id,
+            owner_user: req.user.id
+          });    
         });
+
         return res.ok();
       });
     }else{
@@ -313,10 +337,10 @@ module.exports = {
 
   getSeriesRevision: async function (req, res){
     if(req.user != undefined){
-      let series = await Serie.find({owner_text: req.allParams().id_text, owner_user: req.user.id}).populate('expression');
+      let series = await Serie.find({owner_text: req.allParams().id_text, owner_user: req.user.id}).populate('recordexpression');
       let result = [];
       for(let serie of series){
-        if(serie.expression.length > 0){
+        if(serie.recordexpression.length > 0){
           result.push(serie);
         }
       }
@@ -377,7 +401,7 @@ module.exports = {
   addCustomSerie: async function (req, res){
     let data = {};
     if(req.user != undefined){
-      let expressions = await Expression.find({owner_user: '', owner_user: req.user.id});
+      let expressions = await RecordExpression.find({owner_user: req.user.id});
       data = {id_text: '', expressions: expressions};
     }
     render(req, res, data);
@@ -395,6 +419,10 @@ module.exports = {
   
   getDataHomeAjax: async function (req, res){
 
+    var total = Dataserie.sum('owner_expression');
+console.log('hahaha');
+console.log(total);
+console.log('hohoho');
     var begin = moment(moment().format("YYYY-MM-DD")).unix(); // Date de début d'aujourd'hui
     var end = moment(moment().format("YYYY-MM-DD")).add(1, 'days').unix(); // Date de fin d'aujourd'hui
 

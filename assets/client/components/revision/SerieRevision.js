@@ -58,7 +58,8 @@ export default class serieRevision extends Component {
       data: {id_text: url[3], id_serie: url[5]}
     })
     .then((response) => {
-      this.setState({expressions: response.data.expression});
+      console.log(response);
+      this.setState({expressions: response.data.recordexpression});
     })
     .catch( (error) => {
       console.log(error);
@@ -252,11 +253,11 @@ zeroPad(value) {
 }
 
 update(millis, seconds, minutes) {
-    this.setState({
-        millis: millis,
-        seconds: seconds,
-        minutes: minutes
-    });
+    // this.setState({
+    //     millis: millis,
+    //     seconds: seconds,
+    //     minutes: minutes
+    // });
 }
 ////////////////////////////////////////////////////////////
   render() {
@@ -276,8 +277,11 @@ update(millis, seconds, minutes) {
     /************************* */
     let text = '...';
     if(this.state.expressions[this.state.numQuestion] !== undefined){
-      text = this.state.expressions[this.state.numQuestion].english_value;
+      text = this.state.expressions[this.state.numQuestion].owner_expression.english_value;
     }
+    console.log("toto");
+    console.log(this.state.expressions);
+    console.log("tata");
     let clock = '';
     if(this.props.num_mode == 2){
       let count = 0;

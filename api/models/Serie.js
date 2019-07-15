@@ -6,8 +6,8 @@ module.exports = {
         type: 'string'
       },
 
-      expression: {
-        collection: 'expression',
+      recordexpression: {
+        collection: 'recordexpression',
         via: 'owner_serie',
         type: "string"
       },

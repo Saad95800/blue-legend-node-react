@@ -10,8 +10,8 @@ module.exports = {
         type: 'number'
       },
 
-      owner_expression: {
-        model: 'expression'
+      owner_recordexpression: {
+        model: 'recordexpression'
       },
 
       owner_serie: {

@@ -335,6 +335,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _category_CategoryAdd__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./category/CategoryAdd */ "./assets/client/components/category/CategoryAdd.js");
 /* harmony import */ var _revision_Revision__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./revision/Revision */ "./assets/client/components/revision/Revision.js");
 /* harmony import */ var _revision_CustomSeriesList__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./revision/CustomSeriesList */ "./assets/client/components/revision/CustomSeriesList.js");
+/* harmony import */ var _revision_AddCustomSerie__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./revision/AddCustomSerie */ "./assets/client/components/revision/AddCustomSerie.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -354,6 +355,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -552,14 +554,14 @@ function (_Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
         path: "/custom-series-list",
         render: function render(props) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(AddCustomSerie, _extends({}, props, {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_revision_AddCustomSerie__WEBPACK_IMPORTED_MODULE_12__["default"], _extends({}, props, {
             data: data
           }));
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
         path: "/add-custom-serie",
         render: function render(props) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(AddCustomSerie, _extends({}, props, {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_revision_AddCustomSerie__WEBPACK_IMPORTED_MODULE_12__["default"], _extends({}, props, {
             data: data
           }));
         }
@@ -1745,7 +1747,6 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      console.log(this.props.data);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container-home container-page display-flex-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Container"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Row"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2294,6 +2295,119 @@ function (_Component) {
   }]);
 
   return NavBar;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+/***/ }),
+
+/***/ "./assets/client/components/revision/AddCustomSerie.js":
+/*!*************************************************************!*\
+  !*** ./assets/client/components/revision/AddCustomSerie.js ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AddCustomSerie; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+var AddCustomSerie =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(AddCustomSerie, _Component);
+
+  function AddCustomSerie(props) {
+    var _this;
+
+    _classCallCheck(this, AddCustomSerie);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(AddCustomSerie).call(this, props));
+    var expressions = [];
+
+    if (_this.props.data.app == 'server') {
+      expressions = _this.props.data.expressions;
+    }
+
+    _this.state = {
+      expressions: expressions
+    };
+    return _this;
+  }
+
+  _createClass(AddCustomSerie, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default()({
+        method: 'post',
+        url: '/series-revision-ajax',
+        responseType: 'json',
+        data: {
+          id_text: ''
+        }
+      }).then(function (response) {
+        _this2.setState({
+          series: response.data
+        });
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container-custom-serie container-page"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "main-titles"
+      }, "AJOUTER UNE SERIE PERSONNALISEE")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+        xs: {
+          size: 3,
+          offset: 9
+        },
+        style: {
+          textAlign: 'right',
+          marginTop: '16px'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        to: '/add-custom-serie'
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+        className: "btn-forms"
+      }, "Enregistrer")))));
+    }
+  }]);
+
+  return AddCustomSerie;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 
@@ -3315,8 +3429,10 @@ function (_Component) {
           id_serie: url[5]
         }
       }).then(function (response) {
+        console.log(response);
+
         _this3.setState({
-          expressions: response.data.expression
+          expressions: response.data.recordexpression
         });
       }).catch(function (error) {
         console.log(error);
@@ -3537,13 +3653,12 @@ function (_Component) {
     }
   }, {
     key: "update",
-    value: function update(millis, seconds, minutes) {
-      this.setState({
-        millis: millis,
-        seconds: seconds,
-        minutes: minutes
-      });
-    } ////////////////////////////////////////////////////////////
+    value: function update(millis, seconds, minutes) {} // this.setState({
+    //     millis: millis,
+    //     seconds: seconds,
+    //     minutes: minutes
+    // });
+    ////////////////////////////////////////////////////////////
 
   }, {
     key: "render",
@@ -3571,9 +3686,12 @@ function (_Component) {
       var text = '...';
 
       if (this.state.expressions[this.state.numQuestion] !== undefined) {
-        text = this.state.expressions[this.state.numQuestion].english_value;
+        text = this.state.expressions[this.state.numQuestion].owner_expression.english_value;
       }
 
+      console.log("toto");
+      console.log(this.state.expressions);
+      console.log("tata");
       var clock = '';
 
       if (this.props.num_mode == 2) {
@@ -4101,6 +4219,7 @@ function (_Component) {
       selText: '',
       french_value: 'Trad',
       msgBtnSave: 'Enregistrer',
+      colorBtnSave: '#3b74fe',
       wysiwyg: false,
       dataPopup: {
         display: 'none',
@@ -4150,13 +4269,21 @@ function (_Component) {
         });
       }).catch(function (error) {
         console.log(error);
+      }); // this.addLinksToWords();
+    }
+  }, {
+    key: "addLinksToWords",
+    value: function addLinksToWords() {
+      var new_html = this.state.texte.content.replace(' as ', ' <span style="color:blue">as</span> ');
+      this.setState({
+        texte: {
+          content: new_html
+        }
       });
     }
   }, {
     key: "changePopup",
     value: function changePopup(mouse) {
-      var _this3 = this;
-
       var ele = document.getElementById('popupTrad');
       var sel = window.getSelection();
       var rel1 = document.createRange();
@@ -4177,24 +4304,32 @@ function (_Component) {
             selText: sel.toString()
           });
           ele.style.display = 'block';
-          axios__WEBPACK_IMPORTED_MODULE_1___default()({
-            method: 'post',
-            url: 'https://api.deepl.com/v2/translate?auth_key=&text=' + sel.toString() + '&target_lang=fr&source_lang=en',
-            // url: `https://translation.googleapis.com/language/translate/v2?source=en&target=fr&key=&q=${sel.toString()}`,
-            responseType: 'json',
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded',
-              'Accept': '*/*'
-            }
-          }).then(function (response) {
-            console.log(response);
 
-            _this3.setState({
-              french_value: response.data.translations[0].text
+          if (sel.toString().length > 40) {
+            this.setState({
+              msgBtnSave: 'Maximum 40 caractères',
+              colorBtnSave: 'red'
             });
-          }).catch(function (error) {
-            console.log(error);
-          });
+          } else {
+            this.setState({
+              msgBtnSave: 'Enregistrer',
+              colorBtnSave: '#3b74fe'
+            });
+          } // axios({
+          //   method: 'post',
+          //   url: 'https://api.deepl.com/v2/translate?auth_key=&text='+sel.toString()+'&target_lang=fr&source_lang=en',
+          //   // url: `https://translation.googleapis.com/language/translate/v2?source=en&target=fr&key=&q=${sel.toString()}`,
+          //   responseType: 'json',
+          //   headers: {'Content-Type': 'application/x-www-form-urlencoded', 'Accept': '*/*'}
+          // })
+          // .then((response) => {
+          //   console.log(response);
+          //   this.setState({french_value: response.data.translations[0].text});
+          // })
+          // .catch( (error) => {
+          //   console.log(error);
+          // });
+
         }
       } else {
         ele.style.display = 'none';
@@ -4258,39 +4393,43 @@ function (_Component) {
   }, {
     key: "saveExpression",
     value: function saveExpression() {
-      var _this4 = this;
+      var _this3 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default()({
-        method: 'post',
-        url: '/save-expression-ajax',
-        responseType: 'json',
-        data: {
-          french_value: this.state.french_value,
-          english_value: this.state.selText,
-          id_text: this.state.texte.id
-        }
-      }).then(function (response) {
-        console.log(response);
+      if (this.state.msgBtnSave == 'Enregistrer') {
+        axios__WEBPACK_IMPORTED_MODULE_1___default()({
+          method: 'post',
+          url: '/save-expression-ajax',
+          responseType: 'json',
+          data: {
+            french_value: this.state.french_value,
+            english_value: this.state.selText,
+            id_text: this.state.texte.id
+          }
+        }).then(function (response) {
+          console.log(response);
 
-        if (response.statusText == 'OK') {
-          _this4.setState({
-            msgBtnSave: 'Enregistré !'
-          });
-
-          setTimeout(function () {
-            _this4.setState({
-              msgBtnSave: 'Enregistrer'
+          if (response.statusText == 'OK') {
+            _this3.setState({
+              msgBtnSave: 'Enregistré !',
+              colorBtnSave: '#08e608'
             });
-          }, 3000);
-        }
-      }).catch(function (error) {
-        console.log(error);
-      });
+
+            setTimeout(function () {
+              _this3.setState({
+                msgBtnSave: 'Enregistrer',
+                colorBtnSave: '#3b74fe'
+              });
+            }, 1000);
+          }
+        }).catch(function (error) {
+          console.log(error);
+        });
+      }
     }
   }, {
     key: "updateText",
     value: function updateText() {
-      var _this5 = this;
+      var _this4 = this;
 
       var wysiwyg = document.getElementsByName("react-trumbowyg")[0];
       var divWysiwyg = document.querySelector("#react-trumbowyg");
@@ -4316,10 +4455,10 @@ function (_Component) {
           console.log(response);
 
           if (response.statusText == 'OK') {
-            var text = _this5.state.texte;
+            var text = _this4.state.texte;
             text.content = wysiwyg.value;
 
-            _this5.setState({
+            _this4.setState({
               texte: text,
               wysiwyg: false
             });
@@ -4332,7 +4471,7 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this6 = this,
+      var _this5 = this,
           _ref;
 
       var options = this.state.categories.map(function (category, index) {
@@ -4370,7 +4509,7 @@ function (_Component) {
         type: "select",
         id: "select-category-text",
         onChange: function onChange() {
-          _this6.setState({
+          _this5.setState({
             textCategory: document.querySelector("#select-category-text").value
           });
         }
@@ -4390,7 +4529,7 @@ function (_Component) {
         value: this.state.textTitle,
         type: "text",
         onChange: function onChange() {
-          _this6.setState({
+          _this5.setState({
             textTitle: document.querySelector("#title-text").value
           });
         },
@@ -4410,7 +4549,7 @@ function (_Component) {
           backgroundColor: '#DF2645'
         },
         onClick: function onClick() {
-          _this6.setState({
+          _this5.setState({
             wysiwyg: false
           });
         }
@@ -4434,7 +4573,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "btn-forms",
         onClick: function onClick() {
-          _this6.setState({
+          _this5.setState({
             wysiwyg: true
           });
         }
@@ -4473,11 +4612,11 @@ function (_Component) {
         onClick: this.saveExpression.bind(this),
         style: {
           width: '90px',
-          height: '45px',
+          minHeight: '45px',
           cursor: 'pointer',
           color: 'white',
           fontWeight: 'bold',
-          backgroundColor: '#08e608',
+          backgroundColor: this.state.colorBtnSave,
           borderRadius: '5px',
           textAlign: 'center',
           padding: '12px 0px'
@@ -4488,10 +4627,10 @@ function (_Component) {
           marginTop: '20px'
         },
         onMouseUp: function onMouseUp() {
-          _this6.changePopup('mouseUp');
+          _this5.changePopup('mouseUp');
         },
         onMouseDown: function onMouseDown() {
-          _this6.changePopup('mouseDown');
+          _this5.changePopup('mouseDown');
         },
         dangerouslySetInnerHTML: {
           __html: this.state.texte.content

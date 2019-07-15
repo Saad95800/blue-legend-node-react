@@ -16,8 +16,9 @@ export default class TextSsr extends Component {
       texte: texte,
       categories: [],
       selText: '',
-      french_value: 'TRADUCTION',
+      french_value: 'Trad',
       msgBtnSave: 'Enregistrer',
+      colorBtnSave: '#3b74fe',
       wysiwyg: false,
       dataPopup:{
         display: 'none', 
@@ -56,8 +57,8 @@ export default class TextSsr extends Component {
                       <div style={{margin: '10px'}}>{capitalizeFirstLetter(this.state.selText)}</div>
                       <div style={{margin: '10px', fontSize: '1.2em', fontWeight: 'bold'}}>{capitalizeFirstLetter(this.state.french_value)}</div>
                       </div>
-                      <div class="display-flex-center">
-                        <div id="btnSaveExpression" style={{width:'90px', height: '45px', cursor: 'pointer', color: 'white', fontWeight: 'bold', backgroundColor: '#08e608', borderRadius: '5px', textAlign: 'center', padding: '12px 0px'}}>{this.state.msgBtnSave}</div>
+                      <div className="display-flex-center">
+                        <div id="btnSaveExpression" style={{width:'90px', minHeight: '45px', cursor: 'pointer', color: 'white', fontWeight: 'bold', backgroundColor: this.state.colorBtnSave, borderRadius: '5px', textAlign: 'center', padding: '12px 0px'}}>{this.state.msgBtnSave}</div>
                       </div>
                   </div>
                   <div id="container-text" style={{marginTop: '20px'}} dangerouslySetInnerHTML={{ __html: this.state.texte.content }}></div>

@@ -10,6 +10,7 @@ import CategoryList from './category/CategoryList';
 import CategoryAdd from './category/CategoryAdd';
 import RevisionSsr from './revision/RevisionSsr';
 import CustomSeriesList from './revision/CustomSeriesList';
+import AddCustomSerie from './revision/AddCustomSerie';
 // import SwipeableRoutes from "react-swipeable-routes";
 
 let styles = {

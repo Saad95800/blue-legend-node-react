@@ -49,6 +49,12 @@ module.exports = {
       collection: 'serie',
       via: 'owner_user',
       type: "string"
+    },
+
+    recordexpression: {
+      collection: 'recordexpression',
+      via: 'owner_user',
+      type: "string"
     }
 
   },

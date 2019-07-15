@@ -23,8 +23,8 @@ module.exports = {
       type: "string"
     },
 
-    expression: {
-      collection: 'expression',
+    recordexpression: {
+      collection: 'recordexpression',
       via: 'owner_texte',
       type: "string"
     },
