@@ -4,6 +4,7 @@ import Appserver from '../../assets/client/components/Appserver';
 import Vitrine from '../../assets/client/components/Vitrine';
 import {StaticRouter } from 'react-router-dom';
 import moment from 'moment';
+moment.locale('fr');
 
 let render = (req, res, data = {}) => {
   if(req.isAuthenticated() && req.user != undefined){
@@ -265,7 +266,6 @@ module.exports = {
           {english_value: params.english_value, french_value:params.french_value}
           )
         .exec(async(err, expression, wasCreated) => {
-          console.log(params);
           if (err) { return res.serverError(err); }
           if(wasCreated){
             sails.log('Nouvelle expression crée: ' + expression.id);
@@ -419,10 +419,6 @@ module.exports = {
   
   getDataHomeAjax: async function (req, res){
 
-    var total = Dataserie.sum('owner_expression');
-console.log('hahaha');
-console.log(total);
-console.log('hohoho');
     var begin = moment(moment().format("YYYY-MM-DD")).unix(); // Date de début d'aujourd'hui
     var end = moment(moment().format("YYYY-MM-DD")).add(1, 'days').unix(); // Date de fin d'aujourd'hui
 

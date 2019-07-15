@@ -32,7 +32,7 @@ export default class btnBeginRevision extends Component {
 
 let styles = {
   btnBegin: {
-    marginTop: '30px',
+    marginTop: '90px',
     width: '400px',
     height: '150px',
     borderRadius: '80px',

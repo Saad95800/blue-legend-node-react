@@ -201,6 +201,14 @@ body{
   cursor: pointer;
   border-radius: 5px;
 }
+.img-item-liste-serie{
+  background:url(./images/main_img.png) -2146px -200px no-repeat;
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  border-radius: 5px;
+}
 .img-item-liste-category{
   background: url(./images/main_img.png) -2450px -200px no-repeat;
   display: inline-block;
@@ -305,8 +313,8 @@ body{
 .container-app{
   position: absolute;
   width: 94%;
-  height: 100%;
-  background-color: #F8FAFE;
+  height: 80%;
+  /* background-color: #F8FAFE; */
   margin-top: -1px;
   margin-left: 50px;
   padding-right: 35px;
@@ -698,6 +706,37 @@ body{
   background:url(./images/icon_user.png) 0px 0px no-repeat;
   background-size: 100%;
 }
+.btn-serie{
+  display: inline-flex;
+  width: 260px;
+  height: 80px;
+  border-radius: 50px;
+  background-color: #26DF38;
+  color: white;
+  font-weight: block;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 33px;
+  margin-top: 50px;
+}
+.btn-mode-revision{
+  display: inline-flex;
+  width: 150px;
+  height: 150px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  color: #fff;
+  background-color: #3B74FE;
+  border: 1px solid #3B74FE;
+  font-size: 1.8em;
+  margin: 20px;
+}
+.btn-mode-revision:hover{
+  box-shadow: 0px 0px 6px 3px #3B74FE;
+}
 /****************** Media queries *******************/
 @media screen and (max-width: 768px) {
   .container-page{
@@ -785,7 +824,7 @@ body{
 }
 
 .pace .pace-progress {
-  background: #fff;
+  background: rgb(57, 201, 0);
   position: fixed;
   z-index: 2000;
   top: 0;

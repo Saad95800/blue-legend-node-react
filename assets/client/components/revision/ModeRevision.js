@@ -15,26 +15,13 @@ export default class modeRevision extends Component {
     
     return (
       <div>
-      <h3>Quel mode ?</h3>
+      <h3 className="text-center">Quel mode ?</h3>
       <div style={{display: 'flex', flexDirection: 'row'}}>
-        <Link to={`/revision-btn-begin/texte/${id_texte}/serie/${id_serie}/content/${num_content}/mode/1`} id={1}><div style={styles.itemBtn}>Normal</div></Link>
-        <Link to={`/revision-btn-begin/texte/${id_texte}/serie/${id_serie}/content/${num_content}/mode/2`} id={2}><div style={styles.itemBtn}>Contre la montre</div></Link>
+        <Link to={`/revision-btn-begin/texte/${id_texte}/serie/${id_serie}/content/${num_content}/mode/1`} id={1} style={{textDecoration: 'none'}}><div className="btn-mode-revision">Normal</div></Link>
+        <Link to={`/revision-btn-begin/texte/${id_texte}/serie/${id_serie}/content/${num_content}/mode/2`} id={2} style={{textDecoration: 'none'}}><div className="btn-mode-revision">Contre la montre</div></Link>
       </div>
   </div>
     );
 
-  }
-}
-
-let styles = {
-  itemBtn: {
-    display: 'inline-flex',
-    width: '100px',
-    height: '50px',
-    border: '1px solid',
-    margin: '10px',
-    textAlign: 'center',
-    justifyContent: 'center',
-    alignItems: 'center'
   }
 }

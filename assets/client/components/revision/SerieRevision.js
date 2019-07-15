@@ -15,6 +15,7 @@ export default class serieRevision extends Component {
       id_histoserie: 0,
       numQuestion: 0,
       inputResponse: '',
+      inputResponseDisabled: false,
       stepRev: "Question",
       stepRevs: {
         "1": "Question",
@@ -40,10 +41,11 @@ export default class serieRevision extends Component {
     }
 
     // this.startTimer();
-    
-    this._handleStartClick = this._handleStartClick.bind(this);
-    this._handleStopClick = this._handleStopClick.bind(this);
-    this._handleResetClick = this._handleResetClick.bind(this);
+    if(this.props.num_mode == 2){
+      this._handleStartClick = this._handleStartClick.bind(this);
+      this._handleStopClick = this._handleStopClick.bind(this);
+      this._handleResetClick = this._handleResetClick.bind(this);
+    }
 
     
   }
@@ -69,7 +71,7 @@ export default class serieRevision extends Component {
   validate(){
     this._handleStopClick();
     if(this.state.stepRev == 'Question'){
-      let res = this.state.expressions[this.state.numQuestion].french_value.toLowerCase() == document.querySelector("#inputResponse").value.toLowerCase();
+      let res = this.state.expressions[this.state.numQuestion].owner_expression.french_value.toLowerCase().trim() == document.querySelector("#inputResponse").value.toLowerCase().trim();
       let last = (this.state.numQuestion == this.state.expressions.length - 1);
       let msg = "Suivant";
       if(last){
@@ -84,17 +86,19 @@ export default class serieRevision extends Component {
           }, 
           score: this.state.score+1, 
           stepRev: "Validation", 
-          clock: 'disabled'
+          clock: 'disabled',
+          inputResponseDisabled: true
         });
       }else{
         this.setState({
                     stateQuestion:{
                       btnValidation: msg, 
                       colorMessageValidation: "red", 
-                      messageValidation: this.state.expressions[this.state.numQuestion].french_value
+                      messageValidation: this.state.expressions[this.state.numQuestion].owner_expression.french_value
                     }, 
                     stepRev: "Validation",
-                    clock: 'disabled'
+                    clock: 'disabled',
+                    inputResponseDisabled: true
                   });
       }
       let url = this.props.data.location.pathname.split('/');
@@ -154,8 +158,10 @@ export default class serieRevision extends Component {
       });
 
     }else{
-      this._handleResetClick();
-      this._handleStartClick();
+      if(this.props.num_mode == 2){
+        this._handleResetClick();
+        this._handleStartClick();
+      }
       this.setState({
         stateQuestion:{
           btnValidation: "Valider", 
@@ -164,7 +170,8 @@ export default class serieRevision extends Component {
         stepRev: "Question", 
         numQuestion: this.state.numQuestion+1, 
         clock: 'enabled',
-        inputResponse: ''
+        inputResponse: '',
+        inputResponseDisabled: false
       });
     }
     document.querySelector("#inputResponse").value = "";
@@ -200,8 +207,10 @@ export default class serieRevision extends Component {
       score: 0,
       clock: 'enabled'
     });
-    this._handleResetClick();
-    this._handleStartClick();
+      if(this.props.num_mode == 2){
+        this._handleResetClick();
+        this._handleStartClick();
+      }
   }
 
   /////////////////////////////////////////////////////
@@ -253,11 +262,11 @@ zeroPad(value) {
 }
 
 update(millis, seconds, minutes) {
-    // this.setState({
-    //     millis: millis,
-    //     seconds: seconds,
-    //     minutes: minutes
-    // });
+    this.setState({
+        millis: millis,
+        seconds: seconds,
+        minutes: minutes
+    });
 }
 ////////////////////////////////////////////////////////////
   render() {
@@ -279,9 +288,7 @@ update(millis, seconds, minutes) {
     if(this.state.expressions[this.state.numQuestion] !== undefined){
       text = this.state.expressions[this.state.numQuestion].owner_expression.english_value;
     }
-    console.log("toto");
-    console.log(this.state.expressions);
-    console.log("tata");
+
     let clock = '';
     if(this.props.num_mode == 2){
       let count = 0;
@@ -311,21 +318,22 @@ update(millis, seconds, minutes) {
                         onChange={ () => {this.setState({ inputResponse: document.querySelector("#inputResponse").value})} }
                         onKeyPress={this.verifKey.bind(this)}
                         autoComplete="off"
+                        disabled={this.state.inputResponseDisabled}
                       />
                     </div>
                     <div style={{height:"30px", marginLeft:"30px", marginTop:"10px", fontSize: "30px", color: this.state.stateQuestion.colorMessageValidation}}>{this.state.stateQuestion.messageValidation}</div>
                   
                     <div style={{textAlign: "center"}}>
-                      <div style={styles.btnSuivant} onClick={func.bind(this)}>{this.state.stateQuestion.btnValidation}</div>
+                      <div className="btn-serie" onClick={func.bind(this)}>{this.state.stateQuestion.btnValidation}</div>
                     </div>
                   </div>
                   <div style={{display: displayRes, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
                     <div>
-                      <div>Score</div>
-                      <div style={{textAlign: 'center', fontWeight: 'bold', fontSize: '100px'}}>
-                        {this.state.score}/{this.state.expressions.length}
+                      <div style={{textAlign: 'center', fontSize: '2em'}}>Score</div>
+                      <div style={{textAlign: 'center', fontWeight: 'bold', fontSize: '100px', marginTop: '-10px'}}>
+                        <span style={{fontSize: '2em'}}>{this.state.score}</span>/<span style={{fontSize: '1em', color:'#C2BEBE'}}>{this.state.expressions.length}</span>
                       </div>
-                      <button onClick={this.restart.bind(this)}>Recommencer</button>
+                      <div style={{marginTop: '-37px', backgroundColor: '#3B74FE'}} className="btn-serie" onClick={this.restart.bind(this)}>Recommencer</div>
                     </div>
                   </div>
                 </div>
@@ -351,19 +359,5 @@ let styles = {
     borderRadius: "10px",
     border: "1px solid #c7c7c7",
     marginTop: "30px"
-  },
-  btnSuivant: {
-    display: "inline-flex",
-    width: "260px",
-    height: "80px",
-    borderRadius: "50px",
-    backgroundColor: "#26DF38",
-    color: "white",
-    fontWeight: "block",
-    justifyContent: "center",
-    alignItems: "center",
-    cursor: "pointer",
-    fontSize: "40px",
-    marginTop: "50px"
   }
 }

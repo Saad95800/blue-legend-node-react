@@ -137,7 +137,7 @@ export default class RevisionSsr extends Component {
                 </Row>
                 <Row>
                   <div className="hidden-xs col-sm-2" style={{position: 'absolute'}}>
-                      {stepsIcons}
+                      {/* {stepsIcons} */}
                   </div>
                   <Col xs="12" sm="10" style={{width: '100%'}}>
                     <Row style={{marginTop: '20px'}}>

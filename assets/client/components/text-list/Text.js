@@ -17,11 +17,6 @@ export default class Text extends Component {
       msgBtnSave: 'Enregistrer',
       colorBtnSave: '#3b74fe',
       wysiwyg: false,
-      dataPopup:{
-        display: 'none', 
-        top: 0, 
-        left: 0
-      },
       textTitle: '',
       textCategory: '',
       wysiwyg_bg_color: '#fff'

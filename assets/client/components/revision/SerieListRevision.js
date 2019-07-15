@@ -17,10 +17,10 @@ export default class SerieListRevision extends Component {
         return <Link
                 to={link}
                 key={index}>
-                  <div key={serie.id} style={{display: 'inline-block', borderRadius: '5px', margin: '10px', width: '120px'}} className="hover-item">
+                  <div key={serie.id} style={{display: 'inline-block', borderRadius: '5px', margin: '10px', width: '120px'}} className="list-hover-item">
                     <div style={{textAlign: 'center'}}>{serieName}</div>
                     <div style={{'textAlign': 'center'}}>
-                    <span className="img-item-liste-texte"></span>
+                    <span className="img-item-liste-serie"></span>
                     </div>  
                   </div>
                 </Link>;

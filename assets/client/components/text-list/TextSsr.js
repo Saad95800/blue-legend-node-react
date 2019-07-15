@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, FormGroup, Label, Input } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 import {capitalizeFirstLetter} from './../functions';
 
 export default class TextSsr extends Component {
@@ -20,11 +20,6 @@ export default class TextSsr extends Component {
       msgBtnSave: 'Enregistrer',
       colorBtnSave: '#3b74fe',
       wysiwyg: false,
-      dataPopup:{
-        display: 'none', 
-        top: 0, 
-        left: 0
-      },
       textTitle: texte.title,
       textContent: texte.content,
       textCategory: texte.owner_category,

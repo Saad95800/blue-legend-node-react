@@ -2496,7 +2496,7 @@ function (_Component) {
 
 var styles = {
   btnBegin: {
-    marginTop: '30px',
+    marginTop: '90px',
     width: '400px',
     height: '150px',
     borderRadius: '80px',
@@ -2820,21 +2820,29 @@ function (_Component) {
       var id_texte = url.split("/")[3];
       var id_serie = url.split("/")[5];
       var num_content = url.split("/")[7];
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Quel mode ?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        className: "text-center"
+      }, "Quel mode ?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
           display: 'flex',
           flexDirection: 'row'
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/revision-btn-begin/texte/".concat(id_texte, "/serie/").concat(id_serie, "/content/").concat(num_content, "/mode/1"),
-        id: 1
+        id: 1,
+        style: {
+          textDecoration: 'none'
+        }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        style: styles.itemBtn
+        className: "btn-mode-revision"
       }, "Normal")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/revision-btn-begin/texte/".concat(id_texte, "/serie/").concat(id_serie, "/content/").concat(num_content, "/mode/2"),
-        id: 2
+        id: 2,
+        style: {
+          textDecoration: 'none'
+        }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        style: styles.itemBtn
+        className: "btn-mode-revision"
       }, "Contre la montre"))));
     }
   }]);
@@ -2843,18 +2851,6 @@ function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 
-var styles = {
-  itemBtn: {
-    display: 'inline-flex',
-    width: '100px',
-    height: '50px',
-    border: '1px solid',
-    margin: '10px',
-    textAlign: 'center',
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
-};
 
 /***/ }),
 
@@ -3208,7 +3204,7 @@ function (_Component) {
         style: {
           position: 'absolute'
         }
-      }, stepsIcons), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_8__["Col"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_8__["Col"], {
         xs: "12",
         sm: "10",
         style: {
@@ -3299,7 +3295,7 @@ function (_Component) {
               margin: '10px',
               width: '120px'
             },
-            className: "hover-item"
+            className: "list-hover-item"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             style: {
               textAlign: 'center'
@@ -3309,7 +3305,7 @@ function (_Component) {
               'textAlign': 'center'
             }
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-            className: "img-item-liste-texte"
+            className: "img-item-liste-serie"
           }))));
         });
       }
@@ -3382,6 +3378,7 @@ function (_Component) {
       id_histoserie: 0,
       numQuestion: 0,
       inputResponse: '',
+      inputResponseDisabled: false,
       stepRev: "Question",
       stepRevs: {
         "1": "Question",
@@ -3405,9 +3402,13 @@ function (_Component) {
       running: false // this.startTimer();
 
     };
-    _this2._handleStartClick = _this2._handleStartClick.bind(_assertThisInitialized(_this2));
-    _this2._handleStopClick = _this2._handleStopClick.bind(_assertThisInitialized(_this2));
-    _this2._handleResetClick = _this2._handleResetClick.bind(_assertThisInitialized(_this2));
+
+    if (_this2.props.num_mode == 2) {
+      _this2._handleStartClick = _this2._handleStartClick.bind(_assertThisInitialized(_this2));
+      _this2._handleStopClick = _this2._handleStopClick.bind(_assertThisInitialized(_this2));
+      _this2._handleResetClick = _this2._handleResetClick.bind(_assertThisInitialized(_this2));
+    }
+
     return _this2;
   }
 
@@ -3446,7 +3447,7 @@ function (_Component) {
       this._handleStopClick();
 
       if (this.state.stepRev == 'Question') {
-        var res = this.state.expressions[this.state.numQuestion].french_value.toLowerCase() == document.querySelector("#inputResponse").value.toLowerCase();
+        var res = this.state.expressions[this.state.numQuestion].owner_expression.french_value.toLowerCase().trim() == document.querySelector("#inputResponse").value.toLowerCase().trim();
         var last = this.state.numQuestion == this.state.expressions.length - 1;
         var msg = "Suivant";
 
@@ -3463,17 +3464,19 @@ function (_Component) {
             },
             score: this.state.score + 1,
             stepRev: "Validation",
-            clock: 'disabled'
+            clock: 'disabled',
+            inputResponseDisabled: true
           });
         } else {
           this.setState({
             stateQuestion: {
               btnValidation: msg,
               colorMessageValidation: "red",
-              messageValidation: this.state.expressions[this.state.numQuestion].french_value
+              messageValidation: this.state.expressions[this.state.numQuestion].owner_expression.french_value
             },
             stepRev: "Validation",
-            clock: 'disabled'
+            clock: 'disabled',
+            inputResponseDisabled: true
           });
         }
 
@@ -3534,9 +3537,11 @@ function (_Component) {
           console.log(error);
         });
       } else {
-        this._handleResetClick();
+        if (this.props.num_mode == 2) {
+          this._handleResetClick();
 
-        this._handleStartClick();
+          this._handleStartClick();
+        }
 
         this.setState({
           stateQuestion: {
@@ -3546,7 +3551,8 @@ function (_Component) {
           stepRev: "Question",
           numQuestion: this.state.numQuestion + 1,
           clock: 'enabled',
-          inputResponse: ''
+          inputResponse: '',
+          inputResponseDisabled: false
         });
       }
 
@@ -3588,9 +3594,11 @@ function (_Component) {
         clock: 'enabled'
       });
 
-      this._handleResetClick();
+      if (this.props.num_mode == 2) {
+        this._handleResetClick();
 
-      this._handleStartClick();
+        this._handleStartClick();
+      }
     } /////////////////////////////////////////////////////
 
   }, {
@@ -3653,12 +3661,13 @@ function (_Component) {
     }
   }, {
     key: "update",
-    value: function update(millis, seconds, minutes) {} // this.setState({
-    //     millis: millis,
-    //     seconds: seconds,
-    //     minutes: minutes
-    // });
-    ////////////////////////////////////////////////////////////
+    value: function update(millis, seconds, minutes) {
+      this.setState({
+        millis: millis,
+        seconds: seconds,
+        minutes: minutes
+      });
+    } ////////////////////////////////////////////////////////////
 
   }, {
     key: "render",
@@ -3689,9 +3698,6 @@ function (_Component) {
         text = this.state.expressions[this.state.numQuestion].owner_expression.english_value;
       }
 
-      console.log("toto");
-      console.log(this.state.expressions);
-      console.log("tata");
       var clock = '';
 
       if (this.props.num_mode == 2) {
@@ -3750,7 +3756,8 @@ function (_Component) {
           });
         },
         onKeyPress: this.verifKey.bind(this),
-        autoComplete: "off"
+        autoComplete: "off",
+        disabled: this.state.inputResponseDisabled
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
           height: "30px",
@@ -3764,7 +3771,7 @@ function (_Component) {
           textAlign: "center"
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        style: styles.btnSuivant,
+        className: "btn-serie",
         onClick: func.bind(this)
       }, this.state.stateQuestion.btnValidation))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
@@ -3774,13 +3781,33 @@ function (_Component) {
           alignItems: 'center',
           height: '100%'
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Score"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: {
+          textAlign: 'center',
+          fontSize: '2em'
+        }
+      }, "Score"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
           textAlign: 'center',
           fontWeight: 'bold',
-          fontSize: '100px'
+          fontSize: '100px',
+          marginTop: '-10px'
         }
-      }, this.state.score, "/", this.state.expressions.length), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        style: {
+          fontSize: '2em'
+        }
+      }, this.state.score), "/", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        style: {
+          fontSize: '1em',
+          color: '#C2BEBE'
+        }
+      }, this.state.expressions.length)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: {
+          marginTop: '-37px',
+          backgroundColor: '#3B74FE'
+        },
+        className: "btn-serie",
         onClick: this.restart.bind(this)
       }, "Recommencer")))));
     }
@@ -3799,20 +3826,6 @@ var styles = {
     borderRadius: "10px",
     border: "1px solid #c7c7c7",
     marginTop: "30px"
-  },
-  btnSuivant: {
-    display: "inline-flex",
-    width: "260px",
-    height: "80px",
-    borderRadius: "50px",
-    backgroundColor: "#26DF38",
-    color: "white",
-    fontWeight: "block",
-    justifyContent: "center",
-    alignItems: "center",
-    cursor: "pointer",
-    fontSize: "40px",
-    marginTop: "50px"
   }
 };
 
@@ -4221,11 +4234,6 @@ function (_Component) {
       msgBtnSave: 'Enregistrer',
       colorBtnSave: '#3b74fe',
       wysiwyg: false,
-      dataPopup: {
-        display: 'none',
-        top: 0,
-        left: 0
-      },
       textTitle: '',
       textCategory: '',
       wysiwyg_bg_color: '#fff'
