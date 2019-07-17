@@ -737,6 +737,35 @@ body{
 .btn-mode-revision:hover{
   box-shadow: 0px 0px 6px 3px #3B74FE;
 }
+.hover-word{
+  background-color: rgb(240, 240, 240);
+  border-radius: 5px;
+  padding: 3px;
+}
+.hover-word:hover{
+  background-color: rgb(220, 220, 220);
+  cursor: pointer;
+  /* border: 1px solid rgb(209, 209, 209); */
+}
+.popup-trad{
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 10px;
+  z-index: 1;
+  background-color: #E7EDFD;
+  min-width: 200px;
+  min-height: 90px;
+  border: 1px solid black;
+  position: absolute;
+}
+.popup-hover-word{
+  display: inline-block;
+}
+.hover-word-french{
+  display: none;
+}
 /****************** Media queries *******************/
 @media screen and (max-width: 768px) {
   .container-page{
