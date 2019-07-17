@@ -15,6 +15,7 @@ export default class Home extends Component {
       let nbMotsExprTotalAppris = '-';
 
       if(this.props.data.app == 'server'){
+        console.log(this.props.data);
         nbSeriesToday = this.props.data.nbSeriesToday;
         nbSerieRealiseesToday = this.props.data.nbSerieRealiseesToday;
         nbSeriesTotalRealisees = this.props.data.nbSeriesTotalRealisees;

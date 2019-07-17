@@ -58,6 +58,7 @@ export default class NavItem extends Component {
                 onClick={this.colorClickItem.bind(this)} 
                 id={this.props.id}>
             </Link>
+            <span style={this.props.cssTitle}>{this.props.title}</span>
         </div>
     );
   }

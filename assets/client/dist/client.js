@@ -1701,6 +1701,7 @@ function (_Component) {
     var nbMotsExprTotalAppris = '-';
 
     if (_this.props.data.app == 'server') {
+      console.log(_this.props.data);
       nbSeriesToday = _this.props.data.nbSeriesToday;
       nbSerieRealiseesToday = _this.props.data.nbSerieRealiseesToday;
       nbSeriesTotalRealisees = _this.props.data.nbSeriesTotalRealisees;
@@ -1990,7 +1991,9 @@ function (_Component) {
         onMouseOut: this.colorMouseOutItem.bind(this),
         onClick: this.colorClickItem.bind(this),
         id: this.props.id
-      }));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        style: this.props.cssTitle
+      }, this.props.title));
     }
   }]);
 
@@ -2073,7 +2076,14 @@ function (_Component) {
         classItem: "menu-item nav-lecture",
         id: "item-menu-text",
         style: {},
-        isSelected: false
+        isSelected: false,
+        title: 'Textes',
+        cssTitle: {
+          position: 'absolute',
+          marginTop: '53px',
+          marginLeft: '-48px',
+          color: 'white'
+        }
       }, // {
       //     url:"/categorie-ajout",
       //     classContainer:"bloc-btn-menu",
@@ -2088,14 +2098,28 @@ function (_Component) {
         classItem: "menu-item nav-categories",
         id: "item-menu-categories",
         style: {},
-        isSelected: false
+        isSelected: false,
+        title: 'Catégories',
+        cssTitle: {
+          position: 'absolute',
+          marginTop: '53px',
+          marginLeft: '-60px',
+          color: 'white'
+        }
       }, {
         url: "/revision",
         classContainer: "bloc-btn-menu",
         classItem: "menu-item nav-revision",
         id: "item-menu-revision",
         style: {},
-        isSelected: false
+        isSelected: false,
+        title: 'Révision',
+        cssTitle: {
+          position: 'absolute',
+          marginTop: '53px',
+          marginLeft: '-51px',
+          color: 'white'
+        }
       }],
       itemsLeft: [{
         url: "/accueil",
@@ -2103,7 +2127,15 @@ function (_Component) {
         classItem: "menu-item-left nav-item-left",
         id: "item-menu-accueil",
         style: {},
-        isSelected: false
+        isSelected: false,
+        title: 'Dashboard',
+        cssTitle: {
+          position: 'absolute',
+          marginTop: '32px',
+          marginLeft: '-36px',
+          color: 'white',
+          fontSize: '9px'
+        }
       }],
       url_courante: _this.props.data.url,
       menuMobileView: false
@@ -2199,6 +2231,8 @@ function (_Component) {
           id: item.id,
           style: item.style,
           isSelected: item.isSelected,
+          title: item.title,
+          cssTitle: item.cssTitle,
           colorHoverItem: _this4.colorHoverItem.bind(_this4),
           colorMouseOutItem: _this4.colorMouseOutItem.bind(_this4),
           colorClickItem: _this4.colorClickItem.bind(_this4),
@@ -2214,6 +2248,8 @@ function (_Component) {
           id: item.id,
           style: item.style,
           isSelected: item.isSelected,
+          title: item.title,
+          cssTitle: item.cssTitle,
           colorHoverItem: _this4.colorHoverItem.bind(_this4),
           colorMouseOutItem: _this4.colorMouseOutItem.bind(_this4),
           colorClickItem: _this4.colorClickItem.bind(_this4),
@@ -3464,8 +3500,8 @@ function (_Component) {
             },
             score: this.state.score + 1,
             stepRev: "Validation",
-            clock: 'disabled',
-            inputResponseDisabled: true
+            clock: 'disabled' // inputResponseDisabled: true
+
           });
         } else {
           this.setState({
@@ -3475,8 +3511,8 @@ function (_Component) {
               messageValidation: this.state.expressions[this.state.numQuestion].owner_expression.french_value
             },
             stepRev: "Validation",
-            clock: 'disabled',
-            inputResponseDisabled: true
+            clock: 'disabled' // inputResponseDisabled: true
+
           });
         }
 
@@ -3551,8 +3587,8 @@ function (_Component) {
           stepRev: "Question",
           numQuestion: this.state.numQuestion + 1,
           clock: 'enabled',
-          inputResponse: '',
-          inputResponseDisabled: false
+          inputResponse: '' // inputResponseDisabled: false
+
         });
       }
 
@@ -4180,7 +4216,7 @@ function (_Component) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Text; });
+/* WEBPACK VAR INJECTION */(function($) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Text; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
@@ -4190,8 +4226,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
 /* harmony import */ var _functions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../functions */ "./assets/client/components/functions.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -4228,9 +4262,11 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Text).call(this, props));
     _this.state = {
       texte: {},
+      texteContent: '',
+      contentTextArea: '',
       categories: [],
       selText: '',
-      french_value: 'Trad',
+      french_value: '',
       msgBtnSave: 'Enregistrer',
       colorBtnSave: '#3b74fe',
       wysiwyg: false,
@@ -4256,10 +4292,12 @@ function (_Component) {
           id: this.props.location.pathname.split("/")[2]
         }
       }).then(function (response) {
-        var text = response.data[0];
+        var text = response.data;
 
         _this2.setState({
           texte: text,
+          texteContent: text.content,
+          contentTextArea: text.contentTextArea,
           textTitle: text.title,
           textCategory: text.owner_category
         });
@@ -4277,73 +4315,98 @@ function (_Component) {
         });
       }).catch(function (error) {
         console.log(error);
-      }); // this.addLinksToWords();
-    }
-  }, {
-    key: "addLinksToWords",
-    value: function addLinksToWords() {
-      var new_html = this.state.texte.content.replace(' as ', ' <span style="color:blue">as</span> ');
-      this.setState({
-        texte: {
-          content: new_html
-        }
+      }); // $(document).on('click', '.hover-word', (e) => {
+      //   console.log('hover-word');
+      // });
+
+      var th = this;
+      $(document).on('click', '.block-hover-word', function (e) {
+        console.log('cliqued');
+        var word = $(this).find('.hover-word').text(); // console.log($(this).html());
+
+        console.log($(this));
+        th.setState({
+          selText: word,
+          french_value: $(this).find('.hover-word-french').text()
+        });
+        var ele = $('#popupTrad');
+        $(this).find('.popup-hover-word').html('<div class="popup-trad" style="display:inline-block;margin-left: -130px;margin-top: 20px;">' + ele.html() + '</div>');
+        $(this).find('#btnSaveExpression').remove();
       });
     }
   }, {
     key: "changePopup",
     value: function changePopup(mouse) {
+      var _this3 = this;
+
+      $('.popup-hover-word').html("");
       var ele = document.getElementById('popupTrad');
       var sel = window.getSelection();
       var rel1 = document.createRange();
       rel1.selectNode(document.getElementById('cal1'));
       var rel2 = document.createRange();
       rel2.selectNode(document.getElementById('cal2'));
+      var selText = sel.toString().trim();
 
-      if (mouse == 'mouseUp') {
-        if (!sel.isCollapsed) {
-          var r = sel.getRangeAt(0).getBoundingClientRect();
-          var rb1 = rel1.getBoundingClientRect();
-          var rb2 = rel2.getBoundingClientRect();
-          ele.style.top = (r.bottom - rb2.top) * 100 / (rb1.top - rb2.top) + 20 + 'px'; //this will place ele below the selection
-
-          ele.style.left = (r.left - rb2.left) * 100 / (rb1.left - rb2.left) - 90 + 'px'; //this will align the right edges together
-
-          this.setState({
-            selText: sel.toString()
-          });
-          ele.style.display = 'block';
-
-          if (sel.toString().length > 40) {
+      if (selText != '' && selText != ' ') {
+        if (mouse == 'mouseUp') {
+          if (selText.length > 40) {
             this.setState({
               msgBtnSave: 'Maximum 40 caractères',
               colorBtnSave: 'red'
             });
           } else {
-            this.setState({
-              msgBtnSave: 'Enregistrer',
-              colorBtnSave: '#3b74fe'
-            });
-          } // axios({
-          //   method: 'post',
-          //   url: 'https://api.deepl.com/v2/translate?auth_key=&text='+sel.toString()+'&target_lang=fr&source_lang=en',
-          //   // url: `https://translation.googleapis.com/language/translate/v2?source=en&target=fr&key=&q=${sel.toString()}`,
-          //   responseType: 'json',
-          //   headers: {'Content-Type': 'application/x-www-form-urlencoded', 'Accept': '*/*'}
-          // })
-          // .then((response) => {
-          //   console.log(response);
-          //   this.setState({french_value: response.data.translations[0].text});
-          // })
-          // .catch( (error) => {
-          //   console.log(error);
-          // });
+            /////////////////////////////////////////
+            if (!sel.isCollapsed) {
+              axios__WEBPACK_IMPORTED_MODULE_1___default()({
+                method: 'post',
+                url: '/check-expression-exist-ajax',
+                responseType: 'json',
+                data: {
+                  expression: selText
+                }
+              }).then(function (response) {
+                console.log(response);
+                var r = sel.getRangeAt(0).getBoundingClientRect();
+                var rb1 = rel1.getBoundingClientRect();
+                var rb2 = rel2.getBoundingClientRect();
+                ele.style.top = (r.bottom - rb2.top) * 100 / (rb1.top - rb2.top) + 20 + 'px'; //this will place ele below the selection
 
+                ele.style.left = (r.left - rb2.left) * 100 / (rb1.left - rb2.left) - 90 + 'px'; //this will align the right edges together
+
+                _this3.setState({
+                  selText: selText
+                });
+
+                ele.style.display = 'block';
+
+                if (response.data.existUserSpace == 'no') {
+                  // L'expression sélectionnéee n'éxiste pas dans l'espace de l'utilisateur
+                  _this3.setState({
+                    msgBtnSave: 'Enregistrer',
+                    colorBtnSave: '#3b74fe',
+                    french_value: response.data.translation
+                  });
+                } else {
+                  // L'expression sélectionnée éxiste en bdd
+                  _this3.setState({
+                    msgBtnSave: 'Déjà enregistré',
+                    colorBtnSave: '#727d97',
+                    french_value: response.data.translation
+                  });
+                }
+              }).catch(function (error) {
+                console.log(error);
+              });
+            }
+          }
+        } else {
+          ele.style.display = 'none';
+          $('.popup-hover-word').html("");
+          this.setState({
+            selText: ''
+          });
         }
-      } else {
-        ele.style.display = 'none';
-        this.setState({
-          selText: ''
-        });
       }
     }
   }, {
@@ -4401,7 +4464,7 @@ function (_Component) {
   }, {
     key: "saveExpression",
     value: function saveExpression() {
-      var _this3 = this;
+      var _this4 = this;
 
       if (this.state.msgBtnSave == 'Enregistrer') {
         axios__WEBPACK_IMPORTED_MODULE_1___default()({
@@ -4415,18 +4478,22 @@ function (_Component) {
           }
         }).then(function (response) {
           console.log(response);
+          var data = response.data;
 
           if (response.statusText == 'OK') {
-            _this3.setState({
+            _this4.setState({
               msgBtnSave: 'Enregistré !',
-              colorBtnSave: '#08e608'
+              colorBtnSave: '#08e608',
+              texteContent: data.textHoverWords
             });
 
             setTimeout(function () {
-              _this3.setState({
+              _this4.setState({
                 msgBtnSave: 'Enregistrer',
                 colorBtnSave: '#3b74fe'
               });
+
+              document.getElementById('popupTrad').style.display = 'none';
             }, 1000);
           }
         }).catch(function (error) {
@@ -4437,7 +4504,7 @@ function (_Component) {
   }, {
     key: "updateText",
     value: function updateText() {
-      var _this4 = this;
+      var _this5 = this;
 
       var wysiwyg = document.getElementsByName("react-trumbowyg")[0];
       var divWysiwyg = document.querySelector("#react-trumbowyg");
@@ -4463,10 +4530,10 @@ function (_Component) {
           console.log(response);
 
           if (response.statusText == 'OK') {
-            var text = _this4.state.texte;
+            var text = _this5.state.texte;
             text.content = wysiwyg.value;
 
-            _this4.setState({
+            _this5.setState({
               texte: text,
               wysiwyg: false
             });
@@ -4479,9 +4546,9 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this5 = this,
-          _ref;
+      var _this6 = this;
 
+      var contentText = this.state.texteContent;
       var options = this.state.categories.map(function (category, index) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
           key: index,
@@ -4517,7 +4584,7 @@ function (_Component) {
         type: "select",
         id: "select-category-text",
         onChange: function onChange() {
-          _this5.setState({
+          _this6.setState({
             textCategory: document.querySelector("#select-category-text").value
           });
         }
@@ -4537,7 +4604,7 @@ function (_Component) {
         value: this.state.textTitle,
         type: "text",
         onChange: function onChange() {
-          _this5.setState({
+          _this6.setState({
             textTitle: document.querySelector("#title-text").value
           });
         },
@@ -4557,7 +4624,7 @@ function (_Component) {
           backgroundColor: '#DF2645'
         },
         onClick: function onClick() {
-          _this5.setState({
+          _this6.setState({
             wysiwyg: false
           });
         }
@@ -4569,7 +4636,7 @@ function (_Component) {
         id: "react-trumbowyg",
         buttons: [['viewHTML'], ['formatting'], 'btnGrp-semantic', ['link'], ['insertImage'], 'btnGrp-justify', 'btnGrp-lists', ['table'], // I ADDED THIS FOR THE TABLE PLUGIN BUTTON
         ['fullscreen']],
-        data: this.state.texte.content,
+        data: this.state.contentTextArea,
         placeholder: "Entrez votre texte",
         ref: "trumbowyg"
       })));
@@ -4581,7 +4648,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "btn-forms",
         onClick: function onClick() {
-          _this5.setState({
+          _this6.setState({
             wysiwyg: true
           });
         }
@@ -4591,13 +4658,7 @@ function (_Component) {
         id: "cal2"
       }, "\xA0"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "popupTrad",
-        style: (_ref = {
-          display: 'none',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          padding: '10px'
-        }, _defineProperty(_ref, "padding", '10px 10px'), _defineProperty(_ref, "zIndex", 1), _defineProperty(_ref, "backgroundColor", '#E7EDFD'), _defineProperty(_ref, "minWidth", '200px'), _defineProperty(_ref, "minHeight", '90px'), _defineProperty(_ref, "border", '1px solid black'), _defineProperty(_ref, "position", 'absolute'), _ref)
+        className: "popup-trad"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "arrow-popuptrad"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -4635,13 +4696,13 @@ function (_Component) {
           marginTop: '20px'
         },
         onMouseUp: function onMouseUp() {
-          _this5.changePopup('mouseUp');
+          _this6.changePopup('mouseUp');
         },
         onMouseDown: function onMouseDown() {
-          _this5.changePopup('mouseDown');
+          _this6.changePopup('mouseDown');
         },
         dangerouslySetInnerHTML: {
-          __html: this.state.texte.content
+          __html: this.state.texteContent
         }
       }));
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -4675,6 +4736,7 @@ function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "jquery")))
 
 /***/ }),
 

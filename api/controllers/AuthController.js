@@ -27,6 +27,7 @@ module.exports = {
         res.ok();
     },
     register: function(req, res){
+        console.log('register');
         // TODO form validation here
         let params = req.allParams();
         User.create({
@@ -43,7 +44,8 @@ module.exports = {
               req.login(user, function(err){
                 if(err) return res.negotiate(err);
                 sails.log('User '+user.id+' has logged in.');
-                return res.redirect('/accueil');
+                return res.json(user);
+                // return res.redirect('/accueil');
               })
           });
     }

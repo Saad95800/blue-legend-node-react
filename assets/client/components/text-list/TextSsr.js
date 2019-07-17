@@ -7,21 +7,20 @@ export default class TextSsr extends Component {
   constructor(props){
     super(props);
 
-    let texte = {};
-    if(this.props.data.app == 'server'){
-      texte = this.props.data.texte;
-    }
-
+    let texte = this.props.data.texte;
+    let contentText = texte.content;
+    let contentTextArea = texte.contentTextArea;
     this.state = {
       texte: texte,
+      texteContent: contentText,
+      contentTextArea: contentTextArea,
       categories: [],
       selText: '',
-      french_value: 'Trad',
+      french_value: '',
       msgBtnSave: 'Enregistrer',
       colorBtnSave: '#3b74fe',
       wysiwyg: false,
       textTitle: texte.title,
-      textContent: texte.content,
       textCategory: texte.owner_category,
       wysiwyg_bg_color: '#fff'
     }
@@ -29,7 +28,7 @@ export default class TextSsr extends Component {
   }
 
   render() {
-
+    let contentText = this.state.texteContent;
     let wysiwygDisplay = 'none';
     let textDisplay = 'none';
     if(this.state.wysiwyg == true){
@@ -46,7 +45,7 @@ export default class TextSsr extends Component {
                   </div>
                   <div id="cal1">&nbsp;</div>
                   <div id="cal2">&nbsp;</div>
-                  <div id="popupTrad" style={{display: 'none',flexDirection: 'column',justifyContent: 'center',alignItems: 'center',padding: '10px', padding: '10px 10px', zIndex: 1, backgroundColor: '#E7EDFD', minWidth: '200px', minHeight: '90px', border: '1px solid black', position: 'absolute'}}>
+                  <div id="popupTrad" className="popup-trad">
                       <div className="arrow-popuptrad"></div>
                       <div id="translationPopupText" className="text-center">
                       <div style={{margin: '10px'}}>{capitalizeFirstLetter(this.state.selText)}</div>
@@ -56,7 +55,7 @@ export default class TextSsr extends Component {
                         <div id="btnSaveExpression" style={{width:'90px', minHeight: '45px', cursor: 'pointer', color: 'white', fontWeight: 'bold', backgroundColor: this.state.colorBtnSave, borderRadius: '5px', textAlign: 'center', padding: '12px 0px'}}>{this.state.msgBtnSave}</div>
                       </div>
                   </div>
-                  <div id="container-text" style={{marginTop: '20px'}} dangerouslySetInnerHTML={{ __html: this.state.texte.content }}></div>
+                  <div id="container-text" style={{marginTop: '20px'}} dangerouslySetInnerHTML={{ __html: this.state.texteContent }}></div>
                 </div>;
 
     return (

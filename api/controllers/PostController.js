@@ -4,6 +4,7 @@ import Appserver from '../../assets/client/components/Appserver';
 import Vitrine from '../../assets/client/components/Vitrine';
 import {StaticRouter } from 'react-router-dom';
 import moment from 'moment';
+import axios from 'axios';
 moment.locale('fr');
 
 let render = (req, res, data = {}) => {
@@ -35,11 +36,11 @@ module.exports = {
   },
 
   accueil: async function (req, res){
-    await Planning.create({
-      date: moment().format("YYYY-MM-DD"),
-      owner_serie: '5d2b53af4343e33070e4af24',
-      owner_user: req.user.id
-    });
+    // await Planning.create({
+    //   date: moment().format("YYYY-MM-DD"),
+    //   owner_serie: '5d2b53af4343e33070e4af24',
+    //   owner_user: req.user.id
+    // });
     let data = {};
     if(req.user != undefined){
       var begin = moment(moment().format("YYYY-MM-DD")).unix(); // Date de début d'aujourd'hui
@@ -50,8 +51,31 @@ module.exports = {
       data.nbSeriesToday = nbSeriesToday;
       data.nbSerieRealiseesToday = nbSerieRealiseesToday;
       data.nbSeriesTotalRealisees = nbSeriesTotalRealisees;
+      data.nbMotsExprApprisToday = '-';
+      data.nbMotsExprTotalAppris = '-';
     }
     render(req, res, data);
+  },
+
+  getDataHomeAjax: async function (req, res){
+
+    var begin = moment(moment().format("YYYY-MM-DD")).unix(); // Date de début d'aujourd'hui
+    var end = moment(moment().format("YYYY-MM-DD")).add(1, 'days').unix(); // Date de fin d'aujourd'hui
+
+    let nbSeriesToday = await Planning.count({owner_user: req.user.id, date: {'>=': begin, '<': end} });
+    let nbSerieRealiseesToday = await Histoserie.count({completed: true, owner_user: req.user.id, date_creation: {'>=': begin, '<': end}});
+    // let nbMotsExprApprisToday = await Dataserie.count({owner_user: req.user.id, date: {'>=': begin, '<': end}, groupBy:'owner_expression'});
+    let nbSeriesTotalRealisees = await Histoserie.count({completed: true, owner_user: req.user.id});
+    // let nbMotsExprTotalAppris = await Dataserie.count({owner_user: req.user.id});
+
+    let data = {
+      nbSeriesToday: nbSeriesToday,
+      nbSerieRealiseesToday: nbSerieRealiseesToday,
+      nbMotsExprApprisToday: '-',
+      nbSeriesTotalRealisees: nbSeriesTotalRealisees,
+      nbMotsExprTotalAppris: '-'
+    }
+    return res.json(data);
   },
 
   textes: async function (req, res){
@@ -70,9 +94,20 @@ module.exports = {
 
   texte: async function(req, res){
     let data = {};
+    let texte = {}
     if(req.user != undefined){
-      let texte = await Text.find({id: req.allParams().id_texte, owner_user: req.user.id});
-      data = {'texte': texte[0]};
+      texte = await Text.findOne({id: req.allParams().id_texte, owner_user: req.user.id});
+      let textContent = texte.content;
+      texte.contentTextArea = textContent;
+      
+      let recordexpressions = await RecordExpression.find({owner_user: req.user.id}).populate('owner_expression')
+      console.log(recordexpressions);
+      textContent = await sails.helpers.textHoverWords.with({
+                      textContent: textContent,
+                      recordexpressions: recordexpressions
+                    });
+      texte.content = textContent;
+      data = {'texte': texte};
     }
     render(req, res, data);
   },
@@ -125,7 +160,17 @@ module.exports = {
     if(req.user != undefined){
       let filtres = req.allParams();
       filtres.owner_user = req.user.id;
-      texte = await Text.find(filtres);
+      texte = await Text.findOne(filtres);
+      let textContent = texte.content;
+      texte.contentTextArea = texte.content;
+      let recordexpressions = await RecordExpression.find({owner_user: req.user.id}).populate('owner_expression')
+
+      textContent = await sails.helpers.textHoverWords.with({
+        textContent: textContent,
+        recordexpressions: recordexpressions
+      });
+
+      texte.content = textContent;
     }
     return res.json(texte);
   },
@@ -242,7 +287,7 @@ module.exports = {
     }
   },
 
-  saveExpression: async function (req, res){
+  saveExpressionAjax: async function (req, res){
     if(req.user != undefined){
       let params = req.allParams();
       let serie = await Serie.find({ owner_text: params.id_text, owner_user: req.user.id });
@@ -273,15 +318,30 @@ module.exports = {
           }else{
             sails.log('Expression éxistante trouvée: ' + expression.id);
           }
-          await RecordExpression.create({
-            owner_texte: params.id_text, 
-            owner_serie: serie.id,
-            owner_expression: expression.id,
-            owner_user: req.user.id
-          });    
+         await RecordExpression.findOrCreate(
+                                    {
+                                      owner_expression: expression.id,
+                                      owner_user: req.user.id
+                                    },
+                                    {
+                                    owner_texte: params.id_text, 
+                                    owner_serie: serie.id,
+                                    owner_expression: expression.id,
+                                    owner_user: req.user.id
+                                    }
+                                  );
+          let recordexpressions = await RecordExpression.find({owner_user: req.user.id}).populate('owner_expression');
+          let text = await Text.findOne({id: params.id_text});
+          let textHoverWords = await sails.helpers.textHoverWords.with({
+                                textContent: text.content,
+                                recordexpressions: recordexpressions
+                              });
+          let data = {
+            textHoverWords: textHoverWords,
+            texte: text.content,
+          }
+          return res.json(data);
         });
-
-        return res.ok();
       });
     }else{
       return res.error('Erreur de traitement');
@@ -416,27 +476,6 @@ module.exports = {
     }).fetch();
     return res.json(user);
   },
-  
-  getDataHomeAjax: async function (req, res){
-
-    var begin = moment(moment().format("YYYY-MM-DD")).unix(); // Date de début d'aujourd'hui
-    var end = moment(moment().format("YYYY-MM-DD")).add(1, 'days').unix(); // Date de fin d'aujourd'hui
-
-    let nbSeriesToday = await Planning.count({owner_user: req.user.id, date: {'>=': begin, '<': end} });
-    let nbSerieRealiseesToday = await Histoserie.count({completed: true, owner_user: req.user.id, date_creation: {'>=': begin, '<': end}});
-    // let nbMotsExprApprisToday = await Dataserie.count({owner_user: req.user.id, date: {'>=': begin, '<': end}, groupBy:'owner_expression'});
-    let nbSeriesTotalRealisees = await Histoserie.count({completed: true, owner_user: req.user.id});
-    // let nbMotsExprTotalAppris = await Dataserie.count({owner_user: req.user.id});
-
-    let data = {
-      nbSeriesToday: nbSeriesToday,
-      nbSerieRealiseesToday: nbSerieRealiseesToday,
-      nbMotsExprApprisToday: '-',
-      nbSeriesTotalRealisees: nbSeriesTotalRealisees,
-      nbMotsExprTotalAppris: '-'
-    }
-    return res.json(data);
-  },
 
   updateHistoserieAjax: async function(req, res){
 
@@ -458,6 +497,43 @@ module.exports = {
 
   getDataNavbarAjax: async function(req, res){
     return res.json(req.user);
+  },
+
+  checkExpressionExistAjax: async function(req, res){
+    let params = req.allParams();
+    let selText = params.expression.trim();
+    let expression = await Expression.findOne({
+      english_value: params.expression.trim()
+    });
+    if(expression != undefined){
+      // L'expression sélectionnée éxiste en bdd
+      let recordexpression = await RecordExpression.findOne({
+                                owner_expression: expression.id,
+                                owner_user: req.user.id
+                              })
+                              .populate('owner_expression');
+      if(recordexpression != undefined){
+        // L'expression éxiste dans l'espace membre de l'utilisateur
+        return res.json({existApi: 'yes', existUserSpace: 'yes', translation: expression.french_value});
+      }else{
+        return res.json({existApi: 'yes', existUserSpace: 'no', translation: expression.french_value});
+      }
+    }else{
+      axios({
+        method: 'post',
+        url: 'https://api.deepl.com/v2/translate?auth_key=3d1a2e4a-99eb-4622-3158-39c43344859b&text='+selText+'&target_lang=fr&source_lang=en',
+        responseType: 'json',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded', 'Accept': '*/*'}
+      })
+      .then((response) => {
+        return res.json({existApi: 'no', existUserSpace: 'no', translation: response.data.translations[0].text});
+      })
+      .catch( (error) => {
+        console.log(error);
+        return res.error('Erreur lors de l\'accès à l\'API deepl');
+      });
+    }
+
   }
 
 };

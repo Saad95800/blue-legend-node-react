@@ -29,7 +29,9 @@ export default class NavBar extends Component {
             classItem:"menu-item nav-lecture",
             id:"item-menu-text",
             style: {},
-            isSelected: false
+            isSelected: false,
+            title: 'Textes',
+            cssTitle: {position: 'absolute', marginTop: '53px', marginLeft: '-48px', color: 'white'}
         },
         // {
         //     url:"/categorie-ajout",
@@ -45,7 +47,9 @@ export default class NavBar extends Component {
             classItem:"menu-item nav-categories",
             id:"item-menu-categories",
             style: {},
-            isSelected: false
+            isSelected: false,
+            title: 'Catégories',
+            cssTitle: {position: 'absolute', marginTop: '53px', marginLeft: '-60px', color: 'white'}
         },
         {
             url:"/revision",
@@ -53,7 +57,9 @@ export default class NavBar extends Component {
             classItem:"menu-item nav-revision",
             id:"item-menu-revision",
             style: {},
-            isSelected: false
+            isSelected: false,
+            title: 'Révision',
+            cssTitle: {position: 'absolute', marginTop: '53px', marginLeft: '-51px', color: 'white'}
         },
         // {
         //     url:"/planning",
@@ -79,7 +85,9 @@ export default class NavBar extends Component {
             classItem:"menu-item-left nav-item-left",
             id:"item-menu-accueil",
             style: {},
-            isSelected: false
+            isSelected: false,
+            title: 'Dashboard',
+            cssTitle: {position: 'absolute', marginTop: '32px', marginLeft: '-36px', color: 'white', fontSize: '9px'}
         },
         // {
         //     url:"/info-user",
@@ -172,6 +180,8 @@ export default class NavBar extends Component {
                             id={item.id}
                             style={item.style}
                             isSelected={item.isSelected}
+                            title={item.title}
+                            cssTitle={item.cssTitle}
                             colorHoverItem={this.colorHoverItem.bind(this)} 
                             colorMouseOutItem={this.colorMouseOutItem.bind(this)} 
                             colorClickItem={this.colorClickItem.bind(this)}
@@ -187,6 +197,8 @@ export default class NavBar extends Component {
                             id={item.id}
                             style={item.style}
                             isSelected={item.isSelected}
+                            title={item.title}
+                            cssTitle={item.cssTitle}
                             colorHoverItem={this.colorHoverItem.bind(this)} 
                             colorMouseOutItem={this.colorMouseOutItem.bind(this)} 
                             colorClickItem={this.colorClickItem.bind(this)}

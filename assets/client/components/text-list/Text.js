@@ -11,9 +11,11 @@ export default class Text extends Component {
 
     this.state = {
       texte: {},
+      texteContent: '',
+      contentTextArea: '',
       categories: [],
       selText: '',
-      french_value: 'Trad',
+      french_value: '',
       msgBtnSave: 'Enregistrer',
       colorBtnSave: '#3b74fe',
       wysiwyg: false,
@@ -36,9 +38,11 @@ export default class Text extends Component {
       data: {id: this.props.location.pathname.split("/")[2]}
     })
     .then((response) => {
-      let text = response.data[0];
+      let text = response.data;
       this.setState({
         texte: text,
+        texteContent: text.content,
+        contentTextArea: text.contentTextArea,
         textTitle: text.title,
         textCategory: text.owner_category
       });
@@ -59,54 +63,77 @@ export default class Text extends Component {
     .catch( (error) => {
       console.log(error);
     });
-    // this.addLinksToWords();
-  }
-  addLinksToWords(){
-    let new_html = this.state.texte.content.replace(' as ', ' <span style="color:blue">as</span> ');
-    this.setState({texte: {content: new_html}});
+
+    // $(document).on('click', '.hover-word', (e) => {
+    //   console.log('hover-word');
+    // });
+    let th = this;
+    $(document).on('click', '.block-hover-word', function(e) {
+      console.log('cliqued');
+      let word = $(this).find('.hover-word').text();
+      // console.log($(this).html());
+      console.log($(this));
+      th.setState({selText: word, french_value: $(this).find('.hover-word-french').text()});
+      let ele = $('#popupTrad');
+      $(this).find('.popup-hover-word').html('<div class="popup-trad" style="display:inline-block;margin-left: -130px;margin-top: 20px;">'+ele.html()+'</div>');
+      
+      $(this).find('#btnSaveExpression').remove();
+    });
   }
 
   changePopup(mouse){
+      $('.popup-hover-word').html("");
       var ele = document.getElementById('popupTrad');
       var sel = window.getSelection();
       var rel1= document.createRange();
       rel1.selectNode(document.getElementById('cal1'));
       var rel2= document.createRange();
       rel2.selectNode(document.getElementById('cal2'));
-    if(mouse == 'mouseUp'){
-      if (!sel.isCollapsed) {
-            
-        var r = sel.getRangeAt(0).getBoundingClientRect();
-        var rb1 = rel1.getBoundingClientRect();
-        var rb2 = rel2.getBoundingClientRect();
-        ele.style.top = ((r.bottom - rb2.top)*100/(rb1.top-rb2.top)+20) + 'px'; //this will place ele below the selection
-        ele.style.left = ((r.left - rb2.left)*100/(rb1.left-rb2.left)-90) + 'px'; //this will align the right edges together
-        this.setState({selText: sel.toString()});
-        ele.style.display = 'block';
-        if(sel.toString().length > 40){
+      let selText = sel.toString().trim();
+    if(selText != '' && selText != ' '){
+      if(mouse == 'mouseUp'){
+        if(selText.length > 40){
           this.setState({msgBtnSave: 'Maximum 40 caractères', colorBtnSave: 'red'});
         }else{
-          this.setState({msgBtnSave: 'Enregistrer', colorBtnSave: '#3b74fe'});
+          /////////////////////////////////////////
+          if (!sel.isCollapsed) {
+              
+            axios({
+              method: 'post',
+              url: '/check-expression-exist-ajax',
+              responseType: 'json',
+              data: {expression: selText}
+            })
+            .then((response) => {
+              console.log(response);
+              var r = sel.getRangeAt(0).getBoundingClientRect();
+              var rb1 = rel1.getBoundingClientRect();
+              var rb2 = rel2.getBoundingClientRect();
+              ele.style.top = ((r.bottom - rb2.top)*100/(rb1.top-rb2.top)+20) + 'px'; //this will place ele below the selection
+              ele.style.left = ((r.left - rb2.left)*100/(rb1.left-rb2.left)-90) + 'px'; //this will align the right edges together
+              this.setState({selText: selText});
+              ele.style.display = 'block';
+              if(response.data.existUserSpace == 'no'){
+                // L'expression sélectionnéee n'éxiste pas dans l'espace de l'utilisateur
+                this.setState({msgBtnSave: 'Enregistrer', colorBtnSave: '#3b74fe', french_value: response.data.translation});
+              }else{
+                // L'expression sélectionnée éxiste en bdd
+                this.setState({msgBtnSave: 'Déjà enregistré', colorBtnSave: '#727d97', french_value: response.data.translation});
+              }
+  
+            })
+            .catch( (error) => {
+              console.log(error);
+            });
+          }
         }
-        // axios({
-        //   method: 'post',
-        //   url: 'https://api.deepl.com/v2/translate?auth_key=&text='+sel.toString()+'&target_lang=fr&source_lang=en',
-        //   // url: `https://translation.googleapis.com/language/translate/v2?source=en&target=fr&key=&q=${sel.toString()}`,
-        //   responseType: 'json',
-        //   headers: {'Content-Type': 'application/x-www-form-urlencoded', 'Accept': '*/*'}
-        // })
-        // .then((response) => {
-        //   console.log(response);
-        //   this.setState({french_value: response.data.translations[0].text});
-        // })
-        // .catch( (error) => {
-        //   console.log(error);
-        // });
+      }else{
+        ele.style.display = 'none';
+        $('.popup-hover-word').html("");
+        this.setState({selText: ''});
+      }      
     }
-    }else{
-      ele.style.display = 'none';
-      this.setState({selText: ''});
-    }
+
   }
 
   getSelectedText(){
@@ -171,9 +198,13 @@ export default class Text extends Component {
       })
       .then((response) => {
         console.log(response);
+        let data = response.data;
         if(response.statusText == 'OK'){
-          this.setState({msgBtnSave: 'Enregistré !', colorBtnSave: '#08e608'});
-          setTimeout(() => {this.setState({msgBtnSave: 'Enregistrer', colorBtnSave: '#3b74fe'})}, 1000);
+          this.setState({msgBtnSave: 'Enregistré !', colorBtnSave: '#08e608', texteContent: data.textHoverWords});
+          setTimeout(() => {
+            this.setState({msgBtnSave: 'Enregistrer', colorBtnSave: '#3b74fe'});
+            document.getElementById('popupTrad').style.display = 'none';
+          }, 1000);
         }
       })
       .catch( (error) => {
@@ -216,7 +247,7 @@ export default class Text extends Component {
   }
 
   render() {
-
+    let contentText = this.state.texteContent;
     let options = this.state.categories.map((category, index) =>{
       return <option key={index} value={category.id}>{category.name}</option>
     });
@@ -259,7 +290,7 @@ export default class Text extends Component {
                     <div className="btn-forms" style={{marginRight: '5px'}} onClick={this.updateText.bind(this)}>Enregistrer</div>
                     <div className="btn-forms" style={{backgroundColor: '#DF2645'}} onClick={() => {this.setState({wysiwyg: false})}}>Annuler</div>
                   </div>
-                  <div  style={{backgroundColor: this.state.wysiwyg_bg_color}}>
+                  <div style={{backgroundColor: this.state.wysiwyg_bg_color}}>
                     <Trumbowyg id='react-trumbowyg'
                       buttons={
                           [
@@ -274,7 +305,7 @@ export default class Text extends Component {
                               ['fullscreen']
                           ]
                       }
-                      data={this.state.texte.content}
+                      data={this.state.contentTextArea}
                       placeholder='Entrez votre texte'
                       ref="trumbowyg"
                     />
@@ -287,7 +318,7 @@ export default class Text extends Component {
                     </div>
                     <div id="cal1">&nbsp;</div>
                     <div id="cal2">&nbsp;</div>
-                    <div id="popupTrad" style={{display: 'none',flexDirection: 'column',justifyContent: 'center',alignItems: 'center',padding: '10px', padding: '10px 10px', zIndex: 1, backgroundColor: '#E7EDFD', minWidth: '200px', minHeight: '90px', border: '1px solid black', position: 'absolute'}}>
+                    <div id="popupTrad" className="popup-trad">
                         <div className="arrow-popuptrad"></div>
                         <div id="translationPopupText" className="text-center">
                         <div style={{margin: '10px'}}>{capitalizeFirstLetter(this.state.selText)}</div>
@@ -297,7 +328,7 @@ export default class Text extends Component {
                           <div id="btnSaveExpression" onClick={this.saveExpression.bind(this)} style={{width:'90px', minHeight: '45px', cursor: 'pointer', color: 'white', fontWeight: 'bold', backgroundColor: this.state.colorBtnSave, borderRadius: '5px', textAlign: 'center', padding: '12px 0px'}}>{this.state.msgBtnSave}</div>
                         </div>
                     </div>
-                    <div id="container-text" style={{marginTop: '20px'}} onMouseUp={()=>{this.changePopup('mouseUp')}} onMouseDown={()=>{this.changePopup('mouseDown')}} dangerouslySetInnerHTML={{ __html: this.state.texte.content }}></div>
+                    <div id="container-text" style={{marginTop: '20px'}} onMouseUp={()=>{this.changePopup('mouseUp')}} onMouseDown={()=>{this.changePopup('mouseDown')}} dangerouslySetInnerHTML={{ __html: this.state.texteContent }}></div>
                   </div>;
 
     return (

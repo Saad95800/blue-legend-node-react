@@ -87,7 +87,7 @@ export default class serieRevision extends Component {
           score: this.state.score+1, 
           stepRev: "Validation", 
           clock: 'disabled',
-          inputResponseDisabled: true
+          // inputResponseDisabled: true
         });
       }else{
         this.setState({
@@ -98,7 +98,7 @@ export default class serieRevision extends Component {
                     }, 
                     stepRev: "Validation",
                     clock: 'disabled',
-                    inputResponseDisabled: true
+                    // inputResponseDisabled: true
                   });
       }
       let url = this.props.data.location.pathname.split('/');
@@ -171,7 +171,7 @@ export default class serieRevision extends Component {
         numQuestion: this.state.numQuestion+1, 
         clock: 'enabled',
         inputResponse: '',
-        inputResponseDisabled: false
+        // inputResponseDisabled: false
       });
     }
     document.querySelector("#inputResponse").value = "";
