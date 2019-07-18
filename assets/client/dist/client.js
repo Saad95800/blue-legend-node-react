@@ -997,10 +997,10 @@ function (_Component) {
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onClick: this.viewPopupSignin.bind(this),
-        className: "btn-vitrine display-flex-center"
+        className: "btn-vitrine-header display-flex-center"
       }, "CONNEXION"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onClick: this.viewPopupSignup.bind(this),
-        className: "btn-vitrine display-flex-center"
+        className: "btn-vitrine-header display-flex-center"
       }, "INSCRIPTION"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "block1 img-vitrine-blocks"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1011,8 +1011,8 @@ function (_Component) {
         style: {
           height: '580px'
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-        sm: "6",
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-xs-6",
         style: {
           height: '100%'
         }
@@ -1020,8 +1020,8 @@ function (_Component) {
         className: "size100 display-flex-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "img-block1-logo"
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-        sm: "6",
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-xs-6",
         style: {
           height: '100%'
         }
@@ -1035,23 +1035,18 @@ function (_Component) {
           margin: '15px 0px'
         }
       }, "Apprend l'anglais efficacement. Par la lecture."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "btn-vitrine display-flex-center",
-        style: {
-          width: '300px',
-          height: '100px',
-          borderRadius: '50px',
-          fontSize: '2em'
-        }
+        className: "btn-vitrine-begin display-flex-center"
       }, "Commencer"))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-        className: "block2 img-vitrine-blocks"
+        className: "block2 img-vitrine-blocks display-flex-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Container"], {
         className: "size100"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row display-flex-center",
         style: {
           height: '100%'
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-        sm: "6",
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-xs-6",
         style: {
           height: '100%'
         }
@@ -1063,51 +1058,38 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "flex-column"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        style: {
-          fontSize: '37px'
-        },
-        className: "text-center font-weight-bold"
+        className: "text1-block2 text-center font-weight-bold"
       }, "Qu'est-ce que Blue Legend ?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        style: {
-          fontSize: '22px'
-        },
-        className: "text-center font-weight-bold"
-      }, "Blue Legend est une application web et mobile permettant d'apprendre l'anglais \xE0 travers la lecture de textes en leur donnant la possibilit\xE9 de traduire chaque expressions et mots de vocabulaire et de les r\xE9viser gr\xE2ce \xE0 des s\xE9ries de r\xE9visions ludiques et int\xE9ractives.")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-        sm: "6",
+        className: "text2-block2 text-center font-weight-bold"
+      }, "Blue Legend est une application web et mobile permettant d'apprendre l'anglais \xE0 travers la lecture de textes en leur donnant la possibilit\xE9 de traduire chaque expressions et mots de vocabulaire et de les r\xE9viser gr\xE2ce \xE0 des s\xE9ries de r\xE9visions ludiques et int\xE9ractives.")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-xs-6",
         style: {
           height: '100%'
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "img-vitrine-block2 size100"
+        className: "img-vitrine-block2"
       }))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-        className: "block3 img-vitrine-blocks"
+        className: "block3 img-vitrine-blocks display-flex-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Container"], {
         className: "img-vitrine-block3 size100"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row minH600Desktop",
         style: {
           height: '100%'
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-sm-6 col-sm-offset-6",
+        className: "col-xs-6 col-xs-offset-6 col-sm-offset-6 display-flex-center minH600Desktop",
         style: {
           height: '100%'
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "size100 text-border display-flex-center flex-column"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        style: {
-          fontSize: '37px',
-          color: '#fff'
-        },
-        className: "text-center font-weight-bold"
+        className: "text1-block3 text-center font-weight-bold"
       }, "Apprend en lisant tes textes et contenus pr\xE9f\xE9r\xE9s."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        style: {
-          fontSize: '22px',
-          color: '#fff'
-        },
-        className: "text-center font-weight-bold"
+        className: "text2-block3 text-center font-weight-bold"
       }, "Choisis les livres et contenus qui te passionnent. Lis tes textes et enregistre les mots de vocabulaire et expression que tu souhaites.")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-        className: "block4 img-vitrine-blocks"
+        className: "block4 img-vitrine-blocks display-flex-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Container"], {
         className: "size100"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
@@ -1115,31 +1097,25 @@ function (_Component) {
           height: '100%'
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-sm-6",
+        className: "col-xs-6",
         style: {
           height: '100%'
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "size100 display-flex-center flex-column"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        style: {
-          fontSize: '37px'
-        },
-        className: "text-center font-weight-bold"
+        className: "text1-block4 text-center font-weight-bold"
       }, "Apprend efficacement ton vocabulaire."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        style: {
-          fontSize: '22px'
-        },
-        className: "text-center font-weight-bold"
+        className: "text2-block4 text-center font-weight-bold"
       }, "R\xE9vise ton vocabulaire avec des s\xE9ries de r\xE9vision int\xE9ractives."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-sm-6",
+        className: "col-xs-6",
         style: {
           height: '100%'
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "img-vitrine-block4 size100"
+        className: "img-vitrine-block4"
       }))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-        className: "block5 img-vitrine-blocks"
+        className: "block5 img-vitrine-blocks display-flex-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Container"], {
         className: "size100"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
@@ -1147,37 +1123,25 @@ function (_Component) {
           height: '100%'
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-sm-6",
+        className: "col-xs-6 display-flex-center",
         style: {
           height: '100%'
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "size100 display-flex-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "img-vitrine-block5",
-        style: {
-          height: '80%',
-          width: '80%'
-        }
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-sm-6",
+        className: "img-vitrine-block5"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-xs-6",
         style: {
           height: '100%'
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "size100 display-flex-center flex-column"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        style: {
-          fontSize: '37px'
-        },
-        className: "text-center font-weight-bold"
+        className: "text1-block5 text-center font-weight-bold"
       }, "Met-toi au d\xE9fi en jouant contre la montre."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        style: {
-          fontSize: '22px'
-        },
-        className: "text-center font-weight-bold"
+        className: "text2-block5 text-center font-weight-bold"
       }, "Tu as la possibilit\xE9 de mettre au chronom\xE8tre lors de chacune de tes s\xE9ries de r\xE9vision afin de te mettre au d\xE9fi et de voir la qualit\xE9 de ton apprentissage.")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-        className: "block6 img-vitrine-blocks"
+        className: "block6 img-vitrine-blocks display-flex-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Container"], {
         className: "size100"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
@@ -1185,32 +1149,23 @@ function (_Component) {
           height: '100%'
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-sm-6",
+        className: "col-xs-6",
         style: {
           height: '100%'
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "size100 display-flex-center flex-column"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        style: {
-          fontSize: '37px'
-        },
-        className: "text-center font-weight-bold"
+        className: "text1-block6 text-center font-weight-bold"
       }, "M\xE9morise durablement gr\xE2ce \xE0 la m\xE9thode de r\xE9p\xE9titions espac\xE9s"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-sm-6",
+        className: "col-xs-6",
         style: {
           height: '100%'
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "display-flex-center size100"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "img-vitrine-block6",
-        style: {
-          width: '90%',
-          height: '90%'
-        }
-      })))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-        className: "block7 img-vitrine-blocks"
+        className: "img-vitrine-block6"
+      }))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "block7 img-vitrine-blocks display-flex-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Container"], {
         className: "size100"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
@@ -1218,37 +1173,25 @@ function (_Component) {
           height: '100%'
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-sm-6",
+        className: "col-xs-6",
         style: {
           height: '100%'
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "size100 display-flex-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "img-vitrine-block7",
-        style: {
-          height: '80%',
-          width: '80%'
-        }
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-sm-6",
+        className: "img-vitrine-block7"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-xs-6",
         style: {
           height: '100%'
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "size100 display-flex-center flex-column"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        style: {
-          fontSize: '37px'
-        },
-        className: "text-center font-weight-bold"
+        className: "text1-block7 text-center font-weight-bold"
       }, "En ligne ou hors ligne, r\xE9vise tes textes o\xF9 que tu soit."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        style: {
-          fontSize: '22px'
-        },
-        className: "text-center font-weight-bold"
+        className: "text2-block7 text-center font-weight-bold"
       }, "Notre application est disponible pour tout type d'appareils et est utilisable en mode hors-ligne. C'est une progressive web app, ce qui signifie qu'elle est multi plate-forme et fonctionne sur IOS et Android.")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-        className: "block8 footer-vitrine"
+        className: "block8 footer-vitrine display-flex-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Container"], {
         className: "size100"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {

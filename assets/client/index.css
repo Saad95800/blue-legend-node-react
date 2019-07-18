@@ -562,7 +562,19 @@ body{
   overflow:none;
   z-index:-100;
 }
-.btn-vitrine{
+.btn-vitrine-begin{
+  background-color: #2558D5;
+  border: 0.4px solid #fff;
+  color: #fff;
+  Font-weight: bold;
+  margin: 0px 3px;
+  cursor: pointer;
+  width: 300px;
+  height: 100px; 
+  border-radius: 50px;
+  font-size: 2em;
+}
+.btn-vitrine-header{
   border-radius: 20px;
   background-color: #2558D5;
   width: 150px;
@@ -591,7 +603,7 @@ body{
   height: 100%;
 }
 .img-vitrine-blocks{
-  height: 600px;
+  min-height: 600px;
   width: 100%;
 }
 .img-vitrine-block1{
@@ -599,11 +611,12 @@ body{
   background-size: 100% 100%;
   opacity: 0.9;
   position: absolute;
-  height: 600px;
+  height: 580px;
 }
 .img-vitrine-block2{
   background: url(./images/vitrine/block2.png) 0px 0px no-repeat;
   background-size: 100% 100%;
+  height: 400px;
 }
 .img-vitrine-block3{
   background: url(./images/vitrine/block3.png) 0px 0px no-repeat;
@@ -612,18 +625,23 @@ body{
 .img-vitrine-block4{
   background: url(./images/vitrine/block4.png) 0px 0px no-repeat;
   background-size: 100% 100%;
+  height: 400px;
 }
 .img-vitrine-block5{
   background: url(./images/vitrine/block5.png) 0px 0px no-repeat;
   background-size: 100% 100%;
+  height: 400px;
+  width: 400px;
 }
 .img-vitrine-block6{
   background: url(./images/vitrine/block6.png) 0px 0px no-repeat;
   background-size: 100% 100%;
+  height: 400px;
 }
 .img-vitrine-block7{
   background: url(./images/vitrine/block7.jpg) 0px 0px no-repeat;
   background-size: 100% 100%;
+  height: 400px;
 }
 .img-block1-logo{
   background: url(./images/vitrine/logo_blue_legend.png) 0px 0px no-repeat;
@@ -665,7 +683,6 @@ body{
 }
 .footer-vitrine{
   background-color: #3B74FE;
-  height: 250px;
 }
 .back-screen{
   background-color: #000;
@@ -766,6 +783,12 @@ body{
 .hover-word-french{
   display: none;
 }
+.text1-block2, .text1-block3, .text1-block4, .text1-block5, .text1-block6, .text1-block7{
+  font-size: 37px;
+}
+.text2-block2, .text2-block3, .text2-block4, .text2-block5, .text2-block6, .text2-block7{
+  font-size: 22px;
+}
 /****************** Media queries *******************/
 @media screen and (max-width: 768px) {
   .container-page{
@@ -814,6 +837,48 @@ body{
 @media screen and (min-width: 576px) {
   .block-option-home>div{
     font-size:3vw;
+  }
+  .img-vitrine-block3{
+    min-height: 600px;
+  }
+  .minH600Desktop{
+    min-height: 600px;
+  }
+  .footer-vitrine{
+    height: 250px;
+  }
+}
+@media screen and (max-width: 576px) {
+  .btn-vitrine-begin{
+    margin: 0px 0px;
+    width: 160px;
+    height: 75px;
+    font-size: 1.5em;
+  }
+  .img-block1-logo{
+    height: 175px;
+  }
+  .text-block1-msg{
+    font-size: 1.6em;
+  }
+  .img-vitrine-block2, .img-vitrine-block4, .img-vitrine-block5, .img-vitrine-block6, .img-vitrine-block7{
+    height: 220px;
+  }
+  .text1-block2, .text1-block3, .text1-block4, .text1-block5, .text1-block6, .text1-block7{
+    font-size: 26px;
+  }
+  .text2-block2, .text2-block3, .text2-block4, .text2-block5, .text2-block6, .text2-block7{
+    font-size: 13px;
+  }
+  .img-vitrine-blocks{
+    min-height: 455px;
+    width: 100%;
+  }
+  .img-vitrine-block3{
+    height: 455px;
+  }
+  .btn-vitrine-header{
+    font-size: 0.8em;
   }
 }
 /*///////////////////////////////////////////////////////////////////*/
