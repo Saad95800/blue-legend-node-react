@@ -290,22 +290,50 @@ module.exports = {
   saveExpressionAjax: async function (req, res){
     if(req.user != undefined){
       let params = req.allParams();
-      let serie = await Serie.find({ owner_text: params.id_text, owner_user: req.user.id });
+      let serie = await Serie.find(
+        { 
+          owner_text: params.id_text, 
+          owner_user: req.user.id
+        })
+        .populate('recordexpression')
+        .sort([
+          { createdAt: 'ASC' },
+        ]);
       let number = serie.length + 1;
-      await Serie.findOrCreate(
-        { owner_text: params.id_text, owner_user: req.user.id }, 
-        { owner_text: params.id_text, name: 'Série '+number, owner_user: req.user.id }
-      )
-      .exec(async(err, serie, wasCreated) => {
-        if (err) { return res.serverError(err); }
-      
-        if(wasCreated) {
-          sails.log('Nouvelle série crée: ' + serie.id);
+      let serie_id = null;
+
+      console.log(serie);
+      console.log(serie.length);
+
+      if(serie.length == 0){
+        let s = await Serie.create({
+          name: 'Série 1',
+          owner_text: params.id_text,
+          owner_user: req.user.id
+        });
+        serie_id = s.id;
+      }else if(serie.length == 1 && serie[0].recordexpression.length < 10){
+        serie_id = serie.id;
+      }else if(serie.length > 1){
+        console.log('plus d\'une série');
+        let exist = false;
+        for(let se of serie){
+          if(se.recordexpression.length < 10){
+            exist = true;
+            serie_id = se.id;
+            break;
+          }
         }
-        else {
-          sails.log('Série éxistante trouvée: ' + serie.id);
+        if(exist == false){
+          var ser = await Serie.create({
+            name: 'Série '+number,
+            owner_text: params.id_text,
+            owner_user: req.user.id
+          }).fetch();
+          serie_id = ser.id;
         }
-        
+      }
+
         await Expression.findOrCreate(
           {english_value: params.english_value},
           {english_value: params.english_value, french_value:params.french_value}
@@ -325,7 +353,7 @@ module.exports = {
                                     },
                                     {
                                     owner_texte: params.id_text, 
-                                    owner_serie: serie.id,
+                                    owner_serie: serie_id,
                                     owner_expression: expression.id,
                                     owner_user: req.user.id
                                     }
@@ -342,7 +370,60 @@ module.exports = {
           }
           return res.json(data);
         });
-      });
+
+      // await Serie.findOrCreate(
+      //   { owner_text: params.id_text, owner_user: req.user.id }, 
+      //   { owner_text: params.id_text, name: 'Série '+number, owner_user: req.user.id }
+      // )
+      // .exec(async(err, serie, wasCreated) => {
+      //   if (err) { return res.serverError(err); }
+      
+      //   if(wasCreated) {
+      //     sails.log('Nouvelle série crée: ' + serie.id);
+      //   }
+      //   else {
+      //     sails.log('Série éxistante trouvée: ' + serie.id);
+      //     console.log(serie);
+      //   }
+        
+        // await Expression.findOrCreate(
+        //   {english_value: params.english_value},
+        //   {english_value: params.english_value, french_value:params.french_value}
+        //   )
+        // .exec(async(err, expression, wasCreated) => {
+        //   if (err) { return res.serverError(err); }
+        //   if(wasCreated){
+        //     sails.log('Nouvelle expression crée: ' + expression.id);
+        //     // await Expression.updateOne({id: expression.id}).set({french_value:params.french_value});
+        //   }else{
+        //     sails.log('Expression éxistante trouvée: ' + expression.id);
+        //   }
+        //  await RecordExpression.findOrCreate(
+        //                             {
+        //                               owner_expression: expression.id,
+        //                               owner_user: req.user.id
+        //                             },
+        //                             {
+        //                             owner_texte: params.id_text, 
+        //                             owner_serie: serie.id,
+        //                             owner_expression: expression.id,
+        //                             owner_user: req.user.id
+        //                             }
+        //                           );
+        //   let recordexpressions = await RecordExpression.find({owner_user: req.user.id}).populate('owner_expression');
+        //   let text = await Text.findOne({id: params.id_text});
+        //   let textHoverWords = await sails.helpers.textHoverWords.with({
+        //                         textContent: text.content,
+        //                         recordexpressions: recordexpressions
+        //                       });
+        //   let data = {
+        //     textHoverWords: textHoverWords,
+        //     texte: text.content,
+        //   }
+        //   return res.json(data);
+        // });
+
+      // });
     }else{
       return res.error('Erreur de traitement');
     }

@@ -38,16 +38,37 @@ module.exports = {
 
   fn: async function (inputs) {
     for(let recordexpression of inputs.recordexpressions){
-      let english_value = recordexpression.owner_expression.english_value;
-      let french_value = recordexpression.owner_expression.french_value;
-      inputs.textContent = inputs.textContent.split(' '+english_value+' ');
-      inputs.textContent = inputs.textContent.join( ' <span class="block-hover-word"><span class="hover-word">'+english_value+'</span><span class="hover-word-french">'+french_value+'</span><span class="popup-hover-word"></span></span> ');
-      inputs.textContent = inputs.textContent.split('>'+english_value+' ');
-      inputs.textContent = inputs.textContent.join( '><span class="block-hover-word"><span class="hover-word">'+english_value+'</span><span class="hover-word-french">'+french_value+'</span><span class="popup-hover-word"></span></span> ');
-      inputs.textContent = inputs.textContent.split(' '+english_value+'<');
-      inputs.textContent = inputs.textContent.join( ' <span class="block-hover-word"><span class="hover-word">'+english_value+'</span><span class="hover-word-french">'+french_value+'</span><span class="popup-hover-word"></span></span><');
-      inputs.textContent = inputs.textContent.split(' '+english_value+'.');
-      inputs.textContent = inputs.textContent.join( ' <span class="block-hover-word"><span class="hover-word">'+english_value+'</span><span class="hover-word-french">'+french_value+'</span><span class="popup-hover-word"></span></span>.');
+      if(recordexpression.owner_expression.english_value.indexOf(' ') == -1){
+        let english_value = recordexpression.owner_expression.english_value;
+        let french_value = recordexpression.owner_expression.french_value;
+        inputs.textContent = inputs.textContent.split(' '+english_value+' ');
+        inputs.textContent = inputs.textContent.join( ' <span class="block-hover-word"><span class="hover-word">'+english_value+'</span><span class="hover-word-french">'+french_value+'</span><span class="popup-hover-word"></span></span> ');
+        inputs.textContent = inputs.textContent.split('&nbsp;'+english_value+'&nbsp;');
+        inputs.textContent = inputs.textContent.join( '&nbsp;<span class="block-hover-word"><span class="hover-word">'+english_value+'</span><span class="hover-word-french">'+french_value+'</span><span class="popup-hover-word"></span></span>&nbsp;');
+        inputs.textContent = inputs.textContent.split('>'+english_value+' ');
+        inputs.textContent = inputs.textContent.join( '><span class="block-hover-word"><span class="hover-word">'+english_value+'</span><span class="hover-word-french">'+french_value+'</span><span class="popup-hover-word"></span></span> ');
+        inputs.textContent = inputs.textContent.split(' '+english_value+'<');
+        inputs.textContent = inputs.textContent.join( ' <span class="block-hover-word"><span class="hover-word">'+english_value+'</span><span class="hover-word-french">'+french_value+'</span><span class="popup-hover-word"></span></span><');
+        inputs.textContent = inputs.textContent.split(' '+english_value+'.');
+        inputs.textContent = inputs.textContent.join( ' <span class="block-hover-word"><span class="hover-word">'+english_value+'</span><span class="hover-word-french">'+french_value+'</span><span class="popup-hover-word"></span></span>.');
+        inputs.textContent = inputs.textContent.split(' '+english_value+',');
+        inputs.textContent = inputs.textContent.join( ' <span class="block-hover-word"><span class="hover-word">'+english_value+'</span><span class="hover-word-french">'+french_value+'</span><span class="popup-hover-word"></span></span>,');
+        inputs.textContent = inputs.textContent.split(' '+english_value+';');
+        inputs.textContent = inputs.textContent.join( ' <span class="block-hover-word"><span class="hover-word">'+english_value+'</span><span class="hover-word-french">'+french_value+'</span><span class="popup-hover-word"></span></span>;');
+        inputs.textContent = inputs.textContent.split(','+english_value+' ');
+        inputs.textContent = inputs.textContent.join( ',<span class="block-hover-word"><span class="hover-word">'+english_value+'</span><span class="hover-word-french">'+french_value+'</span><span class="popup-hover-word"></span></span> ');
+        inputs.textContent = inputs.textContent.split('.'+english_value+' ');
+        inputs.textContent = inputs.textContent.join( '.<span class="block-hover-word"><span class="hover-word">'+english_value+'</span><span class="hover-word-french">'+french_value+'</span><span class="popup-hover-word"></span></span> ');
+        inputs.textContent = inputs.textContent.split(';'+english_value+' ');
+        inputs.textContent = inputs.textContent.join( ';<span class="block-hover-word"><span class="hover-word">'+english_value+'</span><span class="hover-word-french">'+french_value+'</span><span class="popup-hover-word"></span></span> ');      
+        inputs.textContent = inputs.textContent.split(':'+english_value+' ');
+        inputs.textContent = inputs.textContent.join( ':<span class="block-hover-word"><span class="hover-word">'+english_value+'</span><span class="hover-word-french">'+french_value+'</span><span class="popup-hover-word"></span></span> ');      
+        inputs.textContent = inputs.textContent.split(' '+english_value+':');
+        inputs.textContent = inputs.textContent.join( ' <span class="block-hover-word"><span class="hover-word">'+english_value+'</span><span class="hover-word-french">'+french_value+'</span><span class="popup-hover-word"></span></span>:');      
+        inputs.textContent = inputs.textContent.split('>'+english_value+':');
+        inputs.textContent = inputs.textContent.join( '><span class="block-hover-word"><span class="hover-word">'+english_value+'</span><span class="hover-word-french">'+french_value+'</span><span class="popup-hover-word"></span></span>:');      
+      }
+
     }
     return inputs.textContent;
   }
