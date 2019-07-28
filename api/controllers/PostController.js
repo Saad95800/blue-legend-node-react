@@ -607,6 +607,16 @@ module.exports = {
         headers: {'Content-Type': 'application/x-www-form-urlencoded', 'Accept': '*/*'}
       })
       .then((response) => {
+        Expression.findOrCreate(
+          {english_value: selText},
+          {english_value: selText, french_value:response.data.translations[0].text}
+          )
+        .exec(async(err, expression, wasCreated) => {
+          if (err) { return res.serverError(err); }
+          if(wasCreated){
+            sails.log('Nouvelle expression crée: ' + expression.id);
+          }
+        });
         return res.json({existApi: 'no', existUserSpace: 'no', translation: response.data.translations[0].text});
       })
       .catch( (error) => {
