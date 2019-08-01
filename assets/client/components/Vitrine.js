@@ -19,21 +19,23 @@ export default class Vitrine extends Component {
     }
   }
   
-  viewMessageFlash(msg, error = false){
+  viewMessageFlash(msg, error = false, timeout = true){
     let mf = document.querySelector("#message-flash");
     mf.style.height = '40px';
     mf.innerHTML = msg;
-    console.log('message flash view 2');
+    console.log(msg);
     if(error){
       mf.style.backgroundColor = 'rgb(255, 29, 22)';
     }else{
       mf.style.backgroundColor = '#00ba62';
     }
-    setTimeout(function(){
-      mf.style.height = '0px';
-      mf.style.padding = '0px';
-      mf.innerHTML = '';
-    }, 3000);
+    if(timeout){
+      setTimeout(function(){
+        mf.style.height = '0px';
+        mf.style.padding = '0px';
+        mf.innerHTML = '';
+      }, 3000);
+    }
 
   }
 
@@ -90,9 +92,13 @@ export default class Vitrine extends Component {
           .then((response) => {
             console.log(response);
             if(response.statusText == 'OK'){
-              window.localStorage.setItem('id_user', response.data.id);
-              this.viewMessageFlash('Utilisateur crée avec succes !', false);
-              document.location.href="/accueil";
+              if(response.data.error == true){
+                this.viewMessageFlash(response.data.msg, true);
+              }else{
+                window.localStorage.setItem('id_user', response.data.user.id);
+                this.viewMessageFlash(response.data.msg, false, false);
+                // document.location.href="/accueil";
+              }
             }else{
               this.viewMessageFlash('Erreur lors de la création de l\'utilisateur', true);
             }

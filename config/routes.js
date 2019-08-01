@@ -37,6 +37,7 @@ module.exports.routes = {
   'GET /revision-serie/texte/:id_texte/serie/:id_serie/content/:num_content/mode/:num_mode': {controller: 'PostController', action: 'serieRevision'},
   'GET /custom-series-list': {controller: 'PostController', action: 'customSeriesList'},
   'GET /add-custom-serie': {controller: 'PostController', action: 'addCustomSerie'},
+  'GET /register-confirmation/:id_user': {controller: 'AuthController', action: 'validateUser'},
   'POST /get-serie-by-text-ajax': {controller: 'PostController', action: 'getSerieByText', csrf: false},
   'POST /textes-revision-ajax': {controller: 'PostController', action: 'getTextsRevision', csrf: false},
   'POST /series-revision-ajax': {controller: 'PostController', action: 'getSeriesRevision', csrf: false},
@@ -49,6 +50,7 @@ module.exports.routes = {
   'POST /check-expression-exist-ajax': {controller: 'PostController', action: 'checkExpressionExistAjax', csrf: false},
   'POST /login': {controller: 'AuthController', action: 'login', csrf: false},
   'POST /logout': {controller: 'AuthController', action: 'logout', csrf: false},
+  
   // 'GET /login': { view: 'login' },
   // 'POST /login': 'AuthController.login',
   // '/logout': 'AuthController.logout',

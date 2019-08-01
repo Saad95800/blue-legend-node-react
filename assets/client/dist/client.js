@@ -649,10 +649,11 @@ function (_Component) {
     key: "viewMessageFlash",
     value: function viewMessageFlash(msg) {
       var error = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+      var timeout = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
       var mf = document.querySelector("#message-flash");
       mf.style.height = '40px';
       mf.innerHTML = msg;
-      console.log('message flash view 2');
+      console.log(msg);
 
       if (error) {
         mf.style.backgroundColor = 'rgb(255, 29, 22)';
@@ -660,11 +661,13 @@ function (_Component) {
         mf.style.backgroundColor = '#00ba62';
       }
 
-      setTimeout(function () {
-        mf.style.height = '0px';
-        mf.style.padding = '0px';
-        mf.innerHTML = '';
-      }, 3000);
+      if (timeout) {
+        setTimeout(function () {
+          mf.style.height = '0px';
+          mf.style.padding = '0px';
+          mf.innerHTML = '';
+        }, 3000);
+      }
     }
   }, {
     key: "viewPopupSignup",
@@ -727,11 +730,14 @@ function (_Component) {
               console.log(response);
 
               if (response.statusText == 'OK') {
-                window.localStorage.setItem('id_user', response.data.id);
+                if (response.data.error == true) {
+                  _this2.viewMessageFlash(response.data.msg, true);
+                } else {
+                  window.localStorage.setItem('id_user', response.data.user.id);
 
-                _this2.viewMessageFlash('Utilisateur crée avec succes !', false);
+                  _this2.viewMessageFlash(response.data.msg, false, false); // document.location.href="/accueil";
 
-                document.location.href = "/accueil";
+                }
               } else {
                 _this2.viewMessageFlash('Erreur lors de la création de l\'utilisateur', true);
               }
@@ -2063,6 +2069,20 @@ function (_Component) {
           marginLeft: '-51px',
           color: 'white'
         }
+      }, {
+        url: "/expressions",
+        classContainer: "bloc-btn-menu",
+        classItem: "menu-item nav-expression",
+        id: "item-menu-expression",
+        style: {},
+        isSelected: false,
+        title: 'Expressions',
+        cssTitle: {
+          position: 'absolute',
+          marginTop: '53px',
+          marginLeft: '-64px',
+          color: 'white'
+        }
       }],
       itemsLeft: [{
         url: "/accueil",
@@ -2077,7 +2097,7 @@ function (_Component) {
           marginTop: '32px',
           marginLeft: '-36px',
           color: 'white',
-          fontSize: '9px'
+          fontSize: '9pxp'
         }
       }],
       url_courante: _this.props.data.url,
@@ -4293,63 +4313,71 @@ function (_Component) {
 
       if (selText != '' && selText != ' ') {
         if (mouse == 'mouseUp') {
-          if (selText.length > 40) {
-            this.setState({
-              msgBtnSave: 'Maximum 40 caractères',
-              colorBtnSave: 'red'
-            });
-          } else {
-            /////////////////////////////////////////
-            if (!sel.isCollapsed) {
-              axios__WEBPACK_IMPORTED_MODULE_1___default()({
-                method: 'post',
-                url: '/check-expression-exist-ajax',
-                responseType: 'json',
-                data: {
-                  expression: selText
-                }
-              }).then(function (response) {
-                console.log(response);
-                var r = sel.getRangeAt(0).getBoundingClientRect();
-                var rb1 = rel1.getBoundingClientRect();
-                var rb2 = rel2.getBoundingClientRect();
-                ele.style.top = (r.bottom - rb2.top) * 100 / (rb1.top - rb2.top) + 20 + 'px'; //this will place ele below the selection
+          ele.style.display = 'block'; /////////////////////////////////////////
 
-                ele.style.left = (r.left - rb2.left) * 100 / (rb1.left - rb2.left) - 90 + 'px'; //this will align the right edges together
+          if (!sel.isCollapsed) {
+            axios__WEBPACK_IMPORTED_MODULE_1___default()({
+              method: 'post',
+              url: '/check-expression-exist-ajax',
+              responseType: 'json',
+              data: {
+                expression: selText
+              }
+            }).then(function (response) {
+              console.log(response);
+              var r = sel.getRangeAt(0).getBoundingClientRect();
+              var rb1 = rel1.getBoundingClientRect();
+              var rb2 = rel2.getBoundingClientRect();
+              ele.style.top = (r.bottom - rb2.top) * 100 / (rb1.top - rb2.top) + 20 + 'px'; //this will place ele below the selection
 
-                _this3.setState({
-                  selText: selText
-                });
+              ele.style.left = (r.left - rb2.left) * 100 / (rb1.left - rb2.left) - 90 + 'px'; //this will align the right edges together
 
-                ele.style.display = 'block';
-
-                if (response.data.existUserSpace == 'no') {
-                  // L'expression sélectionnéee n'éxiste pas dans l'espace de l'utilisateur
-                  _this3.setState({
-                    msgBtnSave: 'Enregistrer',
-                    colorBtnSave: '#3b74fe',
-                    french_value: response.data.translation
-                  });
-                } else {
-                  // L'expression sélectionnée éxiste en bdd
-                  _this3.setState({
-                    msgBtnSave: 'Déjà enregistré',
-                    colorBtnSave: '#727d97',
-                    french_value: response.data.translation
-                  });
-                }
-              }).catch(function (error) {
-                console.log(error);
+              _this3.setState({
+                selText: selText
               });
-            }
+
+              if (response.data.existUserSpace == 'no') {
+                // L'expression sélectionnéee n'éxiste pas dans l'espace de l'utilisateur
+                _this3.setState({
+                  msgBtnSave: 'Enregistrer',
+                  colorBtnSave: '#3b74fe',
+                  french_value: response.data.translation
+                });
+              } else {
+                // L'expression sélectionnée éxiste en bdd
+                _this3.setState({
+                  msgBtnSave: 'Déjà enregistré',
+                  colorBtnSave: '#727d97',
+                  french_value: response.data.translation
+                });
+              }
+
+              if (selText.length > 40) {
+                _this3.setState({
+                  msgBtnSave: 'Maximum 40 caractères',
+                  colorBtnSave: 'red'
+                });
+              }
+            }).catch(function (error) {
+              console.log(error);
+            });
           }
         } else {
           ele.style.display = 'none';
-          $('.popup-hover-word').html("");
           this.setState({
+            msgBtnSave: 'Enregistrer',
+            french_value: '',
             selText: ''
           });
+          $('.popup-hover-word').html("");
         }
+      } else {
+        ele.style.display = 'none';
+        this.setState({
+          msgBtnSave: 'Enregistrer',
+          french_value: '',
+          selText: ''
+        });
       }
     }
   }, {
@@ -4857,27 +4885,265 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_Appclient__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Appclient */ "./assets/client/components/Appclient.js");
 /* harmony import */ var _components_Vitrine__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Vitrine */ "./assets/client/components/Vitrine.js");
+/* harmony import */ var _config_routes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../config/routes */ "./config/routes.js");
+/* harmony import */ var _config_routes__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_config_routes__WEBPACK_IMPORTED_MODULE_4__);
+
 
 
 
 
 var url = window.location.href.split("//")[1].replace(window.location.href.split("//")[1].split("/")[0], "");
+var routesArray = [];
 
-if (url == '/') {
-  Object(react_dom__WEBPACK_IMPORTED_MODULE_1__["hydrate"])(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Vitrine__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    data: {
-      url: url,
-      app: 'client'
-    }
-  }), document.getElementById('root'));
-} else {
-  Object(react_dom__WEBPACK_IMPORTED_MODULE_1__["hydrate"])(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Appclient__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    data: {
-      url: url,
-      app: 'client'
-    }
-  }), document.getElementById('root'));
+for (var route in _config_routes__WEBPACK_IMPORTED_MODULE_4___default.a.routes) {
+  routesArray.push(route);
 }
+
+console.log(url);
+console.log(routesArray.indexOf('GET ' + url));
+
+if (routesArray.indexOf('GET ' + url) != -1) {
+  if (url == '/') {
+    Object(react_dom__WEBPACK_IMPORTED_MODULE_1__["hydrate"])(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Vitrine__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      data: {
+        url: url,
+        app: 'client'
+      }
+    }), document.getElementById('root'));
+  } else {
+    Object(react_dom__WEBPACK_IMPORTED_MODULE_1__["hydrate"])(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Appclient__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      data: {
+        url: url,
+        app: 'client'
+      }
+    }), document.getElementById('root'));
+  }
+}
+
+/***/ }),
+
+/***/ "./config/routes.js":
+/*!**************************!*\
+  !*** ./config/routes.js ***!
+  \**************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Route Mappings
+ * (sails.config.routes)
+ *
+ * Your routes tell Sails what to do each time it receives a request.
+ *
+ * For more information on configuring custom routes, check out:
+ * https://sailsjs.com/anatomy/config/routes-js
+ */
+module.exports.routes = {
+  'GET /': {
+    controller: 'PostController',
+    action: 'renderVitrine'
+  },
+  'GET /accueil': {
+    controller: 'PostController',
+    action: 'accueil'
+  },
+  'GET /ajout-texte': {
+    controller: 'PostController',
+    action: 'ajoutTexte'
+  },
+  'GET /texte-liste': {
+    controller: 'PostController',
+    action: 'textes'
+  },
+  'GET /texte/:id_texte': {
+    controller: 'PostController',
+    action: 'texte'
+  },
+  'POST /textes-ajax': {
+    controller: 'PostController',
+    action: 'textesAjax',
+    csrf: false
+  },
+  'POST /get-texte-ajax': {
+    controller: 'PostController',
+    action: 'getTexteAjax',
+    csrf: false
+  },
+  'POST /save-text-ajax': {
+    controller: 'PostController',
+    action: 'saveTextAjax',
+    csrf: false
+  },
+  'POST /update-texte-ajax': {
+    controller: 'PostController',
+    action: 'updateTextAjax',
+    csrf: false
+  },
+  'GET /categories-liste': {
+    controller: 'PostController',
+    action: 'categoryList'
+  },
+  'GET /categorie-ajout': {
+    controller: 'PostController',
+    action: 'categoryAdd'
+  },
+  'GET /textes/category/:id_category': {
+    controller: 'PostController',
+    action: 'textes'
+  },
+  'POST /categories-ajax': {
+    controller: 'PostController',
+    action: 'categoriesAjax',
+    csrf: false
+  },
+  'POST /save-category-ajax': {
+    controller: 'PostController',
+    action: 'saveCategoryAjax',
+    csrf: false
+  },
+  'GET /revision': {
+    controller: 'PostController',
+    action: 'revision'
+  },
+  'GET /revision-serie-list/text/:id_text': {
+    controller: 'PostController',
+    action: 'serieListrevision'
+  },
+  // 'GET /revision-content/texte/:id_texte': {controller: 'PostController', action: 'contentRevision'},
+  'GET /revision-content/text/:id_text/serie/:id_serie': {
+    controller: 'PostController',
+    action: 'contentRevision'
+  },
+  'GET /revision-mode/texte/:id_texte/serie/:id_serie/content/:num_content': {
+    controller: 'PostController',
+    action: 'modeRevision'
+  },
+  'GET /revision-btn-begin/texte/:id_texte/serie/:id_serie/content/:num_content/mode/:num_mode': {
+    controller: 'PostController',
+    action: 'btnBeginRevision'
+  },
+  'GET /revision-serie/texte/:id_texte/serie/:id_serie/content/:num_content/mode/:num_mode': {
+    controller: 'PostController',
+    action: 'serieRevision'
+  },
+  'GET /custom-series-list': {
+    controller: 'PostController',
+    action: 'customSeriesList'
+  },
+  'GET /add-custom-serie': {
+    controller: 'PostController',
+    action: 'addCustomSerie'
+  },
+  'GET /register-confirmation/:id_user': {
+    controller: 'AuthController',
+    action: 'validateUser'
+  },
+  'POST /get-serie-by-text-ajax': {
+    controller: 'PostController',
+    action: 'getSerieByText',
+    csrf: false
+  },
+  'POST /textes-revision-ajax': {
+    controller: 'PostController',
+    action: 'getTextsRevision',
+    csrf: false
+  },
+  'POST /series-revision-ajax': {
+    controller: 'PostController',
+    action: 'getSeriesRevision',
+    csrf: false
+  },
+  'POST /save-expression-ajax': {
+    controller: 'PostController',
+    action: 'saveExpressionAjax',
+    csrf: false
+  },
+  'POST /save-dataserie': {
+    controller: 'PostController',
+    action: 'saveDataSerie',
+    csrf: false
+  },
+  'POST /save-user-ajax': {
+    controller: 'AuthController',
+    action: 'register',
+    csrf: false
+  },
+  'POST /get-data-home-ajax': {
+    controller: 'PostController',
+    action: 'getDataHomeAjax',
+    csrf: false
+  },
+  'POST /get-data-navbar-ajax': {
+    controller: 'PostController',
+    action: 'getDataNavbarAjax',
+    csrf: false
+  },
+  'POST /update-histoserie-ajax': {
+    controller: 'PostController',
+    action: 'updateHistoserieAjax',
+    csrf: false
+  },
+  'POST /check-expression-exist-ajax': {
+    controller: 'PostController',
+    action: 'checkExpressionExistAjax',
+    csrf: false
+  },
+  'POST /login': {
+    controller: 'AuthController',
+    action: 'login',
+    csrf: false
+  },
+  'POST /logout': {
+    controller: 'AuthController',
+    action: 'logout',
+    csrf: false
+  },
+  // 'GET /login': { view: 'login' },
+  // 'POST /login': 'AuthController.login',
+  // '/logout': 'AuthController.logout',
+  // 'GET /register': { view: 'register' },
+  //  ╔╦╗╦╔═╗╔═╗  ╦═╗╔═╗╔╦╗╦╦═╗╔═╗╔═╗╔╦╗╔═╗   ┬   ╔╦╗╔═╗╦ ╦╔╗╔╦  ╔═╗╔═╗╔╦╗╔═╗
+  //  ║║║║╚═╗║    ╠╦╝║╣  ║║║╠╦╝║╣ ║   ║ ╚═╗  ┌┼─   ║║║ ║║║║║║║║  ║ ║╠═╣ ║║╚═╗
+  //  ╩ ╩╩╚═╝╚═╝  ╩╚═╚═╝═╩╝╩╩╚═╚═╝╚═╝ ╩ ╚═╝  └┘   ═╩╝╚═╝╚╩╝╝╚╝╩═╝╚═╝╩ ╩═╩╝╚═╝
+  '/terms': '/legal/terms',
+  // '/logout':                  '/api/v1/account/logout',
+  //  ╦ ╦╔═╗╔╗ ╦ ╦╔═╗╔═╗╦╔═╔═╗
+  //  ║║║║╣ ╠╩╗╠═╣║ ║║ ║╠╩╗╚═╗
+  //  ╚╩╝╚═╝╚═╝╩ ╩╚═╝╚═╝╩ ╩╚═╝
+  // …
+  //  ╔═╗╔═╗╦  ╔═╗╔╗╔╔╦╗╔═╗╔═╗╦╔╗╔╔╦╗╔═╗
+  //  ╠═╣╠═╝║  ║╣ ║║║ ║║╠═╝║ ║║║║║ ║ ╚═╗
+  //  ╩ ╩╩  ╩  ╚═╝╝╚╝═╩╝╩  ╚═╝╩╝╚╝ ╩ ╚═╝
+  // Note that, in this app, these API endpoints may be accessed using the `Cloud.*()` methods
+  // from the Parasails library, or by using those method names as the `action` in <ajax-form>.
+  '/api/v1/account/logout': {
+    action: 'account/logout'
+  },
+  'PUT   /api/v1/account/update-password': {
+    action: 'account/update-password'
+  },
+  'PUT   /api/v1/account/update-profile': {
+    action: 'account/update-profile'
+  },
+  'PUT   /api/v1/account/update-billing-card': {
+    action: 'account/update-billing-card'
+  },
+  'PUT   /api/v1/entrance/login': {
+    action: 'entrance/login'
+  },
+  'POST  /api/v1/entrance/signup': {
+    action: 'entrance/signup'
+  },
+  'POST  /api/v1/entrance/send-password-recovery-email': {
+    action: 'entrance/send-password-recovery-email'
+  },
+  'POST  /api/v1/entrance/update-password-and-login': {
+    action: 'entrance/update-password-and-login'
+  },
+  'POST  /api/v1/deliver-contact-form-message': {
+    action: 'deliver-contact-form-message'
+  }
+};
 
 /***/ }),
 

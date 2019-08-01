@@ -61,6 +61,16 @@ export default class NavBar extends Component {
             title: 'Révision',
             cssTitle: {position: 'absolute', marginTop: '53px', marginLeft: '-51px', color: 'white'}
         },
+        {
+            url:"/expressions",
+            classContainer:"bloc-btn-menu",
+            classItem:"menu-item nav-expression",
+            id:"item-menu-expression",
+            style: {},
+            isSelected: false,
+            title: 'Expressions',
+            cssTitle: {position: 'absolute', marginTop: '53px', marginLeft: '-64px', color: 'white'}
+        },
         // {
         //     url:"/planning",
         //     classContainer:"bloc-btn-menu",
@@ -87,7 +97,7 @@ export default class NavBar extends Component {
             style: {},
             isSelected: false,
             title: 'Dashboard',
-            cssTitle: {position: 'absolute', marginTop: '32px', marginLeft: '-36px', color: 'white', fontSize: '9px'}
+            cssTitle: {position: 'absolute', marginTop: '32px', marginLeft: '-36px', color: 'white', fontSize: '9pxp'}
         },
         // {
         //     url:"/info-user",

@@ -92,9 +92,7 @@ export default class Text extends Component {
       let selText = sel.toString().trim();
     if(selText != '' && selText != ' '){
       if(mouse == 'mouseUp'){
-        if(selText.length > 40){
-          this.setState({msgBtnSave: 'Maximum 40 caractères', colorBtnSave: 'red'});
-        }else{
+        ele.style.display = 'block';
           /////////////////////////////////////////
           if (!sel.isCollapsed) {
               
@@ -112,7 +110,6 @@ export default class Text extends Component {
               ele.style.top = ((r.bottom - rb2.top)*100/(rb1.top-rb2.top)+20) + 'px'; //this will place ele below the selection
               ele.style.left = ((r.left - rb2.left)*100/(rb1.left-rb2.left)-90) + 'px'; //this will align the right edges together
               this.setState({selText: selText});
-              ele.style.display = 'block';
               if(response.data.existUserSpace == 'no'){
                 // L'expression sélectionnéee n'éxiste pas dans l'espace de l'utilisateur
                 this.setState({msgBtnSave: 'Enregistrer', colorBtnSave: '#3b74fe', french_value: response.data.translation});
@@ -120,18 +117,24 @@ export default class Text extends Component {
                 // L'expression sélectionnée éxiste en bdd
                 this.setState({msgBtnSave: 'Déjà enregistré', colorBtnSave: '#727d97', french_value: response.data.translation});
               }
+              if(selText.length > 40){
+                this.setState({msgBtnSave: 'Maximum 40 caractères', colorBtnSave: 'red'});
+              }
   
             })
             .catch( (error) => {
               console.log(error);
             });
           }
-        }
+        
       }else{
         ele.style.display = 'none';
+        this.setState({msgBtnSave: 'Enregistrer', french_value: '', selText: ''});
         $('.popup-hover-word').html("");
-        this.setState({selText: ''});
       }      
+    }else{
+      ele.style.display = 'none';
+      this.setState({msgBtnSave: 'Enregistrer', french_value: '', selText: ''});
     }
 
   }

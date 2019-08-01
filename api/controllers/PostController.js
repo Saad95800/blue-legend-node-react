@@ -5,6 +5,8 @@ import Vitrine from '../../assets/client/components/Vitrine';
 import {StaticRouter } from 'react-router-dom';
 import moment from 'moment';
 import axios from 'axios';
+const { translate, detectLanguage, wordAlternatives, translateWithAlternatives } = require('deepl-translator');
+
 moment.locale('fr');
 
 let render = (req, res, data = {}) => {
@@ -26,6 +28,10 @@ let render = (req, res, data = {}) => {
 module.exports = {
 
   renderVitrine: async function (req, res){
+
+    // Envoi de mails
+    // await sails.helpers.mailer();
+
     let data = {};
     data.url = req.url;
     data.app = 'server';
@@ -99,9 +105,7 @@ module.exports = {
       texte = await Text.findOne({id: req.allParams().id_texte, owner_user: req.user.id});
       let textContent = texte.content;
       texte.contentTextArea = textContent;
-      
       let recordexpressions = await RecordExpression.find({owner_user: req.user.id}).populate('owner_expression')
-      console.log(recordexpressions);
       textContent = await sails.helpers.textHoverWords.with({
                       textContent: textContent,
                       recordexpressions: recordexpressions
@@ -302,18 +306,17 @@ module.exports = {
       let number = serie.length + 1;
       let serie_id = null;
 
-      console.log(serie);
-      console.log(serie.length);
-
       if(serie.length == 0){
+        console.log('Aucune série');
         let s = await Serie.create({
           name: 'Série 1',
           owner_text: params.id_text,
           owner_user: req.user.id
-        });
+        }).fetch();
         serie_id = s.id;
       }else if(serie.length == 1 && serie[0].recordexpression.length < 10){
-        serie_id = serie.id;
+        console.log('Une seule série');
+        serie_id = serie[0].id;
       }else if(serie.length > 1){
         console.log('plus d\'une série');
         let exist = false;
@@ -600,6 +603,7 @@ module.exports = {
         return res.json({existApi: 'yes', existUserSpace: 'no', translation: expression.french_value});
       }
     }else{
+        
       axios({
         method: 'post',
         url: 'https://api.deepl.com/v2/translate?auth_key=3d1a2e4a-99eb-4622-3158-39c43344859b&text='+selText+'&target_lang=fr&source_lang=en',
