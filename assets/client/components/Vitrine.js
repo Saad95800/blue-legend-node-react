@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Redirect } from 'react-router';
 import {Container, Row, Col, FormGroup, Label, Input} from 'reactstrap';
 
 
@@ -9,7 +8,34 @@ export default class Vitrine extends Component {
   constructor(props){
     super(props);
 
+    let msgFlash = '';
+    let hmsgf = '0px';
+    let bgcmsgf = 'transparent';
+    let displayBtnCloseMf = 'none';
+    let confirmation = '';
+    if(this.props.data.app == 'server'){
+      confirmation = this.props.data.confirmation;
+    }else{
+      confirmation = this.props.data.get[0].confirmation;
+      console.log(this.props.data.get[0]);
+    }
+    if(confirmation == 'true'){
+      msgFlash = 'Votre compte a bien été activé, vous pouvez maintenant vous y connecter.';
+      hmsgf = '40px';
+      bgcmsgf = '#00ba62';
+      displayBtnCloseMf = 'inline-block';
+    }else if(confirmation == 'already'){
+      msgFlash = 'Votre compte a déjà été activé, vous pouvez vous y connecter.';
+      hmsgf = '40px';
+      bgcmsgf = 'rgba(255, 29, 22, 1)';
+      displayBtnCloseMf = 'inline-block';
+    }
+
     this.state = {
+      msgFlash: msgFlash,
+      heightMsgFlash: hmsgf,
+      bgColorMsgFlash: bgcmsgf,
+      displayBtnCloseMf: displayBtnCloseMf,
       popupSignup: false,
       popupSignin: false,
       username: '',
@@ -17,13 +43,15 @@ export default class Vitrine extends Component {
       password1: '',
       password2: ''
     }
+
   }
   
   viewMessageFlash(msg, error = false, timeout = true){
     let mf = document.querySelector("#message-flash");
+    let btnmf = document.querySelector(".btn-close-message-flash");
     mf.style.height = '40px';
     mf.innerHTML = msg;
-    console.log(msg);
+    btnmf.style.display = 'inline-block';
     if(error){
       mf.style.backgroundColor = 'rgb(255, 29, 22)';
     }else{
@@ -34,11 +62,22 @@ export default class Vitrine extends Component {
         mf.style.height = '0px';
         mf.style.padding = '0px';
         mf.innerHTML = '';
+        btnmf.style.display = 'none';
       }, 3000);
     }
 
   }
 
+  closeMessageFlash(){
+    console.log('close message flash');
+    let mf = document.querySelector("#message-flash");
+    let btnmf = document.querySelector(".btn-close-message-flash");
+    mf.style.height = '0px';
+    mf.style.padding = '0px';
+    mf.innerHTML = '';
+    btnmf.style.display = 'none';
+  }
+  
   viewPopupSignup(){
     this.setState({
       popupSignup: true,
@@ -159,6 +198,8 @@ export default class Vitrine extends Component {
       console.log(response);
       if(response.data.user == false){
         this.viewMessageFlash('Identifiants ou mot de passe incorrect', true);
+      }else if(response.data.error == true){
+        this.viewMessageFlash(response.data.msg, true);
       }else{
         window.localStorage.setItem('id_user', response.data.user.id);
         document.location.href="/accueil";
@@ -257,7 +298,13 @@ export default class Vitrine extends Component {
 
     return (
         <div className="vitrine-container">
-          <div id="message-flash" style={styles.mfs}></div>
+          <div id="message-flash" style={{height: this.state.heightMsgFlash, backgroundColor: this.state.bgColorMsgFlash}}>
+            {this.state.msgFlash}
+            <div onClick={this.closeMessageFlash.bind(this)} type="button" className="btn-close-message-flash close" style={{display: this.state.displayBtnCloseMf}} aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </div>
+            {/* <div className="btn-close-message-flash close"></div> */}
+          </div>
           {popupSignView}
             <nav className="header-nav-vitrine">
               <div className="size100">
@@ -410,23 +457,5 @@ export default class Vitrine extends Component {
             </section>
           </div>
     );
-  }
-}
-
-let styles = {
-  mfs: {
-    width: '100%', 
-    height: '0px', 
-    backgroundColor: '#00ba62', 
-    color: 'white',
-    position: 'fixed',
-    top: '0px',
-    zIndex: '2',
-    textAlign: 'center',
-    transition: 'height 0.5s',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontWeight: 'bold'
   }
 }

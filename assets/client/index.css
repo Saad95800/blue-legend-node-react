@@ -792,6 +792,29 @@ body{
 .text2-block2, .text2-block3, .text2-block4, .text2-block5, .text2-block6, .text2-block7{
   font-size: 22px;
 }
+#message-flash{
+  width: 100%; 
+  background-color: #00ba62;
+  color: white;
+  position: fixed;
+  top: 0px;
+  z-index: 2;
+  text-align: center;
+  transition: height 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #fff;
+}
+.btn-close-message-flash{
+  display: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  opacity: 1;
+  color: #fff;
+}
 /****************** Media queries *******************/
 @media screen and (max-width: 768px) {
   .container-page{

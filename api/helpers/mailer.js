@@ -44,7 +44,7 @@ module.exports = {
         id_user: inputs.data[0].id
         },
         {
-        to: 'rs.mailpro@gmail.com',
+        to: inputs.data[0].email,
         subject: "Confirmation de votre compte utilisateur"
         },
         function(err) {console.log(err || "Mail Sent!");}

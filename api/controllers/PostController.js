@@ -31,8 +31,8 @@ module.exports = {
 
     // Envoi de mails
     // await sails.helpers.mailer();
-
-    let data = {};
+    console.log(req.allParams());
+    let data = req.allParams();
     data.url = req.url;
     data.app = 'server';
     const body = ReactDOMServer.renderToString(

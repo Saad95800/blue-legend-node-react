@@ -598,8 +598,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/es/index.js");
-/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -622,7 +621,6 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-
 var Vitrine =
 /*#__PURE__*/
 function (_Component) {
@@ -634,7 +632,36 @@ function (_Component) {
     _classCallCheck(this, Vitrine);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Vitrine).call(this, props));
+    var msgFlash = '';
+    var hmsgf = '0px';
+    var bgcmsgf = 'transparent';
+    var displayBtnCloseMf = 'none';
+    var confirmation = '';
+
+    if (_this.props.data.app == 'server') {
+      confirmation = _this.props.data.confirmation;
+    } else {
+      confirmation = _this.props.data.get[0].confirmation;
+      console.log(_this.props.data.get[0]);
+    }
+
+    if (confirmation == 'true') {
+      msgFlash = 'Votre compte a bien été activé, vous pouvez maintenant vous y connecter.';
+      hmsgf = '40px';
+      bgcmsgf = '#00ba62';
+      displayBtnCloseMf = 'inline-block';
+    } else if (confirmation == 'already') {
+      msgFlash = 'Votre compte a déjà été activé, vous pouvez vous y connecter.';
+      hmsgf = '40px';
+      bgcmsgf = 'rgba(255, 29, 22, 1)';
+      displayBtnCloseMf = 'inline-block';
+    }
+
     _this.state = {
+      msgFlash: msgFlash,
+      heightMsgFlash: hmsgf,
+      bgColorMsgFlash: bgcmsgf,
+      displayBtnCloseMf: displayBtnCloseMf,
       popupSignup: false,
       popupSignin: false,
       username: '',
@@ -651,9 +678,10 @@ function (_Component) {
       var error = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
       var timeout = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
       var mf = document.querySelector("#message-flash");
+      var btnmf = document.querySelector(".btn-close-message-flash");
       mf.style.height = '40px';
       mf.innerHTML = msg;
-      console.log(msg);
+      btnmf.style.display = 'inline-block';
 
       if (error) {
         mf.style.backgroundColor = 'rgb(255, 29, 22)';
@@ -666,8 +694,20 @@ function (_Component) {
           mf.style.height = '0px';
           mf.style.padding = '0px';
           mf.innerHTML = '';
+          btnmf.style.display = 'none';
         }, 3000);
       }
+    }
+  }, {
+    key: "closeMessageFlash",
+    value: function closeMessageFlash() {
+      console.log('close message flash');
+      var mf = document.querySelector("#message-flash");
+      var btnmf = document.querySelector(".btn-close-message-flash");
+      mf.style.height = '0px';
+      mf.style.padding = '0px';
+      mf.innerHTML = '';
+      btnmf.style.display = 'none';
     }
   }, {
     key: "viewPopupSignup",
@@ -809,6 +849,8 @@ function (_Component) {
 
         if (response.data.user == false) {
           _this3.viewMessageFlash('Identifiants ou mot de passe incorrect', true);
+        } else if (response.data.error == true) {
+          _this3.viewMessageFlash(response.data.msg, true);
         } else {
           window.localStorage.setItem('id_user', response.data.user.id);
           document.location.href = "/accueil";
@@ -846,11 +888,11 @@ function (_Component) {
             marginTop: '30px',
             width: '60%'
           }
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], {
           row: true
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
           sm: 12
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Label"], null, "Pr\xE9nom"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Label"], null, "Pr\xE9nom"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Input"], {
           value: this.state.username,
           type: "text",
           onChange: function onChange() {
@@ -860,11 +902,11 @@ function (_Component) {
           },
           autoComplete: "off",
           id: "username"
-        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], {
+        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], {
           row: true
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
           sm: 12
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Label"], null, "Email"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Label"], null, "Email"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Input"], {
           value: this.state.email,
           type: "text",
           onChange: function onChange() {
@@ -874,11 +916,11 @@ function (_Component) {
           },
           autoComplete: "off",
           id: "email"
-        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], {
+        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], {
           row: true
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
           sm: 12
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Label"], null, "Mot de passe"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Label"], null, "Mot de passe"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Input"], {
           value: this.state.password1,
           type: "password",
           onChange: function onChange() {
@@ -888,11 +930,11 @@ function (_Component) {
           },
           autoComplete: "off",
           id: "password1"
-        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], {
+        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], {
           row: true
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
           sm: 12
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Label"], null, "Confirmation du mot de passe"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Label"], null, "Confirmation du mot de passe"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Input"], {
           value: this.state.password2,
           type: "password",
           onChange: function onChange() {
@@ -902,9 +944,9 @@ function (_Component) {
           },
           autoComplete: "off",
           id: "password2"
-        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], {
+        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], {
           row: true
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
           sm: 12,
           style: {
             textAlign: 'center'
@@ -936,11 +978,11 @@ function (_Component) {
             marginTop: '30px',
             width: '80%'
           }
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], {
           row: true
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
           sm: 12
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Label"], null, "Email"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Label"], null, "Email"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Input"], {
           value: this.state.email,
           type: "text",
           onChange: function onChange() {
@@ -950,11 +992,11 @@ function (_Component) {
           },
           autoComplete: "off",
           id: "email"
-        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], {
+        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], {
           row: true
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
           sm: 12
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Label"], null, "Mot de passe"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Label"], null, "Mot de passe"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Input"], {
           value: this.state.password1,
           type: "password",
           onChange: function onChange() {
@@ -964,9 +1006,9 @@ function (_Component) {
           },
           autoComplete: "off",
           id: "password1"
-        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], {
+        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], {
           row: true
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
           sm: 12,
           style: {
             textAlign: 'center'
@@ -982,8 +1024,21 @@ function (_Component) {
         className: "vitrine-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "message-flash",
-        style: styles.mfs
-      }), popupSignView, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
+        style: {
+          height: this.state.heightMsgFlash,
+          backgroundColor: this.state.bgColorMsgFlash
+        }
+      }, this.state.msgFlash, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        onClick: this.closeMessageFlash.bind(this),
+        type: "button",
+        className: "btn-close-message-flash close",
+        style: {
+          display: this.state.displayBtnCloseMf
+        },
+        "aria-label": "Close"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        "aria-hidden": "true"
+      }, "\xD7"))), popupSignView, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
         className: "header-nav-vitrine"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "size100"
@@ -1013,7 +1068,7 @@ function (_Component) {
         className: "size100"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "img-vitrine-block1 size100"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Container"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Container"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Row"], {
         style: {
           height: '580px'
         }
@@ -1044,7 +1099,7 @@ function (_Component) {
         className: "btn-vitrine-begin display-flex-center"
       }, "Commencer"))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "block2 img-vitrine-blocks display-flex-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Container"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Container"], {
         className: "size100"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row display-flex-center",
@@ -1076,7 +1131,7 @@ function (_Component) {
         className: "img-vitrine-block2"
       }))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "block3 img-vitrine-blocks display-flex-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Container"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Container"], {
         className: "img-vitrine-block3 size100"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row minH600Desktop",
@@ -1096,9 +1151,9 @@ function (_Component) {
         className: "text2-block3 text-center font-weight-bold"
       }, "Choisis les livres et contenus qui te passionnent. Lis tes textes et enregistre les mots de vocabulaire et expression que tu souhaites.")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "block4 img-vitrine-blocks display-flex-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Container"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Container"], {
         className: "size100"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Row"], {
         style: {
           height: '100%'
         }
@@ -1122,9 +1177,9 @@ function (_Component) {
         className: "img-vitrine-block4"
       }))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "block5 img-vitrine-blocks display-flex-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Container"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Container"], {
         className: "size100"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Row"], {
         style: {
           height: '100%'
         }
@@ -1148,9 +1203,9 @@ function (_Component) {
         className: "text2-block5 text-center font-weight-bold"
       }, "Tu as la possibilit\xE9 de mettre au chronom\xE8tre lors de chacune de tes s\xE9ries de r\xE9vision afin de te mettre au d\xE9fi et de voir la qualit\xE9 de ton apprentissage.")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "block6 img-vitrine-blocks display-flex-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Container"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Container"], {
         className: "size100"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Row"], {
         style: {
           height: '100%'
         }
@@ -1172,9 +1227,9 @@ function (_Component) {
         className: "img-vitrine-block6"
       }))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "block7 img-vitrine-blocks display-flex-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Container"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Container"], {
         className: "size100"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Row"], {
         style: {
           height: '100%'
         }
@@ -1198,9 +1253,9 @@ function (_Component) {
         className: "text2-block7 text-center font-weight-bold"
       }, "Notre application est disponible pour tout type d'appareils et est utilisable en mode hors-ligne. C'est une progressive web app, ce qui signifie qu'elle est multi plate-forme et fonctionne sur IOS et Android.")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "block8 footer-vitrine display-flex-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Container"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Container"], {
         className: "size100"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Row"], {
         style: {
           height: '100%'
         }
@@ -1237,15 +1292,15 @@ function (_Component) {
           fontSize: '20px',
           width: '100%'
         }
-      }, "Abonne-toi et soit inform\xE9 de toutes les nouvelles fonctionnalit\xE9s \xE0 venir"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], {
+      }, "Abonne-toi et soit inform\xE9 de toutes les nouvelles fonctionnalit\xE9s \xE0 venir"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], {
         row: true,
         style: {
           width: '80%',
           marginTop: '20px'
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
         sm: 12
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Input"], {
         type: "text",
         autoComplete: "off",
         id: "newsletter"
@@ -1257,23 +1312,6 @@ function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 
-var styles = {
-  mfs: {
-    width: '100%',
-    height: '0px',
-    backgroundColor: '#00ba62',
-    color: 'white',
-    position: 'fixed',
-    top: '0px',
-    zIndex: '2',
-    textAlign: 'center',
-    transition: 'height 0.5s',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontWeight: 'bold'
-  }
-};
 
 /***/ }),
 
@@ -2097,7 +2135,7 @@ function (_Component) {
           marginTop: '32px',
           marginLeft: '-36px',
           color: 'white',
-          fontSize: '9pxp'
+          fontSize: '9px'
         }
       }],
       url_courante: _this.props.data.url,
@@ -4892,13 +4930,43 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var url = window.location.href.split("//")[1].replace(window.location.href.split("//")[1].split("/")[0], "");
+var url = window.location.href.split("//")[1].replace(window.location.href.split("//")[1].split("/")[0], "").split('?')[0];
+var getUrl = window.location.href.split("//")[1].replace(window.location.href.split("//")[1].split("/")[0], "").split('?')[1].split('&');
+var paseGetUrl = [];
+var _iteratorNormalCompletion = true;
+var _didIteratorError = false;
+var _iteratorError = undefined;
+
+try {
+  for (var _iterator = getUrl[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+    var gt = _step.value;
+    var getsplit = gt.split('=');
+    var obj = {};
+    obj[getsplit[0]] = getsplit[1];
+    paseGetUrl.push(obj);
+  }
+} catch (err) {
+  _didIteratorError = true;
+  _iteratorError = err;
+} finally {
+  try {
+    if (!_iteratorNormalCompletion && _iterator.return != null) {
+      _iterator.return();
+    }
+  } finally {
+    if (_didIteratorError) {
+      throw _iteratorError;
+    }
+  }
+}
+
 var routesArray = [];
 
 for (var route in _config_routes__WEBPACK_IMPORTED_MODULE_4___default.a.routes) {
   routesArray.push(route);
 }
 
+console.log(paseGetUrl);
 console.log(url);
 console.log(routesArray.indexOf('GET ' + url));
 
@@ -4907,6 +4975,7 @@ if (routesArray.indexOf('GET ' + url) != -1) {
     Object(react_dom__WEBPACK_IMPORTED_MODULE_1__["hydrate"])(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Vitrine__WEBPACK_IMPORTED_MODULE_3__["default"], {
       data: {
         url: url,
+        get: paseGetUrl,
         app: 'client'
       }
     }), document.getElementById('root'));
@@ -4914,6 +4983,7 @@ if (routesArray.indexOf('GET ' + url) != -1) {
     Object(react_dom__WEBPACK_IMPORTED_MODULE_1__["hydrate"])(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Appclient__WEBPACK_IMPORTED_MODULE_2__["default"], {
       data: {
         url: url,
+        get: paseGetUrl,
         app: 'client'
       }
     }), document.getElementById('root'));

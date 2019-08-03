@@ -97,7 +97,7 @@ export default class NavBar extends Component {
             style: {},
             isSelected: false,
             title: 'Dashboard',
-            cssTitle: {position: 'absolute', marginTop: '32px', marginLeft: '-36px', color: 'white', fontSize: '9pxp'}
+            cssTitle: {position: 'absolute', marginTop: '32px', marginLeft: '-36px', color: 'white', fontSize: '9px'}
         },
         // {
         //     url:"/info-user",

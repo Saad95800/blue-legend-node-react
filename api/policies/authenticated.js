@@ -15,7 +15,7 @@ module.exports = function(req, res, next) {
     }
     // HTTP
     else
-    {console.log('toto auth');
+    {
         if(req.isAuthenticated())
         {
             return next();
