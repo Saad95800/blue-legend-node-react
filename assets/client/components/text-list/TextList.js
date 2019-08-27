@@ -7,7 +7,6 @@ import {capitalizeFirstLetter} from './../functions';
 export default class TextList extends Component {
 
   constructor(props){
-    console.log("textList");
     super(props);
 
     let textes = [];
@@ -80,7 +79,7 @@ export default class TextList extends Component {
                     </div>
                   </Row>
                   <Row>
-                    <Col xs={{ size: 3, offset: 9 }} style={{textAlign: 'right', marginTop: '16px'}}>
+                    <Col xs={{ size: 3, offset: 9 }} style={{textAlign: 'right', marginTop: '36px'}}>
                     <Link to={'/ajout-texte'}>
                       <Button className="btn-forms">Ajouter un texte</Button>
                     </Link>

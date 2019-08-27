@@ -4,8 +4,13 @@ import Appclient from './components/Appclient';
 import Vitrine from './components/Vitrine';
 import routes from '../../config/routes';
 
-let url = window.location.href.split("//")[1].replace(window.location.href.split("//")[1].split("/")[0], "").split('?')[0];
-let getUrl = window.location.href.split("//")[1].replace(window.location.href.split("//")[1].split("/")[0], "").split('?')[1].split('&');
+let u = window.location.href.split("//")[1].replace(window.location.href.split("//")[1].split("/")[0], "").split('?');
+let url = u[0];
+let getUrl = [];
+if(u.length > 1){
+    getUrl = u[1].split('&');
+}
+console.log(getUrl);
 let paseGetUrl = [];
 for(let gt of getUrl){
     let getsplit = gt.split('=');
@@ -13,13 +18,11 @@ for(let gt of getUrl){
     obj[getsplit[0]] = getsplit[1];
     paseGetUrl.push(obj);
 }
+console.log(paseGetUrl);
 let routesArray = [];
 for (var route in routes.routes) {
     routesArray.push(route);
 }
-console.log(paseGetUrl);
-console.log(url);
-console.log(routesArray.indexOf('GET '+url));
 
 if(routesArray.indexOf('GET '+url) != -1){
     if(url == '/'){

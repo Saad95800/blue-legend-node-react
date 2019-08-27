@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["vendors~pdfjsWorker"],{
 
-/***/ "./node_modules/pdfjs-dist/build/pdf.worker.js":
-/*!*****************************************************!*\
-  !*** ./node_modules/pdfjs-dist/build/pdf.worker.js ***!
-  \*****************************************************/
+/***/ "./node_modules/react-pdf/node_modules/pdfjs-dist/build/pdf.worker.js":
+/*!****************************************************************************!*\
+  !*** ./node_modules/react-pdf/node_modules/pdfjs-dist/build/pdf.worker.js ***!
+  \****************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -55372,7 +55372,7 @@ MessageHandler.prototype = {
 /******/ ]);
 });
 //# sourceMappingURL=pdf.worker.js.map
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../Users/Saad/AppData/Roaming/npm/node_modules/webpack/node_modules/buffer/index.js */ "../../../Users/Saad/AppData/Roaming/npm/node_modules/webpack/node_modules/buffer/index.js").Buffer, __webpack_require__(/*! ./../../../../../../Users/Saad/AppData/Roaming/npm/node_modules/webpack/buildin/global.js */ "../../../Users/Saad/AppData/Roaming/npm/node_modules/webpack/buildin/global.js"), __webpack_require__(/*! ./../../../../../../Users/Saad/AppData/Roaming/npm/node_modules/webpack/node_modules/process/browser.js */ "../../../Users/Saad/AppData/Roaming/npm/node_modules/webpack/node_modules/process/browser.js")))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../../../Users/Saad/AppData/Roaming/npm/node_modules/webpack/node_modules/buffer/index.js */ "../../../Users/Saad/AppData/Roaming/npm/node_modules/webpack/node_modules/buffer/index.js").Buffer, __webpack_require__(/*! ./../../../../../../../../Users/Saad/AppData/Roaming/npm/node_modules/webpack/buildin/global.js */ "../../../Users/Saad/AppData/Roaming/npm/node_modules/webpack/buildin/global.js"), __webpack_require__(/*! ./../../../../../../../../Users/Saad/AppData/Roaming/npm/node_modules/webpack/node_modules/process/browser.js */ "../../../Users/Saad/AppData/Roaming/npm/node_modules/webpack/node_modules/process/browser.js")))
 
 /***/ })
 

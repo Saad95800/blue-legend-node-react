@@ -54,30 +54,41 @@ export default class TextAdd extends Component {
   }
 
   saveText(){
-
     
-    let divWysiwyg = document.querySelector("#react-trumbowyg");
-
     if(this.state.wysiwyg_content == ''){
+      let divWysiwyg = document.querySelector("#react-trumbowyg");
       this.props.viewMessageFlash('Le contenu du texte ne doit pas être vide.', true);
       divWysiwyg.style.backgroundColor = '#ff00001a';
-      setTimeout(function(){divWysiwyg.style.backgroundColor = '#fff';}, 3000)
-    }else{
-      axios({
-        method: 'post',
-        url: '/save-text-ajax',
-        responseType: 'json',
-        data: {title: this.state.wysiwyg_title, content: this.state.wysiwyg_content, id_category: this.state.selected_category}
-      })
-      .then((response) => {
-        this.props.viewMessageFlash('Texte ajouté avec succès !');
-        this.setState({ redirect: true });
-        // this.setState({textes: response.data, id_category:url.split("/")[3]});
-      })
-      .catch( (error) => {
-        console.log(error);
-      });
+      setTimeout(function(){divWysiwyg.style.backgroundColor = '#fff';}, 3000);
+      return;
     }
+    if(this.state.wysiwyg_title == ''){
+      let titleWysiwyg = document.querySelector("#title-text");
+      this.props.viewMessageFlash('Le titre du texte ne doit pas être vide.', true);
+      titleWysiwyg.style.backgroundColor = '#ff00001a';
+      setTimeout(function(){titleWysiwyg.style.backgroundColor = '#fff';}, 3000);
+      return;
+    }
+
+    axios({
+      method: 'post',
+      url: '/save-text-ajax',
+      responseType: 'json',
+      data: {
+        title: this.state.wysiwyg_title, 
+        content: this.state.wysiwyg_content, 
+        id_category: this.state.selected_category
+      }
+    })
+    .then((response) => {
+      this.props.viewMessageFlash('Texte ajouté avec succès !');
+      this.setState({ redirect: true });
+      // this.setState({textes: response.data, id_category:url.split("/")[3]});
+    })
+    .catch( (error) => {
+      console.log(error);
+    });
+    
     
   }
 

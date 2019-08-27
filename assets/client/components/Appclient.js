@@ -11,6 +11,8 @@ import CategoryAdd from './category/CategoryAdd';
 import Revision from './revision/Revision';
 import CustomSeriesList from './revision/CustomSeriesList';
 import AddCustomSerie from './revision/AddCustomSerie';
+import ExpressionList from './expression/ExpressionList';
+import SerieList from './serie/SerieList';
 // import SwipeableRoutes from "react-swipeable-routes";
 
 let styles = {
@@ -75,26 +77,104 @@ export default class Appclient extends Component {
                     atLeave={{ opacity: 0 }}
                     atActive={{ opacity: 1 }}
                     className="switch-wrapper">
-                          <Route path="/accueil" render={(props) => { return <Home {...props} data={data}/>}} />
-                          <Route path="/ajout-texte" render={(props) => { return <TextAdd {...props} data={data} viewMessageFlash={this.viewMessageFlash}/>}} />
-                          <Route path="/texte-liste" render={(props) => { return <TextList {...props} data={data}/>}} />
-                          <Route path="/textes/category/:id_category" render={(props) => { return <TextList {...props} data={data}/>}} />
-                          <Route path="/categories-liste" render={(props) => { return <CategoryList {...props} data={data}/>}} />
-                          <Route path="/categorie-ajout" render={(props) => { return <CategoryAdd {...props} data={data} viewMessageFlash={this.viewMessageFlash}/>}} />
-                          <Route path="/texte/:id_texte" render={ (props) => { return <Text {...props} data={data} viewMessageFlash={this.viewMessageFlash}/>} } />
+                          <Route 
+                            path="/accueil" 
+                            render={(props) => { return <Home {...props} 
+                            data={data}/>}} 
+                          />
+                          <Route 
+                            path="/ajout-texte" 
+                            render={(props) => { return <TextAdd {...props} 
+                            data={data} viewMessageFlash={this.viewMessageFlash}/>}} 
+                          />
+                          <Route 
+                            path="/texte-liste" 
+                            render={(props) => { return <TextList {...props} 
+                            data={data}/>}} 
+                          />
+                          <Route 
+                            path="/textes/category/:id_category" 
+                            render={(props) => { return <TextList {...props} 
+                            data={data}/>}} 
+                          />
+                          <Route 
+                            path="/categories-liste" 
+                            render={(props) => { return <CategoryList {...props} 
+                            data={data}/>}} 
+                          />
+                          <Route 
+                            path="/categorie-ajout" 
+                            render={(props) => { return <CategoryAdd {...props} 
+                            data={data} 
+                            viewMessageFlash={this.viewMessageFlash}/>}} 
+                          />
+                          <Route 
+                            path="/texte/:id_texte" 
+                            render={ (props) => { return <Text {...props} 
+                            data={data} 
+                            viewMessageFlash={this.viewMessageFlash}/>} } 
+                          />
                           {/* <SwipeableRoutes> */}
-                            <Route path="/revision" render={(props) => { return <Revision {...props} data={data} step={'text-list'} />}} />
-                            <Route path="/revision-serie-list/text/:id_text" render={(props) => { return <Revision {...props} data={data} step={'serie-list'}/>}} />
-                            <Route path="/revision-content/text/:id_text/serie/:id_serie" render={(props) => { return <Revision {...props} data={data} step={'content-review'}/>}} />
-                            <Route path="/revision-mode/texte/:id_texte/serie/:id_serie/content/:num_content" render={(props) => { return <Revision {...props} data={data} step={'mode'}/>}} />
-                            <Route path="/revision-btn-begin/texte/:id_texte/serie/:id_serie/content/:num_content/mode/:num_mode" render={(props) => { return <Revision {...props} data={data} step={'btn-begin'}/>}} />
-                            <Route path="/revision-serie/texte/:id_texte/serie/:id_serie/content/:num_content/mode/:num_mode" render={(props) => { return <Revision {...props} data={data} step={'serie'}/>}} />
-                            <Route path="/custom-series-list" render={ (props) => { return <AddCustomSerie {...props} data={data} />} } />
-                            <Route path="/add-custom-serie" render={ (props) => { return <AddCustomSerie {...props} data={data} />} } />
+                            <Route 
+                              path="/revision" render={(props) => { return <Revision {...props} 
+                              data={data}
+                              step={'text-list'} />}} 
+                            />
+                            <Route 
+                              path="/revision-serie-list/text/:id_text" 
+                              render={(props) => { return <Revision {...props} 
+                              data={data} 
+                              step={'serie-list'}/>}} 
+                            />
+                            <Route 
+                              path="/revision-content/text/:id_text/serie/:id_serie" 
+                              render={(props) => { return <Revision {...props} 
+                              data={data} 
+                              step={'content-review'}/>}} 
+                            />
+                            <Route 
+                              path="/revision-mode/texte/:id_texte/serie/:id_serie/content/:num_content" 
+                              render={(props) => { return <Revision {...props} 
+                              data={data} 
+                              step={'mode'}/>}} 
+                            />
+                            <Route 
+                              path="/revision-btn-begin/texte/:id_texte/serie/:id_serie/content/:num_content/mode/:num_mode" 
+                              render={(props) => { return <Revision {...props} 
+                              data={data} 
+                              step={'btn-begin'}/>}} 
+                            />
+                            <Route 
+                              path="/revision-serie/texte/:id_texte/serie/:id_serie/content/:num_content/mode/:num_mode" 
+                              render={(props) => { return <Revision {...props} 
+                              data={data} 
+                              step={'serie'}/>}} 
+                            />
+                            <Route 
+                              path="/custom-series-list" 
+                              render={ (props) => { return <AddCustomSerie {...props} 
+                              data={data} />} } 
+                            />
+                            <Route 
+                              path="/add-custom-serie" 
+                              render={ (props) => { return <AddCustomSerie {...props} 
+                              data={data} />} } 
+                            />
+                            <Route 
+                              path="/expressions" 
+                              render={ (props) => { return <ExpressionList {...props} 
+                              data={data} />} } 
+                            />
+                            <Route
+                              path="/series" 
+                              render={ (props) => { return <SerieList {...props} 
+                              data={data} />} } 
+                            />
                           {/* </SwipeableRoutes> */}
                   </AnimatedSwitch>
                   </div>
-                <Route render={ (props) => { return <NavBar {...props} data={{url: this.props.data.url}}/>} }/>
+                <Route render={ (props) => { return <NavBar {...props} data={{url: this.props.data.url}}/>} }
+    />
             </div>
       </BrowserRouter>
     );

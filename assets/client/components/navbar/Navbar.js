@@ -71,6 +71,16 @@ export default class NavBar extends Component {
             title: 'Expressions',
             cssTitle: {position: 'absolute', marginTop: '53px', marginLeft: '-64px', color: 'white'}
         },
+        {
+            url:"/series",
+            classContainer:"bloc-btn-menu",
+            classItem:"menu-item nav-serie",
+            id:"item-menu-serie",
+            style: {},
+            isSelected: false,
+            title: 'Séries',
+            cssTitle: {position: 'absolute', marginTop: '53px', marginLeft: '-44px', color: 'white'}
+        },
         // {
         //     url:"/planning",
         //     classContainer:"bloc-btn-menu",
@@ -243,7 +253,7 @@ export default class NavBar extends Component {
                             url={'/logout'}
                             url_courante={this.state.url_courante}
                             classContainer={'bloc-btn-menu-right'}
-                            classItem={'menu-item-vitrine nav-vitrine'}
+                            classItem={'menu-item nav-vitrine'}
                             id={'item-logout'}
                             style={''}
                             isSelected={false}

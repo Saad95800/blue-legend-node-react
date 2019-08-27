@@ -5,7 +5,6 @@ import Vitrine from '../../assets/client/components/Vitrine';
 import {StaticRouter } from 'react-router-dom';
 import moment from 'moment';
 import axios from 'axios';
-const { translate, detectLanguage, wordAlternatives, translateWithAlternatives } = require('deepl-translator');
 
 moment.locale('fr');
 
@@ -47,20 +46,24 @@ module.exports = {
     //   owner_serie: '5d2b53af4343e33070e4af24',
     //   owner_user: req.user.id
     // });
-    let data = {};
-    if(req.user != undefined){
-      var begin = moment(moment().format("YYYY-MM-DD")).unix(); // Date de début d'aujourd'hui
-      var end = moment(moment().format("YYYY-MM-DD")).add(1, 'days').unix(); // Date de fin d'aujourd'hui
-      let nbSeriesToday = await Planning.count({owner_user: req.user.id, date: {'>=': begin, '<': end} });
-      let nbSerieRealiseesToday = await Histoserie.count({completed: true, owner_user: req.user.id, date_creation: {'>=': begin, '<': end}});  
-      let nbSeriesTotalRealisees = await Histoserie.count({completed: true, owner_user: req.user.id});
-      data.nbSeriesToday = nbSeriesToday;
-      data.nbSerieRealiseesToday = nbSerieRealiseesToday;
-      data.nbSeriesTotalRealisees = nbSeriesTotalRealisees;
-      data.nbMotsExprApprisToday = '-';
-      data.nbMotsExprTotalAppris = '-';
+    if(req.isAuthenticated() && req.user != undefined){
+      let data = {};
+      if(req.user != undefined){
+        var begin = moment(moment().format("YYYY-MM-DD")).unix(); // Date de début d'aujourd'hui
+        var end = moment(moment().format("YYYY-MM-DD")).add(1, 'days').unix(); // Date de fin d'aujourd'hui
+        let nbSeriesToday = await Planning.count({owner_user: req.user.id, date: {'>=': begin, '<': end} });
+        let nbSerieRealiseesToday = await Histoserie.count({completed: true, owner_user: req.user.id, date_creation: {'>=': begin, '<': end}});  
+        let nbSeriesTotalRealisees = await Histoserie.count({completed: true, owner_user: req.user.id});
+        data.nbSeriesToday = nbSeriesToday;
+        data.nbSerieRealiseesToday = nbSerieRealiseesToday;
+        data.nbSeriesTotalRealisees = nbSeriesTotalRealisees;
+        data.nbMotsExprApprisToday = '-';
+        data.nbMotsExprTotalAppris = '-';
+      }
+      render(req, res, data);
+    }else{
+      res.redirect('/');
     }
-    render(req, res, data);
   },
 
   getDataHomeAjax: async function (req, res){
@@ -85,35 +88,43 @@ module.exports = {
   },
 
   textes: async function (req, res){
-    let data = {};
-    if(req.user != undefined){
-      if(req.params.id_category == undefined){
-        var textes = await Text.find({owner_user: req.user.id});
-        data = {'textes': textes};
-      }else{
-        var textes = await Text.find({'owner_category': req.params.id_category, owner_user: req.user.id});
-        data = {'textes': textes, 'id_category': req.params.id_category};      
-      }      
+    if(req.isAuthenticated() && req.user != undefined){
+      let data = {};
+      if(req.user != undefined){
+        if(req.params.id_category == undefined){
+          var textes = await Text.find({owner_user: req.user.id});
+          data = {'textes': textes};
+        }else{
+          var textes = await Text.find({'owner_category': req.params.id_category, owner_user: req.user.id});
+          data = {'textes': textes, 'id_category': req.params.id_category};      
+        }      
+      }
+      render(req, res, data);
+    }else{
+      res.redirect('/');
     }
-    render(req, res, data);
   },
 
   texte: async function(req, res){
-    let data = {};
-    let texte = {}
-    if(req.user != undefined){
-      texte = await Text.findOne({id: req.allParams().id_texte, owner_user: req.user.id});
-      let textContent = texte.content;
-      texte.contentTextArea = textContent;
-      let recordexpressions = await RecordExpression.find({owner_user: req.user.id}).populate('owner_expression')
-      textContent = await sails.helpers.textHoverWords.with({
-                      textContent: textContent,
-                      recordexpressions: recordexpressions
-                    });
-      texte.content = textContent;
-      data = {'texte': texte};
+    if(req.isAuthenticated() && req.user != undefined){
+      let data = {};
+      let texte = {}
+      if(req.user != undefined){
+        texte = await Text.findOne({id: req.allParams().id_texte, owner_user: req.user.id});
+        let textContent = texte.content;
+        texte.contentTextArea = textContent;
+        let recordexpressions = await RecordExpression.find({owner_user: req.user.id}).populate('owner_expression')
+        textContent = await sails.helpers.textHoverWords.with({
+                        textContent: textContent,
+                        recordexpressions: recordexpressions
+                      });
+        texte.content = textContent;
+        data = {'texte': texte};
+      }
+      render(req, res, data);
+    }else{
+      res.redirect('/');
     }
-    render(req, res, data);
   },
 
   ajoutTexte: (req, res) => {
@@ -121,14 +132,18 @@ module.exports = {
   },
 
   categoryList: async function (req, res){
-    let data = {};
-    if(req.user != undefined){
-      let categories = await Category.find({owner_user: req.user.id});
-      data = {'categories': categories};
+    if(req.isAuthenticated() && req.user != undefined){
+      let data = {};
+      if(req.user != undefined){
+        let categories = await Category.find({owner_user: req.user.id});
+        data = {'categories': categories};
+      }else{
+        data = {'categories': {}};
+      }
+      render(req, res, data);
     }else{
-      data = {'categories': {}};
+      res.redirect('/');
     }
-    render(req, res, data);
   },
 
   categoryAdd: async function (req, res){
@@ -188,22 +203,26 @@ module.exports = {
   },
 
   revision: async function (req, res){
-    let data = {
-      'textes': {}, 
-      step: 'text-list'
-    };
-    if(req.user != undefined){
-      let textes = await Text.find({owner_user: req.user.id}).populate('serie');
-      let texts = [];
-      for(let txt of textes){
-        if(txt.serie.length > 0){
-          texts.push(txt);
+    if(req.isAuthenticated() && req.user != undefined){
+      let data = {
+        'textes': {}, 
+        step: 'text-list'
+      };
+      if(req.user != undefined){
+        let textes = await Text.find({owner_user: req.user.id}).populate('serie');
+        let texts = [];
+        for(let txt of textes){
+          if(txt.serie.length > 0){
+            texts.push(txt);
+          }
         }
+        data.textes = texts;
       }
-      data.textes = texts;
-    }
 
-    render(req, res, data);
+      render(req, res, data);
+    }else{
+      res.redirect('/');
+    }
   },
 
   contentRevision: async function (req, res){
@@ -224,55 +243,67 @@ module.exports = {
   },
 
   btnBeginRevision: async function (req, res){
-    let data = {};
-      if(req.user != undefined){
-      let serie = await Serie.find({owner_text: req.params.id_texte, owner_user: req.user.id});
-      data = {
-        id_texte: req.params.id_texte, 
-        num_content: req.params.num_content, 
-        num_mode: req.params.num_mode, 
-        serie: serie, 
-        step: 'btn-begin'
-      };
+    if(req.isAuthenticated() && req.user != undefined){
+      let data = {};
+        if(req.user != undefined){
+        let serie = await Serie.find({owner_text: req.params.id_texte, owner_user: req.user.id});
+        data = {
+          id_texte: req.params.id_texte, 
+          num_content: req.params.num_content, 
+          num_mode: req.params.num_mode, 
+          serie: serie, 
+          step: 'btn-begin'
+        };
+      }
+      render(req, res, data);
+    }else{
+      res.redirect('/');
     }
-    render(req, res, data);
   },
 
   serieRevision: async function (req, res){
-    let data = {};
-    if(req.user != undefined){
-      let serie = await Serie.find({id: req.params.id_serie, owner_user: req.user.id});
-      data = {
-        id_texte: req.params.id_texte, 
-        num_content: req.params.num_content, 
-        num_mode: req.params.num_mode, 
-        serie: serie, 
-        step: 'serie'
-      };
+    if(req.isAuthenticated() && req.user != undefined){
+      let data = {};
+      if(req.user != undefined){
+        let serie = await Serie.find({id: req.params.id_serie, owner_user: req.user.id});
+        data = {
+          id_texte: req.params.id_texte, 
+          num_content: req.params.num_content, 
+          num_mode: req.params.num_mode, 
+          serie: serie, 
+          step: 'serie'
+        };
+      }
+      render(req, res, data);
+    }else{
+      res.redirect('/');
     }
-    render(req, res, data);
   },
 
   getSerieByText: async function (req, res){
-    let serie = {};
-    if(req.user != undefined){
-      let params = req.allParams();
-      serie = await Serie.findOne({
-        id: params.id_serie, 
-        owner_text: params.id_text,
-        owner_user: req.user.id
-      }).populate('recordexpression');      
+    if(req.isAuthenticated() && req.user != undefined){
+      let serie = {};
+      if(req.user != undefined){
+        let params = req.allParams();
+        serie = await Serie.findOne({
+          id: params.id_serie, 
+          owner_text: params.id_text,
+          owner_user: req.user.id
+        }).populate('recordexpression');      
+      }
+
+      let listRecordExpressions = [];
+      for (let recordexpression of serie.recordexpression) {
+        recordexpression = await RecordExpression.findOne({id: recordexpression.id}).populate('owner_expression');
+        listRecordExpressions.push(recordexpression);
+      }
+
+      serie.recordexpression = listRecordExpressions;
+
+      res.json(serie);
+    }else{
+      res.redirect('/');
     }
-
-    let listRecordExpressions = [];
-    for (let recordexpression of serie.recordexpression) {
-      recordexpression = await RecordExpression.findOne({id: recordexpression.id}).populate('owner_expression');
-      listRecordExpressions.push(recordexpression);
-    }
-
-    serie.recordexpression = listRecordExpressions;
-
-    res.json(serie);
   },
 
   saveTextAjax: async function (req, res){
@@ -282,7 +313,7 @@ module.exports = {
         title:params.title, 
         content: params.content, 
         type_text:"text", 
-        owner_category: params.id_category,
+        owner_category: (params.id_category == '')? null : params.id_category,
         owner_user: req.user.id
       });
       return res.ok();
@@ -434,48 +465,56 @@ module.exports = {
   },
 
   saveDataSerie: async function (req, res){
-    if(req.user != undefined){
-      let params = req.allParams();
-      let histoserie = [];
-      let id_histoserie = 0;
-      if(params.id_histoserie == 0){
-        histoserie = await Histoserie.create({
+    if(req.isAuthenticated() && req.user != undefined){
+      if(req.user != undefined){
+        let params = req.allParams();
+        let histoserie = [];
+        let id_histoserie = 0;
+        if(params.id_histoserie == 0){
+          histoserie = await Histoserie.create({
+            owner_serie: params.id_serie,
+            owner_user: req.user.id,
+            date_creation: moment().unix()
+          })
+          .fetch();
+          id_histoserie = histoserie.id;
+        }else{
+          id_histoserie = params.id_histoserie
+        }
+        let dataserie = await Dataserie.create({
+          result: params.result,
+          duration: params.duration,
+          owner_expression: params.id_expression,
           owner_serie: params.id_serie,
-          owner_user: req.user.id,
-          date_creation: moment().unix()
+          owner_histoserie: id_histoserie,
+          owner_user: req.user.id
         })
         .fetch();
-        id_histoserie = histoserie.id;
+        return res.json({id_histoserie: id_histoserie});
       }else{
-        id_histoserie = params.id_histoserie
+        return res.error('Erreur de traitement');
       }
-      let dataserie = await Dataserie.create({
-        result: params.result,
-        duration: params.duration,
-        owner_expression: params.id_expression,
-        owner_serie: params.id_serie,
-        owner_histoserie: id_histoserie,
-        owner_user: req.user.id
-      })
-      .fetch();
-      return res.json({id_histoserie: id_histoserie});
     }else{
-      return res.error('Erreur de traitement');
+      res.redirect('/');
     }
   },
 
   getTextsRevision: async function (req, res){
-    if(req.user != undefined){
-      let textes = await Text.find({owner_user: req.user.id}).populate('serie');
-      let result = [];
-      for(let txt of textes){
-        if(txt.serie.length > 0){
-          result.push(txt);
+    if(req.isAuthenticated() && req.user != undefined){
+      if(req.user != undefined){
+        let textes = await Text.find({owner_user: req.user.id}).populate('serie');
+        let result = [];
+        for(let txt of textes){
+          if(txt.serie.length > 0){
+            result.push(txt);
+          }
         }
+        return res.json(result);
+      }else{
+        return res.error('Erreur de traitement');
       }
-      return res.json(result);
     }else{
-      return res.error('Erreur de traitement');
+      res.redirect('/');
     }
   },
 
@@ -603,7 +642,7 @@ module.exports = {
         return res.json({existApi: 'yes', existUserSpace: 'no', translation: expression.french_value});
       }
     }else{
-        
+        console.log('Appel Deepl API');
       axios({
         method: 'post',
         url: 'https://api.deepl.com/v2/translate?auth_key=3d1a2e4a-99eb-4622-3158-39c43344859b&text='+selText+'&target_lang=fr&source_lang=en',
@@ -627,6 +666,34 @@ module.exports = {
         console.log(error);
         return res.error('Erreur lors de l\'accès à l\'API deepl');
       });
+    }
+
+  },
+
+  expressions: async function (req, res){
+
+    if(req.isAuthenticated() && req.user != undefined){
+      let expressions = RecordExpression.find({owner_user: req.user.id});
+      let data = {
+        expressions: expressions
+      }
+      render(req, res, data);      
+    }else{
+      res.redirect('/');
+    }
+
+  },
+
+  series:  async function (req, res){
+
+    if(req.isAuthenticated() && req.user != undefined){
+      let series = Serie.find({owner_user: req.user.id});
+      let data = {
+        series: series
+      }
+      render(req, res, data);      
+    }else{
+      res.redirect('/');
     }
 
   }

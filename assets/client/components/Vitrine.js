@@ -15,10 +15,11 @@ export default class Vitrine extends Component {
     let confirmation = '';
     if(this.props.data.app == 'server'){
       confirmation = this.props.data.confirmation;
-    }else{
+    }else if(this.props.data.get[0] != undefined){
       confirmation = this.props.data.get[0].confirmation;
       console.log(this.props.data.get[0]);
     }
+
     if(confirmation == 'true'){
       msgFlash = 'Votre compte a bien été activé, vous pouvez maintenant vous y connecter.';
       hmsgf = '40px';

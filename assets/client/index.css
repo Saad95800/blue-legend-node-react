@@ -147,7 +147,10 @@ body{
   background:url(./images/main_img.png) -375px 0px no-repeat;
 }
 #item-menu-expression{
-  background:url(./images/main_img.png) -375px 0px no-repeat;
+  background:url(./images/main_img.png) -938px 0px no-repeat;
+}
+#item-menu-serie{
+  background:url(./images/main_img.png) -989px 0px no-repeat;
 }
 #item-menu-accueil{
   background:url(./images/main_img.png) -31px -52px no-repeat;
@@ -815,6 +818,40 @@ body{
   opacity: 1;
   color: #fff;
 }
+.serie-list{
+  height: 100px;
+  box-shadow: -3px 3px 7px #00000059;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+.serie-list>div{
+  display: inline-block;
+  height: 100%;
+}
+.block-serie-list-item{
+  width: 70px; 
+  height: 100%;
+  cursor: pointer;
+  flex-direction: column !important;
+}
+.serie-list-item{
+  display: inline-block; 
+  width: 50px; 
+  height: 50px; 
+  background:url(./images/main_img.png) -786px 0px no-repeat;
+}
+.block-serie-list-item:hover{
+  background-color: lightgray;
+}
+.block-serie-list{
+  background-color: #fff;
+  box-shadow: -3px 3px 7px #00000059;
+  min-height: 100px;
+}
+.block-data-expression{
+  min-height: 100px;
+}
 /****************** Media queries *******************/
 @media screen and (max-width: 768px) {
   .container-page{
@@ -952,3 +989,7 @@ body{
   width: 100%;
   height: 2px;
 }
+/********************************************************/
+/************REACT PDF **********************************/
+
+/*************************************************/

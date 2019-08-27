@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>App Anglais</title>
+    <link rel="stylesheet" href="/styles/bootstrap.min.css">
+    <link rel="stylesheet" href="/client/index.css">
+  </head>
+  <body onload="endLoad()">
+      <div class="pace pace-active">
+      </div>
+    <div id="root"><%- body %></div>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/pace.js"></script>
+    <script src="/client/dist/client.js"></script>
+    <script>
+      function endLoad(){
+        $("#container-text").find("img").css('max-width', '100%');
+        $("#container-text").find("a").click(function(e){
+          e.preventDefault();
+        });
+        $("#react-trumbowyg").find("img").css('max-width', '100%');
+        $("#react-trumbowyg").find("a").click(function(e){
+          e.preventDefault();
+        });
+      };
+    </script>
+  </body>
+</html>
