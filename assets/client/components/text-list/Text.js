@@ -64,19 +64,14 @@ export default class Text extends Component {
       console.log(error);
     });
 
-    // $(document).on('click', '.hover-word', (e) => {
-    //   console.log('hover-word');
-    // });
     let th = this;
     $(document).on('click', '.block-hover-word', function(e) {
       console.log('cliqued');
       let word = $(this).find('.hover-word').text();
-      // console.log($(this).html());
       console.log($(this));
       th.setState({selText: word, french_value: $(this).find('.hover-word-french').text()});
       let ele = $('#popupTrad');
       $(this).find('.popup-hover-word').html('<div class="popup-trad" style="display:inline-block;margin-left: -130px;margin-top: 20px;">'+ele.html()+'</div>');
-      
       $(this).find('#btnSaveExpression').remove();
     });
   }

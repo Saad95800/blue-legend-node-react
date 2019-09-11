@@ -696,6 +696,20 @@ module.exports = {
       res.redirect('/');
     }
 
+  },
+
+  uploadFilePdfAjax: async function(req, res){
+
+    req.file('file').upload({
+      dirname: require('path').resolve(sails.config.appPath, 'assets/7/web')
+    },function (err, uploadedFiles) {
+      if (err) return res.serverError(err);
+      console.log(uploadedFiles);
+      return res.json({
+        file: uploadedFiles
+      });
+    });
+
   }
 
 };

@@ -8,6 +8,7 @@ import { Document, Page } from './../../../../node_modules/react-pdf/dist/entry.
 // import { Document, Page } from 'react-pdf';
 // import Sample from './Sample';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
+import pdfFile from './sample.pdf';
 
 const options = {
   cMapUrl: 'cmaps/',
@@ -37,22 +38,11 @@ export default class ExpressionList extends Component {
 
   }
 
-  onFileChange(event){
-    this.setState({
-      file: event.target.files[0],
-    });
-  }
-
-  onDocumentLoadSuccess({ numPages }){
-    alert("succes");
-    this.setState({ numPages });
-  }
-
   render() {
-    const { pageNumber, file, numPages } = this.state;
-    return (
-      <div className="expression-container">
 
+    return (
+      <div className="expression-container display-flex-center">
+        <iframe className="iframe-pdf" src="http://localhost:1337/7/web/viewer.html?file=Natural_Cures.pdf"></iframe>
       </div>
     );
   }

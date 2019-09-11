@@ -50,6 +50,7 @@ module.exports.routes = {
   'POST /get-data-navbar-ajax': {controller: 'MainController', action: 'getDataNavbarAjax', csrf: false},
   'POST /update-histoserie-ajax': {controller: 'MainController', action: 'updateHistoserieAjax', csrf: false},
   'POST /check-expression-exist-ajax': {controller: 'MainController', action: 'checkExpressionExistAjax', csrf: false},
+  'POST /upload-file-pdf-ajax': {controller: 'MainController', action: 'uploadFilePdfAjax', csrf: false},
   'POST /login': {controller: 'AuthController', action: 'login', csrf: false},
   'POST /logout': {controller: 'AuthController', action: 'logout', csrf: false},
   

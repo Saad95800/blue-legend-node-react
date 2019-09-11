@@ -87,6 +87,14 @@ module.exports = [
                         loader: 'expose-loader',
                         options: '$'
                     }]
+                },
+                {
+                    test: /\.(pdf|jpe)$/i,
+                    use: [
+                      {
+                        loader: 'file-loader',
+                      },
+                    ],
                 }
             ]
         },

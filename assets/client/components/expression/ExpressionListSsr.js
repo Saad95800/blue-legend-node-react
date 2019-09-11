@@ -27,9 +27,9 @@ export default class ExpressionListSsr extends Component {
     render() {
 
       return (
-
-        <div className="expression-container"></div>
-
+        <div className="expression-container display-flex-center">
+          <iframe className="iframe-pdf" src="http://localhost:1337/7/web/viewer.html?file=Natural_Cures.pdf"></iframe>
+        </div>
       );
     }
 

@@ -5421,6 +5421,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_react_pdf_dist_entry_webpack__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_node_modules_react_pdf_dist_entry_webpack__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var react_pdf_dist_Page_AnnotationLayer_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-pdf/dist/Page/AnnotationLayer.css */ "./node_modules/react-pdf/dist/Page/AnnotationLayer.css");
 /* harmony import */ var react_pdf_dist_Page_AnnotationLayer_css__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_pdf_dist_Page_AnnotationLayer_css__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _sample_pdf__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./sample.pdf */ "./assets/client/components/expression/sample.pdf");
+/* harmony import */ var _sample_pdf__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_sample_pdf__WEBPACK_IMPORTED_MODULE_8__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -5449,6 +5451,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
  // import { Document, Page } from 'react-pdf';
 // import Sample from './Sample';
+
 
 
 var options = {
@@ -5481,37 +5484,20 @@ function (_Component) {
       id_serie: id_serie,
       numPages: null,
       pageNumber: 1,
-      file: pdfFile
+      file: _sample_pdf__WEBPACK_IMPORTED_MODULE_8___default.a
     }, "numPages", null);
     return _this;
   }
 
   _createClass(ExpressionList, [{
-    key: "onFileChange",
-    value: function onFileChange(event) {
-      this.setState({
-        file: event.target.files[0]
-      });
-    }
-  }, {
-    key: "onDocumentLoadSuccess",
-    value: function onDocumentLoadSuccess(_ref) {
-      var numPages = _ref.numPages;
-      alert("succes");
-      this.setState({
-        numPages: numPages
-      });
-    }
-  }, {
     key: "render",
     value: function render() {
-      var _this$state2 = this.state,
-          pageNumber = _this$state2.pageNumber,
-          file = _this$state2.file,
-          numPages = _this$state2.numPages;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "expression-container"
-      });
+        className: "expression-container display-flex-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
+        className: "iframe-pdf",
+        src: "http://localhost:1337/7/web/viewer.html?file=Natural_Cures.pdf"
+      }));
     }
   }]);
 
@@ -5519,6 +5505,17 @@ function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 
+
+/***/ }),
+
+/***/ "./assets/client/components/expression/sample.pdf":
+/*!********************************************************!*\
+  !*** ./assets/client/components/expression/sample.pdf ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "51029baf1cdefd8e02e16b98c7dd1d00.pdf";
 
 /***/ }),
 
@@ -8011,7 +8008,10 @@ function (_Component) {
       wysiwyg_title: '',
       wysiwyg_content: '',
       selected_category: '',
-      wysiwyg_bg_color: ''
+      wysiwyg_bg_color: '',
+      type_text: 'text',
+      file_name_pdf: '',
+      view_pdf: false
     };
     return _this;
   }
@@ -8025,6 +8025,7 @@ function (_Component) {
       this.divWysiwyg = document.querySelector("#react-trumbowyg");
       this.inputTitleText = document.querySelector("#title-text");
       this.selectCategory = document.querySelector("#select-category-text");
+      this.typeText = document.querySelector("#type-text");
       this.setState({
         wysiwyg_content: document.getElementsByName("react-trumbowyg")[0].value,
         wysiwyg_bg_color: document.querySelector("#react-trumbowyg").style.backgroundColor
@@ -8098,9 +8099,45 @@ function (_Component) {
       });
     }
   }, {
+    key: "changeTypeText",
+    value: function changeTypeText(type) {
+      this.setState({
+        type_text: type
+      });
+    }
+  }, {
+    key: "uploadAndViewPdfFile",
+    value: function uploadAndViewPdfFile(e) {
+      var _this4 = this;
+
+      console.log(e.target.files[0]);
+      var file = e.target.files[0];
+      var formData = new FormData();
+      formData.append('file', file);
+      axios__WEBPACK_IMPORTED_MODULE_3___default()({
+        method: 'post',
+        url: '/upload-file-pdf-ajax',
+        responseType: 'json',
+        data: formData
+      }).then(function (response) {
+        console.log(response);
+
+        _this4.props.viewMessageFlash('Fichier uploadé avec succès !');
+
+        var arrayLength = response.data.file[0].fd.split("\\").length;
+
+        _this4.setState({
+          file_name_pdf: response.data.file[0].fd.split("\\")[arrayLength - 1],
+          view_pdf: true
+        });
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this4 = this;
+      var _this5 = this;
 
       var redirect = this.state.redirect;
 
@@ -8116,6 +8153,60 @@ function (_Component) {
           value: category.id
         }, category.name);
       });
+      var classBtnTypeText = "btn btn-primary btn-sm active";
+      var classBtnTypePdf = "btn btn-primary btn-sm notActive";
+      var contentForm = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container-wysiwig",
+        style: {
+          backgroundColor: this.state.wysiwyg_bg_color
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_trumbowyg__WEBPACK_IMPORTED_MODULE_2___default.a, {
+        id: "react-trumbowyg",
+        onChange: function onChange() {
+          _this5.setState({
+            wysiwyg_content: _this5.textAreaWysiwyg.value
+          });
+        },
+        buttons: [['viewHTML'], ['formatting'], 'btnGrp-semantic', ['link'], ['insertImage'], 'btnGrp-justify', 'btnGrp-lists', ['table'], // I ADDED THIS FOR THE TABLE PLUGIN BUTTON
+        ['fullscreen']],
+        data: this.state.wysiwyg_content,
+        placeholder: "Entrez votre texte",
+        ref: "trumbowyg"
+      }));
+
+      if (this.state.type_text == 'pdf') {
+        classBtnTypePdf = "btn btn-primary btn-sm active";
+        contentForm = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "full-width"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+          className: "text-center color"
+        }, "Choisissez un fichier PDF."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "col-lg-12 col-md-12 col-sm-12"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "display-flex-center"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "file",
+          id: "main-input",
+          className: "form-control form-input form-style-base",
+          onChange: function onChange(e) {
+            _this5.uploadAndViewPdfFile(e);
+          }
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+          id: "fake-btn",
+          className: "form-input fake-styled-btn text-center truncate"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "margin"
+        }, "Choisir un fichier")))));
+
+        if (this.state.view_pdf == true) {
+          var src = "http://localhost:1337/7/web/viewer.html?file=" + this.state.file_name_pdf;
+          contentForm = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
+            className: "iframe-pdf",
+            src: src
+          });
+        }
+      }
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container-text-add container-page"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Container"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -8129,8 +8220,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Col"], {
         sm: "9"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Label"], {
-        for: "select-category-text",
-        sm: 2
+        for: "select-category-text"
       }, "Cat\xE9gorie"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["FormGroup"], {
         row: true
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Col"], {
@@ -8139,8 +8229,8 @@ function (_Component) {
         type: "select",
         id: "select-category-text",
         onChange: function onChange() {
-          _this4.setState({
-            selected_category: _this4.selectCategory.value
+          _this5.setState({
+            selected_category: _this5.selectCategory.value
           });
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
@@ -8158,8 +8248,7 @@ function (_Component) {
       }, "Ajouter"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Row"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Col"], {
         sm: "12"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Label"], {
-        for: "title-text",
-        sm: 2
+        for: "title-text"
       }, "Titre du texte"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["FormGroup"], {
         row: true
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Col"], {
@@ -8167,32 +8256,48 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Input"], {
         type: "text",
         onChange: function onChange() {
-          _this4.setState({
-            wysiwyg_title: _this4.inputTitleText.value
+          _this5.setState({
+            wysiwyg_title: _this5.inputTitleText.value
           });
         },
         autoComplete: "off",
         id: "title-text"
       }))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Row"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Col"], {
         sm: "12"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Label"], {
+        for: "title-text"
+      }, "Type du texte"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["FormGroup"], {
+        row: true
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Col"], {
+        sm: 12
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "container-wysiwig",
-        style: {
-          backgroundColor: this.state.wysiwyg_bg_color
+        className: "input-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "radioBtn",
+        className: "btn-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: classBtnTypeText,
+        "data-toggle": "type",
+        "data-title": "text",
+        onClick: function onClick() {
+          _this5.changeTypeText('text');
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_trumbowyg__WEBPACK_IMPORTED_MODULE_2___default.a, {
-        id: "react-trumbowyg",
-        onChange: function onChange() {
-          _this4.setState({
-            wysiwyg_content: _this4.textAreaWysiwyg.value
-          });
-        },
-        buttons: [['viewHTML'], ['formatting'], 'btnGrp-semantic', ['link'], ['insertImage'], 'btnGrp-justify', 'btnGrp-lists', ['table'], // I ADDED THIS FOR THE TABLE PLUGIN BUTTON
-        ['fullscreen']],
-        data: this.state.wysiwyg_content,
-        placeholder: "Entrez votre texte",
-        ref: "trumbowyg"
-      })))))));
+      }, "Texte"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: classBtnTypePdf,
+        "data-toggle": "type",
+        "data-title": "pdf",
+        onClick: function onClick() {
+          _this5.changeTypeText('pdf');
+        }
+      }, "PDF")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "hidden",
+        name: "happy",
+        id: "happy"
+      })))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Row"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Col"], {
+        sm: "12"
+      }, contentForm)))));
     }
   }]);
 
@@ -8311,15 +8416,11 @@ function (_Component) {
         });
       }).catch(function (error) {
         console.log(error);
-      }); // $(document).on('click', '.hover-word', (e) => {
-      //   console.log('hover-word');
-      // });
-
+      });
       var th = this;
       $(document).on('click', '.block-hover-word', function (e) {
         console.log('cliqued');
-        var word = $(this).find('.hover-word').text(); // console.log($(this).html());
-
+        var word = $(this).find('.hover-word').text();
         console.log($(this));
         th.setState({
           selText: word,
@@ -9162,6 +9263,11 @@ module.exports.routes = {
   'POST /check-expression-exist-ajax': {
     controller: 'MainController',
     action: 'checkExpressionExistAjax',
+    csrf: false
+  },
+  'POST /upload-file-pdf-ajax': {
+    controller: 'MainController',
+    action: 'uploadFilePdfAjax',
     csrf: false
   },
   'POST /login': {

@@ -16,7 +16,10 @@ export default class TextAdd extends Component {
       wysiwyg_title: '',
       wysiwyg_content: '',
       selected_category: '',
-      wysiwyg_bg_color: ''
+      wysiwyg_bg_color: '',
+      type_text: 'text',
+      file_name_pdf: '',
+      view_pdf: false
     }
   }
 
@@ -26,6 +29,7 @@ export default class TextAdd extends Component {
     this.divWysiwyg = document.querySelector("#react-trumbowyg");
     this.inputTitleText = document.querySelector("#title-text");
     this.selectCategory = document.querySelector("#select-category-text");
+    this.typeText = document.querySelector("#type-text");
 
     this.setState({
       wysiwyg_content: document.getElementsByName("react-trumbowyg")[0].value,
@@ -92,6 +96,34 @@ export default class TextAdd extends Component {
     
   }
 
+  changeTypeText(type){
+    this.setState({type_text: type})
+  }
+
+  uploadAndViewPdfFile(e){
+    console.log(e.target.files[0]);
+    let file  = e.target.files[0];
+
+    let formData = new FormData();
+    formData.append('file', file);
+
+    axios({
+      method: 'post',
+      url: '/upload-file-pdf-ajax',
+      responseType: 'json',
+      data: formData
+    })
+    .then((response) => {
+      console.log(response);
+      this.props.viewMessageFlash('Fichier uploadé avec succès !');
+      let arrayLength = response.data.file[0].fd.split("\\").length;
+      this.setState({ file_name_pdf: response.data.file[0].fd.split("\\")[arrayLength-1], view_pdf: true });
+    })
+    .catch( (error) => {
+      console.log(error);
+    });
+  }
+
   render() {
 
     const { redirect } = this.state;
@@ -103,8 +135,60 @@ export default class TextAdd extends Component {
     let options = this.state.categories.map((category, index) =>{
                     return <option key={index} value={category.id}>{category.name}</option>
                   });
+    let classBtnTypeText = "btn btn-primary btn-sm active";
+    let classBtnTypePdf = "btn btn-primary btn-sm notActive";
+
+    let contentForm =               
+            <div className="container-wysiwig" style={{backgroundColor: this.state.wysiwyg_bg_color}}>
+              <Trumbowyg id='react-trumbowyg'
+                        onChange={() =>{
+                          this.setState({wysiwyg_content: this.textAreaWysiwyg.value})
+                        }} 
+                        buttons={
+                            [
+                                ['viewHTML'],
+                                ['formatting'],
+                                'btnGrp-semantic',
+                                ['link'],
+                                ['insertImage'],
+                                'btnGrp-justify',
+                                'btnGrp-lists',
+                                ['table'], // I ADDED THIS FOR THE TABLE PLUGIN BUTTON
+                                ['fullscreen']
+                            ]
+                        }
+                        data={this.state.wysiwyg_content}
+                        placeholder='Entrez votre texte'
+                        ref="trumbowyg"
+              />
+
+          </div>
+    
+    if(this.state.type_text == 'pdf'){
+      classBtnTypePdf = "btn btn-primary btn-sm active";
+      contentForm =
+      <div className="full-width">
+        <h3 className="text-center color">Choisissez un fichier PDF.</h3>
+        <div className="col-lg-12 col-md-12 col-sm-12">
+          <div className="display-flex-center">
+          <input
+              type="file" 
+              id="main-input" 
+              className="form-control form-input form-style-base"
+              onChange={(e) => {this.uploadAndViewPdfFile(e)}}
+              />
+            <h4 id="fake-btn" className="form-input fake-styled-btn text-center truncate"><span className="margin">Choisir un fichier</span></h4>
+          </div>
+        </div>
+      </div>
+      if(this.state.view_pdf == true){
+        let src = "http://localhost:1337/7/web/viewer.html?file="+this.state.file_name_pdf;
+        contentForm = <iframe className="iframe-pdf" src={src}></iframe>
+      }
+    }
 
     return (
+
       <div className="container-text-add container-page">
           <Container>
           <div className="block-text-add">
@@ -115,7 +199,7 @@ export default class TextAdd extends Component {
             </Row>
             <Row style={{marginTop: '20px'}}>
               <Col sm="9">
-                <Label for="select-category-text" sm={2}>Catégorie</Label>
+                <Label for="select-category-text">Catégorie</Label>
                 <FormGroup row>
                   <Col sm={12}>
                     <Input type="select" id="select-category-text" onChange={()=>{this.setState({selected_category: this.selectCategory.value})}}>
@@ -131,7 +215,7 @@ export default class TextAdd extends Component {
             </Row>
             <Row>
               <Col sm="12">
-                <Label for="title-text" sm={2}>Titre du texte</Label>
+                <Label for="title-text">Titre du texte</Label>
                 <FormGroup row>
                   <Col sm={12}>
                     <Input type="text" onChange={() => {this.setState({wysiwyg_title: this.inputTitleText.value})}} autoComplete="off" id="title-text" />
@@ -140,31 +224,40 @@ export default class TextAdd extends Component {
               </Col>
             </Row>
             <Row>
+              <Col sm="12">
+                <Label for="title-text">Type du texte</Label>
+                <FormGroup row>
+                  <Col sm={12}>
+                    <form>
+                      <div className="form-group">
+                        <div className="input-group">
+                          <div id="radioBtn" className="btn-group">
+                            <a 
+                              className={classBtnTypeText}
+                              data-toggle="type" 
+                              data-title="text"
+                              onClick={() => {this.changeTypeText('text')}}>
+                                Texte
+                            </a>
+                            <a 
+                              className={classBtnTypePdf}
+                              data-toggle="type" 
+                              data-title="pdf"
+                              onClick={() => {this.changeTypeText('pdf')}}>
+                                PDF
+                            </a>
+                          </div>
+                          <input type="hidden" name="happy" id="happy"/>
+                        </div>
+                      </div>
+                    </form>
+                  </Col>
+                </FormGroup>
+              </Col>
+            </Row>
+            <Row>
             <Col sm="12">
-              <div className="container-wysiwig" style={{backgroundColor: this.state.wysiwyg_bg_color}}>
-                  <Trumbowyg id='react-trumbowyg'
-                            onChange={() =>{
-                              this.setState({wysiwyg_content: this.textAreaWysiwyg.value})
-                            }} 
-                            buttons={
-                                [
-                                    ['viewHTML'],
-                                    ['formatting'],
-                                    'btnGrp-semantic',
-                                    ['link'],
-                                    ['insertImage'],
-                                    'btnGrp-justify',
-                                    'btnGrp-lists',
-                                    ['table'], // I ADDED THIS FOR THE TABLE PLUGIN BUTTON
-                                    ['fullscreen']
-                                ]
-                            }
-                            data={this.state.wysiwyg_content}
-                            placeholder='Entrez votre texte'
-                            ref="trumbowyg"
-                  />
-
-              </div>
+              {contentForm}
             </Col>
             </Row>
             </div>

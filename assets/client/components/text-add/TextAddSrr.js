@@ -30,7 +30,7 @@ export default class TextAdd extends Component {
           </Row>
           <Row style={{marginTop: '20px'}}>
             <Col sm="9">
-              <Label for="select-category-text" sm={2}>Catégorie</Label>
+              <Label for="select-category-text">Catégorie</Label>
               <FormGroup row>
                 <Col sm={12}>
                   <Input type="select" id="select-category-text">
@@ -45,10 +45,42 @@ export default class TextAdd extends Component {
           </Row>
           <Row>
             <Col sm="12">
-              <Label for="title-text" sm={2}>Titre du texte</Label>
+              <Label for="title-text">Titre du texte</Label>
               <FormGroup row>
                 <Col sm={12}>
                   <Input type="text" autoComplete="off" id="title-text" />
+                </Col>
+              </FormGroup>
+            </Col>
+          </Row>
+          <Row>
+            <Col sm="12">
+              <Label for="title-text">Type du texte</Label>
+              <FormGroup row>
+                <Col sm={12}>
+                <form>
+                      <div className="form-group">
+                        <div className="input-group">
+                          <div id="radioBtn" className="btn-group">
+                            <a 
+                              className="btn btn-primary btn-sm active" 
+                              data-toggle="type" 
+                              data-title="text"
+                              onClick={() => {this.changeTypeText.bind(this)}}>
+                                Texte
+                            </a>
+                            <a 
+                              className="btn btn-primary btn-sm notActive" 
+                              data-toggle="type" 
+                              data-title="pdf"
+                              onClick={() => {this.changeTypeText.bind(this)}}>
+                                PDF
+                            </a>
+                          </div>
+                          <input type="hidden" name="happy" id="happy"/>
+                        </div>
+                      </div>
+                    </form>
                 </Col>
               </FormGroup>
             </Col>
