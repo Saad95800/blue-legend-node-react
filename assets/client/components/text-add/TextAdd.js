@@ -19,12 +19,19 @@ export default class TextAdd extends Component {
       wysiwyg_bg_color: '',
       type_text: 'text',
       file_name_pdf: '',
-      view_pdf: false
+      file_name_pdf_server: '',
+      view_pdf: false,
+      inputFileTitle: 'Choisir un fichier'
     }
   }
 
   componentDidMount(){
 
+    if(this.state.view_pdf == true){
+      this.setState({inputFileTitle: this.state.file_name_pdf});
+    }
+
+    this.textarea = $("react-trumbowyg"); 
     this.textAreaWysiwyg = document.getElementsByName("react-trumbowyg")[0];
     this.divWysiwyg = document.querySelector("#react-trumbowyg");
     this.inputTitleText = document.querySelector("#title-text");
@@ -59,19 +66,27 @@ export default class TextAdd extends Component {
 
   saveText(){
     
-    if(this.state.wysiwyg_content == ''){
-      let divWysiwyg = document.querySelector("#react-trumbowyg");
-      this.props.viewMessageFlash('Le contenu du texte ne doit pas être vide.', true);
-      divWysiwyg.style.backgroundColor = '#ff00001a';
-      setTimeout(function(){divWysiwyg.style.backgroundColor = '#fff';}, 3000);
-      return;
-    }
     if(this.state.wysiwyg_title == ''){
       let titleWysiwyg = document.querySelector("#title-text");
       this.props.viewMessageFlash('Le titre du texte ne doit pas être vide.', true);
       titleWysiwyg.style.backgroundColor = '#ff00001a';
       setTimeout(function(){titleWysiwyg.style.backgroundColor = '#fff';}, 3000);
       return;
+    }  
+
+    if(this.state.type_text == 'text'){
+      if(this.state.wysiwyg_content == ''){
+        let divWysiwyg = document.querySelector("#react-trumbowyg");
+        this.props.viewMessageFlash('Le contenu du texte ne doit pas être vide.', true);
+        divWysiwyg.style.backgroundColor = '#ff00001a';
+        setTimeout(function(){divWysiwyg.style.backgroundColor = '#fff';}, 3000);
+        return;
+      }    
+    }else{
+      if(this.state.file_name_pdf_server == ''){
+        this.props.viewMessageFlash('Vous devez choisir un fichier.', true);
+        return;
+      }
     }
 
     axios({
@@ -81,7 +96,10 @@ export default class TextAdd extends Component {
       data: {
         title: this.state.wysiwyg_title, 
         content: this.state.wysiwyg_content, 
-        id_category: this.state.selected_category
+        id_category: this.state.selected_category,
+        type_text: this.state.type_text,
+        file_name_pdf: this.state.file_name_pdf,
+        file_name_pdf_server: this.state.file_name_pdf_server,
       }
     })
     .then((response) => {
@@ -116,12 +134,32 @@ export default class TextAdd extends Component {
     .then((response) => {
       console.log(response);
       this.props.viewMessageFlash('Fichier uploadé avec succès !');
-      let arrayLength = response.data.file[0].fd.split("\\").length;
-      this.setState({ file_name_pdf: response.data.file[0].fd.split("\\")[arrayLength-1], view_pdf: true });
+      let separator = '/';
+      if(response.data.file[0].fd.indexOf('\\') != -1){
+        separator  = '\\';
+      }
+      let arrayLength = response.data.file[0].fd.split(separator).length;
+      console.log('toto');
+      console.log(response.data.file[0].fd);
+      console.log(response.data.file[0].fd.split(separator)[arrayLength-1]);
+      console.log('tata');
+      this.setState(
+        { 
+          pdf_loading: false,
+          file_name_pdf_server: response.data.file[0].fd.split(separator)[arrayLength-1],
+          file_name_pdf: response.data.file[0].filename,
+          view_pdf: true,
+          inputFileTitle: response.data.file[0].filename
+      });
     })
     .catch( (error) => {
       console.log(error);
     });
+
+    this.setState({
+      pdf_loading : true
+    })
+
   }
 
   render() {
@@ -135,14 +173,17 @@ export default class TextAdd extends Component {
     let options = this.state.categories.map((category, index) =>{
                     return <option key={index} value={category.id}>{category.name}</option>
                   });
-    let classBtnTypeText = "btn btn-primary btn-sm active";
-    let classBtnTypePdf = "btn btn-primary btn-sm notActive";
+    let classBtnTypeText = "btn btn-choice-file display-flex-center btn-primary btn-sm active";
+    let classBtnTypePdf = "btn btn-choice-file display-flex-center btn-primary btn-sm notActive";
 
     let contentForm =               
             <div className="container-wysiwig" style={{backgroundColor: this.state.wysiwyg_bg_color}}>
               <Trumbowyg id='react-trumbowyg'
                         onChange={() =>{
-                          this.setState({wysiwyg_content: this.textAreaWysiwyg.value})
+                          console.log(this.textAreaWysiwyg.value);
+                          this.setState({wysiwyg_content: this.textAreaWysiwyg.value});
+                          let val = this.textarea.val();
+                          this.textarea.focus().val("").val(val);
                         }} 
                         buttons={
                             [
@@ -165,7 +206,12 @@ export default class TextAdd extends Component {
           </div>
     
     if(this.state.type_text == 'pdf'){
-      classBtnTypePdf = "btn btn-primary btn-sm active";
+      classBtnTypeText = "btn btn-choice-file display-flex-center btn-primary btn-sm notActive";
+      classBtnTypePdf = "btn btn-choice-file display-flex-center btn-primary btn-sm active";
+      let contentBtnFile = this.state.inputFileTitle;
+      if(this.state.pdf_loading){
+        contentBtnFile = <img src="/client/images/Rolling-1s-80px.gif" style={{width: '40px', marginTop: '-10px'}} />
+      }
       contentForm =
       <div className="full-width">
         <h3 className="text-center color">Choisissez un fichier PDF.</h3>
@@ -177,14 +223,18 @@ export default class TextAdd extends Component {
               className="form-control form-input form-style-base"
               onChange={(e) => {this.uploadAndViewPdfFile(e)}}
               />
-            <h4 id="fake-btn" className="form-input fake-styled-btn text-center truncate"><span className="margin">Choisir un fichier</span></h4>
+            <h4 id="fake-btn" className="form-input fake-styled-btn text-center truncate">
+            <span className="margin">
+              {contentBtnFile}
+            </span>
+            </h4>
           </div>
         </div>
       </div>
-      if(this.state.view_pdf == true){
-        let src = "http://localhost:1337/7/web/viewer.html?file="+this.state.file_name_pdf;
-        contentForm = <iframe className="iframe-pdf" src={src}></iframe>
-      }
+      // if(this.state.view_pdf == true){
+      //   let src = "http://localhost:1337/7/web/viewer.html?file="+this.state.file_name_pdf_server;
+      //   contentForm = <iframe className="iframe-pdf" src={src}></iframe>
+      // }
     }
 
     return (

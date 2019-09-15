@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Container, Row, Col, Button } from 'reactstrap';
 import {capitalizeFirstLetter} from '../functions';
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 export default class ExpressionListSsr extends Component {
 
@@ -28,7 +27,6 @@ export default class ExpressionListSsr extends Component {
 
       return (
         <div className="expression-container display-flex-center">
-          <iframe className="iframe-pdf" src="http://localhost:1337/7/web/viewer.html?file=Natural_Cures.pdf"></iframe>
         </div>
       );
     }

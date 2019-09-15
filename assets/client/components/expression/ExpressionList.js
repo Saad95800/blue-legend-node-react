@@ -3,17 +3,6 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Container, Row, Col, Button } from 'reactstrap';
 import {capitalizeFirstLetter} from './../functions';
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { Document, Page } from './../../../../node_modules/react-pdf/dist/entry.webpack';
-// import { Document, Page } from 'react-pdf';
-// import Sample from './Sample';
-import 'react-pdf/dist/Page/AnnotationLayer.css';
-import pdfFile from './sample.pdf';
-
-const options = {
-  cMapUrl: 'cmaps/',
-  cMapPacked: true,
-};
 
 export default class ExpressionList extends Component {
 
@@ -42,7 +31,6 @@ export default class ExpressionList extends Component {
 
     return (
       <div className="expression-container display-flex-center">
-        <iframe className="iframe-pdf" src="http://localhost:1337/7/web/viewer.html?file=Natural_Cures.pdf"></iframe>
       </div>
     );
   }

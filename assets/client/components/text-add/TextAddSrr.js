@@ -63,14 +63,14 @@ export default class TextAdd extends Component {
                         <div className="input-group">
                           <div id="radioBtn" className="btn-group">
                             <a 
-                              className="btn btn-primary btn-sm active" 
+                              className="btn btn-primary btn-choice-file display-flex-center btn-sm active" 
                               data-toggle="type" 
                               data-title="text"
                               onClick={() => {this.changeTypeText.bind(this)}}>
                                 Texte
                             </a>
                             <a 
-                              className="btn btn-primary btn-sm notActive" 
+                              className="btn btn-primary btn-choice-file display-flex-center btn-sm notActive" 
                               data-toggle="type" 
                               data-title="pdf"
                               onClick={() => {this.changeTypeText.bind(this)}}>

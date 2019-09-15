@@ -158,7 +158,7 @@ module.exports = {
       });
       return res.ok();
     }else{
-      return res.error('Erreur de traitement');
+      return res.error('L\'utilisateur n\'est pas connecté');
     }
   },
 
@@ -170,7 +170,7 @@ module.exports = {
       });
       return res.json(textes);
     }else{
-      return res.error('Erreur de traitement');
+      return res.error('L\'utilisateur n\'est pas connecté');
     }
   },
 
@@ -309,16 +309,32 @@ module.exports = {
   saveTextAjax: async function (req, res){
     if(req.user != undefined){
       let params = req.allParams();
+    console.log(params);
+    if(params.type_text == 'text'){
       await Text.create({
         title:params.title, 
         content: params.content, 
-        type_text:"text", 
+        type_text: 'text', 
         owner_category: (params.id_category == '')? null : params.id_category,
-        owner_user: req.user.id
+        owner_user: req.user.id,
+        file_name: '-',
+        file_name_server: '-'
       });
+    }else{
+        await Text.create({
+          title:params.title, 
+          content: '-', 
+          type_text: 'pdf', 
+          owner_category: (params.id_category == '')? null : params.id_category,
+          owner_user: req.user.id,
+          file_name: params.file_name_pdf,
+          file_name_server: params.file_name_pdf_server
+        });
+    }
+
       return res.ok();
     }else{
-      return res.error('Erreur de traitement');
+      return res.error('L\'utilisateur n\'est pas connecté');
     }
   },
 
@@ -459,7 +475,7 @@ module.exports = {
 
       // });
     }else{
-      return res.error('Erreur de traitement');
+      return res.error('L\'utilisateur n\'est pas connecté');
     }
 
   },
@@ -492,7 +508,7 @@ module.exports = {
         .fetch();
         return res.json({id_histoserie: id_histoserie});
       }else{
-        return res.error('Erreur de traitement');
+        return res.error('L\'utilisateur n\'est pas connecté');
       }
     }else{
       res.redirect('/');
@@ -511,7 +527,7 @@ module.exports = {
         }
         return res.json(result);
       }else{
-        return res.error('Erreur de traitement');
+        return res.error('L\'utilisateur n\'est pas connecté');
       }
     }else{
       res.redirect('/');
@@ -529,7 +545,7 @@ module.exports = {
       }
       return res.json(result);
     }else{
-      return res.error('Erreur de traitement');
+      return res.error('L\'utilisateur n\'est pas connecté');
     }
   },
 

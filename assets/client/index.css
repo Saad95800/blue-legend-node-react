@@ -10,7 +10,7 @@ body{
   width:100%;
 }
 .navbar-home{
-  height: 75px;
+  height: 85px;
   background-color:#3B74FE;
   position: fixed;
   top:0px;
@@ -49,7 +49,7 @@ body{
 }
 .bloc-btn-menu{
   width: 80px;
-  height: 74px;
+  height: 84px;
   display: inline-block;
   padding: 4px;
   text-align: center;
@@ -321,7 +321,7 @@ body{
   width: 94%;
   height: 80%;
   /* background-color: #F8FAFE; */
-  margin-top: -1px;
+  margin-top: 10px;
   margin-left: 50px;
   padding-right: 35px;
 }
@@ -444,7 +444,7 @@ body{
   background-color: rgb(59, 116, 254);
   position: fixed;
   left:50px;
-  top: 75px;
+  top: 85px;
 }
 .corner-radius{
   width: 10px; 
@@ -539,9 +539,9 @@ body{
   position: absolute;
   top: -11px;
   left: 90px;
-  background-color: #e7edfd;
-  border-top: 1px solid black;
-  border-left: 1px solid black;
+  background-color: #f4f7ff;
+  border-top: 1px solid #00000024;
+  border-left: 1px solid #00000024;
   -ms-transform: rotate(45deg); /* IE 9 */
   -webkit-transform: rotate(45deg); /* Safari */
   transform: rotate(45deg);
@@ -761,12 +761,12 @@ body{
   box-shadow: 0px 0px 6px 3px #3B74FE;
 }
 .hover-word{
-  background-color: rgb(240, 240, 240);
+  background-color: transparent;
   border-radius: 5px;
   padding: 3px;
 }
 .hover-word:hover{
-  background-color: rgb(220, 220, 220);
+  background-color: rgb(240, 240, 240);
   cursor: pointer;
   /* border: 1px solid rgb(209, 209, 209); */
 }
@@ -775,12 +775,12 @@ body{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 10px 10px;
-  z-index: 1;
-  background-color: #E7EDFD;
+  padding: 25px 10px;
+  z-index: 3;
+  background-color: #f4f7ff;
   min-width: 200px;
   min-height: 90px;
-  border: 1px solid black;
+  border: 1px solid #00000024;
   position: absolute;
 }
 .popup-hover-word{
@@ -871,16 +871,36 @@ body{
   cursor: pointer;
 }
 .truncate {
-  width: 250px;
+  width: 330px;
+  border-radius: 10px !important;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .form-style-base{position:absolute;top:0px;z-index: 999;opacity: 0;}
-.form-input{height:50px;border-radius: 0px;margin-top: 20px;}
+.form-input{height:50px;cursor: pointer;margin-top: 20px;}
 .form-control::-webkit-input-placeholder {
   color:lightgray;
   font-size:18px;
+}
+.btn-choice-file{
+  height: 60px;
+  width: 120px;
+  font-size: 1.4em;
+}
+#btnSaveExpression{
+  width:90px;
+  min-height: 45px;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  text-align: center;
+  padding: 12px 0px;
+  text-shadow: 1px 1px 1px black;
+}
+#btnSaveExpression:hover{
+  background-color: #3b74fe;
 }
 /****************** Media queries *******************/
 @media screen and (max-width: 768px) {

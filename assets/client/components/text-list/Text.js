@@ -17,11 +17,12 @@ export default class Text extends Component {
       selText: '',
       french_value: '',
       msgBtnSave: 'Enregistrer',
-      colorBtnSave: '#3b74fe',
+      colorBtnSave: '#6592ff',
       wysiwyg: false,
       textTitle: '',
       textCategory: '',
-      wysiwyg_bg_color: '#fff'
+      wysiwyg_bg_color: '#fff',
+      type_text: ''
     }
 
   }
@@ -44,7 +45,8 @@ export default class Text extends Component {
         texteContent: text.content,
         contentTextArea: text.contentTextArea,
         textTitle: text.title,
-        textCategory: text.owner_category
+        textCategory: text.owner_category,
+        type_text: text.type_text
       });
     })
     .catch( (error) => {
@@ -74,6 +76,7 @@ export default class Text extends Component {
       $(this).find('.popup-hover-word').html('<div class="popup-trad" style="display:inline-block;margin-left: -130px;margin-top: 20px;">'+ele.html()+'</div>');
       $(this).find('#btnSaveExpression').remove();
     });
+
   }
 
   changePopup(mouse){
@@ -87,7 +90,6 @@ export default class Text extends Component {
       let selText = sel.toString().trim();
     if(selText != '' && selText != ' '){
       if(mouse == 'mouseUp'){
-        ele.style.display = 'block';
           /////////////////////////////////////////
           if (!sel.isCollapsed) {
               
@@ -104,10 +106,11 @@ export default class Text extends Component {
               var rb2 = rel2.getBoundingClientRect();
               ele.style.top = ((r.bottom - rb2.top)*100/(rb1.top-rb2.top)+20) + 'px'; //this will place ele below the selection
               ele.style.left = ((r.left - rb2.left)*100/(rb1.left-rb2.left)-90) + 'px'; //this will align the right edges together
+              ele.style.display = 'block';
               this.setState({selText: selText});
               if(response.data.existUserSpace == 'no'){
                 // L'expression sélectionnéee n'éxiste pas dans l'espace de l'utilisateur
-                this.setState({msgBtnSave: 'Enregistrer', colorBtnSave: '#3b74fe', french_value: response.data.translation});
+                this.setState({msgBtnSave: 'Enregistrer', colorBtnSave: '#6592ff', french_value: response.data.translation});
               }else{
                 // L'expression sélectionnée éxiste en bdd
                 this.setState({msgBtnSave: 'Déjà enregistré', colorBtnSave: '#727d97', french_value: response.data.translation});
@@ -155,36 +158,6 @@ export default class Text extends Component {
     return selText;
   }
 
-  // viewPopup(e) {
-  //   let selText = this.getSelectedText();
-  //   if(selText != '' && selText != ' ' && selText != '\n'){
-  //     this.setState({selText: selText});
-  //     console.log(selText);
-  //     $('#popupTrad').css({
-  //       left:  e.pageX - 350,
-  //       top:   e.pageY - 90,
-  //       display: 'flex'
-  //     });
-
-  //     axios({
-  //       method: 'post',
-  //       url: 'https://api.deepl.com/v2/translate?auth_key=de9c22f0-b3e2-6694-d19a-e6c106c773d2&text='+selText+'&target_lang=fr&source_lang=en',
-  //       responseType: 'json',
-  //       headers: {'Content-Type': 'application/x-www-form-urlencoded', 'Accept': '*/*'}
-  //     })
-  //     .then((response) => {
-  //       console.log(response);
-  //       this.setState({french_value: response.data.translations[0].text});
-  //     })
-  //     .catch( (error) => {
-  //       console.log(error);
-  //     });
-  //   }else{
-  //     document.querySelector('#popupTrad').style.display = 'none';
-  //     this.setState({msgBtnSave: 'Enregistrer'})
-  //   }
-  // }
-
   saveExpression(){
 
     if(this.state.msgBtnSave == 'Enregistrer'){
@@ -200,7 +173,7 @@ export default class Text extends Component {
         if(response.statusText == 'OK'){
           this.setState({msgBtnSave: 'Enregistré !', colorBtnSave: '#08e608', texteContent: data.textHoverWords});
           setTimeout(() => {
-            this.setState({msgBtnSave: 'Enregistrer', colorBtnSave: '#3b74fe'});
+            this.setState({msgBtnSave: 'Enregistrer', colorBtnSave: '#6592ff'});
             document.getElementById('popupTrad').style.display = 'none';
           }, 1000);
         }
@@ -309,25 +282,31 @@ export default class Text extends Component {
                     />
                   </div>
               </div>;
-
-      let text = <div>
-                    <div className="display-flex-right" style={{marginTop: '20px'}}>
-                      <div className="btn-forms" onClick={ () => {this.setState({wysiwyg: true})} }>Editer</div>
-                    </div>
-                    <div id="cal1">&nbsp;</div>
-                    <div id="cal2">&nbsp;</div>
-                    <div id="popupTrad" className="popup-trad">
-                        <div className="arrow-popuptrad"></div>
-                        <div id="translationPopupText" className="text-center">
-                        <div style={{margin: '10px'}}>{capitalizeFirstLetter(this.state.selText)}</div>
-                        <div style={{margin: '10px', fontSize: '1.2em', fontWeight: 'bold'}}>{capitalizeFirstLetter(this.state.french_value)}</div>
-                        </div>
-                        <div className="display-flex-center">
-                          <div id="btnSaveExpression" onClick={this.saveExpression.bind(this)} style={{width:'90px', minHeight: '45px', cursor: 'pointer', color: 'white', fontWeight: 'bold', backgroundColor: this.state.colorBtnSave, borderRadius: '5px', textAlign: 'center', padding: '12px 0px'}}>{this.state.msgBtnSave}</div>
-                        </div>
-                    </div>
-                    <div id="container-text" style={{marginTop: '20px'}} onMouseUp={()=>{this.changePopup('mouseUp')}} onMouseDown={()=>{this.changePopup('mouseDown')}} dangerouslySetInnerHTML={{ __html: this.state.texteContent }}></div>
-                  </div>;
+      let text = '';
+      if(this.state.type_text == 'text'){
+        text = <div>
+                      <div className="display-flex-right" style={{marginTop: '20px'}}>
+                        <div className="btn-forms" onClick={ () => {this.setState({wysiwyg: true})} }>Editer</div>
+                      </div>
+                      <div id="cal1">&nbsp;</div>
+                      <div id="cal2">&nbsp;</div>
+                      <div id="popupTrad" className="popup-trad">
+                          <div className="arrow-popuptrad"></div>
+                          <div id="translationPopupText" className="text-center">
+                          <div style={{margin: '10px'}}>{capitalizeFirstLetter(this.state.selText)}</div>
+                          <div style={{margin: '10px', fontSize: '1.2em', fontWeight: 'bold'}}>{capitalizeFirstLetter(this.state.french_value)}</div>
+                          </div>
+                          <div className="display-flex-center">
+                            <div id="btnSaveExpression" onClick={this.saveExpression.bind(this)} style={{backgroundColor: this.state.colorBtnSave}}>{this.state.msgBtnSave}</div>
+                          </div>
+                      </div>
+                      <div id="container-text" style={{marginTop: '20px'}} onMouseUp={()=>{this.changePopup('mouseUp')}} onMouseDown={()=>{this.changePopup('mouseDown')}} dangerouslySetInnerHTML={{ __html: this.state.texteContent }}></div>
+                    </div>;
+      }else if(this.state.type_text == 'pdf'){
+        console.log(this.state.texte);
+        let src = "http://blue-legend.com/7/web/viewer.html?file="+this.state.texte.file_name_server;
+        text = <iframe className="iframe-pdf" src={src}></iframe>
+      }
 
     return (
         <div className="container-text-view container-page display-flex-center" style={{padding: '0px 0px'}}>

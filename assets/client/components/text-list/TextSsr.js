@@ -25,6 +25,8 @@ export default class TextSsr extends Component {
       wysiwyg_bg_color: '#fff'
     }
 
+    this.type_text = texte.type_text;
+
   }
 
   render() {
@@ -39,24 +41,32 @@ export default class TextSsr extends Component {
       textDisplay = 'block';   
     }
 
-    let text = <div>
-                  <div className="display-flex-right" style={{marginTop: '20px'}}>
-                    <div className="btn-forms" onClick={ () => {this.setState({wysiwyg: true})} }>Editer</div>
-                  </div>
-                  <div id="cal1">&nbsp;</div>
-                  <div id="cal2">&nbsp;</div>
-                  <div id="popupTrad" className="popup-trad">
-                      <div className="arrow-popuptrad"></div>
-                      <div id="translationPopupText" className="text-center">
-                      <div style={{margin: '10px'}}>{capitalizeFirstLetter(this.state.selText)}</div>
-                      <div style={{margin: '10px', fontSize: '1.2em', fontWeight: 'bold'}}>{capitalizeFirstLetter(this.state.french_value)}</div>
-                      </div>
-                      <div className="display-flex-center">
-                        <div id="btnSaveExpression" style={{width:'90px', minHeight: '45px', cursor: 'pointer', color: 'white', fontWeight: 'bold', backgroundColor: this.state.colorBtnSave, borderRadius: '5px', textAlign: 'center', padding: '12px 0px'}}>{this.state.msgBtnSave}</div>
-                      </div>
-                  </div>
-                  <div id="container-text" style={{marginTop: '20px'}} dangerouslySetInnerHTML={{ __html: this.state.texteContent }}></div>
-                </div>;
+    let text = '';
+    
+    if(this.type_text == 'text'){
+      text = <div>
+                    <div className="display-flex-right" style={{marginTop: '20px'}}>
+                      <div className="btn-forms" onClick={ () => {this.setState({wysiwyg: true})} }>Editer</div>
+                    </div>
+                    <div id="cal1">&nbsp;</div>
+                    <div id="cal2">&nbsp;</div>
+                    <div id="popupTrad" className="popup-trad">
+                        <div className="arrow-popuptrad"></div>
+                        <div id="translationPopupText" className="text-center">
+                        <div style={{margin: '10px'}}>{capitalizeFirstLetter(this.state.selText)}</div>
+                        <div style={{margin: '10px', fontSize: '1.2em', fontWeight: 'bold'}}>{capitalizeFirstLetter(this.state.french_value)}</div>
+                        </div>
+                        <div className="display-flex-center">
+                          <div id="btnSaveExpression" style={{backgroundColor: this.state.colorBtnSave}}>{this.state.msgBtnSave}</div>
+                        </div>
+                    </div>
+                    <div id="container-text" style={{marginTop: '20px'}} dangerouslySetInnerHTML={{ __html: this.state.texteContent }}></div>
+                  </div>;      
+    }else{
+      console.log(this.props.data.texte);
+      let src = "http://blue-legend.com/7/web/viewer.html?file="+this.props.data.texte.file_name_server;
+      text = <iframe className="iframe-pdf" src={src}></iframe>
+    }
 
     return (
         <div className="container-text-view container-page">

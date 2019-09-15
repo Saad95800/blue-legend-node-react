@@ -8,13 +8,20 @@ module.exports = {
     },
 
     content: {
-      type: 'string',
-      required: true
+      type: 'string'
     },
 
     type_text: {
       type: 'string',
       required: true
+    },
+
+    file_name: {
+      type: 'string'
+    },
+
+    file_name_server: {
+      type: 'string'
     },
 
     serie: {

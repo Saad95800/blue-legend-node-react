@@ -31,7 +31,7 @@ export default class NavBar extends Component {
             style: {},
             isSelected: false,
             title: 'Textes',
-            cssTitle: {position: 'absolute', marginTop: '53px', marginLeft: '-48px', color: 'white'}
+            cssTitle: {position: 'absolute', marginTop: '58px', marginLeft: '-48px', color: 'white'}
         },
         // {
         //     url:"/categorie-ajout",
@@ -49,7 +49,7 @@ export default class NavBar extends Component {
             style: {},
             isSelected: false,
             title: 'Catégories',
-            cssTitle: {position: 'absolute', marginTop: '53px', marginLeft: '-60px', color: 'white'}
+            cssTitle: {position: 'absolute', marginTop: '58px', marginLeft: '-60px', color: 'white'}
         },
         {
             url:"/revision",
@@ -59,7 +59,7 @@ export default class NavBar extends Component {
             style: {},
             isSelected: false,
             title: 'Révision',
-            cssTitle: {position: 'absolute', marginTop: '53px', marginLeft: '-51px', color: 'white'}
+            cssTitle: {position: 'absolute', marginTop: '58px', marginLeft: '-51px', color: 'white'}
         },
         {
             url:"/expressions",
@@ -69,7 +69,7 @@ export default class NavBar extends Component {
             style: {},
             isSelected: false,
             title: 'Expressions',
-            cssTitle: {position: 'absolute', marginTop: '53px', marginLeft: '-64px', color: 'white'}
+            cssTitle: {position: 'absolute', marginTop: '58px', marginLeft: '-64px', color: 'white'}
         },
         {
             url:"/series",
@@ -79,7 +79,7 @@ export default class NavBar extends Component {
             style: {},
             isSelected: false,
             title: 'Séries',
-            cssTitle: {position: 'absolute', marginTop: '53px', marginLeft: '-44px', color: 'white'}
+            cssTitle: {position: 'absolute', marginTop: '58px', marginLeft: '-44px', color: 'white'}
         },
         // {
         //     url:"/planning",
