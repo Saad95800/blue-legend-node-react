@@ -40,6 +40,13 @@ export default class Revision extends Component {
         "2": "Contre la montre"
       }
     }
+    
+  }
+
+  componentWillMount(){
+    if(this.props.data.app == 'client'){
+      this.props.changeColorItemNav("item-menu-revision");
+    }
   }
 
   componentDidMount(){

@@ -59,6 +59,14 @@ export default class Appclient extends Component {
 
   }
 
+  changeColorItemNav(item){
+    $(".bloc-btn-menu").each(function(){
+      $(this).css("background-color", "transparent");
+    });
+    $(".bloc-btn-menu-left").css("background-color", "transparent");
+    document.getElementById(item).parentElement.style.backgroundColor = 'rgb(32, 96, 250)';
+  }
+
   render() {
 
     let data = this.props.data;
@@ -79,94 +87,112 @@ export default class Appclient extends Component {
                           <Route 
                             path="/accueil" 
                             render={(props) => { return <Home {...props} 
-                            data={data}/>}} 
+                            data={data} 
+                            changeColorItemNav={this.changeColorItemNav}/>}} 
                           />
                           <Route 
                             path="/ajout-texte" 
                             render={(props) => { return <TextAdd {...props} 
-                            data={data} viewMessageFlash={this.viewMessageFlash}/>}} 
+                            data={data} 
+                            viewMessageFlash={this.viewMessageFlash} 
+                            changeColorItemNav={this.changeColorItemNav}/>}} 
                           />
                           <Route 
                             path="/texte-liste" 
                             render={(props) => { return <TextList {...props} 
-                            data={data}/>}} 
+                            data={data} 
+                            changeColorItemNav={this.changeColorItemNav}/>}} 
                           />
                           <Route 
                             path="/textes/category/:id_category" 
                             render={(props) => { return <TextList {...props} 
-                            data={data}/>}} 
+                            data={data} 
+                            changeColorItemNav={this.changeColorItemNav}/>}} 
                           />
                           <Route 
                             path="/categories-liste" 
                             render={(props) => { return <CategoryList {...props} 
-                            data={data}/>}} 
+                            data={data} 
+                            changeColorItemNav={this.changeColorItemNav}/>}} 
                           />
                           <Route 
                             path="/categorie-ajout" 
                             render={(props) => { return <CategoryAdd {...props} 
                             data={data} 
-                            viewMessageFlash={this.viewMessageFlash}/>}} 
+                            viewMessageFlash={this.viewMessageFlash} 
+                            changeColorItemNav={this.changeColorItemNav}/>}} 
                           />
                           <Route 
                             path="/texte/:id_texte" 
                             render={ (props) => { return <Text {...props} 
                             data={data} 
-                            viewMessageFlash={this.viewMessageFlash}/>} } 
+                            viewMessageFlash={this.viewMessageFlash} 
+                            changeColorItemNav={this.changeColorItemNav}/>} } 
                           />
                           {/* <SwipeableRoutes> */}
                             <Route 
                               path="/revision" render={(props) => { return <Revision {...props} 
                               data={data}
-                              step={'text-list'} />}} 
+                              step={'text-list'} 
+                              changeColorItemNav={this.changeColorItemNav} />}} 
                             />
-                            <Route 
+                            <Route
                               path="/revision-serie-list/text/:id_text" 
                               render={(props) => { return <Revision {...props} 
                               data={data} 
-                              step={'serie-list'}/>}} 
+                              step={'serie-list'} 
+                              changeColorItemNav={this.changeColorItemNav}/>}} 
                             />
                             <Route 
                               path="/revision-content/text/:id_text/serie/:id_serie" 
                               render={(props) => { return <Revision {...props} 
                               data={data} 
-                              step={'content-review'}/>}} 
+                              step={'content-review'} 
+                              changeColorItemNav={this.changeColorItemNav}/>}} 
                             />
                             <Route 
                               path="/revision-mode/texte/:id_texte/serie/:id_serie/content/:num_content" 
                               render={(props) => { return <Revision {...props} 
                               data={data} 
-                              step={'mode'}/>}} 
+                              step={'mode'} 
+                              changeColorItemNav={this.changeColorItemNav}/>}} 
                             />
                             <Route 
                               path="/revision-btn-begin/texte/:id_texte/serie/:id_serie/content/:num_content/mode/:num_mode" 
                               render={(props) => { return <Revision {...props} 
                               data={data} 
-                              step={'btn-begin'}/>}} 
+                              step={'btn-begin'} 
+                              changeColorItemNav={this.changeColorItemNav}/>}} 
                             />
                             <Route 
                               path="/revision-serie/texte/:id_texte/serie/:id_serie/content/:num_content/mode/:num_mode" 
                               render={(props) => { return <Revision {...props} 
                               data={data} 
-                              step={'serie'}/>}} 
+                              step={'serie'} 
+                              changeColorItemNav={this.changeColorItemNav}/>}} 
                             />
                             <Route 
                               path="/custom-series-list" 
                               render={ (props) => { return <AddCustomSerie {...props} 
-                              data={data} />} } 
+                              data={data} 
+                              changeColorItemNav={this.changeColorItemNav} />} } 
                             />
                             <Route 
                               path="/add-custom-serie" 
                               render={ (props) => { return <AddCustomSerie {...props} 
-                              data={data} />} } 
+                              data={data} 
+                              changeColorItemNav={this.changeColorItemNav} />} } 
                             />
                             <Route 
                               path="/expressions" 
                               render={ (props) => { return <ExpressionList {...props} 
-                              data={data} />} } 
+                              data={data} 
+                              changeColorItemNav={this.changeColorItemNav} />} } 
                             />
                             <Route
                               path="/series" 
                               render={ (props) => { return <SerieList {...props} 
+                              changeColorItemNav={this.changeColorItemNav}
                               data={data} />} } 
                             />
                           {/* </SwipeableRoutes> */}

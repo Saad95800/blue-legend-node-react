@@ -15,6 +15,12 @@ export default class CategoryAdd extends Component {
     }
   }
 
+  componentWillMount(){
+    if(this.props.data.app == 'client'){
+      this.props.changeColorItemNav("item-menu-categories");
+    }
+  }
+
   ajoutCategory(){
 
     if(this.state.categoryTitle != ''){

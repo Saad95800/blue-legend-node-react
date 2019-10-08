@@ -24,6 +24,12 @@ export default class TextAdd extends Component {
       inputFileTitle: 'Choisir un fichier'
     }
   }
+  
+  componentWillMount(){
+    if(this.props.data.app == 'client'){
+      this.props.changeColorItemNav("item-menu-text");
+    }
+  }
 
   componentDidMount(){
 

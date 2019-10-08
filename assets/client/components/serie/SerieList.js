@@ -7,13 +7,19 @@ export default class SerieList extends Component {
     super(props);
   }
 
-    render() {
-
-      return (
-              <div className="container-serie-list container-page display-flex-center">
-
-              </div>
-      );
+  componentWillMount(){
+    if(this.props.data.app == 'client'){
+      this.props.changeColorItemNav("item-menu-serie");
     }
-
   }
+
+  render() {
+
+    return (
+            <div className="container-serie-list container-page display-flex-center">
+
+            </div>
+    );
+  }
+
+}

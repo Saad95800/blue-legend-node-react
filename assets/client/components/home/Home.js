@@ -30,7 +30,11 @@ export default class Home extends Component {
         nbMotsExprTotalAppris: nbMotsExprTotalAppris
       }
     }
-
+    componentWillMount(){
+      if(this.props.data.app == 'client'){
+        this.props.changeColorItemNav("item-menu-accueil");
+      }
+    }
     componentDidMount(){
       axios({
         method: 'post',

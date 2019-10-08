@@ -71,7 +71,13 @@ export default class Text extends Component {
       $(this).find('.popup-hover-word').html('<div class="popup-trad" style="display:inline-block;margin-left: -130px;margin-top: 20px;">'+ele.html()+'</div>');
       $(this).find('#btnSaveExpression').remove();
     });
+    
+  }
 
+  componentWillMount(){
+    if(this.props.data.app == 'client'){
+      this.props.changeColorItemNav("item-menu-text");
+    }
   }
 
   changePopup(mouse){
@@ -299,7 +305,7 @@ export default class Text extends Component {
               />
             </div>
         </div>;
-        let src = "http://blue-legend.com/pages/text.html?data="+this.state.texteContent;
+        let src = "http://localhost:1337/pages/text.html?data="+this.state.texteContent;
         text = <div>
                       <div className="display-flex-right" style={{marginTop: '20px'}}>
                         <div className="btn-forms" onClick={ () => {this.setState({wysiwyg: true})} }>Editer</div>
@@ -316,7 +322,7 @@ export default class Text extends Component {
                     </div>;
       }else if(this.state.type_text == 'pdf'){
         console.log(this.state.texte);
-        let src = "http://blue-legend.com/7/web/viewer.html?file="+this.state.texte.file_name_server;
+        let src = "http://localhost:1337/7/web/viewer.html?file="+this.state.texte.file_name_server;
         text = 
         <div>
           <div id="cal1">&nbsp;</div>

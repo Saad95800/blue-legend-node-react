@@ -20,7 +20,13 @@ export default class TextList extends Component {
       textes: textes,
       id_category: id_category
     }
+    
+  }
 
+  componentWillMount(){
+    if(this.props.data.app == 'client'){
+      this.props.changeColorItemNav("item-menu-text");
+    }
   }
 
   componentDidMount(){

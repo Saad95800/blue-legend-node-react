@@ -44,7 +44,7 @@ export default class TextSsr extends Component {
     let text = '';
     
     if(this.type_text == 'text'){
-      let src = "http://blue-legend.com/pages/text.html?data="+this.state.texteContent;
+      let src = "http://localhost:1337/pages/text.html?data="+this.state.texteContent;
       text = <div>
                     <div className="display-flex-right" style={{marginTop: '20px'}}>
                       <div className="btn-forms" onClick={ () => {this.setState({wysiwyg: true})} }>Editer</div>
@@ -71,7 +71,7 @@ export default class TextSsr extends Component {
                     ></iframe>
                   </div>;      
     }else{
-      let src = "http://blue-legend.com/7/web/viewer.html?file="+this.props.data.texte.file_name_server;
+      let src = "http://localhost:1337/7/web/viewer.html?file="+this.props.data.texte.file_name_server;
       text = 
         <div>
           <div id="cal1">&nbsp;</div>

@@ -16,6 +16,7 @@ export default class CategoryList extends Component {
     this.state = {
       categories: categories
     }
+    
   }
 
   componentDidMount(){
@@ -29,6 +30,12 @@ export default class CategoryList extends Component {
     });
   }
 
+  componentWillMount(){
+    if(this.props.data.app == 'client'){
+      this.props.changeColorItemNav("item-menu-categories");
+    }
+  }
+  
   render() {
 
     let categories = this.state.categories.map((category, index) => {

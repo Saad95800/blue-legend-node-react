@@ -321,7 +321,7 @@ process.umask = function() { return 0; };
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Appclient; });
+/* WEBPACK VAR INJECTION */(function($) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Appclient; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
@@ -430,6 +430,15 @@ function (_Component) {
       }, 3000);
     }
   }, {
+    key: "changeColorItemNav",
+    value: function changeColorItemNav(item) {
+      $(".bloc-btn-menu").each(function () {
+        $(this).css("background-color", "transparent");
+      });
+      $(".bloc-btn-menu-left").css("background-color", "transparent");
+      document.getElementById(item).parentElement.style.backgroundColor = 'rgb(32, 96, 250)';
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -458,7 +467,8 @@ function (_Component) {
         path: "/accueil",
         render: function render(props) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_home_Home__WEBPACK_IMPORTED_MODULE_4__["default"], _extends({}, props, {
-            data: data
+            data: data,
+            changeColorItemNav: _this2.changeColorItemNav
           }));
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
@@ -466,28 +476,32 @@ function (_Component) {
         render: function render(props) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_text_add_TextAdd__WEBPACK_IMPORTED_MODULE_5__["default"], _extends({}, props, {
             data: data,
-            viewMessageFlash: _this2.viewMessageFlash
+            viewMessageFlash: _this2.viewMessageFlash,
+            changeColorItemNav: _this2.changeColorItemNav
           }));
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
         path: "/texte-liste",
         render: function render(props) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_text_list_TextList__WEBPACK_IMPORTED_MODULE_6__["default"], _extends({}, props, {
-            data: data
+            data: data,
+            changeColorItemNav: _this2.changeColorItemNav
           }));
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
         path: "/textes/category/:id_category",
         render: function render(props) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_text_list_TextList__WEBPACK_IMPORTED_MODULE_6__["default"], _extends({}, props, {
-            data: data
+            data: data,
+            changeColorItemNav: _this2.changeColorItemNav
           }));
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
         path: "/categories-liste",
         render: function render(props) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_category_CategoryList__WEBPACK_IMPORTED_MODULE_8__["default"], _extends({}, props, {
-            data: data
+            data: data,
+            changeColorItemNav: _this2.changeColorItemNav
           }));
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
@@ -495,7 +509,8 @@ function (_Component) {
         render: function render(props) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_category_CategoryAdd__WEBPACK_IMPORTED_MODULE_9__["default"], _extends({}, props, {
             data: data,
-            viewMessageFlash: _this2.viewMessageFlash
+            viewMessageFlash: _this2.viewMessageFlash,
+            changeColorItemNav: _this2.changeColorItemNav
           }));
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
@@ -503,7 +518,8 @@ function (_Component) {
         render: function render(props) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_text_list_Text__WEBPACK_IMPORTED_MODULE_7__["default"], _extends({}, props, {
             data: data,
-            viewMessageFlash: _this2.viewMessageFlash
+            viewMessageFlash: _this2.viewMessageFlash,
+            changeColorItemNav: _this2.changeColorItemNav
           }));
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
@@ -511,7 +527,8 @@ function (_Component) {
         render: function render(props) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_revision_Revision__WEBPACK_IMPORTED_MODULE_10__["default"], _extends({}, props, {
             data: data,
-            step: 'text-list'
+            step: 'text-list',
+            changeColorItemNav: _this2.changeColorItemNav
           }));
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
@@ -519,7 +536,8 @@ function (_Component) {
         render: function render(props) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_revision_Revision__WEBPACK_IMPORTED_MODULE_10__["default"], _extends({}, props, {
             data: data,
-            step: 'serie-list'
+            step: 'serie-list',
+            changeColorItemNav: _this2.changeColorItemNav
           }));
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
@@ -527,7 +545,8 @@ function (_Component) {
         render: function render(props) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_revision_Revision__WEBPACK_IMPORTED_MODULE_10__["default"], _extends({}, props, {
             data: data,
-            step: 'content-review'
+            step: 'content-review',
+            changeColorItemNav: _this2.changeColorItemNav
           }));
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
@@ -535,7 +554,8 @@ function (_Component) {
         render: function render(props) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_revision_Revision__WEBPACK_IMPORTED_MODULE_10__["default"], _extends({}, props, {
             data: data,
-            step: 'mode'
+            step: 'mode',
+            changeColorItemNav: _this2.changeColorItemNav
           }));
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
@@ -543,7 +563,8 @@ function (_Component) {
         render: function render(props) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_revision_Revision__WEBPACK_IMPORTED_MODULE_10__["default"], _extends({}, props, {
             data: data,
-            step: 'btn-begin'
+            step: 'btn-begin',
+            changeColorItemNav: _this2.changeColorItemNav
           }));
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
@@ -551,34 +572,39 @@ function (_Component) {
         render: function render(props) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_revision_Revision__WEBPACK_IMPORTED_MODULE_10__["default"], _extends({}, props, {
             data: data,
-            step: 'serie'
+            step: 'serie',
+            changeColorItemNav: _this2.changeColorItemNav
           }));
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
         path: "/custom-series-list",
         render: function render(props) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_revision_AddCustomSerie__WEBPACK_IMPORTED_MODULE_12__["default"], _extends({}, props, {
-            data: data
+            data: data,
+            changeColorItemNav: _this2.changeColorItemNav
           }));
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
         path: "/add-custom-serie",
         render: function render(props) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_revision_AddCustomSerie__WEBPACK_IMPORTED_MODULE_12__["default"], _extends({}, props, {
-            data: data
+            data: data,
+            changeColorItemNav: _this2.changeColorItemNav
           }));
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
         path: "/expressions",
         render: function render(props) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_expression_ExpressionList__WEBPACK_IMPORTED_MODULE_13__["default"], _extends({}, props, {
-            data: data
+            data: data,
+            changeColorItemNav: _this2.changeColorItemNav
           }));
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
         path: "/series",
         render: function render(props) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_serie_SerieList__WEBPACK_IMPORTED_MODULE_14__["default"], _extends({}, props, {
+            changeColorItemNav: _this2.changeColorItemNav,
             data: data
           }));
         }
@@ -598,6 +624,7 @@ function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "jquery")))
 
 /***/ }),
 
@@ -1412,6 +1439,13 @@ function (_Component) {
   }
 
   _createClass(CategoryAdd, [{
+    key: "componentWillMount",
+    value: function componentWillMount() {
+      if (this.props.data.app == 'client') {
+        this.props.changeColorItemNav("item-menu-categories");
+      }
+    }
+  }, {
     key: "ajoutCategory",
     value: function ajoutCategory() {
       var _this2 = this;
@@ -1585,6 +1619,13 @@ function (_Component) {
           categories: categories
         });
       });
+    }
+  }, {
+    key: "componentWillMount",
+    value: function componentWillMount() {
+      if (this.props.data.app == 'client') {
+        this.props.changeColorItemNav("item-menu-categories");
+      }
     }
   }, {
     key: "render",
@@ -1842,6 +1883,13 @@ function (_Component) {
   }
 
   _createClass(Home, [{
+    key: "componentWillMount",
+    value: function componentWillMount() {
+      if (this.props.data.app == 'client') {
+        this.props.changeColorItemNav("item-menu-accueil");
+      }
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       var _this2 = this;
@@ -3130,6 +3178,13 @@ function (_Component) {
   }
 
   _createClass(Revision, [{
+    key: "componentWillMount",
+    value: function componentWillMount() {
+      if (this.props.data.app == 'client') {
+        this.props.changeColorItemNav("item-menu-revision");
+      }
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       var _this2 = this;
@@ -4159,6 +4214,13 @@ function (_Component) {
   }
 
   _createClass(SerieList, [{
+    key: "componentWillMount",
+    value: function componentWillMount() {
+      if (this.props.data.app == 'client') {
+        this.props.changeColorItemNav("item-menu-serie");
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -4247,6 +4309,13 @@ function (_Component) {
   }
 
   _createClass(TextAdd, [{
+    key: "componentWillMount",
+    value: function componentWillMount() {
+      if (this.props.data.app == 'client') {
+        this.props.changeColorItemNav("item-menu-text");
+      }
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       var _this2 = this;
@@ -4719,6 +4788,13 @@ function (_Component) {
   }
 
   _createClass(Text, [{
+    key: "componentWillMount",
+    value: function componentWillMount() {
+      if (this.props.data.app == 'client') {
+        this.props.changeColorItemNav("item-menu-text");
+      }
+    }
+  }, {
     key: "changePopup",
     value: function changePopup(mouse) {
       var _this2 = this;
@@ -5010,7 +5086,7 @@ function (_Component) {
           placeholder: "Entrez votre texte",
           ref: "trumbowyg"
         })));
-        var src = "http://blue-legend.com/pages/text.html?data=" + this.state.texteContent;
+        var src = "http://localhost:1337/pages/text.html?data=" + this.state.texteContent;
         text = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "display-flex-right",
           style: {
@@ -5036,7 +5112,7 @@ function (_Component) {
       } else if (this.state.type_text == 'pdf') {
         console.log(this.state.texte);
 
-        var _src = "http://blue-legend.com/7/web/viewer.html?file=" + this.state.texte.file_name_server;
+        var _src = "http://localhost:1337/7/web/viewer.html?file=" + this.state.texte.file_name_server;
 
         text = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           id: "cal1"
@@ -5178,6 +5254,13 @@ function (_Component) {
   }
 
   _createClass(TextList, [{
+    key: "componentWillMount",
+    value: function componentWillMount() {
+      if (this.props.data.app == 'client') {
+        this.props.changeColorItemNav("item-menu-text");
+      }
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       var _this2 = this;
