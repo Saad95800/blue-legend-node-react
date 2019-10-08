@@ -8,7 +8,6 @@ export default class Text extends Component {
 
   constructor(props){
     super(props);
-
     this.state = {
       texte: {},
       texteContent: '',
@@ -24,10 +23,6 @@ export default class Text extends Component {
       wysiwyg_bg_color: '#fff',
       type_text: ''
     }
-
-  }
-
-  componentDidMount(){
 
     this.inputTitleText = document.querySelector("#title-text");
     this.selectCategory = document.querySelector("#select-category-text");
@@ -93,46 +88,69 @@ export default class Text extends Component {
           /////////////////////////////////////////
           if (!sel.isCollapsed) {
               
-            axios({
-              method: 'post',
-              url: '/check-expression-exist-ajax',
-              responseType: 'json',
-              data: {expression: selText}
-            })
-            .then((response) => {
-              console.log(response);
-              var r = sel.getRangeAt(0).getBoundingClientRect();
-              var rb1 = rel1.getBoundingClientRect();
-              var rb2 = rel2.getBoundingClientRect();
-              ele.style.top = ((r.bottom - rb2.top)*100/(rb1.top-rb2.top)+20) + 'px'; //this will place ele below the selection
-              ele.style.left = ((r.left - rb2.left)*100/(rb1.left-rb2.left)-90) + 'px'; //this will align the right edges together
+            if(selText.length > 40){
               ele.style.display = 'block';
-              this.setState({selText: selText});
-              if(response.data.existUserSpace == 'no'){
-                // L'expression sélectionnéee n'éxiste pas dans l'espace de l'utilisateur
-                this.setState({msgBtnSave: 'Enregistrer', colorBtnSave: '#6592ff', french_value: response.data.translation});
-              }else{
-                // L'expression sélectionnée éxiste en bdd
-                this.setState({msgBtnSave: 'Déjà enregistré', colorBtnSave: '#727d97', french_value: response.data.translation});
-              }
-              if(selText.length > 40){
-                this.setState({msgBtnSave: 'Maximum 40 caractères', colorBtnSave: 'red'});
-              }
-  
-            })
-            .catch( (error) => {
-              console.log(error);
-            });
+              this.setState({
+                msgBtnSave: 'Maximum 40 caractères', 
+                colorBtnSave: 'red'
+              });
+            }else{
+
+              axios({
+                method: 'post',
+                url: '/check-expression-exist-ajax',
+                responseType: 'json',
+                data: {expression: selText}
+              })
+              .then((response) => {
+                console.log(response);
+                var r = sel.getRangeAt(0).getBoundingClientRect();
+                var rb1 = rel1.getBoundingClientRect();
+                var rb2 = rel2.getBoundingClientRect();
+                ele.style.top = ((r.bottom - rb2.top)*100/(rb1.top-rb2.top)+20) + 'px'; //this will place ele below the selection
+                ele.style.left = ((r.left - rb2.left)*100/(rb1.left-rb2.left)-90) + 'px'; //this will align the right edges together
+                ele.style.display = 'block';
+                this.setState({selText: selText});
+                if(response.data.existUserSpace == 'no'){
+                  // L'expression sélectionnéee n'éxiste pas dans l'espace de l'utilisateur
+                  this.setState({
+                    msgBtnSave: 'Enregistrer', 
+                    colorBtnSave: '#6592ff', 
+                    french_value: response.data.translation
+                  });
+                }else{
+                  // L'expression sélectionnée éxiste en bdd
+                  this.setState({
+                    msgBtnSave: 'Déjà enregistré', 
+                    colorBtnSave: '#727d97', 
+                    french_value: response.data.translation
+                  });
+                }
+    
+              })
+              .catch( (error) => {
+                console.log(error);
+              });
+
+            }
+
           }
         
-      }else{
+      }else{ // MouseDown
         ele.style.display = 'none';
-        this.setState({msgBtnSave: 'Enregistrer', french_value: '', selText: ''});
+        console.log("none btn")
+        this.setState({
+          msgBtnSave: 'Enregistrer', 
+          french_value: '', selText: ''
+        });
         $('.popup-hover-word').html("");
       }      
     }else{
       ele.style.display = 'none';
-      this.setState({msgBtnSave: 'Enregistrer', french_value: '', selText: ''});
+      this.setState({
+        msgBtnSave: 'Enregistrer', 
+        french_value: '', selText: ''
+      });
     }
 
   }
@@ -158,8 +176,8 @@ export default class Text extends Component {
     return selText;
   }
 
-  saveExpression(){
-
+  saveExpression(e){
+    e.stopPropagation();
     if(this.state.msgBtnSave == 'Enregistrer'){
       axios({
         method: 'post',
@@ -168,7 +186,6 @@ export default class Text extends Component {
         data: {french_value: this.state.french_value, english_value: this.state.selText, id_text: this.state.texte.id}
       })
       .then((response) => {
-        console.log(response);
         let data = response.data;
         if(response.statusText == 'OK'){
           this.setState({msgBtnSave: 'Enregistré !', colorBtnSave: '#08e608', texteContent: data.textHoverWords});
@@ -182,7 +199,6 @@ export default class Text extends Component {
         console.log(error);
       });      
     }
-
 
   }
 
@@ -203,7 +219,6 @@ export default class Text extends Component {
         data: {id_text: this.props.location.pathname.split("/")[2], title: this.state.textTitle, content: wysiwyg.value, category: this.state.textCategory }
       })
       .then((response) => {
-        console.log(response);
         if(response.statusText == 'OK'){
           let text = this.state.texte;
           text.content = wysiwyg.value;
@@ -218,7 +233,6 @@ export default class Text extends Component {
   }
 
   render() {
-    let contentText = this.state.texteContent;
     let options = this.state.categories.map((category, index) =>{
       return <option key={index} value={category.id}>{category.name}</option>
     });
@@ -232,80 +246,93 @@ export default class Text extends Component {
       wysiwygDisplay = 'none';
       textDisplay = 'block';   
     }
-
-      let wysiwyg = <div>
-                  <Row style={{marginTop: '20px'}}>
-                    <Col sm="12">
-                      <Label for="select-category-text" sm={2}>Catégorie</Label>
-                      <FormGroup row>
-                        <Col sm={12}>
-                          <Input value={this.state.textCategory} type="select" id="select-category-text" onChange={()=>{this.setState({textCategory: document.querySelector("#select-category-text").value})}}>
-                            <option key="0" value="0">---</option>
-                            {options}
-                          </Input>
-                        </Col>
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col sm="12">
-                      <Label for="title-text" sm={3}>Titre du texte</Label>
-                      <FormGroup row>
-                        <Col sm={12}>
-                          <Input value={this.state.textTitle} type="text" onChange={() => {this.setState({textTitle: document.querySelector("#title-text").value})}} autoComplete="off" id="title-text" />
-                        </Col>
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <div className="display-flex-right">
-                    <div className="btn-forms" style={{marginRight: '5px'}} onClick={this.updateText.bind(this)}>Enregistrer</div>
-                    <div className="btn-forms" style={{backgroundColor: '#DF2645'}} onClick={() => {this.setState({wysiwyg: false})}}>Annuler</div>
-                  </div>
-                  <div style={{backgroundColor: this.state.wysiwyg_bg_color}}>
-                    <Trumbowyg id='react-trumbowyg'
-                      buttons={
-                          [
-                              ['viewHTML'],
-                              ['formatting'],
-                              'btnGrp-semantic',
-                              ['link'],
-                              ['insertImage'],
-                              'btnGrp-justify',
-                              'btnGrp-lists',
-                              ['table'], // I ADDED THIS FOR THE TABLE PLUGIN BUTTON
-                              ['fullscreen']
-                          ]
-                      }
-                      data={this.state.contentTextArea}
-                      placeholder='Entrez votre texte'
-                      ref="trumbowyg"
-                    />
-                  </div>
-              </div>;
+      let wysiwyg = '';
       let text = '';
       if(this.state.type_text == 'text'){
+
+        wysiwyg = <div>
+            <Row style={{marginTop: '20px'}}>
+              <Col sm="12">
+                <Label for="select-category-text" sm={2}>Catégorie</Label>
+                <FormGroup row>
+                  <Col sm={12}>
+                    <Input value={this.state.textCategory} type="select" id="select-category-text" onChange={()=>{this.setState({textCategory: document.querySelector("#select-category-text").value})}}>
+                      <option key="0" value="0">---</option>
+                      {options}
+                    </Input>
+                  </Col>
+                </FormGroup>
+              </Col>
+            </Row>
+            <Row>
+              <Col sm="12">
+                <Label for="title-text" sm={3}>Titre du texte</Label>
+                <FormGroup row>
+                  <Col sm={12}>
+                    <Input value={this.state.textTitle} type="text" onChange={() => {this.setState({textTitle: document.querySelector("#title-text").value})}} autoComplete="off" id="title-text" />
+                  </Col>
+                </FormGroup>
+              </Col>
+            </Row>
+            <div className="display-flex-right">
+              <div className="btn-forms" style={{marginRight: '5px'}} onClick={this.updateText.bind(this)}>Enregistrer</div>
+              <div className="btn-forms" style={{backgroundColor: '#DF2645'}} onClick={() => {this.setState({wysiwyg: false})}}>Annuler</div>
+            </div>
+            <div style={{backgroundColor: this.state.wysiwyg_bg_color}}>
+              <Trumbowyg id='react-trumbowyg'
+                buttons={
+                    [
+                        ['viewHTML'],
+                        ['formatting'],
+                        'btnGrp-semantic',
+                        ['link'],
+                        ['insertImage'],
+                        'btnGrp-justify',
+                        'btnGrp-lists',
+                        ['table'], // I ADDED THIS FOR THE TABLE PLUGIN BUTTON
+                        ['fullscreen']
+                    ]
+                }
+                data={this.state.contentTextArea}
+                placeholder='Entrez votre texte'
+                ref="trumbowyg"
+              />
+            </div>
+        </div>;
+        let src = "http://blue-legend.com/pages/text.html?data="+this.state.texteContent;
         text = <div>
                       <div className="display-flex-right" style={{marginTop: '20px'}}>
                         <div className="btn-forms" onClick={ () => {this.setState({wysiwyg: true})} }>Editer</div>
                       </div>
-                      <div id="cal1">&nbsp;</div>
-                      <div id="cal2">&nbsp;</div>
-                      <div id="popupTrad" className="popup-trad">
-                          <div className="arrow-popuptrad"></div>
-                          <div id="translationPopupText" className="text-center">
-                          <div style={{margin: '10px'}}>{capitalizeFirstLetter(this.state.selText)}</div>
-                          <div style={{margin: '10px', fontSize: '1.2em', fontWeight: 'bold'}}>{capitalizeFirstLetter(this.state.french_value)}</div>
-                          </div>
-                          <div className="display-flex-center">
-                            <div id="btnSaveExpression" onClick={this.saveExpression.bind(this)} style={{backgroundColor: this.state.colorBtnSave}}>{this.state.msgBtnSave}</div>
-                          </div>
-                      </div>
-                      <div id="container-text" style={{marginTop: '20px'}} onMouseUp={()=>{this.changePopup('mouseUp')}} onMouseDown={()=>{this.changePopup('mouseDown')}} dangerouslySetInnerHTML={{ __html: this.state.texteContent }}></div>
+
+                      {/* <div id="container-text" style={{marginTop: '20px'}} onMouseUp={()=>{this.changePopup('mouseUp')}} onMouseDown={()=>{this.changePopup('mouseDown')}} dangerouslySetInnerHTML={{ __html: this.state.texteContent }}></div> */}
+                      <iframe 
+                        id="container-text-iframe" 
+                        data-textcontent={this.state.texteContent}
+                        data-textid={this.state.texte.id}
+                        src={src}
+                        style={{width: '100%', height: '1000px'}}
+                        ></iframe>
                     </div>;
       }else if(this.state.type_text == 'pdf'){
         console.log(this.state.texte);
         let src = "http://blue-legend.com/7/web/viewer.html?file="+this.state.texte.file_name_server;
-        text = <iframe className="iframe-pdf" src={src}></iframe>
+        text = 
+        <div>
+          <div id="cal1">&nbsp;</div>
+          <div id="cal2">&nbsp;</div>
+          <div id="popupTrad" className="popup-trad">
+              <div className="arrow-popuptrad"></div>
+              <div id="translationPopupText" className="text-center">
+              <div style={{margin: '10px'}}>{capitalizeFirstLetter(this.state.selText)}</div>
+              <div style={{margin: '10px', fontSize: '1.2em', fontWeight: 'bold'}}>{capitalizeFirstLetter(this.state.french_value)}</div>
+              </div>
+              <div className="display-flex-center">
+                <div id="btnSaveExpression" onClick={this.saveExpression.bind(this)} style={{backgroundColor: this.state.colorBtnSave}}>{this.state.msgBtnSave}</div>
+              </div>
+          </div>
+          <iframe className="iframe-pdf" src={src}></iframe>
+        </div>
       }
 
     return (

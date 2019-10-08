@@ -5,11 +5,15 @@ import Vitrine from '../../assets/client/components/Vitrine';
 import {StaticRouter } from 'react-router-dom';
 import moment from 'moment';
 import axios from 'axios';
+import extractDomain from 'extract-domain';
 
 moment.locale('fr');
 
 let render = (req, res, data = {}) => {
+  console.log(req.hostname);
   if(req.isAuthenticated() && req.user != undefined){
+    data.url = req.url;
+    data.domain = req.hostname;
     data.url = req.url;
     data.app = 'server';
     data.user = req.user;
@@ -28,16 +32,20 @@ module.exports = {
 
   renderVitrine: async function (req, res){
 
-    // Envoi de mails
-    // await sails.helpers.mailer();
-    console.log(req.allParams());
-    let data = req.allParams();
-    data.url = req.url;
-    data.app = 'server';
-    const body = ReactDOMServer.renderToString(
-                                                <Vitrine data={data}/>
-                                              );
-    res.view('pages/homepage', {body: body});
+    if( !(req.isAuthenticated() && req.user != undefined) ){
+      // Envoi de mails
+      // await sails.helpers.mailer();
+      console.log(req.allParams());
+      let data = req.allParams();
+      data.url = req.url;
+      data.app = 'server';
+      const body = ReactDOMServer.renderToString(
+                                                  <Vitrine data={data}/>
+                                                );
+      res.view('pages/homepage', {body: body});
+    }else{
+      res.redirect('/accueil');
+    }
   },
 
   accueil: async function (req, res){
@@ -641,21 +649,22 @@ module.exports = {
   checkExpressionExistAjax: async function(req, res){
     let params = req.allParams();
     let selText = params.expression.trim();
-    let expression = await Expression.findOne({
+    let expression = await Expression.find({
       english_value: params.expression.trim()
-    });
-    if(expression != undefined){
+    }).limit(1);
+    if(expression.length > 0){
       // L'expression sélectionnée éxiste en bdd
-      let recordexpression = await RecordExpression.findOne({
-                                owner_expression: expression.id,
+      let recordexpression = await RecordExpression.find({
+                                owner_expression: expression[0].id,
                                 owner_user: req.user.id
                               })
+                              .limit(1)
                               .populate('owner_expression');
-      if(recordexpression != undefined){
+      if(recordexpression[0] != undefined){
         // L'expression éxiste dans l'espace membre de l'utilisateur
-        return res.json({existApi: 'yes', existUserSpace: 'yes', translation: expression.french_value});
+        return res.json({existDb: 'yes', existUserSpace: 'yes', translation: expression[0].french_value});
       }else{
-        return res.json({existApi: 'yes', existUserSpace: 'no', translation: expression.french_value});
+        return res.json({existDb: 'yes', existUserSpace: 'no', translation: expression[0].french_value});
       }
     }else{
         console.log('Appel Deepl API');
@@ -673,10 +682,10 @@ module.exports = {
         .exec(async(err, expression, wasCreated) => {
           if (err) { return res.serverError(err); }
           if(wasCreated){
-            sails.log('Nouvelle expression crée: ' + expression.id);
+            sails.log('Nouvelle expression crée: ' + expression[0].id);
           }
         });
-        return res.json({existApi: 'no', existUserSpace: 'no', translation: response.data.translations[0].text});
+        return res.json({existDb: 'no', existUserSpace: 'no', translation: response.data.translations[0].text});
       })
       .catch( (error) => {
         console.log(error);

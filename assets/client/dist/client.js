@@ -416,7 +416,6 @@ function (_Component) {
       var mf = document.querySelector("#message-flash");
       mf.style.height = '40px';
       mf.innerHTML = msg;
-      console.log('message flash view 2');
 
       if (error) {
         mf.style.backgroundColor = 'rgb(255, 29, 22)';
@@ -1088,7 +1087,7 @@ function (_Component) {
         className: "img-vitrine-block1 size100"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Container"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Row"], {
         style: {
-          height: '580px'
+          height: '530px'
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-xs-6",
@@ -1114,9 +1113,15 @@ function (_Component) {
           margin: '15px 0px'
         }
       }, "Apprend l'anglais efficacement. Par la lecture."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "btn-vitrine-begin display-flex-center"
-      }, "Commencer"))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-        className: "block2 img-vitrine-blocks display-flex-center"
+        className: "container-btn-vitrine-begin"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "btn-vitrine-begin display-flex-center",
+        onClick: this.viewPopupSignin.bind(this)
+      }, "Commencer")))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "block2 img-vitrine-blocks display-flex-center",
+        style: {
+          height: '400px'
+        }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Container"], {
         className: "size100"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1140,7 +1145,7 @@ function (_Component) {
         className: "text1-block2 text-center font-weight-bold"
       }, "Qu'est-ce que Blue Legend ?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "text2-block2 text-center font-weight-bold"
-      }, "Blue Legend est une application web et mobile permettant d'apprendre l'anglais \xE0 travers la lecture de textes en leur donnant la possibilit\xE9 de traduire chaque expressions et mots de vocabulaire et de les r\xE9viser gr\xE2ce \xE0 des s\xE9ries de r\xE9visions ludiques et int\xE9ractives.")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Blue Legend est une application web et mobile permettant d'apprendre l'anglais \xE0 travers la lecture de textes et de livres.")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-xs-6",
         style: {
           height: '100%'
@@ -1178,7 +1183,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-xs-6",
         style: {
-          height: '100%'
+          height: '400px'
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "size100 display-flex-center flex-column"
@@ -1204,14 +1209,14 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-xs-6 display-flex-center",
         style: {
-          height: '100%'
+          height: '400px'
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "img-vitrine-block5"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-xs-6",
         style: {
-          height: '100%'
+          height: '400px'
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "size100 display-flex-center flex-column"
@@ -1230,7 +1235,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-xs-6",
         style: {
-          height: '100%'
+          height: '400px'
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "size100 display-flex-center flex-column"
@@ -1239,7 +1244,7 @@ function (_Component) {
       }, "M\xE9morise durablement gr\xE2ce \xE0 la m\xE9thode de r\xE9p\xE9titions espac\xE9s"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-xs-6",
         style: {
-          height: '100%'
+          height: '400px'
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "img-vitrine-block6"
@@ -1254,14 +1259,14 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-xs-6",
         style: {
-          height: '100%'
+          height: '400px'
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "img-vitrine-block7"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-xs-6",
         style: {
-          height: '100%'
+          height: '400px'
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "size100 display-flex-center flex-column"
@@ -1269,7 +1274,7 @@ function (_Component) {
         className: "text1-block7 text-center font-weight-bold"
       }, "En ligne ou hors ligne, r\xE9vise tes textes o\xF9 que tu soit."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "text2-block7 text-center font-weight-bold"
-      }, "Notre application est disponible pour tout type d'appareils et est utilisable en mode hors-ligne. C'est une progressive web app, ce qui signifie qu'elle est multi plate-forme et fonctionne sur IOS et Android.")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+      }, "Notre application est disponible IOS et Android et est utilisable en mode hors-ligne.")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "block8 footer-vitrine display-flex-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Container"], {
         className: "size100"
@@ -1318,11 +1323,26 @@ function (_Component) {
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
         sm: 12
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-sm-10"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Input"], {
         type: "text",
         autoComplete: "off",
-        id: "newsletter"
-      })))))))));
+        id: "newsletter",
+        style: {
+          marginTop: "5px"
+        }
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-sm-2"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "btn",
+        style: {
+          backgroundColor: "#f5f5ff",
+          marginTop: "5px"
+        }
+      }, "Envoyer")))))))))));
     }
   }]);
 
@@ -1731,6 +1751,14 @@ function (_Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "capitalizeFirstLetter", function() { return capitalizeFirstLetter; });
 function capitalizeFirstLetter(string) {
+  if (string == undefined) {
+    return '';
+  }
+
+  if (string.length == 0) {
+    return '';
+  }
+
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
@@ -2292,7 +2320,6 @@ function (_Component) {
     value: function colorClickItem(event) {
       var _this3 = this;
 
-      console.log(event.target);
       var newItems = this.state.items.map(function (item) {
         if (item.id == event.target.id) {
           item.isSelected = true;
@@ -4409,6 +4436,17 @@ function (_Component) {
 
           _this5.textarea.focus().val("").val(val);
         },
+        onPaste: function onPaste() {
+          console.log(_this5.textAreaWysiwyg.value);
+
+          _this5.setState({
+            wysiwyg_content: _this5.textAreaWysiwyg.value
+          });
+
+          var val = _this5.textarea.val();
+
+          _this5.textarea.focus().val("").val(val);
+        },
         buttons: [['viewHTML'], ['formatting'], 'btnGrp-semantic', ['link'], ['insertImage'], 'btnGrp-justify', 'btnGrp-lists', ['table'], // I ADDED THIS FOR THE TABLE PLUGIN BUTTON
         ['fullscreen']],
         data: this.state.wysiwyg_content,
@@ -4587,9 +4625,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -4627,67 +4665,63 @@ function (_Component) {
       wysiwyg_bg_color: '#fff',
       type_text: ''
     };
+    _this.inputTitleText = document.querySelector("#title-text");
+    _this.selectCategory = document.querySelector("#select-category-text");
+    axios__WEBPACK_IMPORTED_MODULE_1___default()({
+      method: 'post',
+      url: '/get-texte-ajax',
+      responseType: 'json',
+      data: {
+        id: _this.props.location.pathname.split("/")[2]
+      }
+    }).then(function (response) {
+      var text = response.data;
+
+      _this.setState({
+        texte: text,
+        texteContent: text.content,
+        contentTextArea: text.contentTextArea,
+        textTitle: text.title,
+        textCategory: text.owner_category,
+        type_text: text.type_text
+      });
+    }).catch(function (error) {
+      console.log(error);
+    });
+    axios__WEBPACK_IMPORTED_MODULE_1___default()({
+      method: 'post',
+      url: '/categories-ajax',
+      responseType: 'json',
+      data: {}
+    }).then(function (response) {
+      _this.setState({
+        categories: response.data
+      });
+    }).catch(function (error) {
+      console.log(error);
+    });
+
+    var th = _assertThisInitialized(_this);
+
+    $(document).on('click', '.block-hover-word', function (e) {
+      console.log('cliqued');
+      var word = $(this).find('.hover-word').text();
+      console.log($(this));
+      th.setState({
+        selText: word,
+        french_value: $(this).find('.hover-word-french').text()
+      });
+      var ele = $('#popupTrad');
+      $(this).find('.popup-hover-word').html('<div class="popup-trad" style="display:inline-block;margin-left: -130px;margin-top: 20px;">' + ele.html() + '</div>');
+      $(this).find('#btnSaveExpression').remove();
+    });
     return _this;
   }
 
   _createClass(Text, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      this.inputTitleText = document.querySelector("#title-text");
-      this.selectCategory = document.querySelector("#select-category-text");
-      axios__WEBPACK_IMPORTED_MODULE_1___default()({
-        method: 'post',
-        url: '/get-texte-ajax',
-        responseType: 'json',
-        data: {
-          id: this.props.location.pathname.split("/")[2]
-        }
-      }).then(function (response) {
-        var text = response.data;
-
-        _this2.setState({
-          texte: text,
-          texteContent: text.content,
-          contentTextArea: text.contentTextArea,
-          textTitle: text.title,
-          textCategory: text.owner_category,
-          type_text: text.type_text
-        });
-      }).catch(function (error) {
-        console.log(error);
-      });
-      axios__WEBPACK_IMPORTED_MODULE_1___default()({
-        method: 'post',
-        url: '/categories-ajax',
-        responseType: 'json',
-        data: {}
-      }).then(function (response) {
-        _this2.setState({
-          categories: response.data
-        });
-      }).catch(function (error) {
-        console.log(error);
-      });
-      var th = this;
-      $(document).on('click', '.block-hover-word', function (e) {
-        console.log('cliqued');
-        var word = $(this).find('.hover-word').text();
-        console.log($(this));
-        th.setState({
-          selText: word,
-          french_value: $(this).find('.hover-word-french').text()
-        });
-        var ele = $('#popupTrad');
-        $(this).find('.popup-hover-word').html('<div class="popup-trad" style="display:inline-block;margin-left: -130px;margin-top: 20px;">' + ele.html() + '</div>');
-        $(this).find('#btnSaveExpression').remove();
-      });
-    }
-  }, {
     key: "changePopup",
     value: function changePopup(mouse) {
-      var _this3 = this;
+      var _this2 = this;
 
       $('.popup-hover-word').html("");
       var ele = document.getElementById('popupTrad');
@@ -4702,56 +4736,59 @@ function (_Component) {
         if (mouse == 'mouseUp') {
           /////////////////////////////////////////
           if (!sel.isCollapsed) {
-            axios__WEBPACK_IMPORTED_MODULE_1___default()({
-              method: 'post',
-              url: '/check-expression-exist-ajax',
-              responseType: 'json',
-              data: {
-                expression: selText
-              }
-            }).then(function (response) {
-              console.log(response);
-              var r = sel.getRangeAt(0).getBoundingClientRect();
-              var rb1 = rel1.getBoundingClientRect();
-              var rb2 = rel2.getBoundingClientRect();
-              ele.style.top = (r.bottom - rb2.top) * 100 / (rb1.top - rb2.top) + 20 + 'px'; //this will place ele below the selection
-
-              ele.style.left = (r.left - rb2.left) * 100 / (rb1.left - rb2.left) - 90 + 'px'; //this will align the right edges together
-
+            if (selText.length > 40) {
               ele.style.display = 'block';
-
-              _this3.setState({
-                selText: selText
+              this.setState({
+                msgBtnSave: 'Maximum 40 caractères',
+                colorBtnSave: 'red'
               });
+            } else {
+              axios__WEBPACK_IMPORTED_MODULE_1___default()({
+                method: 'post',
+                url: '/check-expression-exist-ajax',
+                responseType: 'json',
+                data: {
+                  expression: selText
+                }
+              }).then(function (response) {
+                console.log(response);
+                var r = sel.getRangeAt(0).getBoundingClientRect();
+                var rb1 = rel1.getBoundingClientRect();
+                var rb2 = rel2.getBoundingClientRect();
+                ele.style.top = (r.bottom - rb2.top) * 100 / (rb1.top - rb2.top) + 20 + 'px'; //this will place ele below the selection
 
-              if (response.data.existUserSpace == 'no') {
-                // L'expression sélectionnéee n'éxiste pas dans l'espace de l'utilisateur
-                _this3.setState({
-                  msgBtnSave: 'Enregistrer',
-                  colorBtnSave: '#6592ff',
-                  french_value: response.data.translation
-                });
-              } else {
-                // L'expression sélectionnée éxiste en bdd
-                _this3.setState({
-                  msgBtnSave: 'Déjà enregistré',
-                  colorBtnSave: '#727d97',
-                  french_value: response.data.translation
-                });
-              }
+                ele.style.left = (r.left - rb2.left) * 100 / (rb1.left - rb2.left) - 90 + 'px'; //this will align the right edges together
 
-              if (selText.length > 40) {
-                _this3.setState({
-                  msgBtnSave: 'Maximum 40 caractères',
-                  colorBtnSave: 'red'
+                ele.style.display = 'block';
+
+                _this2.setState({
+                  selText: selText
                 });
-              }
-            }).catch(function (error) {
-              console.log(error);
-            });
+
+                if (response.data.existUserSpace == 'no') {
+                  // L'expression sélectionnéee n'éxiste pas dans l'espace de l'utilisateur
+                  _this2.setState({
+                    msgBtnSave: 'Enregistrer',
+                    colorBtnSave: '#6592ff',
+                    french_value: response.data.translation
+                  });
+                } else {
+                  // L'expression sélectionnée éxiste en bdd
+                  _this2.setState({
+                    msgBtnSave: 'Déjà enregistré',
+                    colorBtnSave: '#727d97',
+                    french_value: response.data.translation
+                  });
+                }
+              }).catch(function (error) {
+                console.log(error);
+              });
+            }
           }
         } else {
+          // MouseDown
           ele.style.display = 'none';
+          console.log("none btn");
           this.setState({
             msgBtnSave: 'Enregistrer',
             french_value: '',
@@ -4794,8 +4831,10 @@ function (_Component) {
     }
   }, {
     key: "saveExpression",
-    value: function saveExpression() {
-      var _this4 = this;
+    value: function saveExpression(e) {
+      var _this3 = this;
+
+      e.stopPropagation();
 
       if (this.state.msgBtnSave == 'Enregistrer') {
         axios__WEBPACK_IMPORTED_MODULE_1___default()({
@@ -4808,18 +4847,17 @@ function (_Component) {
             id_text: this.state.texte.id
           }
         }).then(function (response) {
-          console.log(response);
           var data = response.data;
 
           if (response.statusText == 'OK') {
-            _this4.setState({
+            _this3.setState({
               msgBtnSave: 'Enregistré !',
               colorBtnSave: '#08e608',
               texteContent: data.textHoverWords
             });
 
             setTimeout(function () {
-              _this4.setState({
+              _this3.setState({
                 msgBtnSave: 'Enregistrer',
                 colorBtnSave: '#6592ff'
               });
@@ -4835,7 +4873,7 @@ function (_Component) {
   }, {
     key: "updateText",
     value: function updateText() {
-      var _this5 = this;
+      var _this4 = this;
 
       var wysiwyg = document.getElementsByName("react-trumbowyg")[0];
       var divWysiwyg = document.querySelector("#react-trumbowyg");
@@ -4858,13 +4896,11 @@ function (_Component) {
             category: this.state.textCategory
           }
         }).then(function (response) {
-          console.log(response);
-
           if (response.statusText == 'OK') {
-            var text = _this5.state.texte;
+            var text = _this4.state.texte;
             text.content = wysiwyg.value;
 
-            _this5.setState({
+            _this4.setState({
               texte: text,
               wysiwyg: false
             });
@@ -4877,9 +4913,8 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this6 = this;
+      var _this5 = this;
 
-      var contentText = this.state.texteContent;
       var options = this.state.categories.map(function (category, index) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
           key: index,
@@ -4897,83 +4932,85 @@ function (_Component) {
         textDisplay = 'block';
       }
 
-      var wysiwyg = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
-        style: {
-          marginTop: '20px'
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-        sm: "12"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Label"], {
-        for: "select-category-text",
-        sm: 2
-      }, "Cat\xE9gorie"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], {
-        row: true
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-        sm: 12
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
-        value: this.state.textCategory,
-        type: "select",
-        id: "select-category-text",
-        onChange: function onChange() {
-          _this6.setState({
-            textCategory: document.querySelector("#select-category-text").value
-          });
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        key: "0",
-        value: "0"
-      }, "---"), options))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-        sm: "12"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Label"], {
-        for: "title-text",
-        sm: 3
-      }, "Titre du texte"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], {
-        row: true
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-        sm: 12
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
-        value: this.state.textTitle,
-        type: "text",
-        onChange: function onChange() {
-          _this6.setState({
-            textTitle: document.querySelector("#title-text").value
-          });
-        },
-        autoComplete: "off",
-        id: "title-text"
-      }))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "display-flex-right"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "btn-forms",
-        style: {
-          marginRight: '5px'
-        },
-        onClick: this.updateText.bind(this)
-      }, "Enregistrer"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "btn-forms",
-        style: {
-          backgroundColor: '#DF2645'
-        },
-        onClick: function onClick() {
-          _this6.setState({
-            wysiwyg: false
-          });
-        }
-      }, "Annuler")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        style: {
-          backgroundColor: this.state.wysiwyg_bg_color
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_trumbowyg__WEBPACK_IMPORTED_MODULE_2___default.a, {
-        id: "react-trumbowyg",
-        buttons: [['viewHTML'], ['formatting'], 'btnGrp-semantic', ['link'], ['insertImage'], 'btnGrp-justify', 'btnGrp-lists', ['table'], // I ADDED THIS FOR THE TABLE PLUGIN BUTTON
-        ['fullscreen']],
-        data: this.state.contentTextArea,
-        placeholder: "Entrez votre texte",
-        ref: "trumbowyg"
-      })));
+      var wysiwyg = '';
       var text = '';
 
       if (this.state.type_text == 'text') {
+        wysiwyg = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
+          style: {
+            marginTop: '20px'
+          }
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+          sm: "12"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Label"], {
+          for: "select-category-text",
+          sm: 2
+        }, "Cat\xE9gorie"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], {
+          row: true
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+          sm: 12
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
+          value: this.state.textCategory,
+          type: "select",
+          id: "select-category-text",
+          onChange: function onChange() {
+            _this5.setState({
+              textCategory: document.querySelector("#select-category-text").value
+            });
+          }
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          key: "0",
+          value: "0"
+        }, "---"), options))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+          sm: "12"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Label"], {
+          for: "title-text",
+          sm: 3
+        }, "Titre du texte"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], {
+          row: true
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+          sm: 12
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
+          value: this.state.textTitle,
+          type: "text",
+          onChange: function onChange() {
+            _this5.setState({
+              textTitle: document.querySelector("#title-text").value
+            });
+          },
+          autoComplete: "off",
+          id: "title-text"
+        }))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "display-flex-right"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "btn-forms",
+          style: {
+            marginRight: '5px'
+          },
+          onClick: this.updateText.bind(this)
+        }, "Enregistrer"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "btn-forms",
+          style: {
+            backgroundColor: '#DF2645'
+          },
+          onClick: function onClick() {
+            _this5.setState({
+              wysiwyg: false
+            });
+          }
+        }, "Annuler")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          style: {
+            backgroundColor: this.state.wysiwyg_bg_color
+          }
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_trumbowyg__WEBPACK_IMPORTED_MODULE_2___default.a, {
+          id: "react-trumbowyg",
+          buttons: [['viewHTML'], ['formatting'], 'btnGrp-semantic', ['link'], ['insertImage'], 'btnGrp-justify', 'btnGrp-lists', ['table'], // I ADDED THIS FOR THE TABLE PLUGIN BUTTON
+          ['fullscreen']],
+          data: this.state.contentTextArea,
+          placeholder: "Entrez votre texte",
+          ref: "trumbowyg"
+        })));
+        var src = "http://blue-legend.com/pages/text.html?data=" + this.state.texteContent;
         text = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "display-flex-right",
           style: {
@@ -4982,11 +5019,26 @@ function (_Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "btn-forms",
           onClick: function onClick() {
-            _this6.setState({
+            _this5.setState({
               wysiwyg: true
             });
           }
-        }, "Editer")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, "Editer")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
+          id: "container-text-iframe",
+          "data-textcontent": this.state.texteContent,
+          "data-textid": this.state.texte.id,
+          src: src,
+          style: {
+            width: '100%',
+            height: '1000px'
+          }
+        }));
+      } else if (this.state.type_text == 'pdf') {
+        console.log(this.state.texte);
+
+        var _src = "http://blue-legend.com/7/web/viewer.html?file=" + this.state.texte.file_name_server;
+
+        text = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           id: "cal1"
         }, "\xA0"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           id: "cal2"
@@ -5016,28 +5068,10 @@ function (_Component) {
           style: {
             backgroundColor: this.state.colorBtnSave
           }
-        }, this.state.msgBtnSave))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          id: "container-text",
-          style: {
-            marginTop: '20px'
-          },
-          onMouseUp: function onMouseUp() {
-            _this6.changePopup('mouseUp');
-          },
-          onMouseDown: function onMouseDown() {
-            _this6.changePopup('mouseDown');
-          },
-          dangerouslySetInnerHTML: {
-            __html: this.state.texteContent
-          }
-        }));
-      } else if (this.state.type_text == 'pdf') {
-        console.log(this.state.texte);
-        var src = "http://blue-legend.com/7/web/viewer.html?file=" + this.state.texte.file_name_server;
-        text = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
+        }, this.state.msgBtnSave))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
           className: "iframe-pdf",
-          src: src
-        });
+          src: _src
+        }));
       }
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -5250,11 +5284,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Vitrine__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Vitrine */ "./assets/client/components/Vitrine.js");
 /* harmony import */ var _config_routes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../config/routes */ "./config/routes.js");
 /* harmony import */ var _config_routes__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_config_routes__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var extract_domain__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! extract-domain */ "./node_modules/extract-domain/dist/extract-domain.min.js");
+/* harmony import */ var extract_domain__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(extract_domain__WEBPACK_IMPORTED_MODULE_5__);
 
 
 
 
 
+
+var domain = extract_domain__WEBPACK_IMPORTED_MODULE_5___default()(window.location.href);
 var u = window.location.href.split("//")[1].replace(window.location.href.split("//")[1].split("/")[0], "").split('?');
 var url = u[0];
 var getUrl = [];
@@ -5304,6 +5342,7 @@ if (routesArray.indexOf('GET ' + url) != -1) {
     Object(react_dom__WEBPACK_IMPORTED_MODULE_1__["hydrate"])(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Vitrine__WEBPACK_IMPORTED_MODULE_3__["default"], {
       data: {
         url: url,
+        domain: domain,
         get: paseGetUrl,
         app: 'client'
       }
@@ -5312,6 +5351,7 @@ if (routesArray.indexOf('GET ' + url) != -1) {
     Object(react_dom__WEBPACK_IMPORTED_MODULE_1__["hydrate"])(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Appclient__WEBPACK_IMPORTED_MODULE_2__["default"], {
       data: {
         url: url,
+        domain: domain,
         get: paseGetUrl,
         app: 'client'
       }
@@ -7986,6 +8026,19 @@ function replaceClassName(origClass, classToRemove) {
 module.exports = function removeClass(element, className) {
   if (element.classList) element.classList.remove(className);else if (typeof element.className === 'string') element.className = replaceClassName(element.className, className);else element.setAttribute('class', replaceClassName(element.className && element.className.baseVal || '', className));
 };
+
+/***/ }),
+
+/***/ "./node_modules/extract-domain/dist/extract-domain.min.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/extract-domain/dist/extract-domain.min.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+(function(d,a){ true?module.exports=a():undefined})("undefined"!==typeof self?self:this,function(){return function(d){function a(c){if(e[c])return e[c].exports;var b=e[c]={i:c,l:!1,exports:{}};d[c].call(b.exports,b,b.exports,a);b.l=!0;return b.exports}var e={};a.m=d;a.c=e;a.d=function(c,b,d){a.o(c,b)||Object.defineProperty(c,
+b,{configurable:!1,enumerable:!0,get:d})};a.n=function(c){var b=c&&c.__esModule?function(){return c["default"]}:function(){return c};a.d(b,"a",b);return b};a.o=function(c,a){return Object.prototype.hasOwnProperty.call(c,a)};a.p="";return a(a.s=0)}([function(d,a,e){function c(){throw new TypeError("The given URL is not a string. Please verify your string|array.");}function b(a){"string"!==typeof a&&c();for(var b=0,d=0,g=0,e=a.length,f=0;e--&&++f&&!(b&&-1<h.indexOf(a[f]));)"."===a[f]&&(++b,d=f);b=f;
+for(f=d;f--;)if(-1!==k.indexOf(a[f])){g=f+1;break}return 2>g?"":a.slice(g,b)}var h=["/",":","?","#"],k=[".","/","@"];d.exports=function(a){if("string"===typeof a)return b(a);if(Array.isArray(a)){var d=[],e,g=0;for(e=a.length;g<e;g++)d.push(b(a[g]));return d}c()}}])});
 
 /***/ }),
 

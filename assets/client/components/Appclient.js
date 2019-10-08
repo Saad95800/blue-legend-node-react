@@ -46,7 +46,6 @@ export default class Appclient extends Component {
     let mf = document.querySelector("#message-flash");
     mf.style.height = '40px';
     mf.innerHTML = msg;
-    console.log('message flash view 2');
     if(error){
       mf.style.backgroundColor = 'rgb(255, 29, 22)';
     }else{
@@ -173,8 +172,9 @@ export default class Appclient extends Component {
                           {/* </SwipeableRoutes> */}
                   </AnimatedSwitch>
                   </div>
-                <Route render={ (props) => { return <NavBar {...props} data={{url: this.props.data.url}}/>} }
-    />
+                <Route 
+                  render={ (props) => { return <NavBar {...props} data={{url: this.props.data.url}}/>} }
+                />
             </div>
       </BrowserRouter>
     );

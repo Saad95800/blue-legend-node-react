@@ -2388,3 +2388,81 @@ html[dir='rtl'] #documentPropertiesOverlay .row > * {
     display: none;
   }
 }
+.display-flex-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.popup-trad{
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 25px 10px;
+  z-index: 3;
+  background-color: #f4f7ff;
+  min-width: 200px;
+  min-height: 90px;
+  border: 1px solid #00000024;
+  position: absolute;
+}
+.arrow-popuptrad{
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: -11px;
+  left: 90px;
+  background-color: #f4f7ff;
+  border-top: 1px solid #00000024;
+  border-left: 1px solid #00000024;
+  -ms-transform: rotate(45deg); /* IE 9 */
+  -webkit-transform: rotate(45deg); /* Safari */
+  transform: rotate(45deg);
+}
+.text-center{
+  text-align: center;
+}
+#btnSaveExpression{
+  width:90px;
+  min-height: 45px;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  text-align: center;
+  padding: 0px 10px;
+  text-shadow: 1px 1px 1px black;
+}
+#cal1{
+  position:absolute;
+  height:0px;
+  width:0px;
+  top:100px;
+  left:100px;
+  overflow:none;
+  z-index:-100;
+}
+#cal2{
+  position:absolute;
+  height:0px;
+  width:0px;
+  top:0px;
+  left:0px;
+  overflow:none;
+  z-index:-100;
+}
+.hover-word{
+  background-color: transparent;
+  border-bottom: 1px solid black;
+  padding: 3px;
+}
+.hover-word:hover{
+  background-color: rgb(240, 240, 240);
+  cursor: pointer;
+}
+.popup-hover-word{
+  display: inline-block;
+}
+.hover-word-french{
+  display: none;
+}

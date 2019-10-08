@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import {capitalizeFirstLetter} from './../functions';
+import extractDomain from 'extract-domain';
 
 export default class TextSsr extends Component {
 
   constructor(props){
     super(props);
-
     let texte = this.props.data.texte;
     let contentText = texte.content;
     let contentTextArea = texte.contentTextArea;
@@ -44,6 +44,7 @@ export default class TextSsr extends Component {
     let text = '';
     
     if(this.type_text == 'text'){
+      let src = "http://blue-legend.com/pages/text.html?data="+this.state.texteContent;
       text = <div>
                     <div className="display-flex-right" style={{marginTop: '20px'}}>
                       <div className="btn-forms" onClick={ () => {this.setState({wysiwyg: true})} }>Editer</div>
@@ -60,12 +61,33 @@ export default class TextSsr extends Component {
                           <div id="btnSaveExpression" style={{backgroundColor: this.state.colorBtnSave}}>{this.state.msgBtnSave}</div>
                         </div>
                     </div>
-                    <div id="container-text" style={{marginTop: '20px'}} dangerouslySetInnerHTML={{ __html: this.state.texteContent }}></div>
+                    {/* <div id="container-text" style={{marginTop: '20px'}} dangerouslySetInnerHTML={{ __html: this.state.texteContent }}></div> */}
+                    <iframe 
+                        id="container-text-iframe" 
+                        data-textcontent={this.state.texteContent}
+                        data-textid={this.state.texte.id} 
+                        src={src}
+                        style={{width: '100%', height: '1000px'}}
+                    ></iframe>
                   </div>;      
     }else{
-      console.log(this.props.data.texte);
       let src = "http://blue-legend.com/7/web/viewer.html?file="+this.props.data.texte.file_name_server;
-      text = <iframe className="iframe-pdf" src={src}></iframe>
+      text = 
+        <div>
+          <div id="cal1">&nbsp;</div>
+          <div id="cal2">&nbsp;</div>
+          <div id="popupTrad" className="popup-trad">
+              <div className="arrow-popuptrad"></div>
+              <div id="translationPopupText" className="text-center">
+              <div style={{margin: '10px'}}>{capitalizeFirstLetter(this.state.selText)}</div>
+              <div style={{margin: '10px', fontSize: '1.2em', fontWeight: 'bold'}}>{capitalizeFirstLetter(this.state.french_value)}</div>
+              </div>
+              <div className="display-flex-center">
+                <div id="btnSaveExpression" style={{backgroundColor: this.state.colorBtnSave}}>{this.state.msgBtnSave}</div>
+              </div>
+          </div>
+          <iframe className="iframe-pdf" src={src}></iframe>
+        </div>
     }
 
     return (

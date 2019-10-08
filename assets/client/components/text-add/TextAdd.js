@@ -185,6 +185,12 @@ export default class TextAdd extends Component {
                           let val = this.textarea.val();
                           this.textarea.focus().val("").val(val);
                         }} 
+                        onPaste={() =>{
+                          console.log(this.textAreaWysiwyg.value);
+                          this.setState({wysiwyg_content: this.textAreaWysiwyg.value});
+                          let val = this.textarea.val();
+                          this.textarea.focus().val("").val(val);
+                        }} 
                         buttons={
                             [
                                 ['viewHTML'],

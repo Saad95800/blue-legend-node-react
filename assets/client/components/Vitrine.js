@@ -326,8 +326,11 @@ export default class Vitrine extends Component {
               <div className="size100">
                 <div className="img-vitrine-block1 size100">
                 </div>
+                {/* <video className="img-vitrine-block1"  controls loop>
+                  <source src="/client/images/vitrine/Search.mp4" type="video/mp4" />
+                </video> */}
                 <Container>
-                  <Row style={{height: '580px'}}>
+                  <Row style={{height: '530px'}}>
                       <div className="col-xs-6" style={{height: '100%'}}>
                         <div className="size100 display-flex-center">
                           <div className="img-block1-logo"></div>
@@ -339,26 +342,33 @@ export default class Vitrine extends Component {
                           <p className="text-block1-msg text-border" style={{margin: '15px 0px'}}>
                             Apprend l'anglais efficacement. Par la lecture.
                           </p>
-                          <div className="btn-vitrine-begin display-flex-center">Commencer</div>
+                          <div className="container-btn-vitrine-begin">
+                            <div 
+                              className="btn-vitrine-begin display-flex-center" 
+                              onClick={this.viewPopupSignin.bind(this)}
+                            >
+                              Commencer
+                            </div>
+                          </div>
                         </div>
                       </div>
                   </Row>
                 </Container>
               </div>
             </section>
-            <section className="block2 img-vitrine-blocks display-flex-center">
+            <section className="block2 img-vitrine-blocks display-flex-center" style={{height: '400px'}}>
                 <Container className="size100">
                   <div className="row display-flex-center" style={{height: '100%'}} >
                     <div className="col-xs-6" style={{height: '100%'}}>
                       <div className="display-flex-center size100" style={{padding: '0px 20px'}}>
                         <div className="flex-column">
                           <p className="text1-block2 text-center font-weight-bold">Qu'est-ce que Blue Legend ?</p>
-                          <p className="text2-block2 text-center font-weight-bold">Blue Legend est une application web et mobile permettant d'apprendre l'anglais à travers la lecture de textes en leur donnant la possibilité de traduire chaque expressions et mots de vocabulaire et de les réviser grâce à des séries de révisions ludiques et intéractives.</p>
+                          <p className="text2-block2 text-center font-weight-bold">Blue Legend est une application web et mobile permettant d'apprendre l'anglais à travers la lecture de textes et de livres.</p>
                         </div>
                       </div>
                     </div>
                     <div className="col-xs-6" style={{height: '100%'}}>
-                      <div className="img-vitrine-block2"></div>
+                        <div className="img-vitrine-block2"></div>
                     </div>
                   </div>
                 </Container>
@@ -378,7 +388,7 @@ export default class Vitrine extends Component {
             <section className="block4 img-vitrine-blocks display-flex-center">
               <Container className="size100">
                 <Row style={{height:'100%'}}>
-                  <div className="col-xs-6" style={{height:'100%'}}>
+                  <div className="col-xs-6" style={{height:'400px'}}>
                     <div className="size100 display-flex-center flex-column">
                       <p className="text1-block4 text-center font-weight-bold">Apprend efficacement ton vocabulaire.</p>
                       <p className="text2-block4 text-center font-weight-bold">Révise ton vocabulaire avec des séries de révision intéractives.</p>
@@ -393,10 +403,10 @@ export default class Vitrine extends Component {
             <section className="block5 img-vitrine-blocks display-flex-center">
               <Container className="size100">
                 <Row style={{height:'100%'}}>
-                  <div className="col-xs-6 display-flex-center" style={{height:'100%'}}>
+                  <div className="col-xs-6 display-flex-center" style={{height:'400px'}}>
                       <div className="img-vitrine-block5"></div>
                   </div>
-                  <div className="col-xs-6" style={{height:'100%'}}>
+                  <div className="col-xs-6" style={{height:'400px'}}>
                     <div className="size100 display-flex-center flex-column">
                       <p className="text1-block5 text-center font-weight-bold">Met-toi au défi en jouant contre la montre.</p>
                       <p className="text2-block5 text-center font-weight-bold">Tu as la possibilité de mettre au chronomètre lors de chacune de tes séries de révision afin de te mettre au défi et de voir la qualité de ton apprentissage.</p>
@@ -408,12 +418,12 @@ export default class Vitrine extends Component {
             <section className="block6 img-vitrine-blocks display-flex-center">
               <Container className="size100">
                 <Row style={{height:'100%'}}>
-                  <div className="col-xs-6" style={{height:'100%'}}>
+                  <div className="col-xs-6" style={{height:'400px'}}>
                     <div className="size100 display-flex-center flex-column">
                       <p className="text1-block6 text-center font-weight-bold">Mémorise durablement grâce à la méthode de répétitions espacés</p>
                     </div>
                   </div>
-                  <div className="col-xs-6" style={{height:'100%'}}>
+                  <div className="col-xs-6" style={{height:'400px'}}>
                       <div className="img-vitrine-block6"></div>
                   </div>    
                 </Row>
@@ -422,13 +432,13 @@ export default class Vitrine extends Component {
             <section className="block7 img-vitrine-blocks display-flex-center">
               <Container className="size100">
                 <Row style={{height:'100%'}}>
-                  <div className="col-xs-6" style={{height:'100%'}}>
+                  <div className="col-xs-6" style={{height:'400px'}}>
                       <div className="img-vitrine-block7"></div>
                   </div>
-                  <div className="col-xs-6" style={{height:'100%'}}>
+                  <div className="col-xs-6" style={{height:'400px'}}>
                     <div className="size100 display-flex-center flex-column">
                       <p className="text1-block7 text-center font-weight-bold">En ligne ou hors ligne, révise tes textes où que tu soit.</p>
-                      <p className="text2-block7 text-center font-weight-bold">Notre application est disponible pour tout type d'appareils et est utilisable en mode hors-ligne. C'est une progressive web app, ce qui signifie qu'elle est multi plate-forme et fonctionne sur IOS et Android.</p>
+                      <p className="text2-block7 text-center font-weight-bold">Notre application est disponible IOS et Android et est utilisable en mode hors-ligne.</p>
                     </div>
                   </div>                
                 </Row>
@@ -448,7 +458,16 @@ export default class Vitrine extends Component {
                       <p sm={3} className="text-border" style={{textAlign: 'left', fontSize: '20px', width: '100%'}}>Abonne-toi et soit informé de toutes les nouvelles fonctionnalités à venir</p>
                       <FormGroup row style={{width: '80%', marginTop: '20px'}}>
                         <Col sm={12}>
-                          <Input type="text" autoComplete="off" id="newsletter" />
+                          <div className="row">
+                            <div className="col-sm-10">
+                              <Input type="text" autoComplete="off" id="newsletter" style={{marginTop:"5px"}}/>
+                            </div>
+                            <div className="col-sm-2">
+                              <button className="btn" style={{backgroundColor:"#f5f5ff", marginTop:"5px"}}>Envoyer</button>
+                            </div>
+                          </div>
+                          
+                          
                         </Col>
                       </FormGroup>
                     </div>

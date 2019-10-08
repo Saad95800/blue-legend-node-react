@@ -3,7 +3,9 @@ import { hydrate } from 'react-dom';
 import Appclient from './components/Appclient';
 import Vitrine from './components/Vitrine';
 import routes from '../../config/routes';
+import extractDomain from 'extract-domain';
 
+let domain = extractDomain(window.location.href);
 let u = window.location.href.split("//")[1].replace(window.location.href.split("//")[1].split("/")[0], "").split('?');
 let url = u[0];
 let getUrl = [];
@@ -30,6 +32,7 @@ if(routesArray.indexOf('GET '+url) != -1){
             <Vitrine data={
                     {
                         url: url,
+                        domain: domain,
                         get: paseGetUrl,
                         app: 'client'
                     }
@@ -41,6 +44,7 @@ if(routesArray.indexOf('GET '+url) != -1){
             <Appclient data={
                     {
                         url: url,
+                        domain: domain,
                         get: paseGetUrl,
                         app: 'client'
                     }

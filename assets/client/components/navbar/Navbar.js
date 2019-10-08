@@ -152,8 +152,7 @@ export default class NavBar extends Component {
     });
   }
   colorClickItem(event){
-
-    console.log(event.target);
+    
     let newItems = this.state.items.map((item) =>{
       if(item.id == event.target.id){
         item.isSelected = true;
