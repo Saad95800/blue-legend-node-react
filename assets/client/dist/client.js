@@ -4897,7 +4897,6 @@ function (_Component) {
         }
       } else {
         if (document.selection.createRange) {
-          // Internet Explorer
           var range = document.selection.createRange();
           selText = range.text;
         }

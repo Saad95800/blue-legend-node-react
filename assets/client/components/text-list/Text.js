@@ -174,7 +174,7 @@ export default class Text extends Component {
             selText = selRange.toString();
         }
     }else {
-        if (document.selection.createRange) {       // Internet Explorer
+        if (document.selection.createRange) {
             var range = document.selection.createRange ();
             selText = range.text;
         }
