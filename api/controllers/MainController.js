@@ -135,6 +135,21 @@ module.exports = {
     }
   },
 
+  texteEdit: async function(req, res){
+    if(req.isAuthenticated() && req.user != undefined){
+      let data = {};
+      let texte = {}
+      if(req.user != undefined){
+        texte = await Text.findOne({id: req.allParams().id_texte, owner_user: req.user.id});
+        data = {'texte': texte};
+      }
+      render(req, res, data);
+    }else{
+      res.redirect('/');
+    }
+    
+  },
+
   ajoutTexte: (req, res) => {
     render(req, res);
   },

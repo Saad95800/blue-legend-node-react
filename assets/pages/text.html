@@ -5,84 +5,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <style>
-.display-flex-center{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.popup-trad{
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 25px 10px;
-  z-index: 3;
-  background-color: #f4f7ff;
-  min-width: 200px;
-  min-height: 35px;
-  border: 1px solid #00000024;
-  position: absolute;
-}
-.arrow-popuptrad{
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  top: -11px;
-  left: 90px;
-  background-color: #f4f7ff;
-  border-top: 1px solid #00000024;
-  border-left: 1px solid #00000024;
-  -ms-transform: rotate(45deg); /* IE 9 */
-  -webkit-transform: rotate(45deg); /* Safari */
-  transform: rotate(45deg);
-}
-.text-center{
-  text-align: center;
-}
-#btnSaveExpression{
-  width:90px;
-  min-height: 45px;
-  cursor: pointer;
-  color: white;
-  font-weight: bold;
-  border-radius: 5px;
-  text-align: center;
-  padding: 0px 10px;
-  text-shadow: 1px 1px 1px black;
-}
-#cal1{
-  position:absolute;
-  height:0px;
-  width:0px;
-  top:100px;
-  left:100px;
-  overflow:none;
-  z-index:-100;
-}
-#cal2{
-  position:absolute;
-  height:0px;
-  width:0px;
-  top:0px;
-  left:0px;
-  overflow:none;
-  z-index:-100;
-}
-.hover-word{
-  background-color: transparent;
-  border-bottom: 1px solid black;
-  padding: 3px;
-}
-.hover-word:hover{
-  background-color: rgb(240, 240, 240);
-  cursor: pointer;
-}
-.popup-hover-word{
-  display: inline-block;
-}
-.hover-word-french{
-  display: none;
-}
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      /* Track */
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1; 
+      }
+      
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+        background: #888; 
+      }
+
+      /* Handle on hover */
+      ::-webkit-scrollbar-thumb:hover {
+        background: #555; 
+      }
+
+      .display-flex-center{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .popup-trad{
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 25px 10px;
+        z-index: 3;
+        background-color: #f4f7ff;
+        min-width: 200px;
+        min-height: 35px;
+        border: 1px solid #00000024;
+        position: absolute;
+      }
+      .arrow-popuptrad{
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: -11px;
+        left: 90px;
+        background-color: #f4f7ff;
+        border-top: 1px solid #00000024;
+        border-left: 1px solid #00000024;
+        -ms-transform: rotate(45deg); /* IE 9 */
+        -webkit-transform: rotate(45deg); /* Safari */
+        transform: rotate(45deg);
+      }
+      .text-center{
+        text-align: center;
+      }
+      #btnSaveExpression{
+        width:90px;
+        min-height: 45px;
+        cursor: pointer;
+        color: white;
+        font-weight: bold;
+        border-radius: 5px;
+        text-align: center;
+        padding: 0px 10px;
+        text-shadow: 1px 1px 1px black;
+      }
+      #cal1{
+        position:absolute;
+        height:0px;
+        width:0px;
+        top:100px;
+        left:100px;
+        overflow:none;
+        z-index:-100;
+      }
+      #cal2{
+        position:absolute;
+        height:0px;
+        width:0px;
+        top:0px;
+        left:0px;
+        overflow:none;
+        z-index:-100;
+      }
+      .hover-word{
+        background-color: transparent;
+        border-bottom: 1px solid black;
+        padding: 3px;
+      }
+      .hover-word:hover{
+        background-color: rgb(240, 240, 240);
+        cursor: pointer;
+      }
+      .popup-hover-word{
+        display: inline-block;
+      }
+      .hover-word-french{
+        display: none;
+      }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
@@ -106,13 +125,27 @@
             let selText = sel.toString().trim();
           if(selText != '' && selText != ' '){
             if(mouse == 'mouseup'){
-                if (!sel.isCollapsed) {
+                if (!sel.isCollapsed && selText.length <= 150) {
                     ele.style.display = 'block';
                     var r = sel.getRangeAt(0).getBoundingClientRect();
                     var rb1 = rel1.getBoundingClientRect();
                     var rb2 = rel2.getBoundingClientRect();
                     ele.style.top = ((r.bottom - rb2.top)*100/(rb1.top-rb2.top)+20) + 'px'; //this will place ele below the selection
                     ele.style.left = ((r.left - rb2.left)*100/(rb1.left-rb2.left)-90) + 'px'; //this will align the right edges together
+                    var superWidth = parseFloat(ele.style.left.replace('px', '')) + $('#popupTrad').width()
+                    if(parseFloat(ele.style.left.replace('px', '')) < 0){
+                      ele.style.left = '0px';
+                      $('.arrow-popuptrad').css('left', '3px');
+                    }else if( (superWidth) > $('body').width()){
+                      var delta = (superWidth) - $('body').width()
+                      ele.style.left = parseFloat(ele.style.left.replace('px', '')) - delta + 'px';
+                      $('.arrow-popuptrad').css('left', (90+delta)+'px');
+                    }else{
+                      $('.arrow-popuptrad').css('left', '90px');
+                    }
+                    console.log($('#popupTrad').width());
+                    console.log($('#popupTrad').css('left').replace('px', ''));
+                    console.log($('body').width());
                   axios({
                     method: 'post',
                     url: '/check-expression-exist-ajax',
@@ -136,7 +169,7 @@
                     }
                     if(selText.length > 40){
                       $("#btnSaveExpression").html('Maximum 40 caractères');
-                      $("#btnSaveExpression").css('background-color', 'red');
+                      $("#btnSaveExpression").css('background-color', '#ff000096');
                     }
         
                   })

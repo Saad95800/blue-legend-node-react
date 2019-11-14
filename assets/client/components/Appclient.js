@@ -6,6 +6,7 @@ import Home from './home/Home';
 import TextAdd from './text-add/TextAdd';
 import TextList from './text-list/TextList';
 import Text from './text-list/Text';
+import TextEdit from './text-list/TextEdit';
 import CategoryList from './category/CategoryList';
 import CategoryAdd from './category/CategoryAdd';
 import Revision from './revision/Revision';
@@ -125,6 +126,13 @@ export default class Appclient extends Component {
                           <Route 
                             path="/texte/:id_texte" 
                             render={ (props) => { return <Text {...props} 
+                            data={data} 
+                            viewMessageFlash={this.viewMessageFlash} 
+                            changeColorItemNav={this.changeColorItemNav}/>} } 
+                          />                          
+                          <Route 
+                            path="/texte-edit/:id_texte" 
+                            render={ (props) => { return <TextEdit {...props} 
                             data={data} 
                             viewMessageFlash={this.viewMessageFlash} 
                             changeColorItemNav={this.changeColorItemNav}/>} } 

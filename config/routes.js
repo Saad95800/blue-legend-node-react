@@ -17,6 +17,7 @@ module.exports.routes = {
 
   'GET /texte-liste': {controller: 'MainController', action: 'textes'},
   'GET /texte/:id_texte': {controller: 'MainController', action: 'texte'},
+  'GET /texte-edit/:id_texte': {controller: 'MainController', action: 'texteEdit'},
   'POST /textes-ajax': {controller: 'MainController', action: 'textesAjax', csrf: false},
   'POST /get-texte-ajax': {controller: 'MainController', action: 'getTexteAjax', csrf: false},
   'POST /save-text-ajax': {controller: 'MainController', action: 'saveTextAjax', csrf: false},

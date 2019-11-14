@@ -42,12 +42,12 @@ export default class TextSsr extends Component {
     }
 
     let text = '';
-    
+    let textEditUrl = "/texte-edit/"+this.props.data.texte.id;
     if(this.type_text == 'text'){
       let src = "http://localhost:1337/pages/text.html?data="+this.state.texteContent;
       text = <div>
                     <div className="display-flex-right" style={{marginTop: '20px'}}>
-                      <div className="btn-forms" onClick={ () => {this.setState({wysiwyg: true})} }>Editer</div>
+                    <a href={textEditUrl} className="btn-forms" onClick={ () => {this.setState({wysiwyg: true})} }>Editer</a>
                     </div>
                     <div id="cal1">&nbsp;</div>
                     <div id="cal2">&nbsp;</div>
@@ -62,7 +62,7 @@ export default class TextSsr extends Component {
                         </div>
                     </div>
                     {/* <div id="container-text" style={{marginTop: '20px'}} dangerouslySetInnerHTML={{ __html: this.state.texteContent }}></div> */}
-                    <iframe 
+                    <iframe
                         id="container-text-iframe" 
                         data-textcontent={this.state.texteContent}
                         data-textid={this.state.texte.id} 
